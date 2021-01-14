@@ -1,0 +1,7 @@
+body {
+    color: white
+}
+
+[class^="ph-"], [class*=" ph-"] ::before {
+    font-size: 0.8rem;
+}

@@ -1,0 +1,937 @@
+titulo: Horarios 2020-2, Ingeniería de Sistemas.
+descripcion: |
+  <b>Hay horas distintas/grupos eliminados en lab.</b>
+  <br>
+  Horarios de lab: https://drive.google.com/file/d/1SEYhSvpiWi2oplOSc9tkpVzPRpl91lLP/view
+  <br>
+  <br>
+  Ultima actualizacion: 12 de septiembre de 2020.
+  <br>
+  Puedes ver el historial de cambios en GitHub.
+años:
+  1er año:
+    Realidad Nacional:
+      nombre: Realidad Nacional
+      abreviado: RN
+      Teoria:
+        A:
+          Docente: Hilda Rodriguez
+          Horas:
+            - Ma0940
+            - Ma1040
+            - Ma1130
+        B:
+          Docente: Amparto Yto
+          Horas:
+            - Ma1400
+            - Ma1450
+            - Ma1550
+    Calculo 1:
+      nombre: Cálculo en 1 variable
+      abreviado: C1V
+      Teoria:
+        A:
+          Docente: Paul Cheneaux
+          Horas:
+            - Ma1220
+            - Ma1310
+            - Mi0850
+            - Mi0940
+            - Mi1040
+            - Vi0700
+            - Vi0750
+        B:
+          Docente: Jorge Tarqui
+          Horas:
+            - Lu1550
+            - Lu1640
+            - Mi1550
+            - Mi1640
+            - Vi1400
+            - Vi1450
+            - Vi1550
+    Discretas 2:
+      nombre: Estructuras Discretas 2
+      abreviado: ED2
+      Teoria:
+        A:
+          Docente: Olha Sharhorodska
+          Horas:
+            - Vi0850
+            - Vi0940
+            - Ju1040
+            - Ju1130
+        B:
+          Docente: Olha Sharhorodska
+          Horas:
+            - Lu1400
+            - Lu1450
+            - Ju1400
+            - Ju1450
+    Web 1:
+      nombre: Programacion Web 1
+      abreviado: PW1
+      Teoria:
+        A:
+          Docente: Alfredo Paz
+          Horas:
+            - Lu1040
+            - Lu1130
+        B:
+          Docente: Carlo Corrales
+          Horas:
+            - Ma1640
+            - Ma1740
+      Laboratorio:
+        A:
+          Docente: Alfredo Paz
+          Horas:
+            - Ju1040
+            - Ju1130
+            - Vi1040
+            - Vi1130
+        B:
+          Docente: Alfredo Paz
+          Horas:
+            - Lu1550
+            - Lu1640
+            - Ju1550
+            - Ju1640
+        C:
+          Docente: Alfredo Paz
+          Horas:
+            - Ju0850
+            - Ju0940
+            - Vi0850
+            - Vi0940
+        D:
+          Docente: Carlo Corrales
+          Horas:
+            - Ma1830
+            - Ma1920
+            - Ju0850
+            - Ju0940
+
+    FP2:
+      nombre: Fundamentos de Programacion 2
+      abreviado: FP2
+      Teoria:
+        A:
+          Docente: Marco Aedo
+          Horas:
+            - Lu0850
+            - Lu0940
+            - Ju0850
+            - Ju0940
+        B:
+          Docente: Marco Aedo
+          Horas:
+            - Ma1830
+            - Ma1920
+            - Vi1640
+            - Vi1740
+      Laboratorio:
+        A:
+          Docente: Marco Aedo
+          Horas:
+            - Lu1040
+            - Lu1130
+            - Ju1040
+            - Ju1130
+        B:
+          Docente: Marco Aedo
+          Horas:
+            - Ma1640
+            - Ma1740
+            - Vi1830
+            - Vi1920
+        C:
+          Docente: R. Calienes
+          Horas:
+            - Lu1220
+            - Lu1310
+            - Ju1220
+            - Ju1310
+        D:
+          Docente: Y. Yari
+          Horas:
+            - Mi1220
+            - Mi1310
+            - Ju1550
+            - Ju1640
+    Comunicacion Integral:
+      nombre: Comunicacion Integral
+      abreviado: CI
+      Teoria:
+        A:
+          Docente: Ana Álvarez
+          Horas:
+            - Lu0700
+            - Lu0750
+            - Ju0700
+            - Ju0750
+        B:
+          Docente: Ana Álvarez
+          Horas:
+            - Lu1740
+            - Lu1830
+            - Mi1400
+            - Mi1450
+  2do año:
+    Ecologia:
+      nombre: Ecologia y Medio Ambiente
+      abreviado: ECA
+      Teoria:
+        A:
+          Docente: Marco Valdivia
+          Horas:
+            - Ju0940
+            - Ju1040
+            - Ju1130
+        B:
+          Docente: Luis Mendoza
+          Horas:
+            - Ju1400
+            - Ju1450
+            - Ju1550
+    Estadistica:
+      nombre: Estadistica y Matematica
+      abreviado: EMAT
+      Teoria:
+        A:
+          Docente: Julieta Flores
+          Horas:
+            - Mi0850
+            - Mi0940
+            - Ju1220
+            - Ju1310
+        B:
+          Docente: Julieta Flores
+          Horas:
+            - Mi1040
+            - Mi1130
+            - Ju1640
+            - Ju1740
+      Laboratorio:
+        A:
+          Docente: "?"
+          Horas:
+            - Lu1400
+            - Lu1450
+        B:
+          Docente: "?"
+          Horas:
+            - Ma1040
+            - Ma1130
+        C:
+          Docente: "?"
+          Horas:
+            - Ma1400
+            - Ma1450
+        D:
+          Docente: "?"
+          Horas:
+            - Lu1040
+            - Lu1130
+    Arquitectura de Computadoras:
+      nombre: Arquitectura de Computadoras
+      abreviado: AC
+      Teoria:
+        A:
+          Docente: Pedro Rodriguez
+          Horas:
+            - Vi1220
+            - Vi1310
+            - Vi1400
+        B:
+          Docente: Pedro Rodriguez
+          Horas:
+            - Ju1830
+            - Ju1920
+            - Ju2010
+      Laboratorio:
+        A:
+          Docente: Pedro Rodriguez
+          Horas:
+            - Vi1040
+            - Vi1130
+        B:
+          Docente: Pedro Rodriguez
+          Horas:
+            - Ju1400
+            - Ju1450
+        C:
+          Docente: Pedro Rodriguez
+          Horas:
+            - Ju1550
+            - Ju1640
+        D:
+          Docente: Pedro Rodriguez
+          Horas:
+            - Vi0850
+            - Vi0940
+        E:
+          Docente: Pedro Rodriguez
+          Horas:
+            - Vi0700
+            - Vi0750
+    Metodos de Investigacion y Redaccion:
+      nombre: Metodos de Investigacion y Redaccion
+      abreviado: MIR
+      Teoria:
+        A:
+          Docente: Norka Bedregal
+          Horas:
+            - Lu0750
+            - Lu0850
+            - Lu0940
+        B:
+          Docente: Norka Bedregal
+          Horas:
+            - Ma1740
+            - Ma1830
+            - Ma1920
+        C:
+          Docente: Rolando Cárdenas
+          Horas:
+            - Vi0750
+            - Vi0850
+            - Vi0940
+    Interaccion Humano Computador:
+      nombre: Interaccion Humano Computador
+      abreviado: IHC
+      Teoria:
+        A:
+          Docente: Richart Escobedo
+          Horas:
+            - Ma0700
+            - Ma0750
+            - Mi0700
+            - Mi0750
+        B:
+          Docente: Richart Escobedo
+          Horas:
+            - Ma1550
+            - Ma1640
+            - Mi1550
+            - Mi1640
+      Laboratorio:
+        A:
+          Docente: Richart Escobedo
+          Horas:
+            - Ma0850
+            - Ma0940
+        B:
+          Docente: Richart Escobedo
+          Horas:
+            - Ma1740
+            - Ma1830
+        C:
+          Docente: Richart Escobedo
+          Horas:
+            - Mi0850
+            - Mi0940
+        D:
+          Docente: Richart Escobedo
+          Horas:
+            - Mi1740
+            - Mi1830
+    Enfoque Empresarial:
+      nombre: Enfoque Empresarial
+      abreviado: EE
+      Teoria:
+        A:
+          Docente: Juan Carlos Juarez
+          Horas:
+            - Lu1740
+            - Lu1830
+            - Vi1740
+            - Vi1830
+            - Vi1920
+        B:
+          Docente: Juan C. Juarez Bueno
+          Horas:
+            - Mi1740
+            - Mi1830
+            - Mi1920
+            - Vi1450
+            - Vi1550
+    Analisis y Disenio de Algoritmos:
+      nombre: Analisis y Diseño de Algoritmos
+      abreviado: ADA
+      Teoria:
+        A:
+          Docente: Aurea Soriano
+          Horas:
+            - Ma0850
+            - Ma0940
+            - Ju0750
+            - Ju0850
+        B:
+          Docente: Aurea Soriano
+          Horas:
+            - Lu1550
+            - Lu1640
+            - Mi1220
+            - Mi1310
+        C:
+          Docente: Rolando Cárdenas
+          Horas:
+            - Mi1400
+            - Mi1450
+            - Vi1040
+            - Vi1130
+      Laboratorio:
+        A:
+          Docente: J. Cárdenas
+          Horas:
+            - Lu1220
+            - Lu1310
+        B:
+          Docente: J. Cárdenas
+          Horas:
+            - Ma1550
+            - Ma1640
+        C:
+          Docente: J. Cárdenas
+          Horas:
+            - Vi1310
+            - Vi1400
+        D:
+          Docente: J. Cárdenas
+          Horas:
+            - Mi1550
+            - Mi1640
+        E:
+          Docente: J. Cárdenas
+          Horas:
+            - Ma1040
+            - Ma1130
+  3er año:
+    FSI:
+      nombre: Fundamentos de Sistemas de Informacion
+      abreviado: FSI
+      Teoria:
+        A:
+          Docente: Juan Carlos Juarez
+          Horas:
+            - Lu0850
+            - Lu0940
+            - Lu1040
+            - Mi1040
+            - Mi1130
+        B:
+          Docente: Juan Carlos Juarez
+          Horas:
+            - Mi1550
+            - Mi1640
+            - Mi1740
+            - Ju1740
+            - Ju1830
+    Redes:
+      nombre: Redes y Comunicación de Datos
+      abreviado: RCD
+      Teoria:
+        A:
+          Docente: Lucy Delgado
+          Horas:
+            - Ma1220
+            - Ma1310
+            - Mi0850
+            - Mi0940
+        B:
+          Docente: Lucy Delgado
+          Horas:
+            - Lu1310
+            - Lu1400
+            - Ma1400
+            - Ma1450
+      Laboratorio:
+        A:
+          Docente: L. Laura
+          Horas:
+            - Mi1040
+            - Mi1130
+        B:
+          Docente: L. Laura
+          Horas:
+            - Ju1550
+            - Ju1640
+        C:
+          Docente: L. Laura
+          Horas:
+            - Mi1220
+            - Mi1310
+    Metodos Num:
+      nombre: Métodos numéricos
+      abreviado: MN
+      Teoria:
+        A:
+          Docente: Olha Sharhorodska
+          Horas:
+            - Vi1040
+            - Vi1130
+            - Vi1220
+        B:
+          Docente: Olha Sharhorodska
+          Horas:
+            - Lu1550
+            - Lu1640
+            - Lu1740
+      Laboratorio:
+        A:
+          Docente: Olha Sharodovska
+          Horas:
+            - Lu1130
+            - Lu1220
+        B:
+          Docente: Roni Apaza
+          Horas:
+            - Vi1550
+            - Vi1640
+        C:
+          Docente: Roni Apaza
+          Horas:
+            - Vi1740
+            - Vi1830
+        D:
+          Docente: Roni Apaza
+          Horas:
+            - Mi1830
+            - Mi1920
+    SO:
+      nombre: Sistemas Operativos
+      abreviado: SO
+      Teoria:
+        A:
+          Docente: Karim Guevara
+          Horas:
+            - Ma0700
+            - Ma0750
+            - Ju0850
+            - Ju0940
+        B:
+          Docente: Karim Guevara
+          Horas:
+            - Ma1550
+            - Ma1640
+            - Ju1550
+            - Ju1640
+      Laboratorio:
+        A:
+          Docente: Karim Guevara
+          Horas:
+            - Ma1400
+            - Ma1450
+        B:
+          Docente: Karim Guevara
+          Horas:
+            - Ju1040
+            - Ju1130
+        C:
+          Docente: Karim Guevara
+          Horas:
+            - Ju1400
+            - Ju1450
+        D:
+          Docente: Karim Guevara
+          Horas:
+            - Ju1220
+            - Ju1310
+    Construccion Soft:
+      nombre: Construccion de Software
+      abreviado: CS
+      Teoria:
+        A:
+          Docente: Jorge Chamby
+          Horas:
+            - Ma0850
+            - Ma0940
+        B:
+          Docente: Jorge Chamby
+          Horas:
+            - Ju1400
+            - Ju1450
+      Laboratorio:
+        A:
+          Docente: Jorge Chambi
+          Horas:
+            - Mi0700
+            - Mi0750
+            - Vi0850
+            - Vi0940
+        B:
+          Docente: M. Galarza
+          Horas:
+            - Lu1830
+            - Lu1920
+            - Vi1830
+            - Vi1920
+        C:
+          Docente: M. Galarza
+          Horas:
+            - Ju0700
+            - Ju0750
+            - Ma0700
+            - Ma0750
+        D:
+          Docente: M. Galarza
+          Horas:
+            - Ma1920
+            - Ma2010
+            - Mi1400
+            - Mi1450
+    TecDat:
+      nombre: Tecnologia de Objetos
+      abreviado: TO
+      Teoria:
+        A:
+          Docente: Oscar Ramírez
+          Horas:
+            - Ma1040
+            - Ma1130
+            - Ju1040
+            - Ju1130
+        B:
+          Docente: Oscar Ramírez
+          Horas:
+            - Mi1400
+            - Mi1450
+            - Vi1400
+            - Vi1450
+      Laboratorio:
+        A:
+          Docente: J. Cárdenas
+          Horas:
+            - Lu0700
+            - Lu0750
+        B:
+          Docente: J. Cárdenas
+          Horas:
+            - Lu1550
+            - Lu1640
+        C:
+          Docente: J. Cárdenas
+          Horas:
+            - Ju0850
+            - Ju0940
+        D:
+          Docente: J. Cárdenas
+          Horas:
+            - Ju1220
+            - Ju1310
+  4to año:
+    Intro Soft Ent:
+      nombre: Introduccion a Software de Entetenimiento
+      abreviado: IDSEe
+      Teoria:
+        A:
+          Docente: Diego Iquira
+          Horas:
+            - Lu0750
+            - Lu0850
+            - Lu0940
+        B:
+          Docente: Diego Iquira
+          Horas:
+            - Mi1550
+            - Mi1640
+            - Mi1740
+      Laboratorio:
+        A:
+          Docente: D. Iquira
+          Horas:
+            - Lu1220
+            - Lu1310
+        B:
+          Docente: D. Iquira
+          Horas:
+            - Ju1920
+            - Ju2010
+    Diseno y Arquitectura:
+      nombre: Diseño Y Arquitectura de Software
+      abreviado: DAS
+      Teoria:
+        A:
+          Docente: Percy Huertas
+          Horas:
+            - Lu1040
+            - Lu1130
+            - Mi1040
+            - Mi1130
+        B:
+          Docente: Percy Huertas
+          Horas:
+            - Mi1400
+            - Mi1450
+            - Ju1400
+            - Ju1450
+      Laboratorio:
+        A:
+          Docente: P. Huertas
+          Horas:
+            - Ma1740
+            - Ma1830
+        B:
+          Docente: Roni Apaza
+          Horas:
+            - Ma1830
+            - Ma1920
+        C:
+          Docente: Roni Apaza
+          Horas:
+            - Ju1740
+            - Ju1830
+    Gestion Proyecto Soft:
+      nombre: Gestion de Proyectos de Software
+      abreviado: GPS
+      Teoria:
+        A:
+          Docente: Jesús Silva
+          Horas:
+            - Vi1040
+            - Vi1130
+        B:
+          Docente: Oscar Ramírez
+          Horas:
+            - Lu1400
+            - Lu1450
+      Laboratorio:
+        A:
+          Docente: J. Silva
+          Horas:
+            - Ma1130
+            - Ma1220
+        B:
+          Docente: Oscar Ramírez
+          Horas:
+            - Ma1400
+            - Ma1450
+        C:
+          Docente: Oscar Ramírez
+          Horas:
+            - Ma1550
+            - Ma1640
+    Negocios Electronicos:
+      nombre: Negocios Electrónicos
+      abreviado: NE
+      Teoria:
+        A:
+          Docente: Cesar Baluarte
+          Horas:
+            - Mi0750
+            - Mi0850
+            - Mi0940
+        B:
+          Docente: Oscar Ramírez
+          Horas:
+            - Lu1550
+            - Lu1640
+            - Lu1740
+      Laboratorio:
+        A:
+          Docente: Cesar Baluarte
+          Horas:
+            - Ju1220
+            - Ju1310
+        B:
+          Docente: Oscar Ramírez
+          Horas:
+            - Mi1400
+            - Mi1450
+    Auditoria:
+      nombre: Auditoría de Sistemas
+      abreviado: AS
+      Teoria:
+        A:
+          Docente: Edward Zarate
+          Horas:
+            - Ma0700
+            - Ma0750
+            - Ma0850
+            - Ju0700
+            - Ju0750
+        B:
+          Docente: Edward Zarate
+          Horas:
+            - Ma1400
+            - Ma1450
+            - Ma1550
+            - Ju1550
+            - Ju1640
+    Aspectos Formales:
+      nombre: Aspectos Formales de Verificación y Especificación
+      abreviado: AFEV
+      Teoria:
+        A:
+          Docente: Elizabet Vidal
+          Horas:
+            - Ju0850
+            - Ju0940
+        B:
+          Docente: Maribel Molina
+          Horas:
+            - Vi1550
+            - Vi1640
+      Laboratorio:
+        A:
+          Docente: M. Molina
+          Horas:
+            - Mi1220
+            - Mi1310
+        B:
+          Docente: M. Molina
+          Horas:
+            - Mi1830
+            - Mi1920
+    Calidad Soft:
+      nombre: Calidad de Software
+      abreviado: CS
+      Teoria:
+        A:
+          Docente: Jesús Silva
+          Horas:
+            - Ju1040
+            - Ju1130
+        B:
+          Docente: Maribel Molina
+          Horas:
+            - Vi1400
+            - Vi1450
+      Laboratorio:
+        A:
+          Docente: J. Silva
+          Horas:
+            - Ju1220
+            - Ju1310
+        B:
+          Docente: J. Silva
+          Horas:
+            - Mi1550
+            - Mi1640
+        C:
+          Docente: M. Molina
+          Horas:
+            - Ma0700
+            - Ma0750
+    Intro Nueva Plat:
+      nombre: Introduccion al Desarrollo de Nuevas Plataformas
+      abreviado: IDNP
+      Teoria:
+        A:
+          Docente: Ernesto Suarez
+          Horas:
+            - Vi0700
+            - Vi0750
+            - Vi0850
+        B:
+          Docente: Ernesto Suarez
+          Horas:
+            - Vi1740
+            - Vi1830
+            - Vi1920
+      Laboratorio:
+        A:
+          Docente: Ernesto Suarez
+          Horas:
+            - Ju0850
+            - Ju0940
+        B:
+          Docente: Ernesto Suarez
+          Horas:
+            - Ju1550
+            - Ju1640
+  5to año:
+    Practicas:
+      nombre: Prácticas Pre Profesionales
+      abreviado: PPP
+      Teoria:
+        A:
+          Docente: Fabrizio Calienes
+          Horas:
+            - Lu0750
+            - Lu0850
+            - Ju0700
+            - Ju0750
+            - Vi0700
+            - Vi0750
+        B:
+          Docente: Carlo Corrales
+          Horas:
+            - Lu1400
+            - Lu1450
+            - Vi1400
+            - Vi1450
+            - Vi1550
+    Gestion:
+      nombre: Gestion de Emprendimiento de Software 2
+      abreviado: GES2
+      Teoria:
+        A:
+          Docente: Juan Carlos Zuñiga
+          Horas:
+            - Ma0850
+            - Ma0940
+            - Ma1030
+        B:
+          Docente: Juan Carlos Zuñiga
+          Horas:
+            - Ju1400
+            - Ju1450
+            - Ju1550
+    Proyecto Ing Soft:
+      nombre: Proyecto de Ingeniería de Software 2
+      abreviado: PIS2
+      Teoria:
+        A:
+          Docente: Freddy Gonzales
+          Horas:
+            - Ma1310
+            - Ma1400
+            - Ju0850
+            - Ju0940
+    Topicos Avanzados:
+      nombre: Tópicos Avanzados de Ing. de Software
+      abreviado: TAIS
+      Teoria:
+        A:
+          Docente: Robert Arisaca
+          Horas:
+            - Mi0940
+            - Mi1040
+            - Mi1130
+        B:
+          Docente: Robert Arisaca
+          Horas:
+            - Ma1450
+            - Ma1550
+            - Ma1640
+    Juegos:
+      nombre: Desarrollo de Software para Juegos
+      abreviado: DSJe
+      Teoria:
+        A:
+          Docente: José Sulla
+          Horas:
+            - Mi1450
+            - Mi1550
+    Inteligencia:
+      nombre: Inteligencia de Negocios
+      abreviado: IEe
+      Teoria:
+        A:
+          Docente: Yasiel Pérez
+          Horas:
+            - Vi0850
+            - Vi0940
+    Plataformas Emergentes:
+      nombre: Plataformas Emergentes
+      abreviado: PEe
+      Teoria:
+        A:
+          Docente: Yasiel Pérez
+          Horas:
+            - Vi1040
+            - Vi1130
+
+

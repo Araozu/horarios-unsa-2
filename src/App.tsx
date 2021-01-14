@@ -1,25 +1,16 @@
-import logo from './logo.svg';
-import './App.css';
+import { BarraSuperior } from "./BarraSuperior";
+import { ContenedorHorarios } from "./ContenedorHorarios/";
+import { Wallpaper } from "./Wallpaper";
 
 function App() {
-  return (
-    <div class="App">
-      <header class="App-header">
-        <img src={logo} class="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          class="App-link"
-          href="https://github.com/ryansolid/solid"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Solid
-        </a>
-      </header>
-    </div>
-  );
+    return (
+        <div class="App">
+            <Wallpaper/>
+            <BarraSuperior/>
+            <br/>
+            <ContenedorHorarios/>
+        </div>
+    );
 }
 
 export default App;
