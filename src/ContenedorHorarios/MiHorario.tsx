@@ -1,11 +1,10 @@
 import { estilosGlobales } from "../Estilos";
 import { StyleSheet, css } from "aphrodite";
+import { Tabla } from "./Tabla";
 
 export function MiHorario() {
     const e = StyleSheet.create({
-        horario: {
-            height: "20rem"
-        }
+        horario: {}
     });
 
     return <div>
@@ -18,6 +17,8 @@ export function MiHorario() {
         <div className={css(
             e.horario,
             estilosGlobales.contenedor
-        )}/>
+        )}>
+            <Tabla/>
+        </div>
     </div>;
 }

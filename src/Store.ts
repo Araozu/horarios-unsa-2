@@ -6,7 +6,7 @@ enum ModoColor {
     Auto
 }
 
-const numImgGuardado = parseInt(localStorage.getItem("num-img") ?? "1");
+const numImgGuardado = parseInt(localStorage.getItem("num-img") ?? "4");
 console.log(numImgGuardado);
 
 export const [modoColor, setModoColor] = createSignal(ModoColor.Oscuro);
