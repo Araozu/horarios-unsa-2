@@ -13,10 +13,16 @@ export const estilosGlobales = StyleSheet.create({
         cursor: "pointer",
         userSelect: "none",
         transition: "background-color 200ms",
-        textDecoration: "underline",
+        textDecoration: "underline solid white 2px",
         ":hover": {
-            backgroundColor: "rgba(255, 255, 255, 0.2)"
+            backgroundColor: "rgba(200, 200, 200, 0.2)"
         }
+    },
+    contenedorCursorSoft: {
+        textDecoration: "underline rgba(255, 255, 255, 0.4)"
+    },
+    contenedorCursorActivo: {
+        backgroundColor: "rgba(255, 255, 255, 0.2)"
     },
     inlineBlock: {
         display: "inline-block"

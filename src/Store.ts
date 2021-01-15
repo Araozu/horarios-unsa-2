@@ -11,8 +11,4 @@ console.log(numImgGuardado);
 
 export const [modoColor, setModoColor] = createSignal(ModoColor.Oscuro);
 export const [numWallpaper, setNumWallpaper] = createSignal(numImgGuardado);
-createEffect(() => {
-    const num = numWallpaper();
-    localStorage.setItem("num-img", num.toString());
-    console.log("Establecer item!");
-});
+export const [mostrarDescansos, setMostrarDescansos] = createSignal(true);

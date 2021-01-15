@@ -56,12 +56,12 @@ function CambiadorImg() {
     return <div className={css(estilosGlobales.inlineBlock, e.contCambiador)}>
         <span className={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock)}>
             <i
-                className={"ph-arrow-left " + css(e.boton, e.botonLeft)}
+                className={"ph-arrow-left " + css(e.boton, e.botonLeft, estilosGlobales.contenedorCursorSoft)}
                 onClick={retrocederWallpaper}
             />
             Img. {numWallpaper() + 1}
             <i
-                className={"ph-arrow-right " + css(e.boton, e.botonRight)}
+                className={"ph-arrow-right " + css(e.boton, e.botonRight, estilosGlobales.contenedorCursorSoft)}
                 onClick={avanzarWallpaper}
             />
         </span>

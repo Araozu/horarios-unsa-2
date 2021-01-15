@@ -1,6 +1,7 @@
 import { StyleSheet, css } from "aphrodite";
-import { For } from "solid-js";
+import { For, Show } from "solid-js";
 import { estilosGlobales } from "../Estilos";
+import { mostrarDescansos } from "../Store";
 
 const dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"];
 const horas = [

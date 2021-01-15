@@ -7,7 +7,12 @@ export function Horarios(props: { data: DatosHorario }) {
 
     const elAnios = <For each={Object.entries(props.data.años)}>
         {([nombre]) =>
-            <div className={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock, estilosGlobales.contenedorCursor)}>
+            <div className={css(
+                estilosGlobales.contenedor,
+                estilosGlobales.inlineBlock,
+                estilosGlobales.contenedorCursor,
+                estilosGlobales.contenedorCursorSoft
+            )}>
                 {nombre}
             </div>
         }
