@@ -24,7 +24,8 @@ const horas = [
     "17:40 - 18:30",
     "18:30 - 19:20",
     "19:20 - 20:10",
-    "20:10 - 21:00"
+    "20:10 - 21:00",
+    "21:00 - 21:00"
 ]
 const horasDescanso = [
     "08:40 - 08:50",
@@ -39,6 +40,7 @@ export function Tabla() {
             position: "relative",
             zIndex: 2,
             transition: "background-color 250ms",
+            marginLeft: "4rem",
             ":hover": {
                 backgroundColor: "rgba(200, 200, 200, 0.25)"
             }
@@ -54,7 +56,9 @@ export function Tabla() {
         celdaHora: {
             textAlign: "center",
             width: "4rem",
-            padding: "0.25rem 0"
+            padding: "0.25rem 0",
+            position: "absolute",
+            top: "-0.75rem"
         },
         celdaComun: {
             width: "calc((100% - 4rem) / 5)",
@@ -67,7 +71,7 @@ export function Tabla() {
     return <div>
         <div className={css(e.fila)}>
             <div className={css(e.celdaHora, estilosGlobales.inlineBlock)}>
-                Hora
+
             </div>
             <For each={dias}>
                 {dia =>
@@ -79,18 +83,25 @@ export function Tabla() {
         </div>
         <For each={horas}>
             {hora =>
-                <div className={css(e.fila)}>
+                <div style={{position: "relative"}}>
                     <div className={css(e.celdaHora, estilosGlobales.inlineBlock)}>
                         {hora.substring(0, 5)}
                     </div>
-                    <For each={dias}>
-                        {() =>
-                            <div className={css(e.celdaComun, estilosGlobales.inlineBlock)}>
-                                :D
-                            </div>
-                        }
-                    </For>
-                    <div className={css(e.filaBorde)}/>
+                    <div className={css(e.fila)}>
+                        <For each={dias}>
+                            {() =>
+                                <div className={css(e.celdaComun, estilosGlobales.inlineBlock)}>
+                                    <span>:D</span>
+                                    <span>D:</span>
+                                    <span>:)</span>
+                                    <br/>
+                                    <span>(:</span>
+                                    <span>:p</span>
+                                </div>
+                            }
+                        </For>
+                        <div className={css(e.filaBorde)}/>
+                    </div>
                 </div>
             }
         </For>

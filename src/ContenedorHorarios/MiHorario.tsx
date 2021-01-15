@@ -30,6 +30,7 @@ export function MiHorario() {
             )}>
                 Mi horario
             </div>
+            {/*
             <div
                 className={css(
                     estilosGlobales.inlineBlock,
@@ -42,6 +43,7 @@ export function MiHorario() {
                 <i className={claseBotonMostrarDescansos()}/>
                 &nbsp;Mostrar descansos
             </div>
+            */}
         </div>
 
         <div className={css(
