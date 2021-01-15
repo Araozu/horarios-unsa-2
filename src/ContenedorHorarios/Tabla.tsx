@@ -1,7 +1,7 @@
 import { StyleSheet, css } from "aphrodite";
-import { For, Show } from "solid-js";
+import { For} from "solid-js";
 import { estilosGlobales } from "../Estilos";
-import { mostrarDescansos } from "../Store";
+import { AnioData } from "../types/DatosHorario";
 
 const dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"];
 const horas = [
@@ -34,7 +34,7 @@ const horasDescanso = [
     "17:30 - 17:40"
 ]
 
-export function Tabla() {
+export function Tabla(props: {data: AnioData}) {
     const e = StyleSheet.create({
         fila: {
             position: "relative",
@@ -61,7 +61,7 @@ export function Tabla() {
             top: "-0.75rem"
         },
         celdaComun: {
-            width: "calc((100% - 4rem) / 5)",
+            width: "20%",
             textAlign: "center",
             padding: "0 0.5rem",
             boxSizing: "border-box"
@@ -91,12 +91,7 @@ export function Tabla() {
                         <For each={dias}>
                             {() =>
                                 <div className={css(e.celdaComun, estilosGlobales.inlineBlock)}>
-                                    <span>:D</span>
-                                    <span>D:</span>
-                                    <span>:)</span>
-                                    <br/>
-                                    <span>(:</span>
-                                    <span>:p</span>
+
                                 </div>
                             }
                         </For>

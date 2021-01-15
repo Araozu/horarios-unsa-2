@@ -15,14 +15,14 @@ export const estilosGlobales = StyleSheet.create({
         transition: "background-color 200ms",
         textDecoration: "underline solid white 2px",
         ":hover": {
-            backgroundColor: "rgba(200, 200, 200, 0.2)"
+            backgroundColor: "rgba(200, 200, 200, 0.3)"
         }
     },
     contenedorCursorSoft: {
         textDecoration: "underline rgba(255, 255, 255, 0.4)"
     },
     contenedorCursorActivo: {
-        backgroundColor: "rgba(255, 255, 255, 0.2)"
+        backgroundColor: "rgba(200, 200, 200, 0.3)"
     },
     inlineBlock: {
         display: "inline-block"

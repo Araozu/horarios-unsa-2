@@ -1,5 +1,4 @@
-
-interface Curso {
+export interface Curso {
     nombre: string,
     abreviado: string,
     Teoria: {
@@ -16,15 +15,18 @@ interface Curso {
     }
 }
 
-interface Anio {
-    [key: string]: {
-        [nombre: string]: Curso
-    }
+export interface AnioData {
+    [nombre: string]: Curso
+}
+
+export interface Anio {
+    [key: string]: AnioData
 }
 
 export interface DatosHorario {
     titulo: string,
     descripcion: string,
+    version: number,
     años: Anio
 }
 
