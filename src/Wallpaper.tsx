@@ -17,7 +17,7 @@ export function Wallpaper() {
         cover: {
             width: "100vw",
             height: "100vh",
-            backgroundPosition: "bottom",
+            backgroundPosition: "center",
             backgroundSize: "cover",
             zIndex: -1,
             transition: `opacity ${duracionTransicion}ms`

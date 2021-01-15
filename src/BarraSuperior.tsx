@@ -2,7 +2,7 @@ import { estilosGlobales } from "./Estilos";
 import { StyleSheet, css } from "aphrodite";
 import { numWallpaper, setNumWallpaper } from "./Store";
 
-const totalWallpapers = 17;
+const totalWallpapers = 21;
 
 function CambiadorImg() {
     const e = StyleSheet.create({
@@ -36,6 +36,9 @@ function CambiadorImg() {
         if (num > 0) {
             setNumWallpaper(num - 1);
             localStorage.setItem("num-img", (num - 1).toString());
+        } else {
+            setNumWallpaper(totalWallpapers);
+            localStorage.setItem("num-img", (totalWallpapers).toString());
         }
     };
 
@@ -44,28 +47,21 @@ function CambiadorImg() {
         if (num < totalWallpapers) {
             setNumWallpaper(num + 1);
             localStorage.setItem("num-img", (num + 1).toString());
+        } else {
+            setNumWallpaper(0);
+            localStorage.setItem("num-img", (0).toString());
         }
     };
-
-    const clasesLeft = () =>
-        numWallpaper() <= 0
-            ? "ph-arrow-left " + css(e.boton, e.botonDesactivado, e.botonLeft)
-            : "ph-arrow-left " + css(e.boton, e.botonLeft);
-
-    const clasesRight = () =>
-        numWallpaper() >= totalWallpapers
-            ? "ph-arrow-right " + css(e.boton, e.botonDesactivado, e.botonRight)
-            : "ph-arrow-right " + css(e.boton, e.botonRight);
 
     return <div className={css(estilosGlobales.inlineBlock, e.contCambiador)}>
         <span className={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock)}>
             <i
-                className={clasesLeft()}
+                className={"ph-arrow-left " + css(e.boton, e.botonLeft)}
                 onClick={retrocederWallpaper}
             />
             Img. {numWallpaper() + 1}
             <i
-                className={clasesRight()}
+                className={"ph-arrow-right " + css(e.boton, e.botonRight)}
                 onClick={avanzarWallpaper}
             />
         </span>
@@ -97,8 +93,8 @@ export function BarraSuperior() {
             GitHub
             <i class="ph-arrow-up-right"/>
         </a>
+        <CambiadorImg/>
         <span className={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock)}>2021-A</span>
         <span className={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock)}>Ingeniería de Sistemas</span>
-        <CambiadorImg/>
     </header>;
 }
