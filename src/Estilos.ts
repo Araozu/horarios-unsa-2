@@ -7,7 +7,7 @@ export const estilosGlobales = StyleSheet.create({
         borderRadius: "10px",
         backdropFilter: "blur(40px)",
         backgroundColor: "rgba(100, 100, 100, 0.25)",
-        color: "white"
+        color: "var(--color-texto)"
     },
     contenedorCursor: {
         cursor: "pointer",

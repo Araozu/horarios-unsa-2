@@ -1,12 +1,13 @@
-import { DatosHorario } from "../types/DatosHorario";
+import { AnioData, DatosHorario } from "../types/DatosHorario";
 import { For, createSignal, createMemo } from "solid-js";
 import { StyleSheet, css } from "aphrodite";
 import { estilosGlobales } from "../Estilos";
 import { Tabla } from "./Tabla";
+import { horas } from "../Store";
 
 export function Horarios(props: { data: DatosHorario }) {
 
-    const [anioActual, setAnioActual] = createSignal("1er año");
+    const [anioActual, setAnioActual] = createSignal("3er año");
 
     const elAnios = <For each={Object.entries(props.data.años)}>
         {([nombre]) => {
@@ -35,7 +36,7 @@ export function Horarios(props: { data: DatosHorario }) {
         {elAnios}
         <br/>
         <div className={css(estilosGlobales.contenedor)}>
-            <Tabla data={dataTabla()}/>
+            <Tabla data={dataTabla()} version={props.data.version} anio={anioActual()}/>
         </div>
     </div>;
 }

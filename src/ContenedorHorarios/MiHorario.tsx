@@ -50,7 +50,7 @@ export function MiHorario() {
             e.horario,
             estilosGlobales.contenedor
         )}>
-            <Tabla data={{}}/>
+            <Tabla data={{}} anio={"Mi horario"} version={1}/>
         </div>
     </div>;
 }

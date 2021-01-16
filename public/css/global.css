@@ -1,5 +1,9 @@
+:root {
+    --color-texto: white;
+}
+
 body {
-    color: white
+    color: var(--color-texto);
 }
 
 [class^="ph-"], [class*=" ph-"] ::before {
