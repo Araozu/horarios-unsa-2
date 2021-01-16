@@ -1,5 +1,5 @@
 import { StyleSheet, css } from "aphrodite";
-import { createEffect, createMemo, createState, For } from "solid-js";
+import { createEffect, createMemo, createSignal, createState, For } from "solid-js";
 import { estilosGlobales } from "../Estilos";
 import { AnioData } from "../types/DatosHorario";
 import { dias, horas, horasDescanso } from "../Store";
@@ -10,6 +10,9 @@ const e = StyleSheet.create({
         zIndex: 2,
         transition: "background-color 250ms",
         marginLeft: "4rem",
+        display: "flex",
+        alignItems: "center",
+        minHeight: "1rem",
         ":hover": {
             // backgroundColor: "rgba(200, 200, 200, 0.25)"
         }
@@ -43,23 +46,15 @@ const e = StyleSheet.create({
         padding: "0.25rem 0.35rem",
         cursor: "pointer",
         borderRadius: "5px",
-        ":hover": {
-            backgroundColor: "rgba(200, 200, 200, 0.25)"
-        }
+        transition: "background-color 100ms"
+    },
+    celdaCursoActiva: {
+        backgroundColor: "rgba(200, 200, 200, 0.25)"
     },
     celdaCursoTeoria: {
         fontWeight: "bold"
     }
 });
-
-/*
-TODO: Configurar state.
-      Que el padre pase un objeto state con todos los cursos e info adicional sobre los cursos:
-       Si seleccionado,
-       si solo teoria o lab,
-       cual grupo
-      y aqui resaltar adecuadamente.
-*/
 
 interface DataProcesada {
     [hora: string]: {
@@ -134,24 +129,14 @@ const procesarAnio = (data: AnioData, anio: string, version: number) => {
 }
 
 export function Tabla(props: { data: AnioData, anio: string, version: number }) {
-
     const anio = () => props.anio.substring(0, props.anio.indexOf(" "));
     const data = createMemo(() => procesarAnio(props.data, anio(), props.version));
+    const [idHover, setIdHover] = createSignal("");
 
-    return <div>
-        <div className={css(e.fila)}>
-            <For each={dias}>
-                {dia =>
-                    <div className={css(e.celdaComun, estilosGlobales.inlineBlock, e.celdaDia)}>
-                        {dia}
-                    </div>
-                }
-            </For>
-        </div>
-        <For each={horas}>
+    const celdas = createMemo(() => {
+        console.log("Renderizar tabla", props.anio);
+        return <For each={horas}>
             {hora => {
-                const c = anio();
-                console.log(c);
                 return <div style={{position: "relative"}}>
                     <div className={css(e.celdaHora, estilosGlobales.inlineBlock)}>
                         {hora.substring(0, 5)}
@@ -166,11 +151,18 @@ export function Tabla(props: { data: AnioData, anio: string, version: number }) 
 
                                 return <div className={css(e.celdaComun, estilosGlobales.inlineBlock)}>
                                     <For each={datos}>
-                                        {({txt, esLab}) =>
-                                            <span className={css(e.celdaCurso, !esLab && e.celdaCursoTeoria)}>
+                                        {({id, txt, esLab}) => {
+
+                                            const clases = () => {
+                                                const clases = [e.celdaCurso, !esLab && e.celdaCursoTeoria];
+                                                if (id === idHover()) clases.push(e.celdaCursoActiva);
+                                                return css(...clases);
+                                            };
+
+                                            return <span className={clases()} onMouseEnter={() => setIdHover(id)}>
                                                 {txt}
-                                            </span>
-                                        }
+                                            </span>;
+                                        }}
                                     </For>
                                 </div>;
                             }}
@@ -180,5 +172,18 @@ export function Tabla(props: { data: AnioData, anio: string, version: number }) 
                 </div>;
             }}
         </For>
+    });
+
+    return <div>
+        <div className={css(e.fila)}>
+            <For each={dias}>
+                {dia =>
+                    <div className={css(e.celdaComun, estilosGlobales.inlineBlock, e.celdaDia)}>
+                        {dia}
+                    </div>
+                }
+            </For>
+        </div>
+        {celdas()}
     </div>
 }

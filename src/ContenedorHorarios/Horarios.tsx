@@ -7,7 +7,7 @@ import { horas } from "../Store";
 
 export function Horarios(props: { data: DatosHorario }) {
 
-    const [anioActual, setAnioActual] = createSignal("3er año");
+    const [anioActual, setAnioActual] = createSignal("1er año");
 
     const elAnios = <For each={Object.entries(props.data.años)}>
         {([nombre]) => {
