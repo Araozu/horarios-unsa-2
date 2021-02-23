@@ -5,6 +5,10 @@ import { createSignal, createMemo, createEffect, createState } from "solid-js";
 const duracionTransicion = 250;
 
 export function Wallpaper() {
+    /// @ts-ignore
+    const soportaBackdropFilter = document.body.style.backdropFilter !== undefined;
+    console.log("Soporta backdrop-filter?:", soportaBackdropFilter);
+
     const estilos = StyleSheet.create({
         contenedorCover: {
             position: "fixed",
@@ -12,7 +16,8 @@ export function Wallpaper() {
             height: "100vh",
             top: "0",
             left: "0",
-            backgroundColor: "#212121"
+            backgroundColor: "#212121",
+            zIndex: -1
         },
         cover: {
             width: "100vw",
@@ -20,7 +25,8 @@ export function Wallpaper() {
             backgroundPosition: "center",
             backgroundSize: "cover",
             zIndex: -1,
-            transition: `opacity ${duracionTransicion}ms`
+            transition: `opacity ${duracionTransicion}ms`,
+            filter: soportaBackdropFilter? "": "blur(40px)"
         },
         coverTransicion: {
             opacity: 0

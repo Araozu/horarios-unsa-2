@@ -46,11 +46,14 @@ export function MiHorario() {
             */}
         </div>
 
+
         <div className={css(
             e.horario,
             estilosGlobales.contenedor
         )}>
             <Tabla data={{}} anio={"Mi horario"} version={1}/>
         </div>
+
+
     </div>;
 }
