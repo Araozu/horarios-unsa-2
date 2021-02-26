@@ -2,7 +2,7 @@ import { estilosGlobales } from "./Estilos";
 import { StyleSheet, css } from "aphrodite";
 import { numWallpaper, setNumWallpaper } from "./Store";
 
-const totalWallpapers = 21;
+const totalWallpapers = 4;
 
 function CambiadorImg() {
     const e = StyleSheet.create({
