@@ -30,3 +30,12 @@ export interface DatosHorario {
     años: Anio
 }
 
+export interface DataProcesada {
+    [hora: string]: {
+        [dia: string]: {
+            id: string,
+            txt: string,
+            esLab: boolean
+        }[]
+    }
+}

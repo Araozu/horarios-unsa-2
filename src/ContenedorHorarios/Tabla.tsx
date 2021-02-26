@@ -3,6 +3,8 @@ import { createEffect, createMemo, createSignal, createState, For } from "solid-
 import { estilosGlobales } from "../Estilos";
 import { AnioData } from "../types/DatosHorario";
 import { dias, horas, horasDescanso } from "../Store";
+import { DataProcesada } from "../types/DatosHorario";
+import { FilaTabla } from "./Tabla/FilaTabla";
 
 const e = StyleSheet.create({
     fila: {
@@ -12,7 +14,7 @@ const e = StyleSheet.create({
         marginLeft: "4rem",
         display: "flex",
         alignItems: "center",
-        minHeight: "1rem",
+        minHeight: "1.5rem",
         ":hover": {
             // backgroundColor: "rgba(200, 200, 200, 0.25)"
         }
@@ -55,16 +57,6 @@ const e = StyleSheet.create({
         fontWeight: "bold"
     }
 });
-
-interface DataProcesada {
-    [hora: string]: {
-        [dia: string]: {
-            id: string,
-            txt: string,
-            esLab: boolean
-        }[]
-    }
-}
 
 const procesarAnio = (data: AnioData, anio: string, version: number) => {
     const obj: DataProcesada = {};
@@ -137,39 +129,7 @@ export function Tabla(props: { data: AnioData, anio: string, version: number }) 
         console.log("Renderizar tabla", props.anio);
         return <For each={horas}>
             {hora => {
-                return <div style={{position: "relative"}}>
-                    <div className={css(e.celdaHora, estilosGlobales.inlineBlock)}>
-                        {hora.substring(0, 5)}
-                    </div>
-                    <div className={css(e.fila)}>
-                        <For each={dias}>
-                            {dia => {
-                                const diaStr = dia.substring(0, 2);
-                                const horaStr = hora.substring(0, 5);
-
-                                const datos = data()?.[horaStr]?.[diaStr] ?? [];
-
-                                return <div className={css(e.celdaComun, estilosGlobales.inlineBlock)}>
-                                    <For each={datos}>
-                                        {({id, txt, esLab}) => {
-
-                                            const clases = () => {
-                                                const clases = [e.celdaCurso, !esLab && e.celdaCursoTeoria];
-                                                if (id === idHover()) clases.push(e.celdaCursoActiva);
-                                                return css(...clases);
-                                            };
-
-                                            return <span className={clases()} onMouseEnter={() => setIdHover(id)}>
-                                                {txt}
-                                            </span>;
-                                        }}
-                                    </For>
-                                </div>;
-                            }}
-                        </For>
-                        <div className={css(e.filaBorde)}/>
-                    </div>
-                </div>;
+                return <FilaTabla data={data} hora={hora} idHover={idHover} setIdHover={setIdHover}/>
             }}
         </For>
     });

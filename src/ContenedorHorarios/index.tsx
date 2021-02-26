@@ -7,7 +7,7 @@ import { estilosGlobales } from "../Estilos";
 import { Show, createSignal, createEffect, batch } from "solid-js";
 
 const datosPromise = (async () => {
-    const file = await fetch("/horarios/2020_2_fps_ingenieriadesistemas.yaml");
+    const file = await fetch("/horarios/2020_1_fps_ingenieriadesistemas.yaml");
     const text = await file.text();
     return YAML.parse(text) as DatosHorario;
 })();
