@@ -4,55 +4,55 @@ import { numWallpaper, setNumWallpaper } from "./Store";
 
 const totalWallpapers = 4;
 
+const e = StyleSheet.create({
+    contCambiador: {
+        userSelect: "none"
+    },
+    boton: {
+        cursor: "pointer",
+        textDecoration: "underline",
+        "::before": {
+            fontSize: "1rem",
+            transform: "translateY(0.2rem)"
+        }
+    },
+    botonDesactivado: {
+        cursor: "not-allowed",
+        textDecoration: "none"
+    },
+    botonLeft: {
+        paddingRight: "0.5rem",
+        marginRight: "0.25rem"
+    },
+    botonRight: {
+        paddingLeft: "0.5rem",
+        marginRight: "0.25rem"
+    }
+});
+
+const retrocederWallpaper = () => {
+    const num = numWallpaper();
+    if (num > 0) {
+        setNumWallpaper(num - 1);
+        localStorage.setItem("num-img", (num - 1).toString());
+    } else {
+        setNumWallpaper(totalWallpapers);
+        localStorage.setItem("num-img", (totalWallpapers).toString());
+    }
+};
+
+const avanzarWallpaper = () => {
+    const num = numWallpaper();
+    if (num < totalWallpapers) {
+        setNumWallpaper(num + 1);
+        localStorage.setItem("num-img", (num + 1).toString());
+    } else {
+        setNumWallpaper(0);
+        localStorage.setItem("num-img", (0).toString());
+    }
+};
+
 function CambiadorImg() {
-    const e = StyleSheet.create({
-        contCambiador: {
-            userSelect: "none"
-        },
-        boton: {
-            cursor: "pointer",
-            textDecoration: "underline",
-            "::before": {
-                fontSize: "1rem",
-                transform: "translateY(0.2rem)"
-            }
-        },
-        botonDesactivado: {
-            cursor: "not-allowed",
-            textDecoration: "none"
-        },
-        botonLeft: {
-            paddingRight: "0.5rem",
-            marginRight: "0.25rem"
-        },
-        botonRight: {
-            paddingLeft: "0.5rem",
-            marginRight: "0.25rem"
-        }
-    });
-
-    const retrocederWallpaper = () => {
-        const num = numWallpaper();
-        if (num > 0) {
-            setNumWallpaper(num - 1);
-            localStorage.setItem("num-img", (num - 1).toString());
-        } else {
-            setNumWallpaper(totalWallpapers);
-            localStorage.setItem("num-img", (totalWallpapers).toString());
-        }
-    };
-
-    const avanzarWallpaper = () => {
-        const num = numWallpaper();
-        if (num < totalWallpapers) {
-            setNumWallpaper(num + 1);
-            localStorage.setItem("num-img", (num + 1).toString());
-        } else {
-            setNumWallpaper(0);
-            localStorage.setItem("num-img", (0).toString());
-        }
-    };
-
     return <div className={css(estilosGlobales.inlineBlock, e.contCambiador)}>
         <span className={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock)}>
             <i

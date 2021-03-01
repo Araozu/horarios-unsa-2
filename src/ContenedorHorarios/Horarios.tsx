@@ -1,9 +1,9 @@
-import { AnioData, DatosHorario } from "../types/DatosHorario";
+import { DatosHorario } from "../types/DatosHorario";
 import { For, createSignal, createMemo } from "solid-js";
-import { StyleSheet, css } from "aphrodite";
+import { css } from "aphrodite";
 import { estilosGlobales } from "../Estilos";
 import { Tabla } from "./Tabla";
-import { horas } from "../Store";
+import { Cursos } from "./Cursos";
 
 export function Horarios(props: { data: DatosHorario }) {
 
@@ -37,6 +37,9 @@ export function Horarios(props: { data: DatosHorario }) {
         <br/>
         <div className={css(estilosGlobales.contenedor)}>
             <Tabla data={dataTabla()} version={props.data.version} anio={anioActual()}/>
+        </div>
+        <div>
+            <Cursos dataAnio={dataTabla()}/>
         </div>
     </div>;
 }

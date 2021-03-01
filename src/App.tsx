@@ -1,5 +1,5 @@
 import { BarraSuperior } from "./BarraSuperior";
-import { ContenedorHorarios } from "./ContenedorHorarios/";
+import { ContenedorHorarios } from "./ContenedorHorarios/ContenedorHorarios";
 import { Wallpaper } from "./Wallpaper";
 import { Show } from "solid-js";
 import { css } from "aphrodite";
