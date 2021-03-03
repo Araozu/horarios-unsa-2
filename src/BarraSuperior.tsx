@@ -58,34 +58,34 @@ function CambiadorImg() {
             <i
                 className={"ph-arrow-left " + css(e.boton, e.botonLeft, estilosGlobales.contenedorCursorSoft)}
                 onClick={retrocederWallpaper}
+                title={"Cambiar imagen de fondo"}
             />
             Img. {numWallpaper() + 1}
             <i
                 className={"ph-arrow-right " + css(e.boton, e.botonRight, estilosGlobales.contenedorCursorSoft)}
                 onClick={avanzarWallpaper}
+                title={"Cambiar imagen de fondo"}
             />
         </span>
     </div>;
 }
 
-export function BarraSuperior() {
-    const estilos = StyleSheet.create({
-        tituloPrincipal: {
-            fontWeight: "bold",
-            fontFamily: "'SF Pro Display', sans-serif"
-        }
-    });
+const estilos = StyleSheet.create({
+    tituloPrincipal: {
+        fontWeight: "bold"
+    }
+});
 
+export function BarraSuperior() {
     return <header>
-        <a href="/" className={css(
+        <span className={css(
             estilosGlobales.contenedor,
             estilosGlobales.inlineBlock,
-            estilosGlobales.contenedorCursor,
             estilos.tituloPrincipal
         )}>
             Horarios Unsa
-        </a>
-        <a href="https://github.com" target="_blank" className={css(
+        </span>
+        <a href="https://github.com" target="_blank" title={"Ver codigo fuente en GitHub"} className={css(
             estilosGlobales.contenedor,
             estilosGlobales.inlineBlock,
             estilosGlobales.contenedorCursor

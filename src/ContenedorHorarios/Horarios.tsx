@@ -22,7 +22,7 @@ export function Horarios(props: { data: DatosHorario }) {
                 );
             });
 
-            return <div className={clases()} onClick={() => setAnioActual(nombre)}>
+            return <div className={clases()} title={"Cambiar a " + nombre} onClick={() => setAnioActual(nombre)}>
                 {nombre}
             </div>
         }}

@@ -14,7 +14,7 @@ export function Cursos(props: { dataAnio: AnioData }) {
     return <>
         <For each={Object.entries(props.dataAnio)}>
             {([_, datosCurso]) => {
-                return <span className={css(
+                return <span title={"Agregar " + datosCurso.abreviado + " a mi horario"} className={css(
                     e.contenedorCurso,
                     estilosGlobales.contenedor,
                     estilosGlobales.contenedorCursor,

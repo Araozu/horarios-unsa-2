@@ -17,14 +17,14 @@ const ElemCargando = () =>
         Recuperando horarios...
     </div>
 
-export function ContenedorHorarios() {
-    const e = StyleSheet.create({
-        contenedor: {
-            display: "grid",
-            gridTemplateColumns: "50% 50%"
-        }
-    });
+const e = StyleSheet.create({
+    contenedor: {
+        display: "grid",
+        gridTemplateColumns: "50% 50%"
+    }
+});
 
+export function ContenedorHorarios() {
     const [datosCargados, setDatosCargados] = createSignal(false);
     const [datos, setDatos] = createSignal<DatosHorario | null>(null);
 

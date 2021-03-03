@@ -37,7 +37,7 @@ export const horasDescanso = [
     "17:30 - 17:40"
 ];
 
-const numImgGuardado = parseInt(localStorage.getItem("num-img") ?? "4");
+const numImgGuardado = parseInt(localStorage.getItem("num-img") ?? "3");
 
 export const [modoColor, setModoColor] = createSignal(ModoColor.Oscuro);
 export const [numWallpaper, setNumWallpaper] = createSignal(numImgGuardado);
