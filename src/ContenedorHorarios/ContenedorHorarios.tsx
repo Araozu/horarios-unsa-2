@@ -4,7 +4,7 @@ import { MiHorario } from "./MiHorario";
 import { Horarios } from "./Horarios";
 import { DatosHorario } from "../types/DatosHorario";
 import { estilosGlobales } from "../Estilos";
-import { Show, createSignal, createEffect, batch } from "solid-js";
+import { Show, createSignal, createEffect, createMemo, batch } from "solid-js";
 
 const datosPromise = (async () => {
     const file = await fetch("/horarios/2020_1_fps_ingenieriadesistemas.yaml");
@@ -17,16 +17,36 @@ const ElemCargando = () =>
         Recuperando horarios...
     </div>
 
-const e = StyleSheet.create({
-    contenedor: {
-        display: "grid",
-        gridTemplateColumns: "50% 50%"
-    }
-});
+export type EstadoLayout = "MaxPersonal" | "Normal" | "MaxHorarios";
 
 export function ContenedorHorarios() {
     const [datosCargados, setDatosCargados] = createSignal(false);
     const [datos, setDatos] = createSignal<DatosHorario | null>(null);
+    const [estadoLayout, setEstadoLayout] = createSignal<EstadoLayout>("Normal");
+
+    const e = createMemo(() => {
+        let templateColumns = "";
+        switch (estadoLayout()) {
+            case "MaxHorarios": {
+                templateColumns = "4rem auto";
+                break;
+            }
+            case "MaxPersonal": {
+                templateColumns = "40% 60%";
+                break;
+            }
+            case "Normal": {
+                templateColumns = "50% 50%"
+            }
+        }
+
+        return StyleSheet.create({
+            contenedor: {
+                display: "grid",
+                gridTemplateColumns: templateColumns
+            }
+        });
+    });
 
     createEffect(async () => {
         const datos = await datosPromise;
@@ -36,10 +56,14 @@ export function ContenedorHorarios() {
         });
     });
 
-    return <div className={css(e.contenedor)}>
-        <MiHorario/>
-        <Show when={datosCargados()}>
-            <Horarios data={datos()!!}/>
-        </Show>
+    return <div className={css(e().contenedor)}>
+        <div>
+            <MiHorario estadoLayout={estadoLayout()}/>
+        </div>
+        <div>
+            <Show when={datosCargados()}>
+                <Horarios data={datos()!!} setEstadoLayout={setEstadoLayout}/>
+            </Show>
+        </div>
     </div>;
 }

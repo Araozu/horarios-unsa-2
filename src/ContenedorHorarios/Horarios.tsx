@@ -4,8 +4,47 @@ import { css } from "aphrodite";
 import { estilosGlobales } from "../Estilos";
 import { Tabla } from "./Tabla";
 import { Cursos } from "./Cursos";
+import { EstadoLayout } from "./ContenedorHorarios";
 
-export function Horarios(props: { data: DatosHorario }) {
+const maximizarHorario = (setEstadoLayout: (v: EstadoLayout) => EstadoLayout) => {
+    setEstadoLayout("MaxHorarios");
+};
+
+const minimizarHorario = (setEstadoLayout: (v: EstadoLayout) => EstadoLayout) => {
+    setEstadoLayout("Normal");
+};
+
+function BotonExpandirOcultar(props: { setEstadoLayout: (v: EstadoLayout) => EstadoLayout }) {
+    const [horariosMax, setHorariosMax] = createSignal(false);
+
+    const tituloBoton = () => horariosMax() ? "Minimizar horario" : "Maximizar horario";
+    const iconoBoton = () => horariosMax() ? "ph-arrows-in" : "ph-arrows-out";
+
+    const funcionBoton = () => {
+        const estaMaximizado = horariosMax();
+        setHorariosMax(!estaMaximizado);
+        if (estaMaximizado) {
+            minimizarHorario(props.setEstadoLayout);
+        } else {
+            maximizarHorario(props.setEstadoLayout);
+        }
+    };
+
+    return <div title={tituloBoton()}
+                onClick={funcionBoton}
+                className={css(
+                    estilosGlobales.contenedor,
+                    estilosGlobales.inlineBlock,
+                    estilosGlobales.contenedorCursor,
+                    estilosGlobales.contenedorCursorSoft,
+                    estilosGlobales.contenedorPhospor
+                )}
+    >
+        <i className={css(estilosGlobales.botonPhospor) + " " + iconoBoton()}/>
+    </div>
+}
+
+export function Horarios(props: { data: DatosHorario, setEstadoLayout: (v: EstadoLayout) => EstadoLayout }) {
 
     const [anioActual, setAnioActual] = createSignal("1er año");
 
@@ -34,6 +73,8 @@ export function Horarios(props: { data: DatosHorario }) {
 
     return <div>
         {elAnios}
+        |
+        <BotonExpandirOcultar setEstadoLayout={props.setEstadoLayout}/>
         <br/>
         <div className={css(estilosGlobales.contenedor)}>
             <Tabla data={dataTabla()} version={props.data.version} anio={anioActual()}/>

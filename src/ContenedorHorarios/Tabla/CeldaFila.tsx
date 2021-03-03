@@ -6,7 +6,7 @@ const e = StyleSheet.create({
     celdaComun: {
         width: "20%",
         textAlign: "center",
-        padding: "0 0.5rem",
+        padding: "0 0.7rem",
         boxSizing: "border-box"
     },
     celdaCurso: {
@@ -14,18 +14,22 @@ const e = StyleSheet.create({
         padding: "0.25rem 0.35rem",
         cursor: "pointer",
         borderRadius: "5px",
-        transition: "background-color 100ms"
+        transition: "background-color 100ms, color 100ms"
     },
     celdaCursoActiva: {
-        backgroundColor: "rgba(200, 200, 200, 0.25)"
+        backgroundColor: "rgba(200, 200, 200, 0.5)",
+        color: "#151515"
     },
     celdaCursoTeoria: {
         fontWeight: "bold"
+    },
+    celdaCursoLab: {
+        fontStyle: "italic"
     }
 });
 
 interface Props {
-    datos: {id: string, txt: string, esLab: boolean}[],
+    datos: { id: string, txt: string, esLab: boolean }[],
     idHover: () => string,
     setIdHover: (v: string) => string
 }
@@ -41,7 +45,7 @@ export function CeldaFila(props: Props) {
             {({id, txt, esLab}) => {
 
                 const clases = () => {
-                    const clases = [e.celdaCurso, !esLab && e.celdaCursoTeoria];
+                    const clases = [e.celdaCurso, esLab ? e.celdaCursoLab : e.celdaCursoTeoria];
                     if (id === idHover()) clases.push(e.celdaCursoActiva);
                     return css(...clases);
                 };

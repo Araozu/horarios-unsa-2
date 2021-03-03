@@ -24,7 +24,18 @@ export const estilosGlobales = StyleSheet.create({
     contenedorCursorActivo: {
         backgroundColor: "rgba(200, 200, 200, 0.3)"
     },
+    contenedorPhospor: {
+        padding: "0.5rem 0.65rem",
+        transform: "translateY(0.2rem)"
+    },
     inlineBlock: {
         display: "inline-block"
-    }
+    },
+    botonPhospor: {
+        "::before": {
+            fontSize: "1.25rem",
+            // transform: "translateY(0.2rem)",
+            textDecoration: "underline rgba(255, 255, 255, 0.4)",
+        }
+    },
 });
