@@ -1,8 +1,8 @@
 import { StyleSheet, css } from "aphrodite";
 import { estilosGlobales } from "../../Estilos";
-import { For } from "solid-js";
+import { For, createSignal } from "solid-js";
 import { dias } from "../../Store";
-import {CeldaFila} from "./CeldaFila";
+import { CeldaFila } from "./CeldaFila";
 import { DataProcesada } from "../../types/DatosHorario";
 
 const e = StyleSheet.create({
@@ -16,11 +16,12 @@ const e = StyleSheet.create({
     fila: {
         position: "relative",
         zIndex: 2,
-        transition: "background-color 250ms",
+        transition: "background-color 250ms, border 100ms",
         marginLeft: "4rem",
         display: "flex",
         alignItems: "center",
         minHeight: "1.5rem",
+        borderLeft: "solid transparent",
         ":hover": {
             // backgroundColor: "rgba(200, 200, 200, 0.25)"
         }
@@ -33,6 +34,9 @@ const e = StyleSheet.create({
         backgroundColor: "rgba(200, 200, 200, 0.25)",
         zIndex: 1
     },
+    filaResaltada: {
+        borderLeft: "solid"
+    }
 });
 
 interface Props {
@@ -43,15 +47,31 @@ interface Props {
 }
 
 export function FilaTabla(props: Props) {
+    const [filaResaltada, setFilaResaltada] = createSignal(false);
 
     const hora = props.hora;
     const data = props.data;
+
+    const claseFilaComun = css(e.fila);
+    const claseFilaResaltada = css(e.fila, e.filaResaltada);
+
+    const resaltarFila = () => {
+        if (!filaResaltada()) {
+            setFilaResaltada(true);
+        }
+    };
+
+    const desresaltarFila = () => {
+        if (filaResaltada()) {
+            setFilaResaltada(false);
+        }
+    }
 
     return <div style={{position: "relative"}}>
         <div className={css(e.celdaHora, estilosGlobales.inlineBlock)}>
             {hora.substring(0, 5)}
         </div>
-        <div className={css(e.fila)}>
+        <div className={filaResaltada() ? claseFilaResaltada : claseFilaComun}>
             <For each={dias}>
                 {dia => {
                     const diaStr = dia.substring(0, 2);
@@ -59,7 +79,13 @@ export function FilaTabla(props: Props) {
 
                     const datos = data()?.[horaStr]?.[diaStr] ?? [];
 
-                    return <CeldaFila datos={datos} idHover={props.idHover} setIdHover={props.setIdHover}/>
+                    return <CeldaFila
+                        datos={datos}
+                        idHover={props.idHover}
+                        setIdHover={props.setIdHover}
+                        fnResaltarFila={resaltarFila}
+                        fnDesresaltarFila={desresaltarFila}
+                    />
                 }}
             </For>
             <div className={css(e.filaBorde)}/>

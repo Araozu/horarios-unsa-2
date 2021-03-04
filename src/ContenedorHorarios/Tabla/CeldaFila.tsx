@@ -1,6 +1,6 @@
 import { StyleSheet, css } from "aphrodite";
 import { estilosGlobales } from "../../Estilos";
-import { For } from "solid-js";
+import { For, createSignal } from "solid-js";
 
 const e = StyleSheet.create({
     celdaComun: {
@@ -31,7 +31,9 @@ const e = StyleSheet.create({
 interface Props {
     datos: { id: string, txt: string, esLab: boolean }[],
     idHover: () => string,
-    setIdHover: (v: string) => string
+    setIdHover: (v: string) => string,
+    fnResaltarFila: () => void,
+    fnDesresaltarFila: () => void
 }
 
 export function CeldaFila(props: Props) {
@@ -40,19 +42,30 @@ export function CeldaFila(props: Props) {
     const idHover = props.idHover;
     const setIdHover = props.setIdHover;
 
+    const fnOnMouseEnter = (id: string) => setIdHover(id);
+    const fnOnMouseLeave = () => setIdHover("");
+
     return <div className={css(e.celdaComun, estilosGlobales.inlineBlock)}>
         <For each={datos}>
             {({id, txt, esLab}) => {
+                const [estabaResaltado, setEstabaResaltado] = createSignal(false);
 
                 const clases = () => {
                     const clases = [e.celdaCurso, esLab ? e.celdaCursoLab : e.celdaCursoTeoria];
-                    if (id === idHover()) clases.push(e.celdaCursoActiva);
+                    if (id === idHover()) {
+                        props.fnResaltarFila();
+                        clases.push(e.celdaCursoActiva);
+                        setEstabaResaltado(true);
+                    } else if (estabaResaltado()) {
+                        props.fnDesresaltarFila();
+                        setEstabaResaltado(false);
+                    }
                     return css(...clases);
                 };
 
                 return <span className={clases()}
-                             onMouseEnter={() => setIdHover(id)}
-                             onMouseLeave={() => setIdHover("")}
+                             onMouseEnter={() => fnOnMouseEnter(id)}
+                             onMouseLeave={fnOnMouseLeave}
                 >
                     {txt}
                 </span>;
