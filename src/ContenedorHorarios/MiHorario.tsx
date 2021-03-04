@@ -1,11 +1,17 @@
 import { estilosGlobales } from "../Estilos";
 import { StyleSheet, css } from "aphrodite";
 import { Tabla } from "./Tabla";
-import { mostrarDescansos, setMostrarDescansos } from "../Store";
+import { mostrarDescansos } from "../Store";
 import { EstadoLayout } from "./ContenedorHorarios";
 import { Switch, Match } from "solid-js";
+import { BotonMaxMin } from "./BotonMaxMin";
 
-export function MiHorario(props: { estadoLayout: EstadoLayout }) {
+interface MiHorarioProps {
+    estadoLayout: EstadoLayout,
+    setEstadoLayout: (v: EstadoLayout) => EstadoLayout
+}
+
+export function MiHorario(props: MiHorarioProps) {
     const e = StyleSheet.create({
         horario: {},
         boton: {
@@ -19,17 +25,18 @@ export function MiHorario(props: { estadoLayout: EstadoLayout }) {
         }
     });
 
-    const iconoBoton = () => props.estadoLayout === "Normal" ? "ph-arrows-in" : "ph-arrows-out";
-
     const claseBotonMostrarDescansos = () =>
         mostrarDescansos()
             ? "ph-check " + css(e.boton)
             : "ph-circle " + css(e.boton);
 
-    return <div>
+    const fnMaximizar = () => props.setEstadoLayout("MaxPersonal");
+    const fnMinimizar = () => props.setEstadoLayout("Normal");
+    const estadoActualLayout = () => props.estadoLayout;
 
+    return <div>
         <Switch>
-            <Match when={props.estadoLayout === "Normal"}>
+            <Match when={props.estadoLayout === "Normal" || props.estadoLayout === "MaxPersonal"}>
                 <div>
                     <div className={css(
                         estilosGlobales.inlineBlock,
@@ -37,6 +44,13 @@ export function MiHorario(props: { estadoLayout: EstadoLayout }) {
                     )}>
                         Mi horario
                     </div>
+                    |
+                    <BotonMaxMin
+                        fnMaximizar={fnMaximizar}
+                        fnMinimizar={fnMinimizar}
+                        estadoActualLayout={estadoActualLayout}
+                        estadoLayoutMax={"MaxPersonal"}
+                    />
                     {/*
                         <div
                             className={css(
@@ -62,20 +76,13 @@ export function MiHorario(props: { estadoLayout: EstadoLayout }) {
                 </div>
             </Match>
             <Match when={props.estadoLayout === "MaxHorarios"}>
-                <div
-                     className={css(
-                         estilosGlobales.contenedor,
-                         estilosGlobales.inlineBlock,
-                         estilosGlobales.contenedorCursor,
-                         estilosGlobales.contenedorCursorSoft,
-                         estilosGlobales.contenedorPhospor
-                     )}
-                >
-                    <i className={css(estilosGlobales.botonPhospor) + " " + iconoBoton()}/>
-                </div>
+                <BotonMaxMin
+                    fnMaximizar={fnMaximizar}
+                    fnMinimizar={fnMinimizar}
+                    estadoActualLayout={estadoActualLayout}
+                    estadoLayoutMax={"MaxPersonal"}
+                />
             </Match>
         </Switch>
-
-
     </div>;
 }

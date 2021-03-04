@@ -5,46 +5,16 @@ import { estilosGlobales } from "../Estilos";
 import { Tabla } from "./Tabla";
 import { Cursos } from "./Cursos";
 import { EstadoLayout } from "./ContenedorHorarios";
+import { BotonMaxMin } from "./BotonMaxMin";
+import { Switch, Match } from "solid-js";
 
-const maximizarHorario = (setEstadoLayout: (v: EstadoLayout) => EstadoLayout) => {
-    setEstadoLayout("MaxHorarios");
-};
-
-const minimizarHorario = (setEstadoLayout: (v: EstadoLayout) => EstadoLayout) => {
-    setEstadoLayout("Normal");
-};
-
-function BotonExpandirOcultar(props: { setEstadoLayout: (v: EstadoLayout) => EstadoLayout }) {
-    const [horariosMax, setHorariosMax] = createSignal(false);
-
-    const tituloBoton = () => horariosMax() ? "Minimizar horario" : "Maximizar horario";
-    const iconoBoton = () => horariosMax() ? "ph-arrows-in" : "ph-arrows-out";
-
-    const funcionBoton = () => {
-        const estaMaximizado = horariosMax();
-        setHorariosMax(!estaMaximizado);
-        if (estaMaximizado) {
-            minimizarHorario(props.setEstadoLayout);
-        } else {
-            maximizarHorario(props.setEstadoLayout);
-        }
-    };
-
-    return <div title={tituloBoton()}
-                onClick={funcionBoton}
-                className={css(
-                    estilosGlobales.contenedor,
-                    estilosGlobales.inlineBlock,
-                    estilosGlobales.contenedorCursor,
-                    estilosGlobales.contenedorCursorSoft,
-                    estilosGlobales.contenedorPhospor
-                )}
-    >
-        <i className={css(estilosGlobales.botonPhospor) + " " + iconoBoton()}/>
-    </div>
+interface HorariosProps {
+    data: DatosHorario,
+    estadoLayout: EstadoLayout,
+    setEstadoLayout: (v: EstadoLayout) => EstadoLayout
 }
 
-export function Horarios(props: { data: DatosHorario, setEstadoLayout: (v: EstadoLayout) => EstadoLayout }) {
+export function Horarios(props: HorariosProps) {
 
     const [anioActual, setAnioActual] = createSignal("1er año");
 
@@ -71,16 +41,38 @@ export function Horarios(props: { data: DatosHorario, setEstadoLayout: (v: Estad
         return props.data.años[anioActual()];
     });
 
+    const fnMaximizar = () => props.setEstadoLayout("MaxHorarios");
+    const fnMinimizar = () => props.setEstadoLayout("Normal");
+    const estadoActualLayout = () => props.estadoLayout;
+
     return <div>
-        {elAnios}
-        |
-        <BotonExpandirOcultar setEstadoLayout={props.setEstadoLayout}/>
-        <br/>
-        <div className={css(estilosGlobales.contenedor)}>
-            <Tabla data={dataTabla()} version={props.data.version} anio={anioActual()}/>
-        </div>
-        <div>
-            <Cursos dataAnio={dataTabla()}/>
-        </div>
+        <Switch>
+            <Match when={props.estadoLayout === "Normal" || props.estadoLayout === "MaxHorarios"}>
+                {elAnios}
+                |
+                <BotonMaxMin
+                    fnMaximizar={fnMaximizar}
+                    fnMinimizar={fnMinimizar}
+                    estadoActualLayout={estadoActualLayout}
+                    estadoLayoutMax={"MaxHorarios"}
+                />
+                <br/>
+                <div className={css(estilosGlobales.contenedor)}>
+                    <Tabla data={dataTabla()} version={props.data.version} anio={anioActual()}/>
+                </div>
+                <div>
+                    <Cursos dataAnio={dataTabla()}/>
+                </div>
+            </Match>
+            <Match when={props.estadoLayout === "MaxPersonal"}>
+                <BotonMaxMin
+                    fnMaximizar={fnMaximizar}
+                    fnMinimizar={fnMinimizar}
+                    estadoActualLayout={estadoActualLayout}
+                    estadoLayoutMax={"MaxHorarios"}
+                />
+            </Match>
+        </Switch>
+
     </div>;
 }

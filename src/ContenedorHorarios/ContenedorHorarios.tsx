@@ -32,7 +32,7 @@ export function ContenedorHorarios() {
                 break;
             }
             case "MaxPersonal": {
-                templateColumns = "40% 60%";
+                templateColumns = "auto 4rem";
                 break;
             }
             case "Normal": {
@@ -58,11 +58,11 @@ export function ContenedorHorarios() {
 
     return <div className={css(e().contenedor)}>
         <div>
-            <MiHorario estadoLayout={estadoLayout()}/>
+            <MiHorario estadoLayout={estadoLayout()} setEstadoLayout={setEstadoLayout}/>
         </div>
         <div>
             <Show when={datosCargados()}>
-                <Horarios data={datos()!!} setEstadoLayout={setEstadoLayout}/>
+                <Horarios data={datos()!!} estadoLayout={estadoLayout()} setEstadoLayout={setEstadoLayout}/>
             </Show>
         </div>
     </div>;
