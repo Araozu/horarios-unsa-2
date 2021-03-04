@@ -85,11 +85,12 @@ export function BarraSuperior() {
         )}>
             Horarios Unsa
         </span>
-        <a href="https://github.com" target="_blank" title={"Ver codigo fuente en GitHub"} className={css(
-            estilosGlobales.contenedor,
-            estilosGlobales.inlineBlock,
-            estilosGlobales.contenedorCursor
-        )}>
+        <a href="https://github.com/Araozu/horarios-unsa-2/" target="_blank" title={"Ver codigo fuente en GitHub"}
+           className={css(
+               estilosGlobales.contenedor,
+               estilosGlobales.inlineBlock,
+               estilosGlobales.contenedorCursor
+           )}>
             GitHub
             <i class="ph-arrow-up-right"/>
         </a>
