@@ -22,7 +22,9 @@ export type EstadoLayout = "MaxPersonal" | "Normal" | "MaxHorarios";
 export function ContenedorHorarios() {
     const [datosCargados, setDatosCargados] = createSignal(false);
     const [datos, setDatos] = createSignal<DatosHorario | null>(null);
-    const [estadoLayout, setEstadoLayout] = createSignal<EstadoLayout>("Normal");
+    const [estadoLayout, setEstadoLayout] = createSignal<EstadoLayout>(
+        localStorage.getItem("estadoLayout") as EstadoLayout || "Normal"
+    );
 
     const e = createMemo(() => {
         let templateColumns = "";
@@ -39,6 +41,8 @@ export function ContenedorHorarios() {
                 templateColumns = "50% 50%"
             }
         }
+
+        localStorage.setItem("estadoLayout", estadoLayout());
 
         return StyleSheet.create({
             contenedor: {
