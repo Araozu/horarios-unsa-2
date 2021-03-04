@@ -27,7 +27,7 @@ const e = StyleSheet.create({
         marginLeft: "4.5rem",
         display: "flex",
         alignItems: "center",
-        minHeight: "1.1rem",
+        minHeight: "1.2rem",
         ":hover": {
             // backgroundColor: "rgba(200, 200, 200, 0.25)"
         }
