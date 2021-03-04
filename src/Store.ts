@@ -6,7 +6,9 @@ enum ModoColor {
     Auto
 }
 
-export const dias = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"];
+export type Dia = "Lunes" | "Martes" | "Miercoles" | "Jueves" | "Viernes";
+
+export const dias: Dia[] = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"];
 export const horas = [
     "07:00 - 07:50",
     "07:50 - 08:40",

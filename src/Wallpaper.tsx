@@ -7,7 +7,6 @@ const duracionTransicion = 250;
 export function Wallpaper() {
     /// @ts-ignore
     const soportaBackdropFilter = document.body.style.backdropFilter !== undefined;
-    console.log("Soporta backdrop-filter?:", soportaBackdropFilter);
 
     const estilos = StyleSheet.create({
         contenedorCover: {

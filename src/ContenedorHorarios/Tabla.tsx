@@ -1,17 +1,40 @@
 import { StyleSheet, css } from "aphrodite";
-import { createEffect, createMemo, createSignal, createState, For } from "solid-js";
+import { createMemo, createSignal, For } from "solid-js";
 import { estilosGlobales } from "../Estilos";
 import { AnioData } from "../types/DatosHorario";
-import { dias, horas, horasDescanso } from "../Store";
+import { Dia, dias, horas } from "../Store";
 import { DataProcesada } from "../types/DatosHorario";
 import { FilaTabla } from "./Tabla/FilaTabla";
+
+export const coloresBorde = Object.freeze([
+    "rgba(33,150,243,1)",
+    "rgba(255,214,0 ,1)",
+    "rgba(236,64,122 ,1)",
+    "rgba(29,233,182 ,1)",
+    "rgba(244,67,54,1)"
+]);
+
+export const diaANum = (d: Dia) => {
+    switch (d) {
+        case "Lunes":
+            return 0;
+        case "Martes":
+            return 1;
+        case "Miercoles":
+            return 2;
+        case "Jueves":
+            return 3;
+        case "Viernes":
+            return 4;
+    }
+}
 
 const e = StyleSheet.create({
     fila: {
         position: "relative",
         zIndex: 2,
         transition: "background-color 250ms",
-        marginLeft: "4rem",
+        marginLeft: "4.5rem",
         display: "flex",
         alignItems: "center",
         minHeight: "1.5rem",
