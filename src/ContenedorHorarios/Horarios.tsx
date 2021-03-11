@@ -1,5 +1,5 @@
-import { DatosHorario } from "../types/DatosHorario";
-import { For, createSignal, createMemo } from "solid-js";
+import { Curso, DatosHorario } from "../types/DatosHorario";
+import { For, createSignal, createMemo} from "solid-js";
 import { css } from "aphrodite";
 import { estilosGlobales } from "../Estilos";
 import { Tabla } from "./Tabla";
@@ -11,7 +11,8 @@ import { Switch, Match } from "solid-js";
 interface HorariosProps {
     data: DatosHorario,
     estadoLayout: EstadoLayout,
-    setEstadoLayout: (v: EstadoLayout) => EstadoLayout
+    setEstadoLayout: (v: EstadoLayout) => EstadoLayout,
+    fnAgregarCurso: (c: Curso) => void
 }
 
 export function Horarios(props: HorariosProps) {
@@ -61,7 +62,7 @@ export function Horarios(props: HorariosProps) {
                     <Tabla data={dataTabla()} version={props.data.version} anio={anioActual()}/>
                 </div>
                 <div>
-                    <Cursos dataAnio={dataTabla()}/>
+                    <Cursos dataAnio={dataTabla()} fnAgregarCurso={props.fnAgregarCurso}/>
                 </div>
             </Match>
             <Match when={props.estadoLayout === "MaxPersonal"}>

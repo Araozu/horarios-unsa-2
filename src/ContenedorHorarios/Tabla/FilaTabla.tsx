@@ -62,7 +62,7 @@ const [diasResaltados, setDiasResaltados] = createState({
 
 interface Props {
     hora: string,
-    data: () => DataProcesada,
+    data: DataProcesada,
     idHover: () => string,
     setIdHover: (v: string) => string
 }
@@ -130,7 +130,7 @@ export function FilaTabla(props: Props) {
                     const diaStr = dia.substring(0, 2);
                     const horaStr = hora.substring(0, 5);
 
-                    const datos = data()?.[horaStr]?.[diaStr] ?? [];
+                    const datos = data?.[horaStr]?.[diaStr] ?? [];
 
                     return <CeldaFila
                         datos={datos}

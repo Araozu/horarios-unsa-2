@@ -2,9 +2,9 @@ import YAML from "yaml";
 import { StyleSheet, css } from "aphrodite";
 import { MiHorario } from "./MiHorario";
 import { Horarios } from "./Horarios";
-import { DatosHorario } from "../types/DatosHorario";
+import { Curso, CursoUsuario, DatosHorario, DatosVarianteUsuario, ListaCursosUsuario } from "../types/DatosHorario";
 import { estilosGlobales } from "../Estilos";
-import { Show, createSignal, createEffect, createMemo, batch } from "solid-js";
+import { Show, createSignal, createEffect, createMemo, batch, createState } from "solid-js";
 
 const datosPromise = (async () => {
     const file = await fetch("/horarios/2020_2_fps_ingenieriadesistemas.yaml");
@@ -18,6 +18,37 @@ const ElemCargando = () =>
     </div>
 
 export type EstadoLayout = "MaxPersonal" | "Normal" | "MaxHorarios";
+
+const [cursosUsuario, setCursosUsuarios] = createState<ListaCursosUsuario>({
+    cursos: []
+});
+
+
+
+const agregarCursoUsuario = (curso: Curso) => {
+    if (cursosUsuario.cursos.find(x => x.nombre === curso.nombre)) {
+        return;
+    }
+
+    const gruposTeoria: { [k: string]: DatosVarianteUsuario } = {};
+    for (const [key, data] of Object.entries(curso.Teoria)) {
+        gruposTeoria[key] = Object.assign({seleccionado: false}, data);
+    }
+
+    const gruposLab: { [k: string]: DatosVarianteUsuario } = {};
+    for (const [key, data] of Object.entries(curso.Laboratorio ?? {})) {
+        gruposLab[key] = Object.assign({seleccionado: false}, data);
+    }
+
+    const cursoUsuario: CursoUsuario = {
+        ...curso,
+        oculto: false,
+        Teoria: gruposTeoria,
+        Laboratorio: gruposLab
+    };
+
+    setCursosUsuarios("cursos", a => [...a, cursoUsuario]);
+};
 
 export function ContenedorHorarios() {
     const [datosCargados, setDatosCargados] = createSignal(false);
@@ -62,11 +93,14 @@ export function ContenedorHorarios() {
 
     return <div className={css(e().contenedor)}>
         <div>
-            <MiHorario estadoLayout={estadoLayout()} setEstadoLayout={setEstadoLayout}/>
+            <MiHorario estadoLayout={estadoLayout()} setEstadoLayout={setEstadoLayout} cursosUsuario={cursosUsuario}/>
         </div>
         <div>
             <Show when={datosCargados()}>
-                <Horarios data={datos()!!} estadoLayout={estadoLayout()} setEstadoLayout={setEstadoLayout}/>
+                <Horarios data={datos()!!}
+                          estadoLayout={estadoLayout()}
+                          setEstadoLayout={setEstadoLayout}
+                          fnAgregarCurso={agregarCursoUsuario}/>
             </Show>
         </div>
     </div>;

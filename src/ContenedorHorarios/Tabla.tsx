@@ -149,10 +149,11 @@ export function Tabla(props: { data: AnioData, anio: string, version: number }) 
     const [idHover, setIdHover] = createSignal("");
 
     const celdas = createMemo(() => {
-        console.log("Renderizar tabla", props.anio);
+        // Hace reaccionar a la reactividad de Solid
+        props.data;
         return <For each={horas}>
             {hora => {
-                return <FilaTabla data={data} hora={hora} idHover={idHover} setIdHover={setIdHover}/>
+                return <FilaTabla data={data()} hora={hora} idHover={idHover} setIdHover={setIdHover}/>
             }}
         </For>
     });

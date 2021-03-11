@@ -1,4 +1,4 @@
-import { AnioData } from "../types/DatosHorario";
+import { AnioData, Curso } from "../types/DatosHorario";
 import { For } from "solid-js";
 import { StyleSheet, css } from "aphrodite";
 import { estilosGlobales } from "../Estilos";
@@ -10,7 +10,7 @@ const e = StyleSheet.create({
     }
 });
 
-export function Cursos(props: { dataAnio: AnioData }) {
+export function Cursos(props: { dataAnio: AnioData, fnAgregarCurso: (c: Curso) => void }) {
     return <>
         <For each={Object.entries(props.dataAnio)}>
             {([_, datosCurso]) => {
@@ -20,6 +20,7 @@ export function Cursos(props: { dataAnio: AnioData }) {
                     estilosGlobales.contenedorCursor,
                     estilosGlobales.contenedorCursorSoft
                 )}
+                             onClick={() => props.fnAgregarCurso(datosCurso)}
                 >
                     <i className="ph-plus"/>
                     {datosCurso.abreviado} - {datosCurso.nombre}
