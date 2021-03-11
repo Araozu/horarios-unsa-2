@@ -5,6 +5,7 @@ import { mostrarDescansos } from "../Store";
 import { EstadoLayout } from "./ContenedorHorarios";
 import { Switch, Match, For, createMemo } from "solid-js";
 import { BotonMaxMin } from "./BotonMaxMin";
+import { BotonIcono } from "./BotonIcono";
 import { AnioData, ListaCursosUsuario } from "../types/DatosHorario";
 
 interface MiHorarioProps {
@@ -60,6 +61,7 @@ export function MiHorario(props: MiHorarioProps) {
     return <div>
         <Switch>
             <Match when={props.estadoLayout === "Normal" || props.estadoLayout === "MaxPersonal"}>
+
                 <div>
                     <div className={css(
                         estilosGlobales.inlineBlock,
@@ -67,6 +69,26 @@ export function MiHorario(props: MiHorarioProps) {
                     )}>
                         Mi horario
                     </div>
+                    <div className={css(
+                        estilosGlobales.inlineBlock,
+                        estilosGlobales.contenedor
+                    )}>
+                        Opcion 2
+                    </div>
+                </div>
+
+                <div>
+                    <div className={css(
+                        estilosGlobales.inlineBlock,
+                        estilosGlobales.contenedor
+                    )}>
+                        Mi horario
+                    </div>
+                    |
+                    <BotonIcono titulo={"Nuevo horario en blanco"} icono={"ph-plus"} onClick={() => {}}/>
+                    <BotonIcono titulo={"Reiniciar horario"} icono={"ph-arrow-counter-clockwise"} onClick={() => {}}/>
+                    <BotonIcono titulo={"Duplicar horario"} icono={"ph-copy"} onClick={() => {}}/>
+                    <BotonIcono titulo={"Eliminar horario"} icono={"ph-trash"} onClick={() => {}}/>
                     |
                     <BotonMaxMin
                         fnMaximizar={fnMaximizar}

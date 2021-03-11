@@ -49,6 +49,14 @@ export function Horarios(props: HorariosProps) {
     return <div>
         <Switch>
             <Match when={props.estadoLayout === "Normal" || props.estadoLayout === "MaxHorarios"}>
+                <div>
+                    <div className={css(
+                        estilosGlobales.inlineBlock,
+                        estilosGlobales.contenedor
+                    )}>
+                        Horarios disponibles
+                    </div>
+                </div>
                 {elAnios}
                 |
                 <BotonMaxMin
