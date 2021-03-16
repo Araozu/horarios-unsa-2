@@ -37,7 +37,9 @@ export function Cursos(props: Props) {
             {([_, datosCurso]) => {
 
                 const cursoAgregadoMemo = createMemo(
-                    () => props.listaCursosUsuario.cursos.find(x => x.nombre === datosCurso.nombre) !== undefined,
+                    () => props.listaCursosUsuario.cursos.find(x => {
+                        return x.nombre === datosCurso.nombre && !x.oculto
+                    }) !== undefined,
                     undefined,
                     (x, y) => x === y
                 );
@@ -67,6 +69,6 @@ export function Cursos(props: Props) {
                     {datosCurso.abreviado} - {datosCurso.nombre}
                 </span>
             }}
-        </For>
-    </>;
-}
+                </For>
+                </>;
+                }

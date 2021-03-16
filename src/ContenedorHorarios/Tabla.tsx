@@ -1,7 +1,7 @@
 import { StyleSheet, css } from "aphrodite";
 import { createMemo, createSignal, For } from "solid-js";
 import { estilosGlobales } from "../Estilos";
-import { AnioData } from "../types/DatosHorario";
+import { AnioData, CursoUsuario } from "../types/DatosHorario";
 import { Dia, dias, horas } from "../Store";
 import { DataProcesada } from "../types/DatosHorario";
 import { FilaTabla } from "./Tabla/FilaTabla";
@@ -85,6 +85,9 @@ const procesarAnio = (data: AnioData, anio: string, version: number) => {
     const obj: DataProcesada = {};
 
     for (const [, curso] of Object.entries(data)) {
+        // TODO: Reemplazar Curso con CursoUsuario, hacer los cambios donde se cargan los datos
+        if ((curso as CursoUsuario).oculto) continue;
+
         const nombreAbreviado = curso.abreviado;
 
         for (const [grupoStr, grupo] of Object.entries(curso.Teoria)) {

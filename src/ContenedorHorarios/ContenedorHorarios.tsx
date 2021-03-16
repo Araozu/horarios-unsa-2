@@ -24,7 +24,10 @@ const [cursosUsuario, setCursosUsuarios] = createState<ListaCursosUsuario>({
 });
 
 const agregarCursoUsuario = (curso: Curso) => {
-    if (cursosUsuario.cursos.find(x => x.nombre === curso.nombre)) {
+    // Si el horario ya se habia agregado, ocultarlo
+    const cursoActualIndex = cursosUsuario.cursos.findIndex(x => x.nombre === curso.nombre);
+    if (cursoActualIndex !== -1) {
+        setCursosUsuarios("cursos", cursoActualIndex, "oculto", x => !x);
         return;
     }
 
