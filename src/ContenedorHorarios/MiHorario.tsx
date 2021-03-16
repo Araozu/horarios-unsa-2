@@ -58,6 +58,10 @@ export function MiHorario(props: MiHorarioProps) {
     const fnMinimizar = () => props.setEstadoLayout("Normal");
     const estadoActualLayout = () => props.estadoLayout;
 
+    /* TODO: En barra superior colocar todos los horarios. En barra inferior el horario
+        actual.
+        Al hacer click en un horario de la barra superior, llevarlo al inicio de la lista.
+     */
     return <div>
         <Switch>
             <Match when={props.estadoLayout === "Normal" || props.estadoLayout === "MaxPersonal"}>
@@ -68,12 +72,6 @@ export function MiHorario(props: MiHorarioProps) {
                         estilosGlobales.contenedor
                     )}>
                         Mi horario
-                    </div>
-                    <div className={css(
-                        estilosGlobales.inlineBlock,
-                        estilosGlobales.contenedor
-                    )}>
-                        Opcion 2
                     </div>
                 </div>
 

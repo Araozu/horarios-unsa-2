@@ -4,6 +4,7 @@ import { Wallpaper } from "./Wallpaper";
 import { Show, createSignal } from "solid-js";
 import { css } from "aphrodite";
 import { estilosGlobales } from "./Estilos";
+import { Creditos } from "./Creditos";
 
 function App() {
     /// @ts-ignore
@@ -34,6 +35,7 @@ function App() {
             </Show>
             <div style={{width: "100%", height: "0.5rem"}}/>
             <ContenedorHorarios/>
+            <Creditos/>
         </div>
     );
 }

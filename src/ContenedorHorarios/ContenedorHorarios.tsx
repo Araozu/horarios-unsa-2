@@ -23,8 +23,6 @@ const [cursosUsuario, setCursosUsuarios] = createState<ListaCursosUsuario>({
     cursos: []
 });
 
-
-
 const agregarCursoUsuario = (curso: Curso) => {
     if (cursosUsuario.cursos.find(x => x.nombre === curso.nombre)) {
         return;
@@ -100,7 +98,9 @@ export function ContenedorHorarios() {
                 <Horarios data={datos()!!}
                           estadoLayout={estadoLayout()}
                           setEstadoLayout={setEstadoLayout}
-                          fnAgregarCurso={agregarCursoUsuario}/>
+                          fnAgregarCurso={agregarCursoUsuario}
+                          listaCursosUsuario={cursosUsuario}
+                />
             </Show>
         </div>
     </div>;
