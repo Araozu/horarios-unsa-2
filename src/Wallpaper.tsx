@@ -1,6 +1,6 @@
 import { StyleSheet, css } from "aphrodite";
 import { numWallpaper } from "./Store";
-import { createSignal, createMemo, createEffect, createState } from "solid-js";
+import { createEffect, createState } from "solid-js";
 
 const duracionTransicion = 250;
 
@@ -56,11 +56,6 @@ export function Wallpaper() {
         });
         img.src = url;
     });
-
-    const dummyMemo = () => {
-        console.log("Memo!");
-        return estilosRaw;
-    };
 
     return <div className={css(estilos.contenedorCover)}>
         <div
