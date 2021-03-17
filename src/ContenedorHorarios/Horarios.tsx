@@ -1,5 +1,5 @@
 import { Curso, DatosHorario, ListaCursosUsuario } from "../types/DatosHorario";
-import { For, createSignal, createMemo} from "solid-js";
+import { For, createSignal, createMemo } from "solid-js";
 import { css } from "aphrodite";
 import { estilosGlobales } from "../Estilos";
 import { Tabla } from "./Tabla";
@@ -79,8 +79,11 @@ export function Horarios(props: HorariosProps) {
                 <div>
                     <Cursos
                         dataAnio={dataTabla()}
+                        anioActual={anioActual}
                         fnAgregarCurso={props.fnAgregarCurso}
                         listaCursosUsuario={props.listaCursosUsuario}
+                        idHover={idHover}
+                        setIdHover={setIdHover}
                     />
                 </div>
             </Match>

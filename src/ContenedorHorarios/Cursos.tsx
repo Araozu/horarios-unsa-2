@@ -27,13 +27,20 @@ const e = StyleSheet.create({
 
 interface Props {
     dataAnio: AnioData,
+    anioActual: () => string,
     fnAgregarCurso: (c: Curso) => void,
-    listaCursosUsuario: ListaCursosUsuario
+    listaCursosUsuario: ListaCursosUsuario,
+    idHover: () => string,
+    setIdHover: (v: string) => string
 }
 
-function IndicadorGrupo(props: { nombre: string, esLab: boolean }) {
+function IndicadorGrupo(props: { nombre: string, esLab: boolean, idParcial: string, setIdHover: (v: string) => string }) {
+    const id = `${props.idParcial}_${props.esLab? 'L' : 'T'}_${props.nombre}`;
     return <span className={css(e.botonTexto, estilosGlobales.contenedorCursor, estilosGlobales.contenedorCursorSoft)}
-                 style={props.esLab ? {"font-style": "italic"} : {"font-weight": "bold"}}>
+                 style={props.esLab ? {"font-style": "italic"} : {"font-weight": "bold"}}
+                 onMouseEnter={() => props.setIdHover(id)}
+                 onMouseLeave={() => props.setIdHover("")}
+    >
         {props.esLab ? "L" : ""}{props.nombre}
     </span>
 }
@@ -51,6 +58,7 @@ const agruparProfesores = (datos: { [k: string]: DatosVariante }) => {
 };
 
 export function Cursos(props: Props) {
+    const anio = () => props.anioActual().substring(0, props.anioActual().indexOf(" "));
 
     const claseCursoNoAgregado = css(
         e.contenedorCurso,
@@ -66,6 +74,8 @@ export function Cursos(props: Props) {
     return <>
         <For each={Object.entries(props.dataAnio)}>
             {([_, datosCurso]) => {
+
+                const idCurso = `${anio()}_${datosCurso.abreviado}`;
 
                 const cursoAgregadoMemo = createMemo(
                     () => props.listaCursosUsuario.cursos.find(x => {
@@ -102,7 +112,13 @@ export function Cursos(props: Props) {
                                             {profesor}&nbsp;
                                         </span>
                                         <For each={grupos}>
-                                            {x => <IndicadorGrupo nombre={x} esLab={false}/>}
+                                            {x =>
+                                                <IndicadorGrupo nombre={x}
+                                                                esLab={false}
+                                                                idParcial={idCurso}
+                                                                setIdHover={props.setIdHover}
+                                                />
+                                            }
                                         </For>
                                     </td>
                                 }}
@@ -116,7 +132,13 @@ export function Cursos(props: Props) {
                                             {profesor}&nbsp;
                                         </span>
                                         <For each={grupos}>
-                                            {x => <IndicadorGrupo nombre={x} esLab={true}/>}
+                                            {x =>
+                                                <IndicadorGrupo nombre={x}
+                                                                esLab={true}
+                                                                idParcial={idCurso}
+                                                                setIdHover={props.setIdHover}
+                                                />
+                                            }
                                         </For>
                                     </td>
                                 }}

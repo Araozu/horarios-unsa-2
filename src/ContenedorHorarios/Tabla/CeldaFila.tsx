@@ -80,7 +80,6 @@ interface Props {
 }
 
 export function CeldaFila(props: Props) {
-
     const datos = props.datos;
     const idHover = props.idHover;
     const setIdHover = props.setIdHover;
