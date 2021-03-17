@@ -17,8 +17,9 @@ interface HorariosProps {
 }
 
 export function Horarios(props: HorariosProps) {
-
     const [anioActual, setAnioActual] = createSignal("1er año");
+    // ID que indica cuales celdas resaltar.
+    const [idHover, setIdHover] = createSignal("");
 
     const elAnios = <For each={Object.entries(props.data.años)}>
         {([nombre]) => {
@@ -68,7 +69,12 @@ export function Horarios(props: HorariosProps) {
                 />
                 <br/>
                 <div className={css(estilosGlobales.contenedor)}>
-                    <Tabla data={dataTabla()} version={props.data.version} anio={anioActual()}/>
+                    <Tabla data={dataTabla()}
+                           version={props.data.version}
+                           anio={anioActual()}
+                           idHover={idHover}
+                           setIdHover={setIdHover}
+                    />
                 </div>
                 <div>
                     <Cursos

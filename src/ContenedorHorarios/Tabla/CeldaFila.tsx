@@ -58,7 +58,20 @@ const clasesColores = {
 }
 
 interface Props {
-    datos: { id: string, txt: string, esLab: boolean }[],
+    /**
+     * Informacion de los cursos a renderizar en la celda
+     *
+     * id - Identificador unico del grupo: 20200912_1er_PW1_T_A
+     *
+     * txt - El nombre a renderizar
+     *
+     * esLab - Boolean que indica si el grupo es de laboratorio
+     */
+    datos: {
+        id: string,
+        txt: string,
+        esLab: boolean
+    }[],
     idHover: () => string,
     setIdHover: (v: string) => string,
     fnResaltarFila: () => void,
@@ -80,21 +93,26 @@ export function CeldaFila(props: Props) {
             {({id, txt, esLab}) => {
                 const [estabaResaltado, setEstabaResaltado] = createSignal(false);
 
-                const clases = createMemo(() => {
-                    const clases = [e.celdaCurso, esLab ? e.celdaCursoLab : e.celdaCursoTeoria];
-                    let adicional = "";
-                    if (id === idHover()) {
-                        props.fnResaltarFila();
-                        clases.push(e.celdaCursoActiva);
-                        adicional = clasesColores[props.dia];
+                const clases = createMemo(
+                    () => {
+                        const clases = [e.celdaCurso, esLab ? e.celdaCursoLab : e.celdaCursoTeoria];
+                        let adicional = "";
+                        const idHoverS = idHover();
+                        if (idHoverS !== "" &&  id.search(idHoverS) !== -1) {
+                            props.fnResaltarFila();
+                            clases.push(e.celdaCursoActiva);
+                            adicional = clasesColores[props.dia];
 
-                        setEstabaResaltado(true);
-                    } else if (estabaResaltado()) {
-                        props.fnDesresaltarFila();
-                        setEstabaResaltado(false);
-                    }
-                    return css(...clases) + " " + adicional;
-                });
+                            setEstabaResaltado(true);
+                        } else if (estabaResaltado()) {
+                            props.fnDesresaltarFila();
+                            setEstabaResaltado(false);
+                        }
+                        return css(...clases) + " " + adicional;
+                    },
+                    undefined,
+                    (x, y) => x === y
+                );
 
                 return <span className={clases()}
                              onMouseEnter={() => fnOnMouseEnter(id)}

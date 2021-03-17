@@ -50,8 +50,6 @@ const e = StyleSheet.create({
     }
 });
 
-
-// TODO: Usar un arr en vez de un objeto?
 const [diasResaltados, setDiasResaltados] = createState({
     Lunes: 0,
     Martes: 0,
