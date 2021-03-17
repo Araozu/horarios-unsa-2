@@ -99,7 +99,10 @@ export function Cursos(props: Props) {
                 const profesoresLab = createMemo(() => agruparProfesores(datosCurso.Laboratorio ?? {}));
 
                 return <div className={claseMemo()}>
-                    <div className={css(e.inline, e.lineaTexto)}>
+                    <div className={css(e.inline, e.lineaTexto, e.botonTexto, estilosGlobales.contenedorCursor, estilosGlobales.contenedorCursorSoft)}
+                         onMouseEnter={() => props.setIdHover(idCurso)}
+                         onMouseLeave={() => props.setIdHover("")}
+                    >
                         {datosCurso.abreviado} - {datosCurso.nombre}
                     </div>
                     <table>
