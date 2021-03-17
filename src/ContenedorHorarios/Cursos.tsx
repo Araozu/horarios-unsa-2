@@ -1,11 +1,23 @@
-import { AnioData, Curso, ListaCursosUsuario } from "../types/DatosHorario";
+import { AnioData, Curso, DatosVariante, ListaCursosUsuario } from "../types/DatosHorario";
 import { createEffect, createMemo, For } from "solid-js";
 import { StyleSheet, css } from "aphrodite";
 import { estilosGlobales } from "../Estilos";
 
 const e = StyleSheet.create({
-    contenedorCurso: {
+    inline: {
         display: "inline-block"
+    },
+    lineaTexto: {
+        marginBottom: "0.5rem"
+    },
+    tablaGrupos: {
+        whiteSpace: "pre",
+        borderCollapse: "collapse",
+        borderSpacing: 0
+    },
+    contenedorCurso: {
+        display: "inline-block",
+        verticalAlign: "top"
     }
 });
 
@@ -15,20 +27,32 @@ interface Props {
     listaCursosUsuario: ListaCursosUsuario
 }
 
+const agruparProfesores = (datos: { [k: string]: DatosVariante }) => {
+    const profesores: { [k: string]: string[] } = {};
+    for (const [grupo, datosGrupo] of Object.entries(datos)) {
+        const nombreProfesor = datosGrupo.Docente;
+        if (!profesores[nombreProfesor]) {
+            profesores[nombreProfesor] = [];
+        }
+        profesores[nombreProfesor].push(grupo);
+    }
+    return profesores;
+};
+
 export function Cursos(props: Props) {
 
     const claseCursoNoAgregado = css(
         e.contenedorCurso,
         estilosGlobales.contenedor,
-        estilosGlobales.contenedorCursor,
-        estilosGlobales.contenedorCursorSoft
+        // estilosGlobales.contenedorCursor,
+        // estilosGlobales.contenedorCursorSoft
     );
 
     const claseCursoAgregado = css(
         e.contenedorCurso,
         estilosGlobales.contenedor,
-        estilosGlobales.contenedorCursor,
-        estilosGlobales.contenedorCursorSoft,
+        // estilosGlobales.contenedorCursor,
+        // estilosGlobales.contenedorCursorSoft,
         estilosGlobales.contenedorCursorActivo,
     );
 
@@ -45,8 +69,8 @@ export function Cursos(props: Props) {
                 );
 
                 const tituloMemo = createMemo(() => cursoAgregadoMemo()
-                    ? `Remover ${datosCurso.abreviado} de mi horario`
-                    : `Agregar ${datosCurso.abreviado} a mi horario`
+                    ? `Remover de mi horario`
+                    : `Agregar a mi horario`
                 );
 
                 const claseMemo = createMemo(() =>
@@ -55,20 +79,52 @@ export function Cursos(props: Props) {
                         : claseCursoNoAgregado
                 );
 
-                const iconoMemo = createMemo(() =>
-                    cursoAgregadoMemo()
-                        ? "ph-minus"
-                        : "ph-plus"
-                );
+                const profesoresTeoria = createMemo(() => agruparProfesores(datosCurso.Teoria));
+                const profesoresLab = createMemo(() => agruparProfesores(datosCurso.Laboratorio ?? {}));
 
-                return <span title={tituloMemo()}
-                             className={claseMemo()}
-                             onClick={() => props.fnAgregarCurso(datosCurso)}
-                >
-                    <i className={iconoMemo()}/>
-                    {datosCurso.abreviado} - {datosCurso.nombre}
-                </span>
+                return <div className={claseMemo()}>
+                    <div className={css(e.inline, e.lineaTexto)}>
+                        {datosCurso.abreviado} - {datosCurso.nombre}
+                    </div>
+                    <table>
+                        <tbody>
+                        <tr>
+                            <For each={Object.entries(profesoresTeoria())}>
+                                {([profesor, grupos]) => {
+                                    return <td style={{"padding-bottom": "0.5rem", "padding-right": "0.75rem"}}>
+                                        <span>
+                                            {profesor}&nbsp;
+                                        </span>
+                                        <span style={{"font-weight": "bold"}}>
+                                            {grupos.reduce((x, y) => x + " " + y)}&nbsp;
+                                        </span>
+                                    </td>
+                                }}
+                            </For>
+                        </tr>
+                        <tr>
+                            <For each={Object.entries(profesoresLab())}>
+                                {([profesor, grupos]) => {
+                                    return <td style={{"padding-bottom": "0.5rem", "padding-right": "0.75rem"}}>
+                                        <span>
+                                            {profesor}&nbsp;
+                                        </span>
+                                        <span style={{"font-style": "italic"}}>
+                                            {grupos.map(x => `L${x}`).reduce((x, y) => x + " " + y)}&nbsp;
+                                        </span>
+                                    </td>
+                                }}
+                            </For>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <span className={css(estilosGlobales.contenedorCursor, estilosGlobales.contenedorCursorSoft)}
+                          onClick={() => props.fnAgregarCurso(datosCurso)}
+                    >
+                        {tituloMemo}
+                    </span>
+                </div>
             }}
-                </For>
-                </>;
-                }
+        </For>
+    </>;
+}
