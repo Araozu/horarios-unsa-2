@@ -6,7 +6,7 @@ import { EstadoLayout } from "./ContenedorHorarios";
 import { Switch, Match, For, createMemo } from "solid-js";
 import { BotonMaxMin } from "./BotonMaxMin";
 import { BotonIcono } from "./BotonIcono";
-import { AnioData, ListaCursosUsuario } from "../types/DatosHorario";
+import { Cursos, ListaCursosUsuario } from "../types/DatosHorario";
 
 interface MiHorarioProps {
     estadoLayout: EstadoLayout,
@@ -42,7 +42,7 @@ const e = StyleSheet.create({
 export function MiHorario(props: MiHorarioProps) {
 
     const datosMiHorario = createMemo(() => {
-        const obj: AnioData = {};
+        const obj: Cursos = {};
         props.cursosUsuario.cursos.forEach(x => {
             obj[x.nombre] = {...x};
         });
@@ -83,10 +83,26 @@ export function MiHorario(props: MiHorarioProps) {
                         Mi horario
                     </div>
                     |
-                    <BotonIcono titulo={"Nuevo horario en blanco"} icono={"ph-plus"} onClick={() => {}}/>
-                    <BotonIcono titulo={"Reiniciar horario"} icono={"ph-arrow-counter-clockwise"} onClick={() => {}}/>
-                    <BotonIcono titulo={"Duplicar horario"} icono={"ph-copy"} onClick={() => {}}/>
-                    <BotonIcono titulo={"Eliminar horario"} icono={"ph-trash"} onClick={() => {}}/>
+                    <BotonIcono titulo={"Nuevo horario en blanco"}
+                                icono={"ph-plus"}
+                                onClick={() => {
+                                }}
+                    />
+                    <BotonIcono titulo={"Reiniciar horario"}
+                                icono={"ph-arrow-counter-clockwise"}
+                                onClick={() => {
+                                }}
+                    />
+                    <BotonIcono titulo={"Duplicar horario"}
+                                icono={"ph-copy"}
+                                onClick={() => {
+                                }}
+                    />
+                    <BotonIcono titulo={"Eliminar horario"}
+                                icono={"ph-trash"}
+                                onClick={() => {
+                                }}
+                    />
                     |
                     <BotonMaxMin
                         fnMaximizar={fnMaximizar}
@@ -100,7 +116,12 @@ export function MiHorario(props: MiHorarioProps) {
                     e.horario,
                     estilosGlobales.contenedor
                 )}>
-                    <Tabla data={datosMiHorario()} anio={"Mi horario"} version={1}/>
+                    <Tabla data={datosMiHorario()}
+                           anio={"Mi horario"}
+                           version={1}
+                           idHover={() => ""}
+                           setIdHover={(v: string) => ""}
+                    />
 
                     <Horario cursosUsuario={props.cursosUsuario}/>
 

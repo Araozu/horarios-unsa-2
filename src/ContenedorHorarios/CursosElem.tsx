@@ -1,4 +1,4 @@
-import { AnioData, Curso, DatosVariante, ListaCursosUsuario } from "../types/DatosHorario";
+import { Cursos, CursoRaw, DatosGrupo, ListaCursosUsuario, Curso } from "../types/DatosHorario";
 import { createEffect, createMemo, For } from "solid-js";
 import { StyleSheet, css } from "aphrodite";
 import { estilosGlobales } from "../Estilos";
@@ -26,7 +26,7 @@ const e = StyleSheet.create({
 });
 
 interface Props {
-    dataAnio: AnioData,
+    dataAnio: Cursos,
     anioActual: () => string,
     fnAgregarCurso: (c: Curso) => void,
     listaCursosUsuario: ListaCursosUsuario,
@@ -35,7 +35,7 @@ interface Props {
 }
 
 function IndicadorGrupo(props: { nombre: string, esLab: boolean, idParcial: string, setIdHover: (v: string) => string }) {
-    const id = `${props.idParcial}_${props.esLab? 'L' : 'T'}_${props.nombre}`;
+    const id = `${props.idParcial}_${props.esLab ? 'L' : 'T'}_${props.nombre}`;
     return <span className={css(e.botonTexto, estilosGlobales.contenedorCursor, estilosGlobales.contenedorCursorSoft)}
                  style={props.esLab ? {"font-style": "italic"} : {"font-weight": "bold"}}
                  onMouseEnter={() => props.setIdHover(id)}
@@ -45,7 +45,7 @@ function IndicadorGrupo(props: { nombre: string, esLab: boolean, idParcial: stri
     </span>
 }
 
-const agruparProfesores = (datos: { [k: string]: DatosVariante }) => {
+const agruparProfesores = (datos: { [k: string]: DatosGrupo }) => {
     const profesores: { [k: string]: string[] } = {};
     for (const [grupo, datosGrupo] of Object.entries(datos)) {
         const nombreProfesor = datosGrupo.Docente;
@@ -57,7 +57,7 @@ const agruparProfesores = (datos: { [k: string]: DatosVariante }) => {
     return profesores;
 };
 
-export function Cursos(props: Props) {
+export function CursosElem(props: Props) {
     const anio = () => props.anioActual().substring(0, props.anioActual().indexOf(" "));
 
     const claseCursoNoAgregado = css(
@@ -99,9 +99,10 @@ export function Cursos(props: Props) {
                 const profesoresLab = createMemo(() => agruparProfesores(datosCurso.Laboratorio ?? {}));
 
                 return <div className={claseMemo()}>
-                    <div className={css(e.inline, e.lineaTexto, e.botonTexto, estilosGlobales.contenedorCursor, estilosGlobales.contenedorCursorSoft)}
-                         onMouseEnter={() => props.setIdHover(idCurso)}
-                         onMouseLeave={() => props.setIdHover("")}
+                    <div
+                        className={css(e.inline, e.lineaTexto, e.botonTexto, estilosGlobales.contenedorCursor, estilosGlobales.contenedorCursorSoft)}
+                        onMouseEnter={() => props.setIdHover(idCurso)}
+                        onMouseLeave={() => props.setIdHover("")}
                     >
                         {datosCurso.abreviado} - {datosCurso.nombre}
                     </div>

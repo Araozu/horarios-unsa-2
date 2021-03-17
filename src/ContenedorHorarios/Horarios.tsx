@@ -1,9 +1,9 @@
-import { Curso, DatosHorario, ListaCursosUsuario } from "../types/DatosHorario";
+import { Curso, CursoRaw, DatosHorario, DatosHorarioRaw, ListaCursosUsuario } from "../types/DatosHorario";
 import { For, createSignal, createMemo } from "solid-js";
 import { css } from "aphrodite";
 import { estilosGlobales } from "../Estilos";
 import { Tabla } from "./Tabla";
-import { Cursos } from "./Cursos";
+import { CursosElem } from "./CursosElem";
 import { EstadoLayout } from "./ContenedorHorarios";
 import { BotonMaxMin } from "./BotonMaxMin";
 import { Switch, Match } from "solid-js";
@@ -77,7 +77,7 @@ export function Horarios(props: HorariosProps) {
                     />
                 </div>
                 <div>
-                    <Cursos
+                    <CursosElem
                         dataAnio={dataTabla()}
                         anioActual={anioActual}
                         fnAgregarCurso={props.fnAgregarCurso}

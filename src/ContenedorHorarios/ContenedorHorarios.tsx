@@ -1,15 +1,59 @@
 import YAML from "yaml";
-import { StyleSheet, css } from "aphrodite";
+import { css, StyleSheet } from "aphrodite";
 import { MiHorario } from "./MiHorario";
 import { Horarios } from "./Horarios";
-import { Curso, CursoUsuario, DatosHorario, DatosVarianteUsuario, ListaCursosUsuario } from "../types/DatosHorario";
+import {
+    Anios,
+    Cursos,
+    CursoRaw,
+    Curso,
+    DatosHorario,
+    DatosHorarioRaw,
+    DatosGrupo,
+    ListaCursosUsuario
+} from "../types/DatosHorario";
 import { estilosGlobales } from "../Estilos";
-import { Show, createSignal, createEffect, createMemo, batch, createState } from "solid-js";
+import { batch, createEffect, createMemo, createSignal, createState, Show } from "solid-js";
 
 const datosPromise = (async () => {
     const file = await fetch("/horarios/2020_2_fps_ingenieriadesistemas.yaml");
     const text = await file.text();
-    return YAML.parse(text) as DatosHorario;
+    const datosRaw = YAML.parse(text) as DatosHorarioRaw;
+
+    // Agregar los campos faltantes a DatosHorarioRaw para que sea DatosHorario
+    const datos: DatosHorario = {
+        ...datosRaw,
+        años: {}
+    };
+
+    const anios: Anios = {}
+    for (const [nombreAnio, anio] of Object.entries(datosRaw.años)) {
+        const anioData: Cursos = {};
+        for (const [nombreCurso, curso] of Object.entries(anio)) {
+
+            const gruposTeoria: { [k: string]: DatosGrupo } = {};
+            for (const [key, data] of Object.entries(curso.Teoria)) {
+                gruposTeoria[key] = Object.assign({seleccionado: false}, data);
+            }
+
+            const gruposLab: { [k: string]: DatosGrupo } = {};
+            for (const [key, data] of Object.entries(curso.Laboratorio ?? {})) {
+                gruposLab[key] = Object.assign({seleccionado: false}, data);
+            }
+
+            anioData[nombreCurso] = {
+                ...curso,
+                oculto: false,
+                Teoria: gruposTeoria,
+                Laboratorio: gruposLab
+            };
+        }
+
+        anios[nombreAnio] = anioData;
+    }
+
+    datos.años = anios;
+    return datos;
 })();
 
 const ElemCargando = () =>
@@ -28,27 +72,9 @@ const agregarCursoUsuario = (curso: Curso) => {
     const cursoActualIndex = cursosUsuario.cursos.findIndex(x => x.nombre === curso.nombre);
     if (cursoActualIndex !== -1) {
         setCursosUsuarios("cursos", cursoActualIndex, "oculto", x => !x);
-        return;
+    } else {
+        setCursosUsuarios("cursos", a => [...a, curso]);
     }
-
-    const gruposTeoria: { [k: string]: DatosVarianteUsuario } = {};
-    for (const [key, data] of Object.entries(curso.Teoria)) {
-        gruposTeoria[key] = Object.assign({seleccionado: false}, data);
-    }
-
-    const gruposLab: { [k: string]: DatosVarianteUsuario } = {};
-    for (const [key, data] of Object.entries(curso.Laboratorio ?? {})) {
-        gruposLab[key] = Object.assign({seleccionado: false}, data);
-    }
-
-    const cursoUsuario: CursoUsuario = {
-        ...curso,
-        oculto: false,
-        Teoria: gruposTeoria,
-        Laboratorio: gruposLab
-    };
-
-    setCursosUsuarios("cursos", a => [...a, cursoUsuario]);
 };
 
 export function ContenedorHorarios() {

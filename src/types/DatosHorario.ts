@@ -1,50 +1,66 @@
-export interface DatosVariante {
-    Docente: string,
-    Horas: string[]
+export interface CursoRaw {
+    nombre: string,
+    abreviado: string,
+    Teoria: {
+        [grupo: string]: {
+            Docente: string,
+            Horas: string[]
+        }
+    }
+    Laboratorio?: {
+        [grupo: string]: {
+            Docente: string,
+            Horas: string[]
+        }
+    }
 }
 
-export interface DatosVarianteUsuario extends DatosVariante {
+export interface DatosHorarioRaw {
+    titulo: string,
+    descripcion: string,
+    version: number,
+    años: {
+        [key: string]: {
+            [nombre: string]: CursoRaw
+        }
+    }
+}
+
+export interface DatosGrupo {
+    Docente: string,
+    Horas: string[]
     seleccionado: boolean
 }
 
 export interface Curso {
     nombre: string,
     abreviado: string,
-    Teoria: {
-        [grupo: string]: DatosVariante
-    }
-    Laboratorio?: {
-        [grupo: string]: DatosVariante
-    }
-}
-
-export interface CursoUsuario extends Curso {
     oculto: boolean,
     Teoria: {
-        [grupo: string]: DatosVarianteUsuario
+        [grupo: string]: DatosGrupo
     }
     Laboratorio?: {
-        [grupo: string]: DatosVarianteUsuario
+        [grupo: string]: DatosGrupo
     }
 }
 
 export interface ListaCursosUsuario {
-    cursos: CursoUsuario[]
+    cursos: Curso[]
 }
 
-export interface AnioData {
+export interface Cursos {
     [nombre: string]: Curso
 }
 
-export interface Anio {
-    [key: string]: AnioData
+export interface Anios {
+    [key: string]: Cursos
 }
 
 export interface DatosHorario {
     titulo: string,
     descripcion: string,
     version: number,
-    años: Anio
+    años: Anios
 }
 
 export interface DataProcesada {
