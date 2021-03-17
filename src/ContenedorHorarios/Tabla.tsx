@@ -146,10 +146,19 @@ const procesarAnio = (data: AnioData, anio: string, version: number) => {
     return obj;
 }
 
-export function Tabla(props: { data: AnioData, anio: string, version: number }) {
+interface Props {
+    data: AnioData,
+    anio: string,
+    version: number,
+    idHover: () => string,
+    setIdHover: (v: string) => string
+}
+
+export function Tabla(props: Props) {
     const anio = () => props.anio.substring(0, props.anio.indexOf(" "));
     const data = createMemo(() => procesarAnio(props.data, anio(), props.version));
-    const [idHover, setIdHover] = createSignal("");
+    const idHover = props.idHover;
+    const setIdHover = props.setIdHover;
 
     const celdas = createMemo(() => {
         // Hace reaccionar a la reactividad de Solid

@@ -18,6 +18,10 @@ const e = StyleSheet.create({
     contenedorCurso: {
         display: "inline-block",
         verticalAlign: "top"
+    },
+    botonTexto: {
+        padding: "0.25rem 0.35rem",
+        borderRadius: "5px"
     }
 });
 
@@ -25,6 +29,13 @@ interface Props {
     dataAnio: AnioData,
     fnAgregarCurso: (c: Curso) => void,
     listaCursosUsuario: ListaCursosUsuario
+}
+
+function IndicadorGrupo(props: { nombre: string, esLab: boolean }) {
+    return <span className={css(e.botonTexto, estilosGlobales.contenedorCursor, estilosGlobales.contenedorCursorSoft)}
+                 style={props.esLab ? {"font-style": "italic"} : {"font-weight": "bold"}}>
+        {props.esLab ? "L" : ""}{props.nombre}
+    </span>
 }
 
 const agruparProfesores = (datos: { [k: string]: DatosVariante }) => {
@@ -43,16 +54,12 @@ export function Cursos(props: Props) {
 
     const claseCursoNoAgregado = css(
         e.contenedorCurso,
-        estilosGlobales.contenedor,
-        // estilosGlobales.contenedorCursor,
-        // estilosGlobales.contenedorCursorSoft
+        estilosGlobales.contenedor
     );
 
     const claseCursoAgregado = css(
         e.contenedorCurso,
         estilosGlobales.contenedor,
-        // estilosGlobales.contenedorCursor,
-        // estilosGlobales.contenedorCursorSoft,
         estilosGlobales.contenedorCursorActivo,
     );
 
@@ -73,10 +80,9 @@ export function Cursos(props: Props) {
                     : `Agregar a mi horario`
                 );
 
-                const claseMemo = createMemo(() =>
-                    cursoAgregadoMemo()
-                        ? claseCursoAgregado
-                        : claseCursoNoAgregado
+                const claseMemo = createMemo(() => cursoAgregadoMemo()
+                    ? claseCursoAgregado
+                    : claseCursoNoAgregado
                 );
 
                 const profesoresTeoria = createMemo(() => agruparProfesores(datosCurso.Teoria));
@@ -95,9 +101,9 @@ export function Cursos(props: Props) {
                                         <span>
                                             {profesor}&nbsp;
                                         </span>
-                                        <span style={{"font-weight": "bold"}}>
-                                            {grupos.reduce((x, y) => x + " " + y)}&nbsp;
-                                        </span>
+                                        <For each={grupos}>
+                                            {x => <IndicadorGrupo nombre={x} esLab={false}/>}
+                                        </For>
                                     </td>
                                 }}
                             </For>
@@ -109,17 +115,18 @@ export function Cursos(props: Props) {
                                         <span>
                                             {profesor}&nbsp;
                                         </span>
-                                        <span style={{"font-style": "italic"}}>
-                                            {grupos.map(x => `L${x}`).reduce((x, y) => x + " " + y)}&nbsp;
-                                        </span>
+                                        <For each={grupos}>
+                                            {x => <IndicadorGrupo nombre={x} esLab={true}/>}
+                                        </For>
                                     </td>
                                 }}
                             </For>
                         </tr>
                         </tbody>
                     </table>
-                    <span className={css(estilosGlobales.contenedorCursor, estilosGlobales.contenedorCursorSoft)}
-                          onClick={() => props.fnAgregarCurso(datosCurso)}
+                    <span
+                        className={css(e.botonTexto, estilosGlobales.contenedorCursor, estilosGlobales.contenedorCursorSoft)}
+                        onClick={() => props.fnAgregarCurso(datosCurso)}
                     >
                         {tituloMemo}
                     </span>
