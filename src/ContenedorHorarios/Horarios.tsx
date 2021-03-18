@@ -77,13 +77,13 @@ export function Horarios(props: HorariosProps) {
                     />
                 </div>
                 <div>
-                    <CursosElem
-                        dataAnio={dataTabla()}
-                        anioActual={anioActual}
-                        fnAgregarCurso={props.fnAgregarCurso}
-                        listaCursosUsuario={props.listaCursosUsuario}
-                        idHover={idHover}
-                        setIdHover={setIdHover}
+                    <CursosElem dataAnio={dataTabla()}
+                                anioActual={anioActual}
+                                fnAgregarCurso={props.fnAgregarCurso}
+                                listaCursosUsuario={props.listaCursosUsuario}
+                                idHover={idHover}
+                                setIdHover={setIdHover}
+                                esCursoMiHorario={false}
                     />
                 </div>
             </Match>

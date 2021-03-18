@@ -3,27 +3,17 @@ import { StyleSheet, css } from "aphrodite";
 import { Tabla } from "./Tabla";
 import { mostrarDescansos } from "../Store";
 import { EstadoLayout } from "./ContenedorHorarios";
-import { Switch, Match, For, createMemo } from "solid-js";
+import { Switch, Match, For, createMemo, createSignal } from "solid-js";
 import { BotonMaxMin } from "./BotonMaxMin";
 import { BotonIcono } from "./BotonIcono";
-import { Cursos, ListaCursosUsuario } from "../types/DatosHorario";
+import { Curso, Cursos, ListaCursosUsuario } from "../types/DatosHorario";
+import { CursosElem } from "./CursosElem";
 
 interface MiHorarioProps {
     estadoLayout: EstadoLayout,
     setEstadoLayout: (v: EstadoLayout) => EstadoLayout,
-    cursosUsuario: ListaCursosUsuario
-}
-
-function Horario(props: { cursosUsuario: ListaCursosUsuario }) {
-    return <div>
-        <For each={props.cursosUsuario.cursos}>
-            {c => {
-                return <div>
-                    <p>{c.abreviado} - {c.nombre}</p>
-                </div>
-            }}
-        </For>
-    </div>
+    cursosUsuario: ListaCursosUsuario,
+    fnAgregarCurso: (c: Curso) => void,
 }
 
 const e = StyleSheet.create({
@@ -40,6 +30,7 @@ const e = StyleSheet.create({
 });
 
 export function MiHorario(props: MiHorarioProps) {
+    const [idHover, setIdHover] = createSignal("");
 
     const datosMiHorario = createMemo(() => {
         const obj: Cursos = {};
@@ -119,13 +110,19 @@ export function MiHorario(props: MiHorarioProps) {
                     <Tabla data={datosMiHorario()}
                            anio={"Mi horario"}
                            version={1}
-                           idHover={() => ""}
-                           setIdHover={(v: string) => ""}
+                           idHover={idHover}
+                           setIdHover={setIdHover}
                     />
-
-                    <Horario cursosUsuario={props.cursosUsuario}/>
-
                 </div>
+
+                <CursosElem anioActual={() => "Mi horario"}
+                            dataAnio={datosMiHorario()}
+                            fnAgregarCurso={props.fnAgregarCurso}
+                            listaCursosUsuario={props.cursosUsuario}
+                            idHover={idHover}
+                            setIdHover={setIdHover}
+                            esCursoMiHorario={true}
+                />
             </Match>
             <Match when={props.estadoLayout === "MaxHorarios"}>
                 <BotonMaxMin

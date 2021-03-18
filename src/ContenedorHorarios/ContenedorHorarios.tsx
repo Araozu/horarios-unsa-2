@@ -120,7 +120,11 @@ export function ContenedorHorarios() {
 
     return <div className={css(e().contenedor)}>
         <div>
-            <MiHorario estadoLayout={estadoLayout()} setEstadoLayout={setEstadoLayout} cursosUsuario={cursosUsuario}/>
+            <MiHorario estadoLayout={estadoLayout()}
+                       setEstadoLayout={setEstadoLayout}
+                       cursosUsuario={cursosUsuario}
+                       fnAgregarCurso={agregarCursoUsuario}
+            />
         </div>
         <div>
             <Show when={datosCargados()}>

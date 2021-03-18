@@ -19,6 +19,9 @@ const e = StyleSheet.create({
         display: "inline-block",
         verticalAlign: "top"
     },
+    cursoOculto: {
+        display: "none"
+    },
     botonTexto: {
         padding: "0.25rem 0.35rem",
         borderRadius: "5px"
@@ -31,7 +34,8 @@ interface Props {
     fnAgregarCurso: (c: Curso) => void,
     listaCursosUsuario: ListaCursosUsuario,
     idHover: () => string,
-    setIdHover: (v: string) => string
+    setIdHover: (v: string) => string,
+    esCursoMiHorario: boolean
 }
 
 function IndicadorGrupo(props: { nombre: string, esLab: boolean, idParcial: string, setIdHover: (v: string) => string }) {
@@ -68,8 +72,10 @@ export function CursosElem(props: Props) {
     const claseCursoAgregado = css(
         e.contenedorCurso,
         estilosGlobales.contenedor,
-        estilosGlobales.contenedorCursorActivo,
+        !props.esCursoMiHorario && estilosGlobales.contenedorCursorActivo,
     );
+
+    const claseCursoOculto = css(e.cursoOculto);
 
     return <>
         <For each={Object.entries(props.dataAnio)}>
@@ -90,10 +96,14 @@ export function CursosElem(props: Props) {
                     : `Agregar a mi horario`
                 );
 
-                const claseMemo = createMemo(() => cursoAgregadoMemo()
-                    ? claseCursoAgregado
-                    : claseCursoNoAgregado
-                );
+                const claseMemo = createMemo(() => {
+                    if (props.esCursoMiHorario && datosCurso.oculto) {
+                        return claseCursoOculto
+                    }
+                    return cursoAgregadoMemo()
+                        ? claseCursoAgregado
+                        : claseCursoNoAgregado
+                });
 
                 const profesoresTeoria = createMemo(() => agruparProfesores(datosCurso.Teoria));
                 const profesoresLab = createMemo(() => agruparProfesores(datosCurso.Laboratorio ?? {}));
@@ -158,6 +168,6 @@ export function CursosElem(props: Props) {
                     </span>
                 </div>
             }}
-        </For>
-    </>;
-}
+                </For>
+                </>;
+                }
