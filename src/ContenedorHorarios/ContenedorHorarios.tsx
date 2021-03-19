@@ -124,6 +124,7 @@ export function ContenedorHorarios() {
                        setEstadoLayout={setEstadoLayout}
                        cursosUsuario={cursosUsuario}
                        fnAgregarCurso={agregarCursoUsuario}
+                       setCursosUsuarios={setCursosUsuarios}
             />
         </div>
         <div>

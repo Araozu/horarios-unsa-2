@@ -68,7 +68,9 @@ export interface DataProcesada {
         [dia: string]: {
             id: string,
             txt: string,
-            esLab: boolean
+            esLab: boolean,
+            seleccionado: boolean,
+            fnSeleccionar: () => void
         }[]
     }
 }

@@ -1,7 +1,8 @@
 import { StyleSheet, css } from "aphrodite";
 import { estilosGlobales } from "../../Estilos";
-import { For, createSignal, createMemo } from "solid-js";
+import { For, createSignal, createMemo, createEffect, SetStateFunction } from "solid-js";
 import { Dia } from "../../Store";
+import { ListaCursosUsuario } from "../../types/DatosHorario";
 
 const e = StyleSheet.create({
     celdaComun: {
@@ -70,7 +71,9 @@ interface Props {
     datos: {
         id: string,
         txt: string,
-        esLab: boolean
+        esLab: boolean,
+        seleccionado: boolean,
+        fnSeleccionar: () => void
     }[],
     idHover: () => string,
     setIdHover: (v: string) => string,
@@ -89,8 +92,18 @@ export function CeldaFila(props: Props) {
 
     return <div className={css(e.celdaComun, estilosGlobales.inlineBlock)}>
         <For each={datos}>
-            {({id, txt, esLab}) => {
+            {datos => {
+                const id = datos.id;
+                const txt = datos.txt;
+                const esLab = datos.esLab;
+                const fnSeleccionar = datos.fnSeleccionar;
+
                 const [estabaResaltado, setEstabaResaltado] = createSignal(false);
+
+                createEffect(() => {
+                    const seleccionado = datos.seleccionado;
+                    console.log("Cambiado \"seleccionado\":", seleccionado);
+                });
 
                 const clases = createMemo(
                     () => {
@@ -116,6 +129,7 @@ export function CeldaFila(props: Props) {
                 return <span className={clases()}
                              onMouseEnter={() => fnOnMouseEnter(id)}
                              onMouseLeave={fnOnMouseLeave}
+                             onClick={fnSeleccionar}
                 >
                     {txt}
                 </span>;

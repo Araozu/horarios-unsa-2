@@ -1,7 +1,7 @@
 import { StyleSheet, css } from "aphrodite";
-import { createMemo, createSignal, For } from "solid-js";
+import { createMemo, createSignal, For, SetStateFunction } from "solid-js";
 import { estilosGlobales } from "../Estilos";
-import { Cursos, Curso } from "../types/DatosHorario";
+import { Cursos, Curso, ListaCursosUsuario } from "../types/DatosHorario";
 import { Dia, dias, horas } from "../Store";
 import { DataProcesada } from "../types/DatosHorario";
 import { FilaTabla } from "./Tabla/FilaTabla";
@@ -81,16 +81,24 @@ const e = StyleSheet.create({
     }
 });
 
-const procesarAnio = (data: Cursos, anio: string, version: number) => {
+type FnSetCursosUsuarios = SetStateFunction<ListaCursosUsuario>;
+
+const procesarAnio = (data: Cursos, anio: string, version: number, setCursosUsuarios: FnSetCursosUsuarios) => {
     const obj: DataProcesada = {};
 
-    for (const [, curso] of Object.entries(data)) {
+    for (const cursoKey in data) {
+        const curso = data[cursoKey];
         if (curso.oculto) continue;
 
         const nombreAbreviado = curso.abreviado;
 
-        for (const [grupoStr, grupo] of Object.entries(curso.Teoria)) {
-            for (const hora of grupo.Horas) {
+        for (const grupoStr in curso.Teoria) {
+            const grupo = curso.Teoria[grupoStr];
+            if (!grupo) continue;
+
+            for (const horaKey in grupo.Horas) {
+                const hora = grupo.Horas[horaKey];
+
                 const dia = hora.substring(0, 2);
                 const horas = hora.substring(2, 4);
                 const minutos = hora.substr(4);
@@ -110,12 +118,20 @@ const procesarAnio = (data: Cursos, anio: string, version: number) => {
                 obj[horaCompleta][dia].push({
                     id,
                     txt: `${nombreAbreviado} ${grupoStr}`,
-                    esLab: false
+                    esLab: false,
+                    seleccionado: grupo.seleccionado,
+                    fnSeleccionar: () => {
+                        // setCursosUsuarios("cursos", );
+                        console.log(":D");
+                    }
                 });
             }
         }
 
-        for (const [grupoStr, grupo] of Object.entries(curso.Laboratorio ?? {})) {
+        for (const grupoStr in curso.Laboratorio) {
+            const grupo = curso.Teoria[grupoStr];
+            if (!grupo) continue;
+
             for (const hora of grupo.Horas) {
                 const dia = hora.substring(0, 2);
                 const horas = hora.substring(2, 4);
@@ -136,7 +152,11 @@ const procesarAnio = (data: Cursos, anio: string, version: number) => {
                 obj[horaCompleta][dia].push({
                     id,
                     txt: `${nombreAbreviado} L${grupoStr}`,
-                    esLab: true
+                    esLab: true,
+                    seleccionado: grupo.seleccionado,
+                    fnSeleccionar: () => {
+                        console.log(":D (lab)");
+                    }
                 });
             }
         }
@@ -150,12 +170,13 @@ interface Props {
     anio: string,
     version: number,
     idHover: () => string,
-    setIdHover: (v: string) => string
+    setIdHover: (v: string) => string,
+    setCursosUsuarios: SetStateFunction<ListaCursosUsuario>
 }
 
 export function Tabla(props: Props) {
     const anio = () => props.anio.substring(0, props.anio.indexOf(" "));
-    const data = createMemo(() => procesarAnio(props.data, anio(), props.version));
+    const data = createMemo(() => procesarAnio(props.data, anio(), props.version, props.setCursosUsuarios));
     const idHover = props.idHover;
     const setIdHover = props.setIdHover;
 
@@ -164,7 +185,11 @@ export function Tabla(props: Props) {
         props.data;
         return <For each={horas}>
             {hora => {
-                return <FilaTabla data={data()} hora={hora} idHover={idHover} setIdHover={setIdHover}/>
+                return <FilaTabla data={data()}
+                                  hora={hora}
+                                  idHover={idHover}
+                                  setIdHover={setIdHover}
+                />
             }}
         </For>
     });

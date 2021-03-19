@@ -1,9 +1,9 @@
 import { StyleSheet, css } from "aphrodite";
 import { estilosGlobales } from "../../Estilos";
-import { For, createSignal, createMemo, createState, createEffect, State } from "solid-js";
+import { For, createSignal, createMemo, createState, createEffect, State, SetStateFunction } from "solid-js";
 import { Dia, dias } from "../../Store";
 import { CeldaFila } from "./CeldaFila";
-import { DataProcesada } from "../../types/DatosHorario";
+import { DataProcesada, ListaCursosUsuario } from "../../types/DatosHorario";
 import { coloresBorde, diaANum } from "../Tabla";
 
 const e = StyleSheet.create({

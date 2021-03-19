@@ -3,7 +3,7 @@ import { StyleSheet, css } from "aphrodite";
 import { Tabla } from "./Tabla";
 import { mostrarDescansos } from "../Store";
 import { EstadoLayout } from "./ContenedorHorarios";
-import { Switch, Match, For, createMemo, createSignal } from "solid-js";
+import { Switch, Match, For, createMemo, createSignal, SetStateFunction } from "solid-js";
 import { BotonMaxMin } from "./BotonMaxMin";
 import { BotonIcono } from "./BotonIcono";
 import { Curso, Cursos, ListaCursosUsuario } from "../types/DatosHorario";
@@ -14,6 +14,7 @@ interface MiHorarioProps {
     setEstadoLayout: (v: EstadoLayout) => EstadoLayout,
     cursosUsuario: ListaCursosUsuario,
     fnAgregarCurso: (c: Curso) => void,
+    setCursosUsuarios: SetStateFunction<ListaCursosUsuario>
 }
 
 const e = StyleSheet.create({
@@ -32,6 +33,7 @@ const e = StyleSheet.create({
 export function MiHorario(props: MiHorarioProps) {
     const [idHover, setIdHover] = createSignal("");
 
+    // Simplificar para mantener reactividad (?)
     const datosMiHorario = createMemo(() => {
         const obj: Cursos = {};
         props.cursosUsuario.cursos.forEach(x => {
@@ -112,6 +114,7 @@ export function MiHorario(props: MiHorarioProps) {
                            version={1}
                            idHover={idHover}
                            setIdHover={setIdHover}
+                           setCursosUsuarios={props.setCursosUsuarios}
                     />
                 </div>
 
