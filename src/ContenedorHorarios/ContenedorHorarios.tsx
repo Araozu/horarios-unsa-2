@@ -64,16 +64,20 @@ const ElemCargando = () =>
 export type EstadoLayout = "MaxPersonal" | "Normal" | "MaxHorarios";
 
 const [cursosUsuario, setCursosUsuarios] = createState<ListaCursosUsuario>({
+    sigIndice: 0,
     cursos: []
 });
 
+// TODO: Agregar un indice del ultimo curso
 const agregarCursoUsuario = (curso: Curso) => {
     // Si el horario ya se habia agregado, ocultarlo
     const cursoActualIndex = cursosUsuario.cursos.findIndex(x => x.nombre === curso.nombre);
     if (cursoActualIndex !== -1) {
         setCursosUsuarios("cursos", cursoActualIndex, "oculto", x => !x);
     } else {
-        setCursosUsuarios("cursos", a => [...a, curso]);
+        setCursosUsuarios("cursos", cursosUsuario.sigIndice, curso);
+        setCursosUsuarios("sigIndice", x => x + 1);
+        // setCursosUsuarios("cursos", a => [...a, curso]);
     }
 };
 
@@ -134,6 +138,7 @@ export function ContenedorHorarios() {
                           setEstadoLayout={setEstadoLayout}
                           fnAgregarCurso={agregarCursoUsuario}
                           listaCursosUsuario={cursosUsuario}
+                          setCursosUsuarios={setCursosUsuarios}
                 />
             </Show>
         </div>

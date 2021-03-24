@@ -86,19 +86,13 @@ type FnSetCursosUsuarios = SetStateFunction<ListaCursosUsuario>;
 const procesarAnio = (data: Cursos, anio: string, version: number, setCursosUsuarios: FnSetCursosUsuarios) => {
     const obj: DataProcesada = {};
 
-    for (const cursoKey in data) {
-        const curso = data[cursoKey];
+    for (const [indiceCurso, curso] of Object.entries(data)) {
         if (curso.oculto) continue;
 
         const nombreAbreviado = curso.abreviado;
 
-        for (const grupoStr in curso.Teoria) {
-            const grupo = curso.Teoria[grupoStr];
-            if (!grupo) continue;
-
-            for (const horaKey in grupo.Horas) {
-                const hora = grupo.Horas[horaKey];
-
+        for (const [grupoStr, grupo] of Object.entries(curso.Teoria)) {
+            for (const hora of grupo.Horas) {
                 const dia = hora.substring(0, 2);
                 const horas = hora.substring(2, 4);
                 const minutos = hora.substr(4);
@@ -119,19 +113,13 @@ const procesarAnio = (data: Cursos, anio: string, version: number, setCursosUsua
                     id,
                     txt: `${nombreAbreviado} ${grupoStr}`,
                     esLab: false,
-                    seleccionado: grupo.seleccionado,
-                    fnSeleccionar: () => {
-                        // setCursosUsuarios("cursos", );
-                        console.log(":D");
-                    }
+                    seleccionado: false,
+                    fnSeleccionar: () => {}
                 });
             }
         }
 
-        for (const grupoStr in curso.Laboratorio) {
-            const grupo = curso.Teoria[grupoStr];
-            if (!grupo) continue;
-
+        for (const [grupoStr, grupo] of Object.entries(curso.Laboratorio ?? {})) {
             for (const hora of grupo.Horas) {
                 const dia = hora.substring(0, 2);
                 const horas = hora.substring(2, 4);
@@ -155,7 +143,10 @@ const procesarAnio = (data: Cursos, anio: string, version: number, setCursosUsua
                     esLab: true,
                     seleccionado: grupo.seleccionado,
                     fnSeleccionar: () => {
-                        console.log(":D (lab)");
+
+                        /// @ts-ignore
+                        setCursosUsuarios("cursos", parseInt(indiceCurso), "Laboratorio", grupoStr, "seleccionado", true);
+                        console.log("Seleccionando...", indiceCurso);
                     }
                 });
             }

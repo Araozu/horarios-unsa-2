@@ -45,6 +45,7 @@ export interface Curso {
 }
 
 export interface ListaCursosUsuario {
+    sigIndice: number,
     cursos: Curso[]
 }
 

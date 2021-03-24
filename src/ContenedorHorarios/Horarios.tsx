@@ -1,5 +1,5 @@
 import { Curso, CursoRaw, DatosHorario, DatosHorarioRaw, ListaCursosUsuario } from "../types/DatosHorario";
-import { For, createSignal, createMemo } from "solid-js";
+import { For, createSignal, createMemo, SetStateFunction } from "solid-js";
 import { css } from "aphrodite";
 import { estilosGlobales } from "../Estilos";
 import { Tabla } from "./Tabla";
@@ -13,7 +13,8 @@ interface HorariosProps {
     estadoLayout: EstadoLayout,
     setEstadoLayout: (v: EstadoLayout) => EstadoLayout,
     fnAgregarCurso: (c: Curso) => void,
-    listaCursosUsuario: ListaCursosUsuario
+    listaCursosUsuario: ListaCursosUsuario,
+    setCursosUsuarios: SetStateFunction<ListaCursosUsuario>
 }
 
 export function Horarios(props: HorariosProps) {
@@ -74,6 +75,7 @@ export function Horarios(props: HorariosProps) {
                            anio={anioActual()}
                            idHover={idHover}
                            setIdHover={setIdHover}
+                           setCursosUsuarios={props.setCursosUsuarios}
                     />
                 </div>
                 <div>
