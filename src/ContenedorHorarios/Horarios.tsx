@@ -1,12 +1,11 @@
-import { Curso, CursoRaw, Cursos, DatosHorario, DatosHorarioRaw, ListaCursosUsuario } from "../types/DatosHorario";
-import { For, createSignal, createMemo, SetStateFunction, batch, untrack } from "solid-js";
+import { Curso, Cursos, DatosHorario, ListaCursosUsuario } from "../types/DatosHorario";
+import { batch, createMemo, createSignal, For, Match, SetStateFunction, Switch, untrack } from "solid-js";
 import { css } from "aphrodite";
 import { estilosGlobales } from "../Estilos";
 import { Tabla } from "./Tabla";
 import { CursosElem } from "./CursosElem";
 import { EstadoLayout } from "./ContenedorHorarios";
 import { BotonMaxMin } from "./BotonMaxMin";
-import { Switch, Match } from "solid-js";
 import { useListaCursos } from "./useListaCursos";
 
 interface HorariosProps {
@@ -58,9 +57,8 @@ export function Horarios(props: HorariosProps) {
 
                 let i = 0;
                 for (const [, curso] of Object.entries(cursos)) {
-                    agregarCursoALista(curso);
-
-                    obj[i] = curso;
+                    // El curso devuelto por esta fun. es reactivo
+                    obj[i] = agregarCursoALista(curso);
                     i++;
                 }
             });
