@@ -70,7 +70,7 @@ export interface DataProcesada {
             id: string,
             txt: string,
             esLab: boolean,
-            seleccionado: boolean,
+            datosGrupo: DatosGrupo,
             fnSeleccionar: () => void
         }[]
     }

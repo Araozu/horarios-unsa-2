@@ -1,5 +1,5 @@
 import { StyleSheet, css } from "aphrodite";
-import { createMemo, createSignal, For, SetStateFunction } from "solid-js";
+import { createEffect, createMemo, createSignal, createState, For, SetStateFunction } from "solid-js";
 import { estilosGlobales } from "../Estilos";
 import { Cursos, Curso, ListaCursosUsuario } from "../types/DatosHorario";
 import { Dia, dias, horas } from "../Store";
@@ -113,8 +113,11 @@ const procesarAnio = (data: Cursos, anio: string, version: number, setCursosUsua
                     id,
                     txt: `${nombreAbreviado} ${grupoStr}`,
                     esLab: false,
-                    seleccionado: false,
-                    fnSeleccionar: () => {}
+                    datosGrupo: grupo,
+                    fnSeleccionar: () => {
+                        /// @ts-ignore
+                        setCursosUsuarios("cursos", indiceCurso, "Teoria", grupoStr, "seleccionado", x => !x);
+                    }
                 });
             }
         }
@@ -141,12 +144,10 @@ const procesarAnio = (data: Cursos, anio: string, version: number, setCursosUsua
                     id,
                     txt: `${nombreAbreviado} L${grupoStr}`,
                     esLab: true,
-                    seleccionado: grupo.seleccionado,
+                    datosGrupo: grupo,
                     fnSeleccionar: () => {
-
                         /// @ts-ignore
-                        setCursosUsuarios("cursos", parseInt(indiceCurso), "Laboratorio", grupoStr, "seleccionado", true);
-                        console.log("Seleccionando...", indiceCurso);
+                        setCursosUsuarios("cursos", indiceCurso, "Laboratorio", grupoStr, "seleccionado", x => !x);
                     }
                 });
             }

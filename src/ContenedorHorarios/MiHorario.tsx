@@ -43,11 +43,6 @@ export function MiHorario(props: MiHorarioProps) {
         return obj;
     });
 
-    const claseBotonMostrarDescansos = () =>
-        mostrarDescansos()
-            ? "ph-check " + css(e.boton)
-            : "ph-circle " + css(e.boton);
-
     const fnMaximizar = () => props.setEstadoLayout("MaxPersonal");
     const fnMinimizar = () => props.setEstadoLayout("Normal");
     const estadoActualLayout = () => props.estadoLayout;

@@ -75,7 +75,7 @@ export function Horarios(props: HorariosProps) {
                            anio={anioActual()}
                            idHover={idHover}
                            setIdHover={setIdHover}
-                           setCursosUsuarios={props.setCursosUsuarios}
+                           setCursosUsuarios={() => {}}
                     />
                 </div>
                 <div>

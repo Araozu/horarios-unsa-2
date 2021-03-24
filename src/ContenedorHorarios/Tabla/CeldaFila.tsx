@@ -2,7 +2,7 @@ import { StyleSheet, css } from "aphrodite";
 import { estilosGlobales } from "../../Estilos";
 import { For, createSignal, createMemo, createEffect, SetStateFunction } from "solid-js";
 import { Dia } from "../../Store";
-import { ListaCursosUsuario } from "../../types/DatosHorario";
+import { DatosGrupo, ListaCursosUsuario } from "../../types/DatosHorario";
 
 const e = StyleSheet.create({
     celdaComun: {
@@ -72,7 +72,7 @@ interface Props {
         id: string,
         txt: string,
         esLab: boolean,
-        seleccionado: boolean,
+        datosGrupo: DatosGrupo,
         fnSeleccionar: () => void
     }[],
     idHover: () => string,
@@ -100,14 +100,17 @@ export function CeldaFila(props: Props) {
 
                 const [estabaResaltado, setEstabaResaltado] = createSignal(false);
 
-                createEffect(() => {
-                    const seleccionado = datos.seleccionado;
-                    console.log("Cambiado \"seleccionado\":", seleccionado);
+                const estaSeleccionado = createMemo(() => {
+                    return datos.datosGrupo.seleccionado;
                 });
 
                 const clases = createMemo(
                     () => {
-                        const clases = [e.celdaCurso, esLab ? e.celdaCursoLab : e.celdaCursoTeoria];
+                        const clases = [
+                            e.celdaCurso,
+                            esLab ? e.celdaCursoLab : e.celdaCursoTeoria,
+                            estaSeleccionado() && estilosGlobales.contenedorCursorActivo
+                        ];
                         let adicional = "";
                         const idHoverS = idHover();
                         if (idHoverS !== "" &&  id.search(idHoverS) !== -1) {
