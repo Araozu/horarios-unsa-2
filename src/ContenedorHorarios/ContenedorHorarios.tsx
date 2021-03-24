@@ -14,6 +14,7 @@ import {
 } from "../types/DatosHorario";
 import { estilosGlobales } from "../Estilos";
 import { batch, createEffect, createMemo, createSignal, createState, Show } from "solid-js";
+import { useListaCursos } from "./useListaCursos";
 
 const datosPromise = (async () => {
     const file = await fetch("/horarios/2020_2_fps_ingenieriadesistemas.yaml");
@@ -63,23 +64,11 @@ const ElemCargando = () =>
 
 export type EstadoLayout = "MaxPersonal" | "Normal" | "MaxHorarios";
 
-const [cursosUsuario, setCursosUsuarios] = createState<ListaCursosUsuario>({
-    sigIndice: 0,
-    cursos: []
-});
-
-// TODO: Agregar un indice del ultimo curso
-const agregarCursoUsuario = (curso: Curso) => {
-    // Si el horario ya se habia agregado, ocultarlo
-    const cursoActualIndex = cursosUsuario.cursos.findIndex(x => x.nombre === curso.nombre);
-    if (cursoActualIndex !== -1) {
-        setCursosUsuarios("cursos", cursoActualIndex, "oculto", x => !x);
-    } else {
-        setCursosUsuarios("cursos", cursosUsuario.sigIndice, curso);
-        setCursosUsuarios("sigIndice", x => x + 1);
-        // setCursosUsuarios("cursos", a => [...a, curso]);
-    }
-};
+const {
+    listaCursos: cursosUsuario,
+    setListaCursos: setCursosUsuarios,
+    agregarCursoALista: agregarCursoUsuario
+} = useListaCursos();
 
 export function ContenedorHorarios() {
     const [datosCargados, setDatosCargados] = createSignal(false);
@@ -136,7 +125,7 @@ export function ContenedorHorarios() {
                 <Horarios data={datos()!!}
                           estadoLayout={estadoLayout()}
                           setEstadoLayout={setEstadoLayout}
-                          fnAgregarCurso={agregarCursoUsuario}
+                          fnAgregarCurso={(c) => agregarCursoUsuario(JSON.parse(JSON.stringify(c)))}
                           listaCursosUsuario={cursosUsuario}
                           setCursosUsuarios={setCursosUsuarios}
                 />

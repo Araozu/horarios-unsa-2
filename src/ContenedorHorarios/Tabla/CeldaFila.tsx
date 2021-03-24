@@ -101,6 +101,7 @@ export function CeldaFila(props: Props) {
                 const [estabaResaltado, setEstabaResaltado] = createSignal(false);
 
                 const estaSeleccionado = createMemo(() => {
+                    console.log("Seleccionado actualizado")
                     return datos.datosGrupo.seleccionado;
                 });
 

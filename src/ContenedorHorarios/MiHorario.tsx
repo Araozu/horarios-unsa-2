@@ -33,8 +33,6 @@ const e = StyleSheet.create({
 export function MiHorario(props: MiHorarioProps) {
     const [idHover, setIdHover] = createSignal("");
 
-    // TODO: Cambiar esto para cambiar 'seleccionado' aqui
-    // Simplificar para mantener reactividad (?)
     const datosMiHorario = createMemo(() => {
         const obj: Cursos = {};
         props.cursosUsuario.cursos.forEach((x, i) => {

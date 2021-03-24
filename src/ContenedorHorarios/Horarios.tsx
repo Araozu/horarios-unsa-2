@@ -1,5 +1,5 @@
-import { Curso, CursoRaw, DatosHorario, DatosHorarioRaw, ListaCursosUsuario } from "../types/DatosHorario";
-import { For, createSignal, createMemo, SetStateFunction } from "solid-js";
+import { Curso, CursoRaw, Cursos, DatosHorario, DatosHorarioRaw, ListaCursosUsuario } from "../types/DatosHorario";
+import { For, createSignal, createMemo, SetStateFunction, batch, untrack } from "solid-js";
 import { css } from "aphrodite";
 import { estilosGlobales } from "../Estilos";
 import { Tabla } from "./Tabla";
@@ -7,6 +7,7 @@ import { CursosElem } from "./CursosElem";
 import { EstadoLayout } from "./ContenedorHorarios";
 import { BotonMaxMin } from "./BotonMaxMin";
 import { Switch, Match } from "solid-js";
+import { useListaCursos } from "./useListaCursos";
 
 interface HorariosProps {
     data: DatosHorario,
@@ -16,6 +17,12 @@ interface HorariosProps {
     listaCursosUsuario: ListaCursosUsuario,
     setCursosUsuarios: SetStateFunction<ListaCursosUsuario>
 }
+
+const {
+    setListaCursos,
+    agregarCursoALista,
+    eliminarCursosDeLista
+} = useListaCursos();
 
 export function Horarios(props: HorariosProps) {
     const [anioActual, setAnioActual] = createSignal("1er año");
@@ -42,7 +49,24 @@ export function Horarios(props: HorariosProps) {
     </For>;
 
     const dataTabla = createMemo(() => {
-        return props.data.años[anioActual()];
+        const anio = anioActual();
+        const obj: Cursos = {};
+        untrack(() => {
+            const cursos = props.data.años[anio];
+            batch(() => {
+                eliminarCursosDeLista();
+
+                let i = 0;
+                for (const [, curso] of Object.entries(cursos)) {
+                    agregarCursoALista(curso);
+
+                    obj[i] = curso;
+                    i++;
+                }
+            });
+        });
+
+        return obj;
     });
 
     const fnMaximizar = () => props.setEstadoLayout("MaxHorarios");
@@ -75,7 +99,7 @@ export function Horarios(props: HorariosProps) {
                            anio={anioActual()}
                            idHover={idHover}
                            setIdHover={setIdHover}
-                           setCursosUsuarios={() => {}}
+                           setCursosUsuarios={setListaCursos}
                     />
                 </div>
                 <div>
