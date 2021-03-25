@@ -119,6 +119,7 @@ export function MiHorario(props: MiHorarioProps) {
                             idHover={idHover}
                             setIdHover={setIdHover}
                             esCursoMiHorario={true}
+                            setCursosUsuarios={props.setCursosUsuarios}
                 />
             </Match>
             <Match when={props.estadoLayout === "MaxHorarios"}>

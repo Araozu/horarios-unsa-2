@@ -108,6 +108,7 @@ export function Horarios(props: HorariosProps) {
                                 idHover={idHover}
                                 setIdHover={setIdHover}
                                 esCursoMiHorario={false}
+                                setCursosUsuarios={setListaCursos}
                     />
                 </div>
             </Match>

@@ -1,5 +1,5 @@
 import { Cursos, CursoRaw, DatosGrupo, ListaCursosUsuario, Curso } from "../types/DatosHorario";
-import { createEffect, createMemo, For } from "solid-js";
+import { createEffect, createMemo, For, SetStateFunction } from "solid-js";
 import { StyleSheet, css } from "aphrodite";
 import { estilosGlobales } from "../Estilos";
 
@@ -35,28 +35,53 @@ interface Props {
     listaCursosUsuario: ListaCursosUsuario,
     idHover: () => string,
     setIdHover: (v: string) => string,
-    esCursoMiHorario: boolean
+    esCursoMiHorario: boolean,
+    setCursosUsuarios: SetStateFunction<ListaCursosUsuario>
 }
 
-function IndicadorGrupo(props: { nombre: string, esLab: boolean, idParcial: string, setIdHover: (v: string) => string }) {
+type FnSetCursosUsuarios = SetStateFunction<ListaCursosUsuario>;
+
+interface PropsIndicadorGrupo {
+    nombre: string,
+    esLab: boolean,
+    idParcial: string,
+    setIdHover: (v: string) => string,
+    onClick: () => void
+}
+
+function IndicadorGrupo(props: PropsIndicadorGrupo) {
     const id = `${props.idParcial}_${props.esLab ? 'L' : 'T'}_${props.nombre}`;
     return <span className={css(e.botonTexto, estilosGlobales.contenedorCursor, estilosGlobales.contenedorCursorSoft)}
                  style={props.esLab ? {"font-style": "italic"} : {"font-weight": "bold"}}
                  onMouseEnter={() => props.setIdHover(id)}
                  onMouseLeave={() => props.setIdHover("")}
+                 onClick={props.onClick}
     >
         {props.esLab ? "L" : ""}{props.nombre}
     </span>
 }
 
-const agruparProfesores = (datos: { [k: string]: DatosGrupo }) => {
-    const profesores: { [k: string]: string[] } = {};
+const agruparProfesores = (datos: { [k: string]: DatosGrupo }, indiceCurso: number, esLab: boolean, setCursosUsuarios: FnSetCursosUsuarios) => {
+    const profesores: { [k: string]: [string, () => void][] } = {};
     for (const [grupo, datosGrupo] of Object.entries(datos)) {
         const nombreProfesor = datosGrupo.Docente;
         if (!profesores[nombreProfesor]) {
             profesores[nombreProfesor] = [];
         }
-        profesores[nombreProfesor].push(grupo);
+        profesores[nombreProfesor].push([
+            grupo,
+            () => {
+                setCursosUsuarios(
+                    "cursos",
+                    indiceCurso,
+                    esLab ? "Laboratorio" : "Teoria",
+                    /// @ts-ignore
+                    grupo,
+                    "seleccionado",
+                    x => !x
+                );
+            }
+        ]);
     }
     return profesores;
 };
@@ -79,7 +104,7 @@ export function CursosElem(props: Props) {
 
     return <>
         <For each={Object.entries(props.dataAnio)}>
-            {([_, datosCurso]) => {
+            {([indiceCurso, datosCurso]) => {
 
                 const idCurso = `${anio()}_${datosCurso.abreviado}`;
 
@@ -105,8 +130,18 @@ export function CursosElem(props: Props) {
                         : claseCursoNoAgregado
                 });
 
-                const profesoresTeoria = createMemo(() => agruparProfesores(datosCurso.Teoria));
-                const profesoresLab = createMemo(() => agruparProfesores(datosCurso.Laboratorio ?? {}));
+                const profesoresTeoria = createMemo(() => agruparProfesores(
+                    datosCurso.Teoria,
+                    parseInt(indiceCurso),
+                    false,
+                    props.setCursosUsuarios
+                ));
+                const profesoresLab = createMemo(() => agruparProfesores(
+                    datosCurso.Laboratorio ?? {},
+                    parseInt(indiceCurso),
+                    true,
+                    props.setCursosUsuarios
+                ));
 
                 return <div className={claseMemo()}>
                     <div
@@ -126,11 +161,12 @@ export function CursosElem(props: Props) {
                                             {profesor}&nbsp;
                                         </span>
                                         <For each={grupos}>
-                                            {x =>
+                                            {([x, fnOnClick]) =>
                                                 <IndicadorGrupo nombre={x}
                                                                 esLab={false}
                                                                 idParcial={idCurso}
                                                                 setIdHover={props.setIdHover}
+                                                                onClick={fnOnClick}
                                                 />
                                             }
                                         </For>
@@ -146,11 +182,12 @@ export function CursosElem(props: Props) {
                                             {profesor}&nbsp;
                                         </span>
                                         <For each={grupos}>
-                                            {x =>
+                                            {([x, fnOnClick]) =>
                                                 <IndicadorGrupo nombre={x}
                                                                 esLab={true}
                                                                 idParcial={idCurso}
                                                                 setIdHover={props.setIdHover}
+                                                                onClick={fnOnClick}
                                                 />
                                             }
                                         </For>
@@ -168,6 +205,6 @@ export function CursosElem(props: Props) {
                     </span>
                 </div>
             }}
-                </For>
-                </>;
-                }
+        </For>
+    </>;
+}
