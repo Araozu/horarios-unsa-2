@@ -1,12 +1,12 @@
-import { StyleSheet, css } from "aphrodite";
-import { numWallpaper } from "./Store";
-import { createEffect, createState } from "solid-js";
+import { StyleSheet, css } from "aphrodite"
+import { numWallpaper } from "./Store"
+import { createEffect, createState } from "solid-js"
 
-const duracionTransicion = 250;
+const duracionTransicion = 250
 
 export function Wallpaper() {
     /// @ts-ignore
-    const soportaBackdropFilter = document.body.style.backdropFilter !== undefined;
+    const soportaBackdropFilter = document.body.style.backdropFilter !== undefined
 
     const estilos = StyleSheet.create({
         contenedorCover: {
@@ -16,7 +16,7 @@ export function Wallpaper() {
             top: "0",
             left: "0",
             backgroundColor: "#212121",
-            zIndex: -1
+            zIndex: -1,
         },
         cover: {
             width: "100vw",
@@ -25,43 +25,45 @@ export function Wallpaper() {
             backgroundSize: "cover",
             zIndex: -1,
             transition: `opacity ${duracionTransicion}ms`,
-            filter: soportaBackdropFilter? "": "blur(40px)"
+            filter: soportaBackdropFilter ? "" : "blur(40px)",
         },
         coverTransicion: {
-            opacity: 0
-        }
-    });
+            opacity: 0,
+        },
+    })
 
     const [estilosRaw, setEstilosRaw] = createState({
-        "background-image": `none`,
-        opacity: 1
-    });
+        "background-image": "none",
+        opacity: 1,
+    })
 
     createEffect(() => {
-        const numImg = numWallpaper();
-        setEstilosRaw("opacity", 0);
+        const numImg = numWallpaper()
+        setEstilosRaw("opacity", 0)
 
-        const promesa250ms = new Promise(resolve => {
-            setTimeout(resolve, duracionTransicion);
-        });
+        const promesa250ms = new Promise((resolve) => {
+            setTimeout(resolve, duracionTransicion)
+        })
 
-        const url = `/img/wall${numImg}.webp`;
-        const img = new Image();
-        img.addEventListener("load", async () => {
-            await promesa250ms;
+        const url = `/img/wall${numImg}.webp`
+        const img = new Image()
+        img.addEventListener("load", async() => {
+            await promesa250ms
             setEstilosRaw({
                 "background-image": `url('${url}')`,
-                opacity: 1
-            });
-        });
-        img.src = url;
-    });
+                opacity: 1,
+            })
+        })
+        img.src = url
+    })
 
-    return <div className={css(estilos.contenedorCover)}>
-        <div
-            className={css(estilos.cover)}
-            style={{"background-image": estilosRaw["background-image"], opacity: estilosRaw.opacity}}
-        />
-    </div>
+    return (
+        <div className={css(estilos.contenedorCover)}>
+            <div
+                className={css(estilos.cover)}
+                style={{"background-image": estilosRaw["background-image"], opacity: estilosRaw.opacity}}
+            />
+        </div>
+    )
 
 }

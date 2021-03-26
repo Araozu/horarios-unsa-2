@@ -1,8 +1,8 @@
-import { StyleSheet, css } from "aphrodite";
-import { estilosGlobales } from "../../Estilos";
-import { For, createSignal, createMemo, createEffect, SetStateFunction } from "solid-js";
-import { Dia } from "../../Store";
-import { DatosGrupo, ListaCursosUsuario } from "../../types/DatosHorario";
+import { StyleSheet, css } from "aphrodite"
+import { estilosGlobales } from "../../Estilos"
+import { For, createSignal, createMemo, createEffect, SetStateFunction } from "solid-js"
+import { Dia } from "../../Store"
+import { DatosGrupo, ListaCursosUsuario } from "../../types/DatosHorario"
 
 const e = StyleSheet.create({
     celdaComun: {
@@ -10,7 +10,7 @@ const e = StyleSheet.create({
         textAlign: "center",
         padding: "0 0.7rem",
         boxSizing: "border-box",
-        userSelect: "none"
+        userSelect: "none",
     },
     celdaCurso: {
         display: "inline-block",
@@ -23,39 +23,42 @@ const e = StyleSheet.create({
         // color: "#151515"
     },
     celdaCursoTeoria: {
-        fontWeight: "bold"
+        fontWeight: "bold",
     },
     celdaCursoLab: {
-        fontStyle: "italic"
-    }
-});
+        fontStyle: "italic",
+    },
+    celdaSeleccionada: {
+        textDecoration: "underline",
+    },
+})
 
 const eColores = StyleSheet.create({
     lunes: {
-        backgroundColor: "rgba(33,150,243,1)"
+        backgroundColor: "rgba(33,150,243,1)",
     },
     martes: {
         backgroundColor: "rgba(255,214,0 ,1)",
-        color: "#151515"
+        color: "#151515",
     },
     miercoles: {
-        backgroundColor: "rgba(236,64,122 ,1)"
+        backgroundColor: "rgba(236,64,122 ,1)",
     },
     jueves: {
         backgroundColor: "rgba(29,233,182 ,1)",
-        color: "#151515"
+        color: "#151515",
     },
     viernes: {
-        backgroundColor: "rgba(244,67,54,1)"
-    }
-});
+        backgroundColor: "rgba(244,67,54,1)",
+    },
+})
 
 const clasesColores = {
     Lunes: css(eColores.lunes),
     Martes: css(eColores.martes),
     Miercoles: css(eColores.miercoles),
     Jueves: css(eColores.jueves),
-    Viernes: css(eColores.viernes)
+    Viernes: css(eColores.viernes),
 }
 
 interface Props {
@@ -79,64 +82,68 @@ interface Props {
     setIdHover: (v: string) => string,
     fnResaltarFila: () => void,
     fnDesresaltarFila: () => void,
-    dia: Dia
+    dia: Dia,
 }
 
+const claseSeldaSeleccionada = css(e.celdaSeleccionada)
+
 export function CeldaFila(props: Props) {
-    const datos = props.datos;
-    const idHover = props.idHover;
-    const setIdHover = props.setIdHover;
+    const datos = props.datos
+    const idHover = props.idHover
+    const setIdHover = props.setIdHover
 
-    const fnOnMouseEnter = (id: string) => setIdHover(id);
-    const fnOnMouseLeave = () => setIdHover("");
+    const fnOnMouseEnter = (id: string) => setIdHover(id)
+    const fnOnMouseLeave = () => setIdHover("")
 
-    return <div className={css(e.celdaComun, estilosGlobales.inlineBlock)}>
-        <For each={datos}>
-            {datos => {
-                const id = datos.id;
-                const txt = datos.txt;
-                const esLab = datos.esLab;
-                const fnSeleccionar = datos.fnSeleccionar;
+    return (
+        <div className={css(e.celdaComun, estilosGlobales.inlineBlock)}>
+            <For each={datos}>
+                {(datos) => {
+                    const id = datos.id
+                    const txt = datos.txt
+                    const esLab = datos.esLab
+                    const fnSeleccionar = datos.fnSeleccionar
 
-                const [estabaResaltado, setEstabaResaltado] = createSignal(false);
+                    const [estabaResaltado, setEstabaResaltado] = createSignal(false)
 
-                const estaSeleccionado = createMemo(() => {
-                    return datos.datosGrupo.seleccionado;
-                });
+                    const estaSeleccionado = createMemo(() => datos.datosGrupo.seleccionado)
 
-                const clases = createMemo(
-                    () => {
-                        const clases = [
-                            e.celdaCurso,
-                            esLab ? e.celdaCursoLab : e.celdaCursoTeoria,
-                            estaSeleccionado() && estilosGlobales.contenedorCursorActivo
-                        ];
-                        let adicional = "";
-                        const idHoverS = idHover();
-                        if (idHoverS !== "" &&  id.search(idHoverS) !== -1) {
-                            props.fnResaltarFila();
-                            clases.push(e.celdaCursoActiva);
-                            adicional = clasesColores[props.dia];
+                    const clases = createMemo(
+                        () => {
+                            const clases = [
+                                e.celdaCurso,
+                                esLab ? e.celdaCursoLab : e.celdaCursoTeoria,
+                                estaSeleccionado() && e.celdaSeleccionada,
+                            ]
+                            let adicional = ""
+                            const idHoverS = idHover()
+                            if (idHoverS !== "" && id.search(idHoverS) !== -1) {
+                                props.fnResaltarFila()
+                                clases.push(e.celdaCursoActiva)
+                                adicional = clasesColores[props.dia]
 
-                            setEstabaResaltado(true);
-                        } else if (estabaResaltado()) {
-                            props.fnDesresaltarFila();
-                            setEstabaResaltado(false);
-                        }
-                        return css(...clases) + " " + adicional;
-                    },
-                    undefined,
-                    (x, y) => x === y
-                );
+                                setEstabaResaltado(true)
+                            } else if (estabaResaltado()) {
+                                props.fnDesresaltarFila()
+                                setEstabaResaltado(false)
+                            }
+                            return `${css(...clases)} ${adicional}`
+                        },
+                        undefined,
+                        (x, y) => x === y,
+                    )
 
-                return <span className={clases()}
-                             onMouseEnter={() => fnOnMouseEnter(id)}
-                             onMouseLeave={fnOnMouseLeave}
-                             onClick={fnSeleccionar}
-                >
-                    {txt}
-                </span>;
-            }}
-        </For>
-    </div>
+                    return (
+                        <span className={clases()}
+                            onMouseEnter={() => fnOnMouseEnter(id)}
+                            onMouseLeave={fnOnMouseLeave}
+                            onClick={fnSeleccionar}
+                        >
+                            {txt}
+                        </span>
+                    )
+                }}
+            </For>
+        </div>
+    )
 }

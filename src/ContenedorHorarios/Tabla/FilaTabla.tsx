@@ -1,10 +1,10 @@
-import { StyleSheet, css } from "aphrodite";
-import { estilosGlobales } from "../../Estilos";
-import { For, createSignal, createMemo, createState, createEffect, State, SetStateFunction } from "solid-js";
-import { Dia, dias } from "../../Store";
-import { CeldaFila } from "./CeldaFila";
-import { DataProcesada, ListaCursosUsuario } from "../../types/DatosHorario";
-import { coloresBorde, diaANum } from "../Tabla";
+import { StyleSheet, css } from "aphrodite"
+import { estilosGlobales } from "../../Estilos"
+import { For, createSignal, createMemo, createState, createEffect, State, SetStateFunction } from "solid-js"
+import { Dia, dias } from "../../Store"
+import { CeldaFila } from "./CeldaFila"
+import { DataProcesada, ListaCursosUsuario } from "../../types/DatosHorario"
+import { coloresBorde, diaANum } from "../Tabla"
 
 const e = StyleSheet.create({
     celdaHora: {
@@ -12,13 +12,13 @@ const e = StyleSheet.create({
         width: "3rem",
         padding: "0.25rem 0",
         position: "absolute",
-        top: "-0.75rem"
+        top: "-0.75rem",
     },
     filaResaltado: {
         position: "absolute",
         zIndex: -1,
         height: "100%",
-        transform: "translateX(-1.5rem)"
+        transform: "translateX(-1.5rem)",
     },
     fila: {
         position: "relative",
@@ -30,7 +30,7 @@ const e = StyleSheet.create({
         minHeight: "1.2rem",
         ":hover": {
             // backgroundColor: "rgba(200, 200, 200, 0.25)"
-        }
+        },
     },
     filaBorde: {
         position: "absolute",
@@ -38,17 +38,17 @@ const e = StyleSheet.create({
         height: "1px",
         width: "100%",
         backgroundColor: "rgba(200, 200, 200, 0.25)",
-        zIndex: -1
+        zIndex: -1,
     },
     celdaResaltado: {
         height: "101%",
         width: "5px",
-        display: "inline-block"
+        display: "inline-block",
     },
     celdaResaltadoTransparente: {
-        backgroundColor: "transparent"
-    }
-});
+        backgroundColor: "transparent",
+    },
+})
 
 const [diasResaltados, setDiasResaltados] = createState({
     Lunes: 0,
@@ -56,7 +56,7 @@ const [diasResaltados, setDiasResaltados] = createState({
     Miercoles: 0,
     Jueves: 0,
     Viernes: 0,
-} as { [k: string]: number });
+} as { [k: string]: number })
 
 interface Props {
     hora: string,
@@ -65,12 +65,10 @@ interface Props {
     setIdHover: (v: string) => string
 }
 
-const diasFilter = createMemo(() => {
-    return Object.entries(diasResaltados)
-        .filter(x => x[1] > 0)
-        .map(x => x[0] as Dia)
-        .sort((x, y) => diaANum(x) > diaANum(y) ? 1 : -1);
-});
+const diasFilter = createMemo(() => Object.entries(diasResaltados)
+    .filter((x) => x[1] > 0)
+    .map((x) => x[0] as Dia)
+    .sort((x, y) => (diaANum(x) > diaANum(y) ? 1 : -1)))
 
 const useDiasResaltados: () => [
     State<{ [k: string]: boolean }>,
@@ -83,64 +81,76 @@ const useDiasResaltados: () => [
         Miercoles: false,
         Jueves: false,
         Viernes: false,
-    } as { [k: string]: boolean });
+    } as { [k: string]: boolean })
 
     const fnResaltar = (d: Dia) => {
-        setDiasResaltadosLocal(d, true);
-        setDiasResaltados(d, v => v + 1);
-    };
+        setDiasResaltadosLocal(d, true)
+        setDiasResaltados(d, (v) => v + 1)
+    }
 
     const fnDesresaltar = (d: Dia) => {
-        setDiasResaltadosLocal(d, false);
-        setDiasResaltados(d, v => v - 1);
-    };
+        setDiasResaltadosLocal(d, false)
+        setDiasResaltados(d, (v) => v - 1)
+    }
 
-    return [diasResaltadosLocal, fnResaltar, fnDesresaltar];
-};
+    return [diasResaltadosLocal, fnResaltar, fnDesresaltar]
+}
 
 export function FilaTabla(props: Props) {
-    const [diasResaltadosLocal, fnResaltar, fnDesresaltar] = useDiasResaltados();
+    const [diasResaltadosLocal, fnResaltar, fnDesresaltar] = useDiasResaltados()
 
-    const hora = props.hora;
-    const data = props.data;
+    const hora = props.hora
+    const data = props.data
 
-    return <div style={{position: "relative"}}>
-        <div className={css(e.celdaHora, estilosGlobales.inlineBlock)}>
-            {hora.substring(0, 5)}
-        </div>
-        <div className={css(e.fila)}>
-            <div className={css(estilosGlobales.inlineBlock, e.filaResaltado)}>
-                <div className={css(e.celdaResaltado, diasResaltadosLocal.Lunes ? null : e.celdaResaltadoTransparente)}
-                     style={{"background-color": coloresBorde[0]}}/>
-                <div className={css(e.celdaResaltado, diasResaltadosLocal.Martes ? null : e.celdaResaltadoTransparente)}
-                     style={{"background-color": coloresBorde[1]}}/>
-                <div
-                    className={css(e.celdaResaltado, diasResaltadosLocal.Miercoles ? null : e.celdaResaltadoTransparente)}
-                    style={{"background-color": coloresBorde[2]}}/>
-                <div className={css(e.celdaResaltado, diasResaltadosLocal.Jueves ? null : e.celdaResaltadoTransparente)}
-                     style={{"background-color": coloresBorde[3]}}/>
-                <div
-                    className={css(e.celdaResaltado, diasResaltadosLocal.Viernes ? null : e.celdaResaltadoTransparente)}
-                    style={{"background-color": coloresBorde[4]}}/>
+    return (
+        <div style={{position: "relative"}}>
+            <div className={css(e.celdaHora, estilosGlobales.inlineBlock)}>
+                {hora.substring(0, 5)}
             </div>
-            <For each={dias}>
-                {dia => {
-                    const diaStr = dia.substring(0, 2);
-                    const horaStr = hora.substring(0, 5);
-
-                    const datos = data?.[horaStr]?.[diaStr] ?? [];
-
-                    return <CeldaFila
-                        datos={datos}
-                        idHover={props.idHover}
-                        setIdHover={props.setIdHover}
-                        fnResaltarFila={() => fnResaltar(dia)}
-                        fnDesresaltarFila={() => fnDesresaltar(dia)}
-                        dia={dia}
+            <div className={css(e.fila)}>
+                <div className={css(estilosGlobales.inlineBlock, e.filaResaltado)}>
+                    <div
+                        className={css(e.celdaResaltado, diasResaltadosLocal.Lunes ? null : e.celdaResaltadoTransparente)}
+                        style={{"background-color": coloresBorde[0]}}
                     />
-                }}
-            </For>
-            <div className={css(e.filaBorde)}/>
+                    <div
+                        className={css(e.celdaResaltado, diasResaltadosLocal.Martes ? null : e.celdaResaltadoTransparente)}
+                        style={{"background-color": coloresBorde[1]}}
+                    />
+                    <div
+                        className={css(e.celdaResaltado, diasResaltadosLocal.Miercoles ? null : e.celdaResaltadoTransparente)}
+                        style={{"background-color": coloresBorde[2]}}
+                    />
+                    <div
+                        className={css(e.celdaResaltado, diasResaltadosLocal.Jueves ? null : e.celdaResaltadoTransparente)}
+                        style={{"background-color": coloresBorde[3]}}
+                    />
+                    <div
+                        className={css(e.celdaResaltado, diasResaltadosLocal.Viernes ? null : e.celdaResaltadoTransparente)}
+                        style={{"background-color": coloresBorde[4]}}
+                    />
+                </div>
+                <For each={dias}>
+                    {(dia) => {
+                        const diaStr = dia.substring(0, 2)
+                        const horaStr = hora.substring(0, 5)
+
+                        const datos = data?.[horaStr]?.[diaStr] ?? []
+
+                        return (
+                            <CeldaFila
+                                datos={datos}
+                                idHover={props.idHover}
+                                setIdHover={props.setIdHover}
+                                fnResaltarFila={() => fnResaltar(dia)}
+                                fnDesresaltarFila={() => fnDesresaltar(dia)}
+                                dia={dia}
+                            />
+                        )
+                    }}
+                </For>
+                <div className={css(e.filaBorde)} />
+            </div>
         </div>
-    </div>;
+    )
 }

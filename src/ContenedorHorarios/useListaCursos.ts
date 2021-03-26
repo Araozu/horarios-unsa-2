@@ -1,5 +1,5 @@
-import { createState, SetStateFunction, State } from "solid-js";
-import { Curso, ListaCursosUsuario } from "../types/DatosHorario";
+import { createState, SetStateFunction, State } from "solid-js"
+import { Curso, ListaCursosUsuario } from "../types/DatosHorario"
 
 interface ReturnType {
     listaCursos: State<ListaCursosUsuario>,
@@ -11,31 +11,31 @@ interface ReturnType {
 export const useListaCursos = (): ReturnType => {
     const [listaCursos, setListaCursos] = createState<ListaCursosUsuario>({
         sigIndice: 0,
-        cursos: []
-    });
+        cursos: [],
+    })
 
     const agregarCursoALista = (curso: Curso): Curso => {
         // Si el horario ya se habia agregado, ocultarlo
-        const cursoActualIndex = listaCursos.cursos.findIndex(x => x.nombre === curso.nombre);
+        const cursoActualIndex = listaCursos.cursos.findIndex((x) => x.nombre === curso.nombre)
         if (cursoActualIndex !== -1) {
-            setListaCursos("cursos", cursoActualIndex, "oculto", x => !x);
-            return listaCursos.cursos[cursoActualIndex];
+            setListaCursos("cursos", cursoActualIndex, "oculto", (x) => !x)
+            return listaCursos.cursos[cursoActualIndex]
         } else {
-            setListaCursos("cursos", listaCursos.sigIndice, curso);
-            setListaCursos("sigIndice", x => x + 1);
-            return listaCursos.cursos[listaCursos.sigIndice - 1];
+            setListaCursos("cursos", listaCursos.sigIndice, curso)
+            setListaCursos("sigIndice", (x) => x + 1)
+            return listaCursos.cursos[listaCursos.sigIndice - 1]
         }
-    };
+    }
 
     const eliminarCursosDeLista = () => {
-        setListaCursos("cursos", []);
-        setListaCursos("sigIndice", 0);
-    };
+        setListaCursos("cursos", [])
+        setListaCursos("sigIndice", 0)
+    }
 
     return {
         listaCursos,
         setListaCursos,
         agregarCursoALista,
-        eliminarCursosDeLista
-    };
-};
+        eliminarCursosDeLista,
+    }
+}
