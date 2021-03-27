@@ -9,7 +9,7 @@ import { Creditos } from "./Creditos"
 function App() {
     /// @ts-ignore
     const soportaBackdropFilter = document.body.style.backdropFilter !== undefined
-    const mostrarMensajeBackdropFilterRaw = localStorage.getItem("mensaje-backdrop-filter-oculto") === undefined
+    const mostrarMensajeBackdropFilterRaw = !localStorage.getItem("mensaje-backdrop-filter-oculto")
 
     const [mostrarMensajeBackdropFilter, setMostrarMensaje] = createSignal(mostrarMensajeBackdropFilterRaw)
 

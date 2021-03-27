@@ -1,7 +1,7 @@
 import { StyleSheet, css } from "aphrodite"
-import { createMemo, For, SetStateFunction } from "solid-js"
+import { batch, createMemo, For, produce, SetStateFunction } from "solid-js"
 import { estilosGlobales } from "../Estilos"
-import { Cursos, ListaCursosUsuario, DataProcesada } from "../types/DatosHorario"
+import { Cursos, ListaCursosUsuario, DataProcesada, DatosGrupo } from "../types/DatosHorario"
 import { Dia, dias, horas } from "../Store"
 import { FilaTabla } from "./Tabla/FilaTabla"
 import { TablaObserver } from "./TablaObserver"
@@ -115,8 +115,17 @@ const procesarAnio = (data: Cursos, anio: string, version: number, setCursosUsua
                     esLab: false,
                     datosGrupo: grupo,
                     fnSeleccionar: () => {
-                        /// @ts-ignore
-                        setCursosUsuarios("cursos", indiceCurso, "Teoria", grupoStr, "seleccionado", (x) => !x)
+                        setCursosUsuarios("cursos", Number(indiceCurso), "Teoria", produce<{ [p: string]: DatosGrupo }>((x) => {
+                            const grupoActualSeleccionado = x[grupoStr].seleccionado
+
+                            if (grupoActualSeleccionado) {
+                                x[grupoStr].seleccionado = false
+                            } else {
+                                for (let xKey in x) {
+                                    x[xKey].seleccionado = xKey === grupoStr
+                                }
+                            }
+                        }))
                     },
                 })
             }
@@ -146,8 +155,22 @@ const procesarAnio = (data: Cursos, anio: string, version: number, setCursosUsua
                     esLab: true,
                     datosGrupo: grupo,
                     fnSeleccionar: () => {
-                        /// @ts-ignore
-                        setCursosUsuarios("cursos", indiceCurso, "Laboratorio", grupoStr, "seleccionado", (x) => !x)
+                        setCursosUsuarios(
+                            "cursos",
+                            Number(indiceCurso),
+                            "Laboratorio",
+                            produce<{ [p: string]: DatosGrupo }>((x) => {
+                                const grupoActualSeleccionado = x[grupoStr].seleccionado
+
+                                if (grupoActualSeleccionado) {
+                                    x[grupoStr].seleccionado = false
+                                } else {
+                                    for (let xKey in x) {
+                                        x[xKey].seleccionado = xKey === grupoStr
+                                    }
+                                }
+                            }),
+                        )
                     },
                 })
             }

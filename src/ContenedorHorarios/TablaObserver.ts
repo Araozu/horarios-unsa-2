@@ -1,4 +1,11 @@
-import { createMemo, createState, SetStateFunction, State } from "solid-js"
+import { createMemo, createState, SetStateFunction, State, produce, createEffect } from "solid-js"
+import { DatosGrupo } from "../types/DatosHorario"
+
+const createMemoDefault = <T>(f: () => T) => createMemo<T>(
+    f,
+    undefined,
+    (x, y) => x === y,
+)
 
 /**
  * - Normal
@@ -16,22 +23,38 @@ type EstadoCelda =
     | "ResaltadoSeleccionado"
     | "ResaltadoOculto"
 
-interface Datos {
+type EstadoSeleccionado =
+    | "Seleccionado"
+    | "Oculto"
+    | "Normal"
+
+interface IResaltado {
     anio?: string,
     curso?: string,
     esLab?: boolean,
     grupo?: string,
 }
 
+interface ISeleccionado {
+    [anio: string]: {
+        [curso: string]: {
+            Laboratorio: string[]
+            Teoria: string[]
+        },
+    },
+}
+
 export class TablaObserver {
 
-    private readonly resaltado: State<Datos>
-    private readonly setResaltado: SetStateFunction<Datos>
-    private gruposSeleccionados = {}
-    private memos: {[id: string]: () => EstadoCelda} = {};
+    private readonly resaltado: State<IResaltado>
+    private readonly setResaltado: SetStateFunction<IResaltado>
+    private memos: { [id: string]: () => EstadoCelda } = {}
+
+    private readonly seleccionado: State<ISeleccionado>
+    private readonly setSeleccionado: SetStateFunction<ISeleccionado>
 
     constructor() {
-        const [resaltado, setResaltado] = createState<Datos>({
+        const [resaltado, setResaltado] = createState<IResaltado>({
             anio: undefined,
             curso: undefined,
             esLab: undefined,
@@ -39,6 +62,10 @@ export class TablaObserver {
         })
         this.resaltado = resaltado
         this.setResaltado = setResaltado
+
+        const [seleccionado, setSeleccionado] = createState<ISeleccionado>({})
+        this.seleccionado = seleccionado
+        this.setSeleccionado = setSeleccionado
     }
 
     /**
@@ -47,55 +74,107 @@ export class TablaObserver {
      * @param curso Curso abreviado
      * @param esLab Si es laboratorio
      * @param grupo Una única letra
+     * @param datosGrupo Contiene `seleccionado`, se usa ese valor reactivo
      */
-    private registrar(anio: string, curso: string, esLab: boolean, grupo: string): () => EstadoCelda {
+    private registrar(
+        anio: string,
+        curso: string,
+        esLab: boolean,
+        grupo: string,
+        datosGrupo: DatosGrupo,
+    ): () => EstadoCelda {
         const resaltado = this.resaltado
-        const resaltadoMemo = createMemo(
-            () => {
-                if (resaltado.anio === anio && resaltado.curso === curso) {
-                    if (resaltado.esLab === undefined) {
-                        return true
-                    } else if (resaltado.esLab !== esLab) {
-                        return false
-                    } else {
-                        if (resaltado.grupo === undefined) {
-                            return true
-                        } else return resaltado.grupo === grupo;
-                    }
-                } else {
+        const resaltadoMemo = createMemoDefault(() => {
+            if (resaltado.anio === anio && resaltado.curso === curso) {
+                if (resaltado.esLab === undefined) {
+                    return true
+                } else if (resaltado.esLab !== esLab) {
                     return false
-                }
-            },
-            undefined,
-            (x, y) => x === y,
-        )
-
-        return createMemo(
-            (): EstadoCelda => {
-                if (resaltadoMemo()) {
-                    return "Resaltado"
                 } else {
-                    return "Normal"
+                    if (resaltado.grupo === undefined) {
+                        return true
+                    } else return resaltado.grupo === grupo
                 }
-            },
-            undefined,
-            (x, y) => x === y,
-        )
+            } else {
+                return false
+            }
+        })
+
+        // Registrar curso en `seleccionado`
+        this.setSeleccionado((obj) => {
+            const nuevoObj = {...obj}
+
+            if (!nuevoObj[anio]) {
+                nuevoObj[anio] = {}
+            }
+
+            if (!nuevoObj[anio][curso]) {
+                nuevoObj[anio][curso] = {
+                    Laboratorio: [],
+                    Teoria: [],
+                }
+            }
+
+            return nuevoObj
+        })
+
+        // Crear un effect para que cada vez que la celda se seleccione se actualize `seleccionado`
+        createEffect(() => {
+            const seleccionado = datosGrupo.seleccionado
+            if (seleccionado){
+                this.setSeleccionado(anio, curso, esLab ? "Laboratorio" : "Teoria", (x) => [...x, grupo])
+            } else {
+                this.setSeleccionado(anio, curso, esLab ? "Laboratorio" : "Teoria", (x) => x.filter((x) => x !== grupo))
+            }
+        })
+
+        const seleccionadoMemo = createMemoDefault<EstadoSeleccionado>(() => {
+            const gruposSeleccionados = this.seleccionado[anio][curso][esLab ? "Laboratorio" : "Teoria"]
+
+            if (gruposSeleccionados.length > 0) {
+                return gruposSeleccionados.find((x) => x === grupo) ? "Seleccionado" : "Oculto"
+            } else {
+                return "Normal"
+            }
+        })
+
+        return createMemoDefault((): EstadoCelda => {
+            const resaltado = resaltadoMemo()
+            const seleccionado = seleccionadoMemo()
+
+            switch (seleccionado) {
+                case "Normal": {
+                    return resaltado ? "Resaltado" : "Normal"
+                }
+                case "Oculto": {
+                    return resaltado ? "ResaltadoOculto" : "Oculto"
+                }
+                case "Seleccionado": {
+                    return resaltado ? "ResaltadoSeleccionado" : "Seleccionado"
+                }
+                default: {
+                    let _: never
+                    _ = seleccionado
+                    return _
+                }
+            }
+        })
     }
 
     /**
      * Crea un memo que indica el estado de la celda a partir de un id
      * @param id Id a registrar - YYYYMMDD_Año_Curso[\_Lab[_Grupo]]
+     * @param datosGrupo Contiene `seleccionado`, se usa ese valor reactivo
      */
-    registrarConId(id: string): () => EstadoCelda {
+    registrarConId(id: string, datosGrupo: DatosGrupo): () => EstadoCelda {
         if (this.memos[id]) {
             return this.memos[id]
         }
 
         const [, anio, curso, lab, grupo] = id.split("_")
-        const memo = this.registrar(anio, curso, lab === "L", grupo)
-        this.memos[id] = memo;
-        return memo;
+        const memo = this.registrar(anio, curso, lab === "L", grupo, datosGrupo)
+        this.memos[id] = memo
+        return memo
     }
 
     /**

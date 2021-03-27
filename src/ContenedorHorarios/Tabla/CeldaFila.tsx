@@ -1,6 +1,6 @@
 import { StyleSheet, css } from "aphrodite"
 import { estilosGlobales } from "../../Estilos"
-import { For, createSignal, createMemo } from "solid-js"
+import { For, createSignal, createMemo, createEffect } from "solid-js"
 import { Dia } from "../../Store"
 import { DatosGrupo } from "../../types/DatosHorario"
 import { TablaObserver } from "../TablaObserver"
@@ -31,6 +31,9 @@ const e = StyleSheet.create({
     },
     celdaSeleccionado: {
         textDecoration: "underline",
+    },
+    celdaOculto: {
+        opacity: 0.3,
     },
 })
 
@@ -99,18 +102,15 @@ export function CeldaFila(props: Props) {
                     const esLab = datos.esLab
                     const fnSeleccionar = datos.fnSeleccionar
 
-                    const estadoCeldaMemo = props.tablaObserver.registrarConId(id)
+                    const estadoCeldaMemo = props.tablaObserver.registrarConId(id, datos.datosGrupo)
 
                     const [estabaResaltado, setEstabaResaltado] = createSignal(false)
-
-                    const estaSeleccionado = createMemo(() => datos.datosGrupo.seleccionado)
 
                     const clases = createMemo(
                         () => {
                             const clases = [
                                 e.celdaCurso,
-                                esLab ? e.celdaCursoLab : e.celdaCursoTeoria,
-                                estaSeleccionado() && e.celdaSeleccionado,
+                                esLab ? e.celdaCursoLab : e.celdaCursoTeoria
                             ]
                             let adicional = ""
 
@@ -131,7 +131,7 @@ export function CeldaFila(props: Props) {
                                         setEstabaResaltado(false)
                                     }
 
-                                    // TODO
+                                    clases.push(e.celdaOculto)
                                     break
                                 }
                                 case "Resaltado": {
@@ -147,6 +147,7 @@ export function CeldaFila(props: Props) {
                                         setEstabaResaltado(false)
                                     }
 
+                                    clases.push(e.celdaSeleccionado)
                                     break
                                 }
                                 case "ResaltadoOculto": {
