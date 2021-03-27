@@ -1,10 +1,11 @@
 import { StyleSheet, css } from "aphrodite"
 import { estilosGlobales } from "../../Estilos"
-import { For, createSignal, createMemo, createState, createEffect, State, SetStateFunction } from "solid-js"
+import { For, createMemo, createState, State } from "solid-js"
 import { Dia, dias } from "../../Store"
 import { CeldaFila } from "./CeldaFila"
-import { DataProcesada, ListaCursosUsuario } from "../../types/DatosHorario"
+import { DataProcesada } from "../../types/DatosHorario"
 import { coloresBorde, diaANum } from "../Tabla"
+import { TablaObserver } from "../TablaObserver"
 
 const e = StyleSheet.create({
     celdaHora: {
@@ -61,8 +62,7 @@ const [diasResaltados, setDiasResaltados] = createState({
 interface Props {
     hora: string,
     data: DataProcesada,
-    idHover: () => string,
-    setIdHover: (v: string) => string
+    tablaObserver: TablaObserver,
 }
 
 const diasFilter = createMemo(() => Object.entries(diasResaltados)
@@ -140,16 +140,15 @@ export function FilaTabla(props: Props) {
                         return (
                             <CeldaFila
                                 datos={datos}
-                                idHover={props.idHover}
-                                setIdHover={props.setIdHover}
                                 fnResaltarFila={() => fnResaltar(dia)}
                                 fnDesresaltarFila={() => fnDesresaltar(dia)}
                                 dia={dia}
+                                tablaObserver={props.tablaObserver}
                             />
                         )
                     }}
                 </For>
-                <div className={css(e.filaBorde)} />
+                <div className={css(e.filaBorde)}/>
             </div>
         </div>
     )

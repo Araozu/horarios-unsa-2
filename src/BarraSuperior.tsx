@@ -2,7 +2,7 @@ import { estilosGlobales } from "./Estilos"
 import { StyleSheet, css } from "aphrodite"
 import { numWallpaper, setNumWallpaper } from "./Store"
 
-const totalWallpapers = 5
+const ultimoIndiceWallpaper = 5
 
 const e = StyleSheet.create({
     contCambiador: {
@@ -36,14 +36,14 @@ const retrocederWallpaper = () => {
         setNumWallpaper(num - 1)
         localStorage.setItem("num-img", (num - 1).toString())
     } else {
-        setNumWallpaper(totalWallpapers)
-        localStorage.setItem("num-img", (totalWallpapers).toString())
+        setNumWallpaper(ultimoIndiceWallpaper)
+        localStorage.setItem("num-img", (ultimoIndiceWallpaper).toString())
     }
 }
 
 const avanzarWallpaper = () => {
     const num = numWallpaper()
-    if (num < totalWallpapers) {
+    if (num < ultimoIndiceWallpaper) {
         setNumWallpaper(num + 1)
         localStorage.setItem("num-img", (num + 1).toString())
     } else {

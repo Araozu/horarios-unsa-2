@@ -7,6 +7,7 @@ import { CursosElem } from "./CursosElem"
 import { EstadoLayout } from "./ContenedorHorarios"
 import { BotonMaxMin } from "./BotonMaxMin"
 import { useListaCursos } from "./useListaCursos"
+import { TablaObserver } from "./TablaObserver"
 
 interface HorariosProps {
     data: DatosHorario,
@@ -25,8 +26,8 @@ const {
 
 export function Horarios(props: HorariosProps) {
     const [anioActual, setAnioActual] = createSignal("1er año")
-    // ID que indica cuales celdas resaltar.
-    const [idHover, setIdHover] = createSignal("")
+
+    const tablaObserver = new TablaObserver()
 
     const elAnios = (
         <For each={Object.entries(props.data.años)}>
@@ -102,21 +103,20 @@ export function Horarios(props: HorariosProps) {
                             data={dataTabla()}
                             version={props.data.version}
                             anio={anioActual()}
-                            idHover={idHover}
-                            setIdHover={setIdHover}
                             setCursosUsuarios={setListaCursos}
+                            tablaObserver={tablaObserver}
                         />
                     </div>
                     <div>
                         <CursosElem
+                            version={props.data.version}
                             dataAnio={dataTabla()}
                             anioActual={anioActual}
                             fnAgregarCurso={props.fnAgregarCurso}
                             listaCursosUsuario={props.listaCursosUsuario}
-                            idHover={idHover}
-                            setIdHover={setIdHover}
                             esCursoMiHorario={false}
                             setCursosUsuarios={setListaCursos}
+                            tablaObserver={tablaObserver}
                         />
                     </div>
                 </Match>

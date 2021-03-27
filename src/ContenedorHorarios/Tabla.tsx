@@ -4,6 +4,7 @@ import { estilosGlobales } from "../Estilos"
 import { Cursos, ListaCursosUsuario, DataProcesada } from "../types/DatosHorario"
 import { Dia, dias, horas } from "../Store"
 import { FilaTabla } from "./Tabla/FilaTabla"
+import { TablaObserver } from "./TablaObserver"
 
 export const coloresBorde = Object.freeze([
     "rgba(33,150,243,1)",
@@ -160,16 +161,13 @@ interface Props {
     data: Cursos,
     anio: string,
     version: number,
-    idHover: () => string,
-    setIdHover: (v: string) => string,
-    setCursosUsuarios: SetStateFunction<ListaCursosUsuario>
+    setCursosUsuarios: SetStateFunction<ListaCursosUsuario>,
+    tablaObserver: TablaObserver,
 }
 
 export function Tabla(props: Props) {
     const anio = () => props.anio.substring(0, props.anio.indexOf(" "))
     const data = createMemo(() => procesarAnio(props.data, anio(), props.version, props.setCursosUsuarios))
-    const idHover = props.idHover
-    const setIdHover = props.setIdHover
 
     const celdas = createMemo(() => {
         // Hace reaccionar a la reactividad de Solid
@@ -180,8 +178,7 @@ export function Tabla(props: Props) {
                     <FilaTabla
                         data={data()}
                         hora={hora}
-                        idHover={idHover}
-                        setIdHover={setIdHover}
+                        tablaObserver={props.tablaObserver}
                     />
                 )}
             </For>

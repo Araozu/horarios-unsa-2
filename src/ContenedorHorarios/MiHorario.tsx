@@ -1,13 +1,13 @@
 import { estilosGlobales } from "../Estilos"
 import { StyleSheet, css } from "aphrodite"
 import { Tabla } from "./Tabla"
-import { mostrarDescansos } from "../Store"
 import { EstadoLayout } from "./ContenedorHorarios"
-import { Switch, Match, For, createMemo, createSignal, SetStateFunction } from "solid-js"
+import { Switch, Match, createMemo, SetStateFunction } from "solid-js"
 import { BotonMaxMin } from "./BotonMaxMin"
 import { BotonIcono } from "./BotonIcono"
 import { Curso, Cursos, ListaCursosUsuario } from "../types/DatosHorario"
 import { CursosElem } from "./CursosElem"
+import { TablaObserver } from "./TablaObserver"
 
 interface MiHorarioProps {
     estadoLayout: EstadoLayout,
@@ -31,7 +31,7 @@ const e = StyleSheet.create({
 })
 
 export function MiHorario(props: MiHorarioProps) {
-    const [idHover, setIdHover] = createSignal("")
+    const tablaObserver = new TablaObserver()
 
     const datosMiHorario = createMemo(() => {
         const obj: Cursos = {}
@@ -48,7 +48,7 @@ export function MiHorario(props: MiHorarioProps) {
     /* TODO: En barra superior colocar todos los horarios. En barra inferior el horario
         actual.
         Al hacer click en un horario de la barra superior, llevarlo al inicio de la lista.
-     */
+    */
     return (
         <div>
             <Switch>
@@ -110,21 +110,20 @@ export function MiHorario(props: MiHorarioProps) {
                             data={datosMiHorario()}
                             anio={"Mi horario"}
                             version={1}
-                            idHover={idHover}
-                            setIdHover={setIdHover}
                             setCursosUsuarios={props.setCursosUsuarios}
+                            tablaObserver={tablaObserver}
                         />
                     </div>
 
                     <CursosElem
+                        version={Number(Math.random() * 1_000_000)}
                         anioActual={() => "Mi horario"}
                         dataAnio={datosMiHorario()}
                         fnAgregarCurso={props.fnAgregarCurso}
                         listaCursosUsuario={props.cursosUsuario}
-                        idHover={idHover}
-                        setIdHover={setIdHover}
                         esCursoMiHorario
                         setCursosUsuarios={props.setCursosUsuarios}
+                        tablaObserver={tablaObserver}
                     />
                 </Match>
                 <Match when={props.estadoLayout === "MaxHorarios"}>

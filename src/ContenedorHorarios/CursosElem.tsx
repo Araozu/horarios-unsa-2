@@ -1,7 +1,8 @@
-import { Cursos, CursoRaw, DatosGrupo, ListaCursosUsuario, Curso } from "../types/DatosHorario"
-import { createEffect, createMemo, For, SetStateFunction } from "solid-js"
+import { Cursos, DatosGrupo, ListaCursosUsuario, Curso } from "../types/DatosHorario"
+import { createMemo, For, SetStateFunction } from "solid-js"
 import { StyleSheet, css } from "aphrodite"
 import { estilosGlobales } from "../Estilos"
+import { TablaObserver } from "./TablaObserver"
 
 const e = StyleSheet.create({
     inline: {
@@ -29,14 +30,14 @@ const e = StyleSheet.create({
 })
 
 interface Props {
+    version: number,
     dataAnio: Cursos,
     anioActual: () => string,
     fnAgregarCurso: (c: Curso) => void,
     listaCursosUsuario: ListaCursosUsuario,
-    idHover: () => string,
-    setIdHover: (v: string) => string,
     esCursoMiHorario: boolean,
-    setCursosUsuarios: SetStateFunction<ListaCursosUsuario>
+    setCursosUsuarios: SetStateFunction<ListaCursosUsuario>,
+    tablaObserver: TablaObserver,
 }
 
 type FnSetCursosUsuarios = SetStateFunction<ListaCursosUsuario>;
@@ -45,7 +46,7 @@ interface PropsIndicadorGrupo {
     nombre: string,
     esLab: boolean,
     idParcial: string,
-    setIdHover: (v: string) => string,
+    tablaObserver: TablaObserver,
     onClick: () => void
 }
 
@@ -54,8 +55,8 @@ function IndicadorGrupo(props: PropsIndicadorGrupo) {
     return (
         <span className={css(e.botonTexto, estilosGlobales.contenedorCursor, estilosGlobales.contenedorCursorSoft)}
             style={props.esLab ? {"font-style": "italic"} : {"font-weight": "bold"}}
-            onMouseEnter={() => props.setIdHover(id)}
-            onMouseLeave={() => props.setIdHover("")}
+            onMouseEnter={() => props.tablaObserver.resaltar(id)}
+            onMouseLeave={() => props.tablaObserver.quitarResaltado()}
             onClick={props.onClick}
         >
             {props.esLab ? "L" : ""}{props.nombre}
@@ -114,7 +115,7 @@ export function CursosElem(props: Props) {
             <For each={Object.entries(props.dataAnio)}>
                 {([indiceCurso, datosCurso]) => {
 
-                    const idCurso = `${anio()}_${datosCurso.abreviado}`
+                    const idCurso = `${props.version}_${anio()}_${datosCurso.abreviado}`
 
                     const cursoAgregadoMemo = createMemo(
                         () => props.listaCursosUsuario.cursos.find((x) => x.nombre === datosCurso.nombre && !x.oculto) !== undefined,
@@ -152,8 +153,8 @@ export function CursosElem(props: Props) {
                         <div className={claseMemo()}>
                             <div
                                 className={css(e.inline, e.lineaTexto, e.botonTexto, estilosGlobales.contenedorCursor, estilosGlobales.contenedorCursorSoft)}
-                                onMouseEnter={() => props.setIdHover(idCurso)}
-                                onMouseLeave={() => props.setIdHover("")}
+                                onMouseEnter={() => props.tablaObserver.resaltar(idCurso)}
+                                onMouseLeave={() => props.tablaObserver.quitarResaltado()}
                             >
                                 {datosCurso.abreviado} - {datosCurso.nombre}
                             </div>
@@ -168,10 +169,11 @@ export function CursosElem(props: Props) {
                                                     </span>
                                                     <For each={grupos}>
                                                         {([x, fnOnClick]) => (
-                                                            <IndicadorGrupo nombre={x}
+                                                            <IndicadorGrupo
+                                                                nombre={x}
                                                                 esLab={false}
                                                                 idParcial={idCurso}
-                                                                setIdHover={props.setIdHover}
+                                                                tablaObserver={props.tablaObserver}
                                                                 onClick={fnOnClick}
                                                             />
                                                         )
@@ -190,10 +192,11 @@ export function CursosElem(props: Props) {
                                                     </span>
                                                     <For each={grupos}>
                                                         {([x, fnOnClick]) => (
-                                                            <IndicadorGrupo nombre={x}
+                                                            <IndicadorGrupo
+                                                                nombre={x}
                                                                 esLab
                                                                 idParcial={idCurso}
-                                                                setIdHover={props.setIdHover}
+                                                                tablaObserver={props.tablaObserver}
                                                                 onClick={fnOnClick}
                                                             />
                                                         )

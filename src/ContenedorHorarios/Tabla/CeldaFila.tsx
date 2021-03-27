@@ -1,8 +1,9 @@
 import { StyleSheet, css } from "aphrodite"
 import { estilosGlobales } from "../../Estilos"
-import { For, createSignal, createMemo, createEffect, SetStateFunction } from "solid-js"
+import { For, createSignal, createMemo } from "solid-js"
 import { Dia } from "../../Store"
-import { DatosGrupo, ListaCursosUsuario } from "../../types/DatosHorario"
+import { DatosGrupo } from "../../types/DatosHorario"
+import { TablaObserver } from "../TablaObserver"
 
 const e = StyleSheet.create({
     celdaComun: {
@@ -19,7 +20,7 @@ const e = StyleSheet.create({
         borderRadius: "5px",
         // transition: "background-color 100ms, color 100ms"
     },
-    celdaCursoActiva: {
+    celdaResaltado: {
         // color: "#151515"
     },
     celdaCursoTeoria: {
@@ -28,7 +29,7 @@ const e = StyleSheet.create({
     celdaCursoLab: {
         fontStyle: "italic",
     },
-    celdaSeleccionada: {
+    celdaSeleccionado: {
         textDecoration: "underline",
     },
 })
@@ -78,22 +79,16 @@ interface Props {
         datosGrupo: DatosGrupo,
         fnSeleccionar: () => void
     }[],
-    idHover: () => string,
-    setIdHover: (v: string) => string,
     fnResaltarFila: () => void,
     fnDesresaltarFila: () => void,
     dia: Dia,
+    tablaObserver: TablaObserver,
 }
 
-const claseSeldaSeleccionada = css(e.celdaSeleccionada)
+const claseSeldaSeleccionada = css(e.celdaSeleccionado)
 
 export function CeldaFila(props: Props) {
     const datos = props.datos
-    const idHover = props.idHover
-    const setIdHover = props.setIdHover
-
-    const fnOnMouseEnter = (id: string) => setIdHover(id)
-    const fnOnMouseLeave = () => setIdHover("")
 
     return (
         <div className={css(e.celdaComun, estilosGlobales.inlineBlock)}>
@@ -104,6 +99,8 @@ export function CeldaFila(props: Props) {
                     const esLab = datos.esLab
                     const fnSeleccionar = datos.fnSeleccionar
 
+                    const estadoCeldaMemo = props.tablaObserver.registrarConId(id)
+
                     const [estabaResaltado, setEstabaResaltado] = createSignal(false)
 
                     const estaSeleccionado = createMemo(() => datos.datosGrupo.seleccionado)
@@ -113,20 +110,59 @@ export function CeldaFila(props: Props) {
                             const clases = [
                                 e.celdaCurso,
                                 esLab ? e.celdaCursoLab : e.celdaCursoTeoria,
-                                estaSeleccionado() && e.celdaSeleccionada,
+                                estaSeleccionado() && e.celdaSeleccionado,
                             ]
                             let adicional = ""
-                            const idHoverS = idHover()
-                            if (idHoverS !== "" && id.search(idHoverS) !== -1) {
-                                props.fnResaltarFila()
-                                clases.push(e.celdaCursoActiva)
-                                adicional = clasesColores[props.dia]
 
-                                setEstabaResaltado(true)
-                            } else if (estabaResaltado()) {
-                                props.fnDesresaltarFila()
-                                setEstabaResaltado(false)
+                            const estadoCelda = estadoCeldaMemo()
+
+                            switch (estadoCelda) {
+                                case "Normal": {
+                                    if (estabaResaltado()) {
+                                        props.fnDesresaltarFila()
+                                        setEstabaResaltado(false)
+                                    }
+
+                                    break
+                                }
+                                case "Oculto": {
+                                    if (estabaResaltado()) {
+                                        props.fnDesresaltarFila()
+                                        setEstabaResaltado(false)
+                                    }
+
+                                    // TODO
+                                    break
+                                }
+                                case "Resaltado": {
+                                    props.fnResaltarFila()
+                                    setEstabaResaltado(true)
+                                    clases.push(e.celdaResaltado)
+                                    adicional = clasesColores[props.dia]
+                                    break
+                                }
+                                case "Seleccionado": {
+                                    if (estabaResaltado()) {
+                                        props.fnDesresaltarFila()
+                                        setEstabaResaltado(false)
+                                    }
+
+                                    break
+                                }
+                                case "ResaltadoOculto": {
+                                    props.fnResaltarFila()
+                                    setEstabaResaltado(true)
+
+                                    break
+                                }
+                                case "ResaltadoSeleccionado": {
+                                    props.fnResaltarFila()
+                                    setEstabaResaltado(true)
+
+                                    break
+                                }
                             }
+
                             return `${css(...clases)} ${adicional}`
                         },
                         undefined,
@@ -135,9 +171,13 @@ export function CeldaFila(props: Props) {
 
                     return (
                         <span className={clases()}
-                            onMouseEnter={() => fnOnMouseEnter(id)}
-                            onMouseLeave={fnOnMouseLeave}
-                            onClick={fnSeleccionar}
+                              onMouseEnter={() => {
+                                  props.tablaObserver.resaltar(id)
+                              }}
+                              onMouseLeave={() => {
+                                  props.tablaObserver.quitarResaltado()
+                              }}
+                              onClick={fnSeleccionar}
                         >
                             {txt}
                         </span>
