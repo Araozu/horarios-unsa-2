@@ -92,7 +92,7 @@ export function MiHorario(props: MiHorarioProps) {
                             icono={"ph-trash"}
                             onClick={() => {}}
                         />
-                    |
+                        |
                         <BotonMaxMin
                             fnMaximizar={fnMaximizar}
                             fnMinimizar={fnMinimizar}

@@ -194,12 +194,12 @@ export function Tabla(props: Props) {
 
     const celdas = createMemo(() => {
         // Hace reaccionar a la reactividad de Solid
-        props.data
+        const d = data()
         return (
             <For each={horas}>
                 {(hora) => (
                     <FilaTabla
-                        data={data()}
+                        data={d}
                         hora={hora}
                         tablaObserver={props.tablaObserver}
                     />

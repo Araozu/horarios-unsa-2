@@ -211,7 +211,7 @@ export class TablaObserver {
         })
     }
 
-    limpiar() {
-        this.memos = {}
+    limpiar(id: string) {
+        delete this.memos[id]
     }
 }

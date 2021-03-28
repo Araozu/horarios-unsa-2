@@ -115,7 +115,7 @@ export function CeldaFila(props: Props) {
 
                     // Limpiar los memos, porque cuando se desmonta la celda esos memos quedan sin efecto
                     onCleanup(() => {
-                        props.tablaObserver.limpiar()
+                        props.tablaObserver.limpiar(id)
                     })
 
                     const clases = createMemo(
