@@ -31,9 +31,16 @@ const e = StyleSheet.create({
     },
     celdaSeleccionado: {
         textDecoration: "underline",
+        backgroundColor: "rgba(200, 200, 200, 0.3)",
     },
     celdaOculto: {
         opacity: 0.3,
+    },
+    celdaResaltadoOculto: {
+        opacity: 0.7,
+    },
+    celdaResaltadoSeleccionado: {
+        textDecoration: "underline",
     },
 })
 
@@ -110,7 +117,7 @@ export function CeldaFila(props: Props) {
                         () => {
                             const clases = [
                                 e.celdaCurso,
-                                esLab ? e.celdaCursoLab : e.celdaCursoTeoria
+                                esLab ? e.celdaCursoLab : e.celdaCursoTeoria,
                             ]
                             let adicional = ""
 
@@ -154,12 +161,16 @@ export function CeldaFila(props: Props) {
                                     props.fnResaltarFila()
                                     setEstabaResaltado(true)
 
+                                    clases.push(e.celdaResaltadoOculto)
+                                    adicional = clasesColores[props.dia]
                                     break
                                 }
                                 case "ResaltadoSeleccionado": {
                                     props.fnResaltarFila()
                                     setEstabaResaltado(true)
 
+                                    clases.push(e.celdaResaltadoSeleccionado)
+                                    adicional = clasesColores[props.dia]
                                     break
                                 }
                             }
