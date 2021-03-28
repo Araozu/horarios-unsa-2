@@ -1,5 +1,5 @@
 import { Cursos, DatosGrupo, ListaCursosUsuario, Curso } from "../types/DatosHorario"
-import { createMemo, For, SetStateFunction } from "solid-js"
+import { createMemo, For, produce, SetStateFunction } from "solid-js"
 import { StyleSheet, css } from "aphrodite"
 import { estilosGlobales } from "../Estilos"
 import { TablaObserver } from "./TablaObserver"
@@ -79,15 +79,17 @@ const agruparProfesores = (
         profesores[nombreProfesor].push([
             grupo,
             () => {
-                setCursosUsuarios(
-                    "cursos",
-                    indiceCurso,
-                    esLab ? "Laboratorio" : "Teoria",
-                    /// @ts-ignore
-                    grupo,
-                    "seleccionado",
-                    (x) => !x,
-                )
+                setCursosUsuarios("cursos", Number(indiceCurso), "Teoria", produce<{ [p: string]: DatosGrupo }>((x) => {
+                    const grupoActualSeleccionado = x[grupo].seleccionado
+
+                    if (grupoActualSeleccionado) {
+                        x[grupo].seleccionado = false
+                    } else {
+                        for (let xKey in x) {
+                            x[xKey].seleccionado = xKey === grupo
+                        }
+                    }
+                }))
             },
         ])
     }
