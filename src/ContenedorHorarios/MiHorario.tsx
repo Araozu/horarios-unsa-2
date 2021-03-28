@@ -116,7 +116,7 @@ export function MiHorario(props: MiHorarioProps) {
                     </div>
 
                     <CursosElem
-                        version={Number(Math.random() * 1_000_000)}
+                        version={Math.floor(Math.random() * 1_000_000)}
                         anioActual={() => "Mi horario"}
                         dataAnio={datosMiHorario()}
                         fnAgregarCurso={props.fnAgregarCurso}

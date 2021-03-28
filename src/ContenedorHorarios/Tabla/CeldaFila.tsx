@@ -1,6 +1,6 @@
 import { StyleSheet, css } from "aphrodite"
 import { estilosGlobales } from "../../Estilos"
-import { For, createSignal, createMemo, createEffect } from "solid-js"
+import { For, createSignal, createMemo, createEffect, onCleanup } from "solid-js"
 import { Dia } from "../../Store"
 import { DatosGrupo } from "../../types/DatosHorario"
 import { TablaObserver } from "../TablaObserver"
@@ -112,6 +112,11 @@ export function CeldaFila(props: Props) {
                     const estadoCeldaMemo = props.tablaObserver.registrarConId(id, datos.datosGrupo)
 
                     const [estabaResaltado, setEstabaResaltado] = createSignal(false)
+
+                    // Limpiar los memos, porque cuando se desmonta la celda esos memos quedan sin efecto
+                    onCleanup(() => {
+                        props.tablaObserver.limpiar()
+                    })
 
                     const clases = createMemo(
                         () => {

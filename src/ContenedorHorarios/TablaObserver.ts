@@ -1,4 +1,4 @@
-import { createMemo, createState, SetStateFunction, State, produce, createEffect } from "solid-js"
+import { createMemo, createState, SetStateFunction, State, produce, createEffect, untrack } from "solid-js"
 import { DatosGrupo } from "../types/DatosHorario"
 
 const createMemoDefault = <T>(f: () => T) => createMemo<T>(
@@ -101,7 +101,7 @@ export class TablaObserver {
         })
 
         // Registrar curso en `seleccionado`
-        this.setSeleccionado((obj) => {
+        this.setSeleccionado((obj: State<ISeleccionado>) => {
             const nuevoObj = {...obj}
 
             if (!nuevoObj[anio]) {
@@ -209,5 +209,9 @@ export class TablaObserver {
             esLab: undefined,
             grupo: undefined,
         })
+    }
+
+    limpiar() {
+        this.memos = {}
     }
 }
