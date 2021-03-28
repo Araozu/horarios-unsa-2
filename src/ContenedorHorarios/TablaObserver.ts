@@ -121,7 +121,7 @@ export class TablaObserver {
         // Crear un effect para que cada vez que la celda se seleccione se actualize `seleccionado`
         createEffect(() => {
             const seleccionado = datosGrupo.seleccionado
-            if (seleccionado){
+            if (seleccionado) {
                 this.setSeleccionado(anio, curso, esLab ? "Laboratorio" : "Teoria", (x) => [...x, grupo])
             } else {
                 this.setSeleccionado(anio, curso, esLab ? "Laboratorio" : "Teoria", (x) => x.filter((x) => x !== grupo))
@@ -188,10 +188,16 @@ export class TablaObserver {
             return
         }
 
+        let esLab: boolean | undefined
+        if (lab === undefined) {
+            esLab = undefined
+        } else {
+            esLab = lab === "L"
+        }
         this.setResaltado({
             anio,
             curso,
-            esLab: lab === "L",
+            esLab,
             grupo,
         })
     }
