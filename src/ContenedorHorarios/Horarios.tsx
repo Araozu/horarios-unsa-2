@@ -121,12 +121,15 @@ export function Horarios(props: HorariosProps) {
                     </div>
                 </Match>
                 <Match when={props.estadoLayout === "MaxPersonal"}>
+                    {/*
                     <BotonMaxMin
                         fnMaximizar={fnMaximizar}
                         fnMinimizar={fnMinimizar}
                         estadoActualLayout={estadoActualLayout}
                         estadoLayoutMax={"MaxHorarios"}
                     />
+                    */}
+                    <div/>
                 </Match>
             </Switch>
 

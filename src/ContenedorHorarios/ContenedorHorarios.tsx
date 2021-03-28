@@ -5,15 +5,12 @@ import { Horarios } from "./Horarios"
 import {
     Anios,
     Cursos,
-    CursoRaw,
-    Curso,
     DatosHorario,
     DatosHorarioRaw,
     DatosGrupo,
-    ListaCursosUsuario,
 } from "../types/DatosHorario"
 import { estilosGlobales } from "../Estilos"
-import { batch, createEffect, createMemo, createSignal, createState, Show } from "solid-js"
+import { batch, createEffect, createMemo, createSignal, Show } from "solid-js"
 import { useListaCursos } from "./useListaCursos"
 
 const datosPromise = (async() => {
@@ -82,11 +79,11 @@ export function ContenedorHorarios() {
         let templateColumns = ""
         switch (estadoLayout()) {
             case "MaxHorarios": {
-                templateColumns = "4rem auto"
+                templateColumns = "0 auto"
                 break
             }
             case "MaxPersonal": {
-                templateColumns = "auto 4rem"
+                templateColumns = "auto 0m"
                 break
             }
             case "Normal": {

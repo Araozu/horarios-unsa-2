@@ -1,13 +1,14 @@
-import {StyleSheet} from "aphrodite"
+import { StyleSheet } from "aphrodite"
 
 export const estilosGlobales = StyleSheet.create({
     contenedor: {
-        margin: "0.5rem",
+        margin: "0.3rem",
         padding: "0.75rem 0.75rem",
         borderRadius: "10px",
         backdropFilter: "blur(40px)",
         backgroundColor: "rgba(100, 100, 100, 0.25)",
         color: "var(--color-texto)",
+        border: "solid 1px transparent",
     },
     contenedorCursor: {
         cursor: "pointer",
@@ -23,6 +24,7 @@ export const estilosGlobales = StyleSheet.create({
     },
     contenedorCursorActivo: {
         backgroundColor: "rgba(200, 200, 200, 0.3)",
+        border: "solid 1px rgba(255, 255, 255, 0.75)",
     },
     contenedorPhospor: {
         padding: "0.5rem 0.65rem",

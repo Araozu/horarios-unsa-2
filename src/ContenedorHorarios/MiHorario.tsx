@@ -73,6 +73,7 @@ export function MiHorario(props: MiHorarioProps) {
                             Mi horario
                         </div>
                         |
+                        {/*
                         <BotonIcono
                             titulo={"Nuevo horario en blanco"}
                             icono={"ph-plus"}
@@ -93,6 +94,7 @@ export function MiHorario(props: MiHorarioProps) {
                             onClick={() => {}}
                         />
                         |
+                        */}
                         <BotonMaxMin
                             fnMaximizar={fnMaximizar}
                             fnMinimizar={fnMinimizar}
@@ -127,12 +129,15 @@ export function MiHorario(props: MiHorarioProps) {
                     />
                 </Match>
                 <Match when={props.estadoLayout === "MaxHorarios"}>
+                    {/*
                     <BotonMaxMin
                         fnMaximizar={fnMaximizar}
                         fnMinimizar={fnMinimizar}
                         estadoActualLayout={estadoActualLayout}
                         estadoLayoutMax={"MaxPersonal"}
                     />
+                    */}
+                    <div/>
                 </Match>
             </Switch>
         </div>
