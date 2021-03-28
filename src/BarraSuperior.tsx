@@ -100,7 +100,7 @@ export function BarraSuperior() {
                 <i class="ph-arrow-up-right" />
             </a>
             <CambiadorImg />
-            <span className={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock)}>2020-B</span>
+            <span className={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock)}>2021-A</span>
             <span className={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock)}>Ingeniería de Sistemas</span>
         </header>
     )
