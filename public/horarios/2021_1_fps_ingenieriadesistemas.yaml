@@ -455,6 +455,9 @@ años:
           Horas:
             - Lu1550
             - Lu1640
+            - Mi1640
+            - Mi1740
+            - Mi1830
         C:
           Docente: Aurea Soriano
           Horas:
@@ -463,9 +466,6 @@ años:
             - Lu1740
             - Lu1830
             - Lu1920
-            - Mi1640
-            - Mi1740
-            - Mi1830
     Ingles:
       nombre: Inglés
       abreviado: ING
@@ -494,7 +494,7 @@ años:
             - Ju0940
             - Ju1040
         B:
-          Docente: P. Huertas
+          Docente: Percy Huertas
           Horas:
             - Ju1550
             - Ju1640
