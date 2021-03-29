@@ -758,214 +758,184 @@ años:
             - Ju1400
             - Ju1450
   5to año:
-    Proyecto de Tesis:
-      nombre: Proyecto de Tesis
-      abreviado: PT
+    Tesis:
+      nombre: Seminario de Tesis
+      abreviado: ST
       Teoria:
         A:
-          Docente: E. Castro
+          Docente: Eveling Castro
           Horas:
-            - Ma0700
-            - Ma0750
-            - Mi0700
             - Mi0750
-            - Ju0700
+            - Mi0850
             - Ju0750
+            - Ju0850
         B:
-          Docente: L. Alfaro
+          Docente: Luin Alfaro
           Horas:
+            - Lu0940
             - Lu1040
+            - Vi0940
+            - Vi1040
+        C:
+          Docente: Victor Cornejo
+          Horas:
             - Lu1130
             - Lu1220
-            - Vi1040
-            - Vi1130
-            - Vi1220
-        C:
-          Docente: V. Cornejo
-          Horas:
-            - Mi1040
-            - Mi1130
-            - Mi1220
-            - Ju1040
-            - Ju1130
-            - Ju1220
+            - Ma1640
+            - Ma1740
         D:
-          Docente: J. Zuñiga
+          Docente: Jesús Zuñiga
           Horas:
             - Mi1040
             - Mi1130
-            - Mi1220
-            - Vi1040
-            - Vi1130
             - Vi1220
+            - Vi1310
+        E:
+          Docente: Guadalupe Quispe
+          Horas:
+            - Lu1920
+            - Lu2010
+            - Vi1640
+            - Vi1740
+        F:
+          Docente: Oscar Cuadros
+          Horas:
+            - Lu1920
+            - Lu2010
+            - Vi1640
+            - Vi1740
     Proyecto de Sw 1:
       nombre: Proyecto de Ingeniería de Software 1
       abreviado: PS1
       Teoria:
         A:
-          Docente: F. Gonzales
+          Docente: Freddy Gonzales
           Horas:
-            - Lu0700
-            - Lu0750
+            - Ma0700
+            - Ma0750
         B:
-          Docente: F. Gonzales
+          Docente: Freddy Gonzales
           Horas:
-            - Ju0850
-            - Ju0940
-      Laboratorio:
-        A:
-          Docente: F. Gonzales
+            - Mi1400
+            - Mi1450
+        C:
+          Decente: Freddy Gonzales
           Horas:
-            - Lu1220
-            - Lu1310
-            - Mi1220
-            - Mi1310
-        B:
-          Docente: F. Gonzales
-          Horas:
-            - Ma1220
-            - Ma1310
-            - Ju1220
-            - Ju1310
-    Sistemas de Seguridad Critica:
-      nombre: Sistemas de Seguridad Crítica
+            - Ju1400
+            - Ju1450
+    Seguridad:
+      nombre: Seguridad Informática
       abreviado: SSC
       Teoria:
         A:
-          Docente: L. Delgado
+          Docente: Lucy Delgado
           Horas:
-            - Lu0850
-            - Lu0940
-            - Mi0850
-            - Mi0940
+            - Ju0940
+            - Ju1040
+            - Ju1130
         B:
-          Docente: "?"
+          Docente: Lucy Delgado
           Horas:
-            - Ma0940
-            - Ma1040
-            - Vi0850
-            - Vi0940
-      Laboratorio:
-        A:
-          Docente: L. Delgado
-          Horas:
-            - Mi1040
-            - Mi1130
+            - Ju1550
+            - Ju1640
+            - Ju1740
     Gestion Sw:
       nombre: Gestion de Emprendimiento de Software
       abreviado: GES
       Teoria:
         A:
-          Docente: J. Sulla
+          Docente: José Sulla
           Horas:
             - Ma0850
-            - Vi0700
-            - Vi0750
+            - Ma0940
+            - Ma1040
         B:
-          Docente: J. Sulla
+          Docente: José Sulla
           Horas:
-            - Lu1450
-            - Lu1550
-            - Lu1640
+            - Mi1550
+            - Mi1640
+            - Mi1740
     Mantenimiento:
-      nombre: Mantenimiento, Configuración y Evolución de Software
+      nombre: Mantenimiento, Configuración y Evaluación de Software
       abreviado: MCES
       Teoria:
         A:
-          Docente: "?"
+          Docente: Edward Zárate
           Horas:
-            - Ma1130
-            - Ma1220
-            - Ma1310
+            - Vi0700
+            - Vi0750
+            - Vi0850
         B:
-          Docente: "?"
-          Horas:
-            - Mi1400
-            - Mi1450
-            - Mi1550
-      Laboratorio:
-        A:
-          Docente: E. Zarate
-          Horas:
-            - Ma1400
-            - Ma1450
-        B:
-          Docente: E. Zarate
+          Docente: Edward Zárate
           Horas:
             - Ma1830
             - Ma1920
-    Multimedia:
-      nombre: Multimedia y Realidad Virtual (e)
-      abreviado: MRVe
-      Teoria:
-        A:
-          Docente: "?"
-          Horas:
-            - Ma1400
-            - Ma1450
-        B:
-          Docente: "?"
-          Horas:
-            - Vi1400
-            - Vi1450
-      Laboratorio:
-        A:
-          Docente: D. Iquira
-          Horas:
-            - Ju0850
-            - Ju0940
-        B:
-          Docente: D. Iquira
-          Horas:
-            - Lu1550
-            - Lu1640
-    Gestion Sis:
-      nombre: Gestión de Sistemas y Tecnologías de Informacion (e)
-      abreviado: GSTIe
-      Teoria:
-        A:
-          Docente: "?"
-          Horas:
-            - Ma1550
-            - Ma1640
-        B:
-          Docente: "?"
-          Horas:
-            - Ju1400
-            - Ju1450
-      Laboratorio:
-        A:
-          Docente: Richard Escobedo
-          Horas:
-            - Ma1220
-            - Ma1310
-        B:
-          Docente: Richard Escobedo
-          Horas:
-            - Ju1550
-            - Ju1640
+            - Ma2010
     Desarrollo Plat:
       nombre: Desarrollo de Nuevas Plataformas Avanzado (e)
       abreviado: DNPAe
       Teoria:
         A:
-          Docente: "?"
+          Docente: Ernesto Suarez
           Horas:
-            - Ju1550
-            - Ju1640
-        B:
-          Docente: "?"
-          Horas:
-            - Vi1550
-            - Vi1640
-      Laboratorio:
-        A:
-          Docente: E. Suarez
-          Horas:
-            - Ma0850
-            - Ma0940
-        B:
-          Docente: E. Suarez
-          Horas:
-            - Ma1040
             - Ma1130
+            - Ma1220
+            - Ma1310
+        B:
+          Docente: Ernesto Suarez
+          Horas:
+            - Mi1830
+            - Mi1920
+            - Mi2010
+    Etica:
+      nombre: Ética General y Profesional
+      abreviado: EGP
+      Teoria:
+        A:
+          Docente: Ysidro Velazco
+          Horas:
+            - Lu0700
+            - Lu0750
+            - Lu0850
+        B:
+          Docente: Ysidro Velazco
+          Horas:
+            - Lu1400
+            - Lu1450
+            - Lu1550
+    Computacion:
+      nombre: Computación Gráfica, Visíon Computacional y Multimedia
+      abreviado: CGMe
+      Teoria:
+        A:
+          Docente: Oscar Cuadros
+          Horas:
+            - Lu1310
+            - Ju1220
+            - Ju1310
+        B:
+          Docente: Diego Iquiera
+          Horas:
+            - Ma1400
+            - Ma1450
+            - Ma1550
+    BaseDatos:
+      nombre: Tópicos Avanzados en Bases de Datos
+      abreviado: TABDe
+      Teoria:
+        A:
+          Docente: Lilian Benique
+          Horas:
+            - Mi1220
+            - Mi1310
+            - Vi1400
+            - Vi1450
+            - Vi1550
+        B:
+          Docente: Lilian Benique
+          Horas:
+            - Lu1640
+            - Lu1740
+            - Lu1830
+            - Ju1830
+            - Ju1920
