@@ -34,6 +34,12 @@ function App() {
                     </span>
                 </div>
             </Show>
+            <div className={css(estilosGlobales.contenedor)}>
+                Solo teoria por ahora. Actualizado el 2021/03/28. Fuente:&nbsp;
+                <a className={css(estilosGlobales.linkGenerico)} target="_blank" href="https://www.facebook.com/Escuela-Profesional-de-Ingenieria-de-Sistemas-171720913528/photos/pcb.10159175240878529/10159175239403529">
+                    Página de Facebook de la escuela.
+                </a>
+            </div>
             <div style={{width: "100%", height: "0.5rem"}} />
             <ContenedorHorarios />
             <Creditos />

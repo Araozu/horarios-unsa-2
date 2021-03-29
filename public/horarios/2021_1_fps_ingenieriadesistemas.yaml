@@ -428,29 +428,29 @@ años:
       abreviado: IPS
       Teoria:
         A:
-          Docente: "?"
+          Docente: Robert Arisaca
           Horas:
-            - Lu0700
-            - Lu0750
-            - Vi0700
-            - Vi0750
-            - Vi0850
-        B:
-          Docente: "?"
-          Horas:
+            - Ma0700
+            - Ma0750
+            - Mi1220
+            - Mi1310
             - Mi1400
-            - Mi1450
+        B:
+          Docente: Robert Arisaca
+          Horas:
+            - Ma1400
+            - Ma1450
             - Ju1740
             - Ju1830
             - Ju1920
         C:
-          Docente: "?"
+          Docente: Maribel Molina
           Horas:
-            - Vi0940
-            - Vi1040
-            - Mi1040
-            - Mi1130
-            - Mi1220
+            - Mi1920
+            - Mi2010
+            - Vi1830
+            - Vi1920
+            - Vi2010
     Investigacion de Operaciones:
       nombre: Investigación de Operaciones
       abreviado: IO
@@ -458,167 +458,86 @@ años:
         A:
           Docente: Olha Sharhorodska
           Horas:
-            - Lu1040
-            - Lu1130
-            - Vi1130
-            - Vi1220
-        B:
-          Docente: Olha Sharhorodska
-          Horas:
-            - Lu1400
-            - Lu1450
-            - Vi1550
-            - Vi1640
-      Laboratorio:
-        A:
-          Docente: JT. Ramirez
-          Horas:
-            - Mi1040
-            - Mi1130
-        B:
-          Docente: JT. Ramirez
-          Horas:
-            - Vi1040
-            - Vi1130
-        C:
-          Docente: JT. Ramirez
-          Horas:
-            - Mi1400
-            - Mi1450
-    Organizacion y Metodos:
-      nombre: Organización y Métodos
-      abreviado: OM
-      Teoria:
-        A:
-          Docente: Juan C. Juarez
-          Horas:
-            - Ju1040
-            - Ju1130
-            - Ju1220
-        B:
-          Docente: Juan C. Juarez
-          Horas:
-            - Lu1550
-            - Lu1640
-            - Lu1740
-      Laboratorio:
-        A:
-          Docente: Juan C. Juarez
-          Horas:
             - Lu0850
             - Lu0940
-        C:
-          Docente: T. Ramires (?)
-          Horas:
-            - Ju0700
-            - Ju0750
-    Teoria de la Computacion:
-      nombre: Teoría de la Computación
-      abreviado: TC
-      Teoria:
-        A:
-          Docente: "?"
-          Horas:
-            - Ma0700
-            - Ma0750
-            - Ma0850
-        B:
-          Docente: "?"
-          Horas:
-            - Mi1740
-            - Mi1830
-            - Mi1920
-      Laboratorio:
-        A:
-          Docente: "M. Galarza"
-          Horas:
             - Mi0850
             - Mi0940
         B:
-          Docente: R. Apaza
-          Horas:
-            - Ma1550
-            - Ma1640
-        C:
-          Docente: "M. Galarza"
-          Horas:
-            - Lu1040
-            - Lu1130
-    Base de Datos:
-      nombre: Base de Datos
-      abreviado: BD
-      Teoria:
-        A:
-          Docente: C. Baluarte
-          Horas:
-            - Mi0850
-            - Mi0940
-            - Ju0850
-            - Ju0940
-        B:
-          Docente: C. Baluarte
+          Docente: Olha Sharhorodska
           Horas:
             - Ma1550
             - Ma1640
             - Ju1550
             - Ju1640
-      Laboratorio:
+    Organizacion y Metodos:
+      nombre: Organización y Métodos
+      abreviado: OM
+      Teoria:
         A:
-          Docente: E. Suarez
+          Docente: Juan Carlos Juarez
           Horas:
             - Vi0850
             - Vi0940
+            - Vi1040
         B:
-          Docente: E. Suarez
+          Docente: Juan Carlos Juarez
           Horas:
-            - Lu1220
-            - Lu1310
-        C:
-          Docente: E. Suarez
+            - Lu1740
+            - Lu1830
+            - Lu1920
+    Teoria de la Computacion:
+      nombre: Teoría de la Computación
+      abreviado: TC
+      Teoria:
+        A:
+          Docente: Leticia Laura
+          Horas:
+            - Ju0850
+            - Ju0940
+            - Ju1040
+        B:
+          Docente: Leticia Laura
+          Horas:
+            - Vi1550
+            - Vi1640
+            - Vi1740
+    Base de Datos:
+      nombre: Base de Datos
+      abreviado: BD
+      Teoria:
+        A:
+          Docente: Cesar Baluarte
           Horas:
             - Lu1040
             - Lu1130
-        D:
-          Docente: E. Suarez
+            - Mi1040
+            - Mi1130
+        B:
+          Docente: Cesar Baluarte
           Horas:
-            - Vi1220
-            - Vi1310
+            - Lu1550
+            - Lu1640
+            - Mi1550
+            - Mi1640
     Programacion de Sistemas:
       nombre: Programación de Sistemas
       abreviado: PS
       Teoria:
         A:
-          Docente: O. Ramirez
+          Docente: Oscar Ramirez
           Horas:
             - Mi0700
             - Mi0750
         B:
-          Docente: O. Ramirez
+          Docente: Oscar Ramirez
           Horas:
-            - Mi1550
-            - Mi1640
-      Laboratorio:
-        A:
-          Docente: O. Ramirez
+            - Ju1400
+            - Ju1450
+        C:
+          Docente: Oscar Ramirez
           Horas:
-            - Ma1550
-            - Ma1640
             - Vi1400
             - Vi1450
-        B:
-          Docente: O. Ramirez
-          Horas:
-            - Ma1740
-            - Ma1830
-            - Vi1550
-            - Vi1640
-        C:
-          Docente: O. Ramirez
-          Horas:
-            - Mi1740
-            - Mi1830
-            - Vi1740
-            - Vi1830
   4to año:
     Sistemas Distribuidos:
       nombre: Sistemas Distribuidos

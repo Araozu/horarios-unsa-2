@@ -40,4 +40,7 @@ export const estilosGlobales = StyleSheet.create({
             textDecoration: "underline rgba(255, 255, 255, 0.4)",
         },
     },
+    linkGenerico: {
+        color: "var(--color-texto)"
+    },
 })
