@@ -1,11 +1,7 @@
-titulo: Horarios 2020-1, Ingeniería de Sistemas.
-version: 20200912
+titulo: Horarios 2021-A, Ingeniería de Sistemas.
+version: 20210328
 descripcion: |
-  Este horario esta parcialmente completo. Los datos se obtuvieron de
-  https://drive.google.com/file/d/1DqAkbDtcVjAWhEb6YwMpFWUkXGpgeQt1/view
-  <br>
-  <br>
-  Ultima actualizacion: 26 de abril de 2020
+  Última actualizacion: 2021/03/28
 años:
   1er año:
     Matematica Basica:
@@ -13,50 +9,50 @@ años:
       abreviado: MB
       Teoria:
         A:
-          Docente: M. Hurtado
+          Docente: Dorys Tupacyupanqui
           Horas:
-            - Lu0700
-            - Lu0750
-            - Mi0700
-            - Mi0750
-            - Ju0700
-            - Ju0750
-        B:
-          Docente: M. Hurtado
-          Horas:
-            - Lu1400
-            - Lu1450
-            - Lu1550
-            - Ju1550
-            - Ju1640
-            - Ju1740
-        C:
-          Docente: M. Hurtado
-          Horas:
-            - Ma0700
-            - Ma0750
             - Ma0850
-            - Vi0700
-            - Vi0750
-            - Vi0850
+            - Ma0940
+            - Ma1040
+            - Ju0850
+            - Ju0940
+            - Ju1040
+        B:
+          Docente: Martin Bolaños
+          Horas:
+            - Lu1550
+            - Lu1640
+            - Lu1740
+            - Mi1550
+            - Mi1640
+            - Mi1740
+        C:
+          Docente: Dorys Tupacyupanqui
+          Horas:
+            - Lu0850
+            - Lu0940
+            - Lu1040
+            - Mi0850
+            - Mi0940
+            - Mi1040
     Metodologia:
       nombre: Metodología del Trabajo Int. Universitario
       abreviado: MTU
       Teoria:
         A:
-          Docente: "?"
+          Docente: Rocio Diaz
           Horas:
-            - Lu0850
-            - Lu0940
-            - Ju1040
-            - Ju1130
+            - Lu0700
+            - Lu0750
+            - Mi0700
+            - Mi0750
         B:
-          Docente: "?"
+          Docente: Karina Cayani
           Horas:
-            - Lu1830
-            - Lu1920
-            - Mi1830
-            - Mi1920
+            - Lu1400
+            - Lu1450
+            - Mi1400
+            - Mi1450
     FP1:
       nombre: Fundamentos de la Programación 1
       abreviado: FP1
@@ -64,10 +60,10 @@ años:
         A:
           Docente: Marco Aedo
           Horas:
-            - Lu1040
             - Lu1130
-            - Ju0850
-            - Ju0940
+            - Lu1220
+            - Ju1130
+            - Ju1220
         B:
           Docente: Marco Aedo
           Horas:
@@ -76,137 +72,87 @@ años:
             - Vi1550
             - Vi1640
         C:
-          Docente: Richard Escobedo
-          Horas:
-            - Ma1400
-            - Ma1450
-            - Ju1830
-            - Ju1920
-      Laboratorio:
-        A:
-          Docente: Marco Aedo
-          Horas:
-            - Lu0850
-            - Lu0940
-            - Ju1040
-            - Ju1130
-        B:
-          Docente: Marco Aedo
-          Horas:
-            - Ma1400
-            - Ma1450
-            - Vi1400
-            - Vi1450
-        C:
-          Docente: Richard Escobedo
+          Docente: Leticia Laura
           Horas:
             - Ma1740
             - Ma1830
-            - Mi1550
-            - Mi1640
-        D:
-          Docente: L. Laura
-          Horas:
-            - Mi1400
-            - Mi1450
-            - Ju1400
-            - Ju1450
-        E:
-          Docente: L. Laura
-          Horas:
-            - Lu1400
-            - Lu1450
-            - Mi1550
-            - Mi1640
-        F:
-          Docente: R. Apaza
-          Horas:
-            - Mi1040
-            - Mi1130
-            - Ju1220
-            - Ju1310
+            - Ju1550
+            - Ju1640
     Discretas1:
       nombre: Estructuras Discretas 1
       abreviado: ED1
       Teoria:
         A:
-          Docente: Olha Sharhorodska
+          Docente: Erech Ordoñez
           Horas:
-            - Lu1220
-            - Lu1310
-            - Ju1220
-            - Ju1310
+            - Ma1130
+            - Ma1220
+            - Vi1130
+            - Vi1220
         B:
-          Docente: Olha Sharhorodska
+          Docente: Erech Ordoñez
           Horas:
-            - Ju1400
-            - Ju1450
-            - Vi1400
-            - Vi1450
+            - Lu1830
+            - Lu1920
+            - Mi1830
+            - Mi1920
         C:
-          Docente: "?"
+          Docente: Erech Ordoñez
           Horas:
-            - Ju1400
-            - Ju1450
-            - Vi1400
-            - Vi1450
+            - Ma1920
+            - Ma2010
+            - Vi0700
+            - Vi0750
     Razonamiento:
       nombre: Razonamiento Lógico Matemático
       abreviado: RM
       Teoria:
         A:
-          Docente: A. Mamani
+          Docente: Anita Mamani
           Horas:
-            - Ma0940
-            - Ma1040
-            - Mi0850
-            - Mi0940
+            - Ma0700
+            - Ma0750
+            - Ju0700
+            - Ju0750
         B:
-          Docente: A. Mamani
+          Docente: Ronald Ticona
           Horas:
-            - Ma1130
-            - Ma1220
-            - Vi1830
-            - Vi1920
-        C:
-          Docente: F. Torres
-          Horas:
-            - Lu1640
-            - Lu1740
-            - Mi1640
-            - Mi1740
+            - Ma1400
+            - Ma1450
+            - Ju1400
+            - Ju1450
     Introduccion A Computacion:
       nombre: Introducción a la Computación
       abreviado: IC
       Teoria:
         A:
-          Docente: A. Paz
+          Docente: Richart Escobedo
           Horas:
-            - Vi1040
-            - Vi1130
-            - Vi1220
+            - Vi1310
+            - Vi1400
+            - Vi1450
         B:
-          Docente: "?"
+          Docente: Richart Escobedo
           Horas:
-            - Ma1740
-            - Ma1830
-            - Ma1920
+            - Vi1740
+            - Vi1830
+            - Vi1920
     Relaciones Humanas:
-      nombre: Relaciones Humanas en Empresas de Desarrollo de Software
+      nombre: Relaciones Humanas
       abreviado: RH
       Teoria:
         A:
-          Docente: Juan C. Juarez
+          Docente: Juan Carlos Juarez
           Horas:
-            - Mi1040
             - Mi1130
             - Mi1220
+            - Mi1310
         B:
-          Docente: Juan C. Juarez
+          Docente: Juan Carlos Juarez
           Horas:
-            - Mi1400
-            - Mi1450
-            - Mi1550
+            - Ju1740
+            - Ju1830
+            - Ju1920
   2do año:
     RAII:
       nombre: Redacción de Artículos e Informes de Investigación
