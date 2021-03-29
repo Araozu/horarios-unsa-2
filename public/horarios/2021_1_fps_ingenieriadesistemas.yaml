@@ -213,70 +213,60 @@ años:
       abreviado: RAII
       Teoria:
         A:
-          Docente: E. Vidal
+          Docente: Elizabeth Vidal
           Horas:
-            - Lu0750
-            - Lu0850
+            - Mi1130
+            - Mi1220
         B:
-          Docente: E. Suarez
+          Docente: Elizabeth Suarez
           Horas:
-            - Lu1640
-            - Lu1740
+            - Ju1740
+            - Ju1830
         C:
-          Docente: E. Vidal
+          Docente: Elizabeth Vidal
           Horas:
-            - Lu0940
-            - Lu1040
+            - Ma1830
+            - Ma1920
     Calculo:
       nombre: Cálculo en Varias Variables
       abreviado: CVV
       Teoria:
         A:
-          Docente: Doris Tupacyupanqui
+          Docente: Alejandro Mayta
           Horas:
-            - Vi0700
-            - Vi0750
-            - Ma0850
-            - Ma0940
-            - Ma1040
-            - Ju1040
-            - Ju1130
+            - Lu0700
+            - Lu0750
+            - Mi0700
+            - Mi0750
+            - Vi0940
+            - Vi1040
+            - Vi1130
         B:
-          Docente: J. Tarqui
+          Docente: Alejandro Mayta
           Horas:
-            - Lu1830
-            - Lu1920
-            - Ju1640
-            - Ju1740
-            - Ju1830
-            - Vi1830
-            - Vi1920
-        C:
-          Docente: Doris Tupacyupanqui
-          Horas:
-            - Lu1130
-            - Lu1220
-            - Lu1310
-            - Ma1130
-            - Ma1220
-            - Ju1220
-            - Ju1310
+            - Ma1400
+            - Ma1450
+            - Ma1550
+            - Ju1400
+            - Ju1450
+            - Vi1640
+            - Vi1740
     Ciudadania:
       nombre: Ciudadania e Interculturalidad
       abreviado: CI
       Teoria:
         A:
-          Docente: "?"
+          Docente: William Laura
           Horas:
-            - Lu1400
-            - Lu1450
-            - Lu1550
+            - Vi0700
+            - Vi0750
+            - Vi0850
         B:
-          Docente: "?"
+          Docente: William Laura
           Horas:
+            - Vi1400
+            - Vi1450
             - Vi1550
-            - Vi1640
-            - Vi1740
     EDAT:
       nombre: Estructuras de Datos y Algoritmos
       abreviado: EDAT
@@ -284,57 +274,38 @@ años:
         A:
           Docente: Karim Guevara
           Horas:
-            - Ma0700
-            - Ma0750
             - Ju0700
             - Ju0750
+            - Vi1220
+            - Vi1310
         B:
           Docente: Karim Guevara
           Horas:
-            - Ma1400
-            - Ma1450
-            - Ju1400
-            - Ju1450
-      Laboratorio:
-        A:
-          Docente: Karim Guevara
-          Horas:
-            - Ju0850
-            - Ju0940
-        B:
-          Docente: T. Ramirez
-          Horas:
-            - Lu0700
-            - Lu0750
+            - Lu1550
+            - Lu1640
+            - Ju1550
+            - Ju1640
         C:
-          Docente: J. Cardenaz
+          Docente: Karim Guevara
           Horas:
             - Lu1400
             - Lu1450
-        D:
-          Docente: T. Ramirez
-          Horas:
-            - Mi0700
-            - Mi0750
-        E:
-          Docente: J. Cardenaz
-          Horas:
+            - Ju1130
             - Ju1220
-            - Ju1310
     Liderazgo:
       nombre: Taller de Liderazgo y Colaboración
       abreviado: TLC
       Teoria:
         A:
-          Docente: V. Cornejo
+          Docente: Edward Zárate
           Horas:
-            - Mi0850
-            - Mi0940
+            - Lu0850
+            - Lu0940
         B:
-          Docente: V. Cornejo
+          Docente: Edward Zárate
           Horas:
-            - Ma1640
-            - Ma1740
+            - Lu1920
+            - Lu2010
     Innovacion Y Creatividad:
       nombre: Innovación y Creatividad
       abreviado: IC
@@ -342,83 +313,47 @@ años:
         A:
           Docente: Norka Bedregal
           Horas:
+            - Mi0940
             - Mi1040
-            - Mi1130
-            - Ju0850
             - Ju0940
+            - Ju1040
         B:
-          Docente: V. Cornejo
+          Docente: Roni Apaza
           Horas:
-            - Ma1830
-            - Ma1920
-            - Mi1740
-            - Mi1830
+            - Lu1740
+            - Lu1830
+            - Ma1640
+            - Ma1740
     Web2:
       nombre: Programación Web 2
       abreviado: PW2
       Teoria:
         A:
-          Docente: A. Paz
-          Horas:
-            - Vi0850
-            - Vi0940
-        B:
-          Docente: A. Paz
-          Horas:
-            - Vi1400
-            - Vi1450
-        C:
-          Docente: "?"
-          Horas:
-            - Vi1040
-            - Vi1130
-      Laboratorio:
-        A:
-          Docente: A. Paz
+          Docente: Alfredo Paz
           Horas:
             - Lu1040
             - Lu1130
-            - Ju1040
-            - Ju1130
         B:
-          Docente: A. Paz
+          Docente: Carlo Corrales
           Horas:
-            - Lu1400
-            - Lu1450
-            - Ju1400
-            - Ju1450
+            - Mi1550
+            - Mi1640
         C:
-          Docente: Carlo Corrales
+          Docente: CarloCorrales
           Horas:
-            - Ju0850
-            - Ju0940
-            - Vi0700
-            - Vi0750
-        D:
-          Docente: Carlo Corrales
-          Horas:
-            - Ma1400
-            - Ma1450
-            - Ju1400
-            - Ju1450
-        E:
-          Docente: Carlo Corrales
-          Horas:
-            - Ju1040
-            - Ju1130
-            - Vi0850
-            - Vi0940
+            - Mi1740
+            - Mi1830
     Psicologia:
       nombre: Taller de Psicología
       abreviado: PSI
       Teoria:
         A:
-          Docente: S. Avendaño
+          Docente: "?"
           Horas:
-            - Mi0700
-            - Mi0750
+            - Ma0700
+            - Ma0750
         B:
-          Docente: S. Avendaño
+          Docente: "?"
           Horas:
             - Mi1400
             - Mi1450
