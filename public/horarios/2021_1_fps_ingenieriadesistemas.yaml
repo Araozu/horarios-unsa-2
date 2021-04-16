@@ -438,6 +438,22 @@ años:
             - Ju2010
             - Vi1550
             - Vi1640
+      Laboratorio:
+        A:
+          Docente: Jesús Silva
+          Horas:
+            - Mi0700
+            - Mi0750
+        B:
+          Docente: Jesús Silva
+          Horas:
+            - Ma1740
+            - Ma1830
+        C:
+          Docente: Maribel Molina
+          Horas:
+            - Vi0700
+            - Vi0750
     Inteligencia Artificial:
       nombre: Inteligencia Artificial
       abreviado: IA
@@ -494,12 +510,28 @@ años:
             - Ju0940
             - Ju1040
         B:
-          Docente: P. Huertas
+          Docente: Percy Huertas
           Horas:
             - Ju1550
             - Ju1640
             - Vi1400
             - Vi1450
+      Laboratorio:
+        A:
+          Docente: Percy Huertas
+          Horas:
+            - Lu1040
+            - Lu1130
+        B:
+          Docente: Edith Cano
+          Horas:
+            - Mi1400
+            - Mi1450
+        C:
+          Docente: Edith Cano
+          Horas:
+            - Ma0850
+            - Ma0940
     Pruebas de Software:
       nombre: Pruebas de Software
       abreviado: PS
@@ -514,6 +546,22 @@ años:
           Horas:
             - Ju1740
             - Ju1830
+      Laboratorio:
+        A:
+          Docente: Jorge Chamby
+          Horas:
+            - Ma1040
+            - Ma1130
+        B:
+          Docente: Jorge Chamby
+          Horas:
+            - Mi1920
+            - Mi2010
+        C:
+          Docente: Christian Delgado
+          Horas:
+            - Mi1550
+            - Mi1640
     Tecnologias de Informacion:
       nombre: Tecnologías de Información
       abreviado: TI
@@ -532,6 +580,22 @@ años:
             - Lu1450
             - Ma1550
             - Ma1640
+      Laboratorio:
+        A:
+          Docente: Jesús Silva
+          Horas:
+            - Vi1220
+            - Vi1310
+        B:
+          Docente: Edith Cano
+          Horas:
+            - Mi1920
+            - Mi2010
+        C:
+          Docente: Christian Delgado
+          Horas:
+            - Vi1220
+            - Vi1310
     Fisica Computacional:
       nombre: Física Computacional
       abreviado: FC
@@ -541,20 +605,13 @@ años:
           Horas:
             - Ma0700
             - Ma0750
-        B:
-          Docente: Edwin Llamoca
-          Horas:
-            - Ma1400
-            - Ma1450
-      Laboratorio:
-        A:
-          Docente: Edwin Llamoca
-          Horas:
             - Ju0700
             - Ju0750
         B:
           Docente: Edwin Llamoca
           Horas:
+            - Ma1400
+            - Ma1450
             - Ju1400
             - Ju1450
   5to año:
@@ -625,7 +682,7 @@ años:
             - Ju1450
     Seguridad:
       nombre: Seguridad Informática
-      abreviado: SSC
+      abreviado: SI
       Teoria:
         A:
           Docente: Lucy Delgado
@@ -639,6 +696,17 @@ años:
             - Ju1550
             - Ju1640
             - Ju1740
+      Laboratorio:
+        A:
+          Docente: Lucy Delgado
+          Horas:
+            - Lu1040
+            - Lu1130
+        B:
+          Docente: Lucy Delgado
+          Horas:
+            - Lu1220
+            - Lu1310
     Gestion Sw:
       nombre: Gestion de Emprendimiento de Software
       abreviado: GES
