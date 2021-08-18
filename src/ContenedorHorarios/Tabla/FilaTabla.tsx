@@ -132,7 +132,6 @@ export function FilaTabla(props: Props) {
                 </div>
                 <For each={dias}>
                     {(dia) => {
-                        console.log("Renderizar dias")
                         const diaStr = dia.substring(0, 2)
                         const horaStr = hora.substring(0, 5)
 

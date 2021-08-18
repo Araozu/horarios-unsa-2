@@ -34,6 +34,13 @@ const e = StyleSheet.create({
     },
 })
 
+const claseCursoNoAgregado = css(
+    e.contenedorCurso,
+    estilosGlobales.contenedor,
+)
+
+const claseCursoOculto = css(e.cursoOculto)
+
 interface Props {
     version: number,
     dataAnio: Cursos,
@@ -101,13 +108,102 @@ const agruparProfesores = (
     return profesores
 }
 
+function CursoE(
+    indiceCurso: string,
+    datosCurso: Curso, 
+    anio: () => string, 
+    claseCursoAgregado: string, 
+    props: Props
+) {
+    const idCurso = `${props.version}_${anio()}_${datosCurso.abreviado}`
+
+    const cursoAgregadoMemo = createMemo(
+        () => props.listaCursosUsuario.cursos.find((x) => x.nombre === datosCurso.nombre && !x.oculto) !== undefined,
+        undefined,
+        (x, y) => x === y,
+    )
+
+    const tituloMemo = createMemo(() => (cursoAgregadoMemo()
+        ? "Remover de mi horario"
+        : "Agregar a mi horario"))
+
+    const claseMemo = createMemo(() => {
+        if (props.esCursoMiHorario && datosCurso.oculto) {
+            return claseCursoOculto
+        }
+        return cursoAgregadoMemo()
+            ? claseCursoAgregado
+            : claseCursoNoAgregado
+    })
+
+    const profesoresTeoria = createMemo(() => agruparProfesores(
+        datosCurso.Teoria,
+        Number(indiceCurso),
+        false,
+        props.setCursosUsuarios,
+    ))
+    const profesoresLab = createMemo(() => agruparProfesores(
+        datosCurso.Laboratorio ?? {},
+        Number(indiceCurso),
+        true,
+        props.setCursosUsuarios,
+    ))
+
+    const IndicadorGrupos = (profesor: string, grupos: [string, () => void][], esLab: boolean) => (
+        <td style={{"padding-bottom": "0.5rem", "padding-right": "0.75rem"}}>
+            <span>
+                {profesor}&nbsp;
+            </span>
+            <For each={grupos}>
+                {([x, fnOnClick]) => (
+                    <IndicadorGrupo
+                        nombre={x}
+                        esLab={esLab}
+                        idParcial={idCurso}
+                        tablaObserver={props.tablaObserver}
+                        onClick={fnOnClick}
+                    />
+                )
+                }
+            </For>
+        </td>
+    )
+
+    return (
+        <div className={claseMemo()}>
+            <button
+                className={css(e.botonCurso, e.inline, e.lineaTexto, e.botonTexto, estilosGlobales.contenedorCursor, estilosGlobales.contenedorCursorSoft)}
+                onMouseEnter={() => props.tablaObserver.resaltar(idCurso)}
+                onMouseLeave={() => props.tablaObserver.quitarResaltado()}
+            >
+                {datosCurso.abreviado} - {datosCurso.nombre}
+            </button>
+            <table>
+                <tbody>
+                    <tr>
+                        <For each={Object.entries(profesoresTeoria())}>
+                            {([profesor, grupos]) => IndicadorGrupos(profesor, grupos, false)}
+                        </For>
+                    </tr>
+                    <tr>
+                        <For each={Object.entries(profesoresLab())}>
+                            {([profesor, grupos]) => IndicadorGrupos(profesor, grupos, true)}
+                        </For>
+                    </tr>
+                </tbody>
+            </table>
+            <button
+                className={css(e.botonTexto, estilosGlobales.contenedorCursor, estilosGlobales.contenedorCursorSoft)}
+                onClick={() => props.fnAgregarCurso(datosCurso)}
+            >
+                {tituloMemo}
+            </button>
+        </div>
+    )
+}
+
 export function CursosElem(props: Props) {
     const anio = () => props.anioActual().substring(0, props.anioActual().indexOf(" "))
-
-    const claseCursoNoAgregado = css(
-        e.contenedorCurso,
-        estilosGlobales.contenedor,
-    )
 
     const claseCursoAgregado = css(
         e.contenedorCurso,
@@ -115,115 +211,10 @@ export function CursosElem(props: Props) {
         !props.esCursoMiHorario && estilosGlobales.contenedorCursorActivo,
     )
 
-    const claseCursoOculto = css(e.cursoOculto)
-
     return (
         <>
             <For each={Object.entries(props.dataAnio)}>
-                {([indiceCurso, datosCurso]) => {
-
-                    const idCurso = `${props.version}_${anio()}_${datosCurso.abreviado}`
-
-                    const cursoAgregadoMemo = createMemo(
-                        () => props.listaCursosUsuario.cursos.find((x) => x.nombre === datosCurso.nombre && !x.oculto) !== undefined,
-                        undefined,
-                        (x, y) => x === y,
-                    )
-
-                    const tituloMemo = createMemo(() => (cursoAgregadoMemo()
-                        ? "Remover de mi horario"
-                        : "Agregar a mi horario"))
-
-                    const claseMemo = createMemo(() => {
-                        if (props.esCursoMiHorario && datosCurso.oculto) {
-                            return claseCursoOculto
-                        }
-                        return cursoAgregadoMemo()
-                            ? claseCursoAgregado
-                            : claseCursoNoAgregado
-                    })
-
-                    const profesoresTeoria = createMemo(() => agruparProfesores(
-                        datosCurso.Teoria,
-                        Number(indiceCurso),
-                        false,
-                        props.setCursosUsuarios,
-                    ))
-                    const profesoresLab = createMemo(() => agruparProfesores(
-                        datosCurso.Laboratorio ?? {},
-                        Number(indiceCurso),
-                        true,
-                        props.setCursosUsuarios,
-                    ))
-
-                    return (
-                        <div className={claseMemo()}>
-                            <button
-                                className={css(e.botonCurso, e.inline, e.lineaTexto, e.botonTexto, estilosGlobales.contenedorCursor, estilosGlobales.contenedorCursorSoft)}
-                                onMouseEnter={() => props.tablaObserver.resaltar(idCurso)}
-                                onMouseLeave={() => props.tablaObserver.quitarResaltado()}
-                            >
-                                {datosCurso.abreviado} - {datosCurso.nombre}
-                            </button>
-                            <table>
-                                <tbody>
-                                    <tr>
-                                        <For each={Object.entries(profesoresTeoria())}>
-                                            {([profesor, grupos]) => (
-                                                <td style={{"padding-bottom": "0.5rem", "padding-right": "0.75rem"}}>
-                                                    <span>
-                                                        {profesor}&nbsp;
-                                                    </span>
-                                                    <For each={grupos}>
-                                                        {([x, fnOnClick]) => (
-                                                            <IndicadorGrupo
-                                                                nombre={x}
-                                                                esLab={false}
-                                                                idParcial={idCurso}
-                                                                tablaObserver={props.tablaObserver}
-                                                                onClick={fnOnClick}
-                                                            />
-                                                        )
-                                                        }
-                                                    </For>
-                                                </td>
-                                            )}
-                                        </For>
-                                    </tr>
-                                    <tr>
-                                        <For each={Object.entries(profesoresLab())}>
-                                            {([profesor, grupos]) => (
-                                                <td style={{"padding-bottom": "0.5rem", "padding-right": "0.75rem"}}>
-                                                    <span>
-                                                        {profesor}&nbsp;
-                                                    </span>
-                                                    <For each={grupos}>
-                                                        {([x, fnOnClick]) => (
-                                                            <IndicadorGrupo
-                                                                nombre={x}
-                                                                esLab
-                                                                idParcial={idCurso}
-                                                                tablaObserver={props.tablaObserver}
-                                                                onClick={fnOnClick}
-                                                            />
-                                                        )
-                                                        }
-                                                    </For>
-                                                </td>
-                                            )}
-                                        </For>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <button
-                                className={css(e.botonTexto, estilosGlobales.contenedorCursor, estilosGlobales.contenedorCursorSoft)}
-                                onClick={() => props.fnAgregarCurso(datosCurso)}
-                            >
-                                {tituloMemo}
-                            </button>
-                        </div>
-                    )
-                }}
+                {([indiceCurso, datosCurso]) => CursoE(indiceCurso, datosCurso, anio, claseCursoAgregado, props)}
             </For>
         </>
     )
