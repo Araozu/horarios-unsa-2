@@ -187,7 +187,7 @@ export function CeldaFila(props: Props) {
                     )
 
                     return (
-                        <span className={clases()}
+                        <button className={clases()}
                               onMouseEnter={() => {
                                   props.tablaObserver.resaltar(id)
                               }}
@@ -197,7 +197,7 @@ export function CeldaFila(props: Props) {
                               onClick={fnSeleccionar}
                         >
                             {txt}
-                        </span>
+                        </button>
                     )
                 }}
             </For>

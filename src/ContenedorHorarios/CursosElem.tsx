@@ -27,6 +27,11 @@ const e = StyleSheet.create({
         padding: "0.25rem 0.35rem",
         borderRadius: "5px",
     },
+    botonCurso: {
+        backgroundColor: "transparent",
+        border: "none",
+        color: "var(--color)",
+    },
 })
 
 interface Props {
@@ -153,13 +158,13 @@ export function CursosElem(props: Props) {
 
                     return (
                         <div className={claseMemo()}>
-                            <div
-                                className={css(e.inline, e.lineaTexto, e.botonTexto, estilosGlobales.contenedorCursor, estilosGlobales.contenedorCursorSoft)}
+                            <button
+                                className={css(e.botonCurso, e.inline, e.lineaTexto, e.botonTexto, estilosGlobales.contenedorCursor, estilosGlobales.contenedorCursorSoft)}
                                 onMouseEnter={() => props.tablaObserver.resaltar(idCurso)}
                                 onMouseLeave={() => props.tablaObserver.quitarResaltado()}
                             >
                                 {datosCurso.abreviado} - {datosCurso.nombre}
-                            </div>
+                            </button>
                             <table>
                                 <tbody>
                                     <tr>
@@ -210,12 +215,12 @@ export function CursosElem(props: Props) {
                                     </tr>
                                 </tbody>
                             </table>
-                            <span
+                            <button
                                 className={css(e.botonTexto, estilosGlobales.contenedorCursor, estilosGlobales.contenedorCursorSoft)}
                                 onClick={() => props.fnAgregarCurso(datosCurso)}
                             >
                                 {tituloMemo}
-                            </span>
+                            </button>
                         </div>
                     )
                 }}

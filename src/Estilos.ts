@@ -3,10 +3,10 @@ import { StyleSheet } from "aphrodite"
 export const estilosGlobales = StyleSheet.create({
     contenedor: {
         margin: "0.3rem",
-        padding: "0.75rem 0.75rem",
-        borderRadius: "10px",
+        padding: "0.5rem 0.5rem",
+        borderRadius: "0.4rem",
         backdropFilter: "blur(40px)",
-        backgroundColor: "rgba(100, 100, 100, 0.25)",
+        backgroundColor: "rgba(125, 125, 125, 0.3)",
         color: "var(--color-texto)",
         border: "solid 1px transparent",
     },

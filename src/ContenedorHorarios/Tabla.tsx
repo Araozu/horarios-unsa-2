@@ -34,7 +34,8 @@ const e = StyleSheet.create({
         position: "relative",
         zIndex: 2,
         transition: "background-color 250ms",
-        marginLeft: "4.5rem",
+        // TODO: Vincular al valor en FilaTabla.tsx
+        marginLeft: "4rem",
         display: "flex",
         alignItems: "center",
         minHeight: "1.5rem",

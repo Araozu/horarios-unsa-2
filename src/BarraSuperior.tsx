@@ -2,7 +2,7 @@ import { estilosGlobales } from "./Estilos"
 import { StyleSheet, css } from "aphrodite"
 import { numWallpaper, setNumWallpaper } from "./Store"
 
-const ultimoIndiceWallpaper = 5
+const ultimoIndiceWallpaper = 2
 
 const e = StyleSheet.create({
     contCambiador: {

@@ -44,9 +44,9 @@ export function Horarios(props: HorariosProps) {
                 })
 
                 return (
-                    <div className={clases()} title={`Cambiar a ${nombre}`} onClick={() => setAnioActual(nombre)}>
+                    <button className={clases()} title={`Cambiar a ${nombre}`} onClick={() => setAnioActual(nombre)}>
                         {nombre}
-                    </div>
+                    </button>
                 )
             }}
         </For>

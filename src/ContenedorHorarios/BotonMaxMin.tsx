@@ -25,7 +25,7 @@ export function BotonMaxMin(props: BotonMaxMinProps) {
     }
 
     return (
-        <div
+        <button
             title={tituloBoton()}
             onClick={funcionBoton}
             className={css(
@@ -37,6 +37,6 @@ export function BotonMaxMin(props: BotonMaxMinProps) {
             )}
         >
             <i className={`${css(estilosGlobales.botonPhospor)} ${iconoBoton()}`} />
-        </div>
+        </button>
     )
 }
