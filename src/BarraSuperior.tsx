@@ -1,6 +1,7 @@
 import { estilosGlobales } from "./Estilos"
 import { StyleSheet, css } from "aphrodite"
 import { numWallpaper, setNumWallpaper } from "./Store"
+import { TamanoLetra } from "./BarraSuperior/TamanoLetra"
 
 const ultimoIndiceWallpaper = 2
 
@@ -100,6 +101,7 @@ export function BarraSuperior() {
                 <i class="ph-arrow-up-right" />
             </a>
             <CambiadorImg />
+            <TamanoLetra />
             <span className={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock)}>2021-A</span>
             <span className={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock)}>Ingeniería de Sistemas</span>
         </header>

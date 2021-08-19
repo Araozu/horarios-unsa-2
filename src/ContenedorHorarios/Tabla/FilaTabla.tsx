@@ -10,7 +10,7 @@ import { TablaObserver } from "../TablaObserver"
 const e = StyleSheet.create({
     celdaHora: {
         textAlign: "center",
-        width: "2.5rem",
+        width: "3.3rem",
         padding: "0.25rem 0",
         position: "absolute",
         top: "-0.75rem",
@@ -19,13 +19,13 @@ const e = StyleSheet.create({
         position: "absolute",
         zIndex: -1,
         height: "100%",
-        transform: "translateX(-15px)",
+        transform: "translateX(-1rem)",
     },
     fila: {
         position: "relative",
         zIndex: 2,
         transition: "background-color 250ms, border 100ms",
-        marginLeft: "calc(2.5rem + 20px)",
+        marginLeft: "4.3rem",
         display: "flex",
         alignItems: "center",
         minHeight: "1.1rem",
@@ -43,7 +43,7 @@ const e = StyleSheet.create({
     },
     celdaResaltado: {
         height: "101%",
-        width: "4px",
+        width: "0.2rem",
         display: "inline-block",
     },
     celdaResaltadoTransparente: {

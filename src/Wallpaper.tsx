@@ -26,7 +26,7 @@ export function Wallpaper() {
             zIndex: -1,
             transition: `opacity ${duracionTransicion}ms`,
             filter: soportaBackdropFilter ? "" : "blur(40px)",
-            opacity: soportaBackdropFilter ? 1 : 0.75,
+            opacity: 0.75,
         },
         coverTransicion: {
             opacity: 0,

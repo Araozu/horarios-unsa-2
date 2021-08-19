@@ -40,7 +40,9 @@ export const horasDescanso = [
 ]
 
 const numImgGuardado = Number(localStorage.getItem("num-img") ?? "1")
+const tamanoLetraGuardado = Number(localStorage.getItem("tamano-letra") ?? "16")
 
 export const [modoColor, setModoColor] = createSignal(ModoColor.Oscuro)
 export const [numWallpaper, setNumWallpaper] = createSignal(numImgGuardado)
 export const [mostrarDescansos, setMostrarDescansos] = createSignal(true)
+export const [tamanoLetra, setTamanoLetra] = createSignal(tamanoLetraGuardado);
