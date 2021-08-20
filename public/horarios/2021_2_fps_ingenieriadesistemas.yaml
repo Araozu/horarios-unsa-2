@@ -1,0 +1,162 @@
+titulo: Horarios 2021-A, Ingeniería de Sistemas.
+version: 20210328
+descripcion: |
+  Última actualizacion: 2021/03/28
+años:
+  1er año: {}
+  2do año: {}
+  3er año: {}
+  4to año:
+    Intro Soft Ent:
+      nombre: Introduccion a Software de Entetenimiento
+      abreviado: IDSEe
+      Teoria:
+        A:
+          Docente: Diego Iquira
+          Horas:
+            - Ma0940
+            - Ma1040
+            - Ma1130
+        B:
+          Docente: Diego Iquira
+          Horas:
+            - Lu1740
+            - Lu1830
+            - Lu1920
+    Diseno y Arquitectura:
+      nombre: Diseño Y Arquitectura de Software
+      abreviado: DAS
+      Teoria:
+        A:
+          Docente: Percy Huertas
+          Horas:
+            - Lu0850
+            - Lu0940
+            - Mi0850
+            - Mi0940
+        B:
+          Docente: Percy Huertas
+          Horas:
+            - Lu1400
+            - Lu1450
+            - Ma1400
+            - Ma1450
+      
+    Gestion Proyecto Soft:
+      nombre: Gestion de Proyectos de Software
+      abreviado: GPS
+      Teoria:
+        A:
+          Docente: Jesús Silva
+          Horas:
+            - Mi0700
+            - Mi0750
+        B:
+          Docente: Yasiel Perez
+          Horas:
+            - Mi1550
+            - Mi1640
+        C:
+          Docente: Yasiel Perez
+          Horas:
+            - Lu1040
+            - Lu1130
+      
+    Negocios Electronicos:
+      nombre: Negocios Electrónicos
+      abreviado: NE
+      Teoria:
+        A:
+          Docente: Cesar Baluarte
+          Horas:
+            - Mi1040
+            - Mi1130
+            - Mi1220
+        B:
+          Docente: Lilian Benique
+          Horas:
+            - Vi1630
+            - Vi1920
+            - Vi2010
+      
+    Auditoria:
+      nombre: Auditoría de Sistemas
+      abreviado: AS
+      Teoria:
+        A:
+          Docente: Edward Zarate
+          Horas:
+            - Ju0940
+            - Ju1030
+            - Ju1130
+            - Vi0850
+            - Vi0940
+        B:
+          Docente: Edward Zarate
+          Horas:
+            - Ju1400
+            - Ju1450
+            - Ju1550
+            - Vi1400
+            - Vi1450
+        C:
+          Docente: Edith Cano
+          Horas:
+            - Mi1400
+            - Mi1450
+            - Ju0700
+            - Ju0750
+            - Ju0850
+    Aspectos Formales:
+      nombre: Aspectos Formales de Verificación y Especificación
+      abreviado: AFEV
+      Teoria:
+        A:
+          Docente: Maribel Molina
+          Horas:
+            - Lu0700
+            - Lu0750
+        B:
+          Docente: Maribel Molina
+          Horas:
+            - Ju1920
+            - Ju2010
+        C:
+          Docente: Maribel Molina
+          Horas:
+            - Vi0700
+            - Vi0750
+    Calidad Soft:
+      nombre: Calidad de Software
+      abreviado: CS
+      Teoria:
+        A:
+          Docente: Jesús Silva
+          Horas:
+            - Ma0700
+            - Ma0750
+        B:
+          Docente: Maribel Molina
+          Horas:
+            - Mi1740
+            - Mi1830
+      
+    Intro Nueva Plat:
+      nombre: Introduccion al Desarrollo de Nuevas Plataformas
+      abreviado: IDNP
+      Teoria:
+        A:
+          Docente: Ernesto Suarez
+          Horas:
+            - Vi1040
+            - Vi1130
+            - Vi1220
+        B:
+          Docente: Ernesto Suarez
+          Horas:
+            - Vi1550
+            - Vi1640
+            - Vi1740
+      
+  5to año: {}
+    

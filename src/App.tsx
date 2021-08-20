@@ -4,7 +4,7 @@ import {Index} from "./Views/Index"
 function App() {
     return (
         <div className="App">
-            <Index />
+            <Main />
         </div>
     )
 }
