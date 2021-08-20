@@ -2,6 +2,7 @@ import { StyleSheet } from "aphrodite"
 
 export const estilosGlobales = StyleSheet.create({
     contenedor: {
+        boxSizing: "border-box",
         margin: "0.3rem",
         padding: "0.5rem 0.5rem",
         borderRadius: "0.4rem",
@@ -16,7 +17,7 @@ export const estilosGlobales = StyleSheet.create({
         transition: "background-color 200ms",
         textDecoration: "underline solid white 2px",
         ":hover": {
-            backgroundColor: "rgba(200, 200, 200, 0.3)",
+            backgroundColor: "rgba(200, 200, 200, 0.4)",
         },
     },
     contenedorCursorSoft: {
