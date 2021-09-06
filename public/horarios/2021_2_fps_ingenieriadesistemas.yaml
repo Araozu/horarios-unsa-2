@@ -23,6 +23,22 @@ años:
             - Lu1740
             - Lu1830
             - Lu1920
+      Laboratorio:
+        A:
+          Docente: Rosa Encinas
+          Horas:
+            - Vi0700
+            - Vi0750
+        B:
+          Docente: Rosa Encinas
+          Horas:
+            - Vi1920
+            - Vi2010
+        C:
+          Docente: Rosa Encinas
+          Horas:
+            - Vi1740
+            - Vi1830
     Diseno y Arquitectura:
       nombre: Diseño Y Arquitectura de Software
       abreviado: DAS
@@ -41,7 +57,22 @@ años:
             - Lu1450
             - Ma1400
             - Ma1450
-      
+      Laboratorio:
+        A:
+          Docente: Percy Huertas
+          Horas:
+            - Lu1040
+            - Lu1130
+        B:
+          Docente: Franklin Cruz
+          Horas:
+            - Mi1400
+            - Mi1450
+        C:
+          Docente: Franklin Cruz
+          Horas:
+            - Mi1220
+            - Mi1310
     Gestion Proyecto Soft:
       nombre: Gestion de Proyectos de Software
       abreviado: GPS
@@ -61,7 +92,22 @@ años:
           Horas:
             - Lu1040
             - Lu1130
-      
+      Laboratorio:
+        A:
+          Docente: Jesús Silva
+          Horas:
+            - Lu0700
+            - Lu0750
+        B:
+          Docente: Yasiel Perez
+          Horas:
+            - Lu1220
+            - Lu1310
+        C:
+          Docente: Yasiel Perez
+          Horas:
+            - Ma1740
+            - Ma1830
     Negocios Electronicos:
       nombre: Negocios Electrónicos
       abreviado: NE
@@ -140,7 +186,22 @@ años:
           Horas:
             - Mi1740
             - Mi1830
-      
+      Laboratorio:
+        A:
+          Docente: Jesús Silva
+          Horas:
+            - Lu0850
+            - Lu0940
+        B:
+          Docente: Jesús Silva
+          Horas:
+            - Mi1550
+            - Mi1640
+        C:
+          Docente: Maribel Molina
+          Horas:
+            - Ju0700
+            - Ju0750
     Intro Nueva Plat:
       nombre: Introduccion al Desarrollo de Nuevas Plataformas
       abreviado: IDNP
@@ -157,6 +218,21 @@ años:
             - Vi1550
             - Vi1640
             - Vi1740
-      
+      Laboratorio:
+        A:
+          Docente: Ernesto Suarez
+          Horas:
+            - Mi0700
+            - Mi0750
+        B:
+          Docente: Ernesto Suarez
+          Horas:
+            - Mi1740
+            - Mi1830
+        C:
+          Docente: Ernesto Suarez
+          Horas:
+            - Mi1920
+            - Mi2010
   5to año: {}
     
