@@ -2,6 +2,7 @@ import { estilosGlobales } from "./Estilos"
 import { StyleSheet, css } from "aphrodite"
 import { numWallpaper, setNumWallpaper } from "./Store"
 import { TamanoLetra } from "./BarraSuperior/TamanoLetra"
+import { RouterLink } from "./Router"
 
 const ultimoIndiceWallpaper = 2
 
@@ -82,15 +83,16 @@ const estilos = StyleSheet.create({
 export function BarraSuperior() {
     return (
         <header>
-            <span className={css(
+            <RouterLink to={"/"} className={css(
                 estilosGlobales.contenedor,
                 estilosGlobales.inlineBlock,
                 estilos.tituloPrincipal,
             )}
             >
                 Horarios Unsa
-            </span>
-            <a href="https://github.com/Araozu/horarios-unsa-2/" target="_blank" title={"Ver codigo fuente en GitHub"}
+            </RouterLink>
+            <a
+                href="https://github.com/Araozu/horarios-unsa-2/" target="_blank" title={"Ver codigo fuente en GitHub"}
                 className={css(
                     estilosGlobales.contenedor,
                     estilosGlobales.inlineBlock,
@@ -103,7 +105,7 @@ export function BarraSuperior() {
             <CambiadorImg />
             <TamanoLetra />
             <span className={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock)}>Ingeniería de Sistemas</span>
-            <span className={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock)}>2021-A</span>
+            <span className={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock)}>2021-B</span>
         </header>
     )
 }

@@ -1,10 +1,10 @@
 import { BarraSuperior } from "../BarraSuperior"
 import { ContenedorHorarios } from "../ContenedorHorarios/ContenedorHorarios"
-import { Wallpaper } from "../Wallpaper"
 import { Show, createSignal } from "solid-js"
 import { css } from "aphrodite"
 import { estilosGlobales } from "../Estilos"
 import { Creditos } from "../Creditos"
+import { Separador } from "../Separador"
 
 export function Main() {
     /// @ts-ignore
@@ -20,7 +20,6 @@ export function Main() {
 
     return (
         <div>
-            <Wallpaper />
             <BarraSuperior />
             <Show when={!soportaBackdropFilter && mostrarMensajeBackdropFilter()}>
                 <div className={css(estilosGlobales.contenedor)}>
@@ -42,7 +41,7 @@ export function Main() {
                 </a>
             </div>
             */}
-            <div style={{width: "100%", height: "2rem"}} />
+            <Separador />
             <ContenedorHorarios />
             <Creditos />
         </div>

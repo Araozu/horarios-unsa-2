@@ -42,6 +42,20 @@ export const estilosGlobales = StyleSheet.create({
         },
     },
     linkGenerico: {
-        color: "var(--color-texto)"
+        color: "var(--color-texto)",
+    },
+    entradaTexto: {
+        display: "inline-block",
+        background: "none",
+        color: "var(--color-texto)",
+        margin: "0.25rem 0",
+        borderRadius: "0.25rem",
+        border: "dashed 1px rgba(255, 255, 255, 0.4)",
+        padding: "0.35rem",
+        fontSize: "1rem",
+    },
+    botonTexto: {
+        padding: "0.25rem 0.35rem",
+        borderRadius: "5px",
     },
 })

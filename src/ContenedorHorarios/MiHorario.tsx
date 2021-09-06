@@ -137,7 +137,7 @@ export function MiHorario(props: MiHorarioProps) {
                         estadoLayoutMax={"MaxPersonal"}
                     />
                     */}
-                    <div/>
+                    <div />
                 </Match>
             </Switch>
         </div>

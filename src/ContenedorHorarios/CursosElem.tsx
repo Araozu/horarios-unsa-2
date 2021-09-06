@@ -110,10 +110,10 @@ const agruparProfesores = (
 
 function CursoE(
     indiceCurso: string,
-    datosCurso: Curso, 
-    anio: () => string, 
-    claseCursoAgregado: string, 
-    props: Props
+    datosCurso: Curso,
+    anio: () => string,
+    claseCursoAgregado: string,
+    props: Props,
 ) {
     const idCurso = `${props.version}_${anio()}_${datosCurso.abreviado}`
 

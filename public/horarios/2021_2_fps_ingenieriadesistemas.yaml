@@ -124,7 +124,7 @@ años:
             - Vi1630
             - Vi1920
             - Vi2010
-      
+
     Auditoria:
       nombre: Auditoría de Sistemas
       abreviado: AS
@@ -133,7 +133,7 @@ años:
           Docente: Edward Zarate
           Horas:
             - Ju0940
-            - Ju1030
+            - Ju1040
             - Ju1130
             - Vi0850
             - Vi0940
@@ -235,4 +235,3 @@ años:
             - Mi1920
             - Mi2010
   5to año: {}
-    

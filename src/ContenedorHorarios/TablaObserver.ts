@@ -154,6 +154,7 @@ export class TablaObserver {
                 }
                 default: {
                     let _: never
+                    // eslint-disable-next-line prefer-const
                     _ = seleccionado
                     return _
                 }
