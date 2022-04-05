@@ -1,6 +1,7 @@
 import { StyleSheet, css } from "aphrodite"
 import { estilosGlobales } from "../../Estilos"
-import { For, createMemo, createState, State } from "solid-js"
+import { For, createMemo } from "solid-js"
+import {createStore, Store} from "solid-js/store"
 import { Dia, dias } from "../../Store"
 import { CeldaFila } from "./CeldaFila"
 import { DataProcesada } from "../../types/DatosHorario"
@@ -51,7 +52,7 @@ const e = StyleSheet.create({
     },
 })
 
-const [diasResaltados, setDiasResaltados] = createState({
+const [diasResaltados, setDiasResaltados] = createStore({
     Lunes: 0,
     Martes: 0,
     Miercoles: 0,
@@ -71,11 +72,11 @@ const diasFilter = createMemo(() => Object.entries(diasResaltados)
     .sort((x, y) => (diaANum(x) > diaANum(y) ? 1 : -1)))
 
 const useDiasResaltados: () => [
-    State<{ [k: string]: boolean }>,
+    Store<{ [k: string]: boolean }>,
     (d: Dia) => void,
     (d: Dia) => void
 ] = () => {
-    const [diasResaltadosLocal, setDiasResaltadosLocal] = createState({
+    const [diasResaltadosLocal, setDiasResaltadosLocal] = createStore({
         Lunes: false,
         Martes: false,
         Miercoles: false,
@@ -148,7 +149,7 @@ export function FilaTabla(props: Props) {
                         )
                     }}
                 </For>
-                <div className={css(e.filaBorde)}/>
+                <div className={css(e.filaBorde)} />
             </div>
         </div>
     )

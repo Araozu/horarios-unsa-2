@@ -1,5 +1,6 @@
 import { Curso, Cursos, DatosHorario, ListaCursosUsuario } from "../types/DatosHorario"
-import { batch, createMemo, createSignal, For, Match, SetStateFunction, Switch, untrack } from "solid-js"
+import { batch, createMemo, createSignal, For, Match, Switch, untrack } from "solid-js"
+import {SetStoreFunction} from "solid-js/store"
 import { css } from "aphrodite"
 import { estilosGlobales } from "../Estilos"
 import { Tabla } from "./Tabla"
@@ -15,7 +16,7 @@ interface HorariosProps {
     setEstadoLayout: (v: EstadoLayout) => EstadoLayout,
     fnAgregarCurso: (c: Curso) => void,
     listaCursosUsuario: ListaCursosUsuario,
-    setCursosUsuarios: SetStateFunction<ListaCursosUsuario>
+    setCursosUsuarios: SetStoreFunction<ListaCursosUsuario>
 }
 
 const {
@@ -129,7 +130,7 @@ export function Horarios(props: HorariosProps) {
                         estadoLayoutMax={"MaxHorarios"}
                     />
                     */}
-                    <div/>
+                    <div />
                 </Match>
             </Switch>
 

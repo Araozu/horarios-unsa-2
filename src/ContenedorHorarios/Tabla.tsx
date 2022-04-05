@@ -1,5 +1,6 @@
 import { StyleSheet, css } from "aphrodite"
-import { batch, createMemo, For, produce, SetStateFunction } from "solid-js"
+import { batch, createMemo, For } from "solid-js"
+import { produce, SetStoreFunction } from "solid-js/store"
 import { estilosGlobales } from "../Estilos"
 import { Cursos, ListaCursosUsuario, DataProcesada, DatosGrupo } from "../types/DatosHorario"
 import { Dia, dias, horas } from "../Store"
@@ -82,7 +83,7 @@ const e = StyleSheet.create({
     },
 })
 
-type FnSetCursosUsuarios = SetStateFunction<ListaCursosUsuario>;
+type FnSetCursosUsuarios = SetStoreFunction<ListaCursosUsuario>;
 
 const procesarAnio = (data: Cursos, anio: string, version: number, setCursosUsuarios: FnSetCursosUsuarios) => {
     const obj: DataProcesada = {}
@@ -122,7 +123,7 @@ const procesarAnio = (data: Cursos, anio: string, version: number, setCursosUsua
                             if (grupoActualSeleccionado) {
                                 x[grupoStr].seleccionado = false
                             } else {
-                                for (let xKey in x) {
+                                for (const xKey in x) {
                                     x[xKey].seleccionado = xKey === grupoStr
                                 }
                             }
@@ -166,7 +167,7 @@ const procesarAnio = (data: Cursos, anio: string, version: number, setCursosUsua
                                 if (grupoActualSeleccionado) {
                                     x[grupoStr].seleccionado = false
                                 } else {
-                                    for (let xKey in x) {
+                                    for (const xKey in x) {
                                         x[xKey].seleccionado = xKey === grupoStr
                                     }
                                 }
@@ -185,7 +186,7 @@ interface Props {
     data: Cursos,
     anio: string,
     version: number,
-    setCursosUsuarios: SetStateFunction<ListaCursosUsuario>,
+    setCursosUsuarios: SetStoreFunction<ListaCursosUsuario>,
     tablaObserver: TablaObserver,
 }
 

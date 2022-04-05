@@ -1,5 +1,6 @@
 import { Cursos, DatosGrupo, ListaCursosUsuario, Curso } from "../types/DatosHorario"
-import { createMemo, For, produce, SetStateFunction } from "solid-js"
+import { createMemo, For } from "solid-js"
+import { produce, SetStoreFunction } from "solid-js/store"
 import { StyleSheet, css } from "aphrodite"
 import { estilosGlobales } from "../Estilos"
 import { TablaObserver } from "./TablaObserver"
@@ -48,11 +49,11 @@ interface Props {
     fnAgregarCurso: (c: Curso) => void,
     listaCursosUsuario: ListaCursosUsuario,
     esCursoMiHorario: boolean,
-    setCursosUsuarios: SetStateFunction<ListaCursosUsuario>,
+    setCursosUsuarios: SetStoreFunction<ListaCursosUsuario>,
     tablaObserver: TablaObserver,
 }
 
-type FnSetCursosUsuarios = SetStateFunction<ListaCursosUsuario>;
+type FnSetCursosUsuarios = SetStoreFunction<ListaCursosUsuario>;
 
 interface PropsIndicadorGrupo {
     nombre: string,
@@ -65,7 +66,8 @@ interface PropsIndicadorGrupo {
 function IndicadorGrupo(props: PropsIndicadorGrupo) {
     const id = `${props.idParcial}_${props.esLab ? "L" : "T"}_${props.nombre}`
     return (
-        <span className={css(e.botonTexto, estilosGlobales.contenedorCursor, estilosGlobales.contenedorCursorSoft)}
+        <span
+            className={css(e.botonTexto, estilosGlobales.contenedorCursor, estilosGlobales.contenedorCursorSoft)}
             style={props.esLab ? {"font-style": "italic"} : {"font-weight": "bold"}}
             onMouseEnter={() => props.tablaObserver.resaltar(id)}
             onMouseLeave={() => props.tablaObserver.quitarResaltado()}
@@ -97,7 +99,7 @@ const agruparProfesores = (
                     if (grupoActualSeleccionado) {
                         x[grupo].seleccionado = false
                     } else {
-                        for (let xKey in x) {
+                        for (const xKey in x) {
                             x[xKey].seleccionado = xKey === grupo
                         }
                     }
@@ -120,7 +122,10 @@ function CursoE(
     const cursoAgregadoMemo = createMemo(
         () => props.listaCursosUsuario.cursos.find((x) => x.nombre === datosCurso.nombre && !x.oculto) !== undefined,
         undefined,
-        (x, y) => x === y,
+        {
+            equals:
+                (x, y) => x === y,
+        },
     )
 
     const tituloMemo = createMemo(() => (cursoAgregadoMemo()

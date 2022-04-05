@@ -2,7 +2,8 @@ import { estilosGlobales } from "../Estilos"
 import { StyleSheet, css } from "aphrodite"
 import { Tabla } from "./Tabla"
 import { EstadoLayout } from "./ContenedorHorarios"
-import { Switch, Match, createMemo, SetStateFunction } from "solid-js"
+import { Switch, Match, createMemo } from "solid-js"
+import {SetStoreFunction} from "solid-js/store"
 import { BotonMaxMin } from "./BotonMaxMin"
 import { BotonIcono } from "./BotonIcono"
 import { Curso, Cursos, ListaCursosUsuario } from "../types/DatosHorario"
@@ -14,7 +15,7 @@ interface MiHorarioProps {
     setEstadoLayout: (v: EstadoLayout) => EstadoLayout,
     cursosUsuario: ListaCursosUsuario,
     fnAgregarCurso: (c: Curso) => void,
-    setCursosUsuarios: SetStateFunction<ListaCursosUsuario>
+    setCursosUsuarios: SetStoreFunction<ListaCursosUsuario>
 }
 
 const e = StyleSheet.create({
