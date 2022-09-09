@@ -105,7 +105,7 @@ export function BarraSuperior() {
             <CambiadorImg />
             <TamanoLetra />
             <span className={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock)}>Ingeniería de Sistemas</span>
-            <span className={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock)}>2021-B</span>
+            <span className={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock)}>2022-B</span>
         </header>
     )
 }
