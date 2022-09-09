@@ -7,7 +7,8 @@ import YAML from "yaml"
 import { TablaObserver } from "../ContenedorHorarios/TablaObserver"
 import { Curso, Cursos } from "../types/DatosHorario"
 import { CursosElem } from "../ContenedorHorarios/CursosElem"
-import { For, createMemo, createState } from "solid-js"
+import { For, createMemo } from "solid-js"
+import {createStore} from "solid-js/store"
 import { CursoEditor } from "./Editor/CursoEditor"
 
 const e = StyleSheet.create({
@@ -25,7 +26,7 @@ interface Data {
     cursos: Curso[],
 }
 
-const [nuevaData, setNuevaData] = createState<Data>({
+const [nuevaData, setNuevaData] = createStore<Data>({
     indice: 1,
     cursos: [{
         nombre: "Curso de Ejemplo",
@@ -109,7 +110,7 @@ export function Editor() {
                 <span style={{margin: "1rem 0", display: "inline-block"}}>
                     Agregar curso nuevo:
                 </span>
-                <form onSubmit={agregarCurso}>
+                <form onSubmit={(ev) => agregarCurso(ev as FormEvent)}>
                     <label htmlFor="nombre_curso">Nombre del curso:</label>
                     <input className={css(estilosGlobales.entradaTexto)} type="text" id="nombre_curso" name="nombre_curso" />
                     <br />

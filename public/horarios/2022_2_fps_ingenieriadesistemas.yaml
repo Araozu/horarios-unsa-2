@@ -1,0 +1,433 @@
+titulo: Horarios 2021-A, Ingeniería de Sistemas.
+version: 20210328
+descripcion: |
+  Última actualizacion: 2021/03/28
+años:
+  1er año: {}
+  2do año: {}
+  3er año: {}
+  4to año:
+    Intro Soft Ent:
+      nombre: Introduccion a Software de Entetenimiento
+      abreviado: IDSEe
+      Teoria:
+        A:
+          Docente: Diego Iquira
+          Horas:
+            - Ma0940
+            - Ma1040
+            - Ma1130
+        B:
+          Docente: Diego Iquira
+          Horas:
+            - Lu1740
+            - Lu1830
+            - Lu1920
+      Laboratorio:
+        A:
+          Docente: Rosa Encinas
+          Horas:
+            - Vi0700
+            - Vi0750
+        B:
+          Docente: Rosa Encinas
+          Horas:
+            - Vi1920
+            - Vi2010
+        C:
+          Docente: Rosa Encinas
+          Horas:
+            - Vi1740
+            - Vi1830
+    Diseno y Arquitectura:
+      nombre: Diseño Y Arquitectura de Software
+      abreviado: DAS
+      Teoria:
+        A:
+          Docente: Percy Huertas
+          Horas:
+            - Lu0850
+            - Lu0940
+            - Mi0850
+            - Mi0940
+        B:
+          Docente: Percy Huertas
+          Horas:
+            - Lu1400
+            - Lu1450
+            - Ma1400
+            - Ma1450
+      Laboratorio:
+        A:
+          Docente: Percy Huertas
+          Horas:
+            - Lu1040
+            - Lu1130
+        B:
+          Docente: Franklin Cruz
+          Horas:
+            - Mi1400
+            - Mi1450
+        C:
+          Docente: Franklin Cruz
+          Horas:
+            - Mi1220
+            - Mi1310
+    Gestion Proyecto Soft:
+      nombre: Gestion de Proyectos de Software
+      abreviado: GPS
+      Teoria:
+        A:
+          Docente: Jesús Silva
+          Horas:
+            - Mi0700
+            - Mi0750
+        B:
+          Docente: Yasiel Perez
+          Horas:
+            - Mi1550
+            - Mi1640
+        C:
+          Docente: Yasiel Perez
+          Horas:
+            - Lu1040
+            - Lu1130
+      Laboratorio:
+        A:
+          Docente: Jesús Silva
+          Horas:
+            - Lu0700
+            - Lu0750
+        B:
+          Docente: Yasiel Perez
+          Horas:
+            - Lu1220
+            - Lu1310
+        C:
+          Docente: Yasiel Perez
+          Horas:
+            - Ma1740
+            - Ma1830
+    Negocios Electronicos:
+      nombre: Negocios Electrónicos
+      abreviado: NE
+      Teoria:
+        A:
+          Docente: Cesar Baluarte
+          Horas:
+            - Mi1040
+            - Mi1130
+            - Mi1220
+        B:
+          Docente: Lilian Benique
+          Horas:
+            - Vi1630
+            - Vi1920
+            - Vi2010
+
+    Auditoria:
+      nombre: Auditoría de Sistemas
+      abreviado: AS
+      Teoria:
+        A:
+          Docente: Edward Zarate
+          Horas:
+            - Ju0940
+            - Ju1040
+            - Ju1130
+            - Vi0850
+            - Vi0940
+        B:
+          Docente: Edward Zarate
+          Horas:
+            - Ju1400
+            - Ju1450
+            - Ju1550
+            - Vi1400
+            - Vi1450
+        C:
+          Docente: Edith Cano
+          Horas:
+            - Mi1400
+            - Mi1450
+            - Ju0700
+            - Ju0750
+            - Ju0850
+    Aspectos Formales:
+      nombre: Aspectos Formales de Verificación y Especificación
+      abreviado: AFEV
+      Teoria:
+        A:
+          Docente: Maribel Molina
+          Horas:
+            - Lu0700
+            - Lu0750
+        B:
+          Docente: Maribel Molina
+          Horas:
+            - Ju1920
+            - Ju2010
+        C:
+          Docente: Maribel Molina
+          Horas:
+            - Vi0700
+            - Vi0750
+    Calidad Soft:
+      nombre: Calidad de Software
+      abreviado: CS
+      Teoria:
+        A:
+          Docente: Jesús Silva
+          Horas:
+            - Ma0700
+            - Ma0750
+        B:
+          Docente: Maribel Molina
+          Horas:
+            - Mi1740
+            - Mi1830
+      Laboratorio:
+        A:
+          Docente: Jesús Silva
+          Horas:
+            - Lu0850
+            - Lu0940
+        B:
+          Docente: Jesús Silva
+          Horas:
+            - Mi1550
+            - Mi1640
+        C:
+          Docente: Maribel Molina
+          Horas:
+            - Ju0700
+            - Ju0750
+    Intro Nueva Plat:
+      nombre: Introduccion al Desarrollo de Nuevas Plataformas
+      abreviado: IDNP
+      Teoria:
+        A:
+          Docente: Ernesto Suarez
+          Horas:
+            - Vi1040
+            - Vi1130
+            - Vi1220
+        B:
+          Docente: Ernesto Suarez
+          Horas:
+            - Vi1550
+            - Vi1640
+            - Vi1740
+      Laboratorio:
+        A:
+          Docente: Ernesto Suarez
+          Horas:
+            - Mi0700
+            - Mi0750
+        B:
+          Docente: Ernesto Suarez
+          Horas:
+            - Mi1740
+            - Mi1830
+        C:
+          Docente: Ernesto Suarez
+          Horas:
+            - Mi1920
+            - Mi2010
+  5to año:
+    Topicos:
+      nombre: Tópicos Avanzados en Ingeniería de Software
+      abreviado: TAIS
+      Teoria:
+        A:
+          Docente: "?"
+          Horas:
+            - Ma0940
+            - Ma1040
+            - Ma1130
+        B:
+          Docente: "?"
+          Horas:
+            - Vi1450
+            - Vi1550
+            - Vi1640
+      Laboratorio:
+        A:
+          Docente: "?"
+          Horas:
+            - Mi0700
+            - Mi0750
+        B:
+          Docente: "?"
+          Horas:
+            - Mi1400
+            - Mi1450
+    Plataformas:
+      nombre: Plataformas Emergentes
+      abreviado: PE
+      Teoria:
+        A:
+          Docente: "?"
+          Horas:
+            - Lu0750
+            - Lu0850
+      Laboratorio:
+        A:
+          Docente: "?"
+          Horas:
+            - Ju0850
+            - Ju0940
+    Proyecto de Sw:
+      nombre: Proyecto de Ingeniería de Software 2
+      abreviado: PIS2
+      Teoria:
+        A:
+          Docente: "?"
+          Horas:
+            - Lu0940
+            - Lu1040
+        C:
+          Docente: "?"
+          Horas:
+            - Lu1130
+            - Lu1220
+        B:
+          Docente: "?"
+          Horas:
+            - Lu1550
+            - Lu1640
+        D:
+          Docente: "?"
+          Horas:
+            - Lu1740
+            - Lu1830
+        E:
+          Docente: "?"
+          Horas:
+            - Ju0940
+            - Ju1040
+      Laboratorio:
+        B:
+          Docente: "?"
+          Horas:
+            - Mi1830
+            - Mi1920
+    Sw de Juegos:
+      nombre: Desarrollo de Software para Juegos
+      abreviado: DSJ
+      Teoria:
+        A:
+          Docente: "?"
+          Horas:
+            - Lu1920
+            - Lu2010
+      Laboratorio:
+        A:
+          Docente: "?"
+          Horas:
+            - Mi1220
+            - Mi1310
+    Tesis 2:
+      nombre: Seminario de Tesis 2
+      abreviado: ST2
+      Teoria:
+        A:
+          Docente: "?"
+          Horas:
+            - Ma0700
+            - Ma0750
+            - Ma0850
+            - Ju0700
+            - Ju0750
+            - Ju0850
+        B:
+          Docente: "?"
+          Horas:
+            - Ma1310
+            - Ma1400
+            - Ma1450
+            - Mi1310
+            - Mi1400
+            - Mi1450
+        C:
+          Docente: "?"
+          Horas:
+            - Mi0750
+            - Mi0850
+            - Mi0940
+            - Vi0700
+            - Vi0750
+            - Vi0850
+        G:
+          Docente: "?"
+          Horas:
+            - Mi1040
+            - Mi1130
+            - Mi1220
+            - Vi0940
+            - Vi1040
+            - Vi1130
+        E:
+          Docente: "?"
+          Horas:
+            - Ma1550
+            - Ma1640
+            - Mi1550
+            - Mi1640
+            - Ju1550
+            - Ju1640
+        F:
+          Docente: "?"
+          Horas:
+            - Ju1220
+            - Ju1310
+            - Ju1400
+            - Vi1220
+            - Vi1310
+            - Vi1400
+    Gestion:
+      nombre: Gestión de Sistemas y Tecnologías de Información
+      abreviado: GSTI
+      Teoria:
+        A:
+          Docente: "?"
+          Horas:
+            - Ma1740
+            - Ma1830
+    Practicas:
+      nombre: Prácticas Pre Profesionales
+      abreviado: PPP
+      Teoria:
+        A:
+          Docente: "?"
+          Horas:
+            - Mi1740
+            - Mi1830
+            - Vi1740
+            - Vi1830
+        B:
+          Docente: "?"
+          Horas:
+            - Mi1920
+            - Mi2010
+            - Vi1920
+            - Vi2010
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

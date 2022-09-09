@@ -1,4 +1,4 @@
-import { createSignal} from "solid-js"
+import { createSignal } from "solid-js"
 
 enum ModoColor {
     Claro,
@@ -45,4 +45,4 @@ const tamanoLetraGuardado = Number(localStorage.getItem("tamano-letra") ?? "16")
 export const [modoColor, setModoColor] = createSignal(ModoColor.Oscuro)
 export const [numWallpaper, setNumWallpaper] = createSignal(numImgGuardado)
 export const [mostrarDescansos, setMostrarDescansos] = createSignal(true)
-export const [tamanoLetra, setTamanoLetra] = createSignal(tamanoLetraGuardado);
+export const [tamanoLetra, setTamanoLetra] = createSignal(tamanoLetraGuardado)

@@ -1,10 +1,13 @@
-import { createMemo, createState, SetStateFunction, State, produce, createEffect, untrack } from "solid-js"
+import { createMemo, createEffect, untrack } from "solid-js"
+import {createStore, SetStoreFunction, Store, produce} from "solid-js/store"
 import { DatosGrupo } from "../types/DatosHorario"
 
 const createMemoDefault = <T>(f: () => T) => createMemo<T>(
     f,
     undefined,
-    (x, y) => x === y,
+    {
+        equals: (x, y) => x === y,
+    },
 )
 
 /**
@@ -46,15 +49,15 @@ interface ISeleccionado {
 
 export class TablaObserver {
 
-    private readonly resaltado: State<IResaltado>
-    private readonly setResaltado: SetStateFunction<IResaltado>
+    private readonly resaltado: Store<IResaltado>
+    private readonly setResaltado: SetStoreFunction<IResaltado>
     private memos: { [id: string]: () => EstadoCelda } = {}
 
-    private readonly seleccionado: State<ISeleccionado>
-    private readonly setSeleccionado: SetStateFunction<ISeleccionado>
+    private readonly seleccionado: Store<ISeleccionado>
+    private readonly setSeleccionado: SetStoreFunction<ISeleccionado>
 
     constructor() {
-        const [resaltado, setResaltado] = createState<IResaltado>({
+        const [resaltado, setResaltado] = createStore<IResaltado>({
             anio: undefined,
             curso: undefined,
             esLab: undefined,
@@ -63,7 +66,7 @@ export class TablaObserver {
         this.resaltado = resaltado
         this.setResaltado = setResaltado
 
-        const [seleccionado, setSeleccionado] = createState<ISeleccionado>({})
+        const [seleccionado, setSeleccionado] = createStore<ISeleccionado>({})
         this.seleccionado = seleccionado
         this.setSeleccionado = setSeleccionado
     }
@@ -101,7 +104,7 @@ export class TablaObserver {
         })
 
         // Registrar curso en `seleccionado`
-        this.setSeleccionado((obj: State<ISeleccionado>) => {
+        this.setSeleccionado((obj: Store<ISeleccionado>) => {
             const nuevoObj = {...obj}
 
             if (!nuevoObj[anio]) {

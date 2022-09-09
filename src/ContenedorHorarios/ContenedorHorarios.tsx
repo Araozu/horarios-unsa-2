@@ -14,7 +14,7 @@ import { batch, createEffect, createMemo, createSignal, Show } from "solid-js"
 import { useListaCursos } from "./useListaCursos"
 
 const datosPromise = (async() => {
-    const file = await fetch("/horarios/2021_2_fps_ingenieriadesistemas.yaml")
+    const file = await fetch("/horarios/2022_2_fps_ingenieriadesistemas.yaml")
     const text = await file.text()
     const datosRaw = YAML.parse(text) as DatosHorarioRaw
 

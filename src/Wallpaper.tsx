@@ -1,6 +1,7 @@
 import { StyleSheet, css } from "aphrodite"
 import { numWallpaper } from "./Store"
-import { createEffect, createState } from "solid-js"
+import { createEffect } from "solid-js"
+import {createStore} from "solid-js/store"
 
 const duracionTransicion = 250
 
@@ -33,7 +34,7 @@ export function Wallpaper() {
         },
     })
 
-    const [estilosRaw, setEstilosRaw] = createState({
+    const [estilosRaw, setEstilosRaw] = createStore({
         "background-image": "none",
         opacity: 1,
     })

@@ -1,15 +1,15 @@
-import { createState, SetStateFunction, State } from "solid-js"
+import {createStore, SetStoreFunction, Store} from "solid-js/store"
 import { Curso, ListaCursosUsuario } from "../types/DatosHorario"
 
 interface ReturnType {
-    listaCursos: State<ListaCursosUsuario>,
-    setListaCursos: SetStateFunction<ListaCursosUsuario>,
+    listaCursos: Store<ListaCursosUsuario>,
+    setListaCursos: SetStoreFunction<ListaCursosUsuario>,
     agregarCursoALista: (c: Curso) => Curso,
     eliminarCursosDeLista: () => void
 }
 
 export const useListaCursos = (): ReturnType => {
-    const [listaCursos, setListaCursos] = createState<ListaCursosUsuario>({
+    const [listaCursos, setListaCursos] = createStore<ListaCursosUsuario>({
         sigIndice: 0,
         cursos: [],
     })
