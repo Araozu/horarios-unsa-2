@@ -1,22 +1,22 @@
-import { BarraSuperior } from "../BarraSuperior"
-import { ContenedorHorarios } from "../ContenedorHorarios/ContenedorHorarios"
-import { Show, createSignal } from "solid-js"
-import { css } from "aphrodite"
-import { estilosGlobales } from "../Estilos"
-import { Creditos } from "../Creditos"
-import { Separador } from "../Separador"
+import { BarraSuperior } from "../BarraSuperior";
+import { ContenedorHorarios } from "../ContenedorHorarios/ContenedorHorarios";
+import { Show, createSignal } from "solid-js";
+import { css } from "aphrodite";
+import { estilosGlobales } from "../Estilos";
+import { Creditos } from "../Creditos";
+import { Separador } from "../Separador";
 
 export function Main() {
     /// @ts-ignore
-    const soportaBackdropFilter = document.body.style.backdropFilter !== undefined
-    const mostrarMensajeBackdropFilterRaw = !localStorage.getItem("mensaje-backdrop-filter-oculto")
+    const soportaBackdropFilter = document.body.style.backdropFilter !== undefined;
+    const mostrarMensajeBackdropFilterRaw = !localStorage.getItem("mensaje-backdrop-filter-oculto");
 
-    const [mostrarMensajeBackdropFilter, setMostrarMensaje] = createSignal(mostrarMensajeBackdropFilterRaw)
+    const [mostrarMensajeBackdropFilter, setMostrarMensaje] = createSignal(mostrarMensajeBackdropFilterRaw);
 
     const ocultarMensajeBackdropFilter = () => {
-        setMostrarMensaje(false)
-        localStorage.setItem("mensaje-backdrop-filter-oculto", "true")
-    }
+        setMostrarMensaje(false);
+        localStorage.setItem("mensaje-backdrop-filter-oculto", "true");
+    };
 
     return (
         <div>
@@ -45,5 +45,5 @@ export function Main() {
             <ContenedorHorarios />
             <Creditos />
         </div>
-    )
+    );
 }

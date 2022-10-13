@@ -4,6 +4,7 @@ import { Editor } from "./Views/Editor";
 import { useRouter } from "./Router";
 import { Switch, Match, Show } from "solid-js";
 import { Wallpaper } from "./Wallpaper";
+import { SistemasMovil } from "./Views/SistemasMovil";
 
 function App() {
     const route = useRouter();
@@ -20,6 +21,9 @@ function App() {
                 </Match>
                 <Match when={route() === "/editor/"}>
                     <Editor />
+                </Match>
+                <Match when={route() === "/sistemas-movil/"}>
+                    <SistemasMovil />
                 </Match>
                 <Match when={route() === "/sistemas/"}>
                     <Main />

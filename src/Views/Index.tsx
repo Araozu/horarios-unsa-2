@@ -55,6 +55,7 @@ function MobileIndex() {
 
     const login = () => {
         console.log((inputElement as HTMLInputElement).value);
+        window.location.href = "#/sistemas-movil/";
     };
 
     return (

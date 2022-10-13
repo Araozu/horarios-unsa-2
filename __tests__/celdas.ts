@@ -42,7 +42,7 @@ type Output = {
 
 class MapaCeldas {
     // Almacena referencias a input
-    private mapa: Map<number, Map<number, Input>> = new Map();
+    private mapa: Map<number, Map<number, null>> = new Map();
 
     private disponible(nroFila: number, nroColumna: number): boolean {
         if (!this.mapa.has(nroFila)) return true;
@@ -52,9 +52,9 @@ class MapaCeldas {
         return fila.has(nroColumna) === false;
     }
 
-    private obtenerFilaOCrear(nro: number): Map<number, Input> {
+    private obtenerFilaOCrear(nro: number): Map<number, null> {
         if (!this.mapa.has(nro)) {
-            const m = new Map<number, Input>();
+            const m = new Map<number, null>();
             this.mapa.set(nro, m);
             return m;
         }
@@ -63,7 +63,7 @@ class MapaCeldas {
     }
 
     // Devuelve el offset
-    public solicitar(inicio: number, cantidad: number, input: Input): number {
+    public solicitar(inicio: number, cantidad: number): number {
         const filas = [];
         for (let i = 0; i < cantidad; i += 1) filas.push(inicio + i);
 
@@ -80,7 +80,7 @@ class MapaCeldas {
                 // Crear estas celdas y almacenar
                 filas.forEach((nroFila) => {
                     const fila = this.obtenerFilaOCrear(nroFila);
-                    fila.set(offsetActual, input);
+                    fila.set(offsetActual, null);
                 });
 
                 // Devolver nro de offset
@@ -112,7 +112,7 @@ function generarMapaCeldas(entrada: Readonly<Array<Input>>): Array<Output> {
 
     // Obtener los offsets de cada curso
     for (const input of entrada) {
-        const offset = mapa.solicitar(input.horaInicio, input.nroHoras, input);
+        const offset = mapa.solicitar(input.horaInicio, input.nroHoras);
         salida.push({
             ...input,
             offset,
@@ -174,29 +174,29 @@ describe("MapaCeldas", () => {
     it("crea 1", () => {
         const mapa = new MapaCeldas();
         const input = {} as unknown as Input;
-        const offset = mapa.solicitar(0, 2, input);
+        const offset = mapa.solicitar(0, 2);
         expect(offset).toBe(0);
     });
 
     it("crea varios que no se solapan", () => {
         const mapa = new MapaCeldas();
         const input = {} as unknown as Input;
-        let offset = mapa.solicitar(0, 2, input);
+        let offset = mapa.solicitar(0, 2);
         expect(offset).toBe(0);
-        offset = mapa.solicitar(4, 3, input);
+        offset = mapa.solicitar(4, 3);
         expect(offset).toBe(0);
-        offset = mapa.solicitar(7, 4, input);
+        offset = mapa.solicitar(7, 4);
         expect(offset).toBe(0);
     });
 
     it("crea varios que se solapan", () => {
         const mapa = new MapaCeldas();
         const input = {} as unknown as Input;
-        let offset = mapa.solicitar(0, 2, input);
+        let offset = mapa.solicitar(0, 2);
         expect(offset).toBe(0);
-        offset = mapa.solicitar(0, 2, input);
+        offset = mapa.solicitar(0, 2);
         expect(offset).toBe(1);
-        offset = mapa.solicitar(0, 4, input);
+        offset = mapa.solicitar(0, 4);
         expect(offset).toBe(2);
     });
 
@@ -212,33 +212,33 @@ describe("MapaCeldas", () => {
          */
         const mapa = new MapaCeldas();
         const input = {} as unknown as Input;
-        let offset = mapa.solicitar(0, 2, input);
+        let offset = mapa.solicitar(0, 2);
         expect(offset).toBe(0);
-        offset = mapa.solicitar(1, 3, input);
+        offset = mapa.solicitar(1, 3);
         expect(offset).toBe(1);
-        offset = mapa.solicitar(1, 4, input);
+        offset = mapa.solicitar(1, 4);
         expect(offset).toBe(2);
-        offset = mapa.solicitar(2, 3, input);
+        offset = mapa.solicitar(2, 3);
         expect(offset).toBe(0);
-        offset = mapa.solicitar(4, 2, input);
+        offset = mapa.solicitar(4, 2);
         expect(offset).toBe(1);
     });
 
     it("genera offsets", () => {
         const mapa = new MapaCeldas();
         const input = {} as unknown as Input;
-        let offset = mapa.solicitar(0, 2, input);
+        let offset = mapa.solicitar(0, 2);
         expect(offset).toBe(0);
         let fraccion = mapa.generarFraccion(0, offset, 2);
         expect(fraccion).toBe(1);
 
-        offset = mapa.solicitar(1, 3, input);
+        offset = mapa.solicitar(1, 3);
         fraccion = mapa.generarFraccion(1, offset, 3);
         expect(fraccion).toBe(2);
 
-        mapa.solicitar(1, 4, input);
-        mapa.solicitar(2, 3, input);
-        offset = mapa.solicitar(4, 2, input);
+        mapa.solicitar(1, 4);
+        mapa.solicitar(2, 3);
+        offset = mapa.solicitar(4, 2);
         fraccion = mapa.generarFraccion(4, offset, 2);
         expect(fraccion).toBe(3);
     });
