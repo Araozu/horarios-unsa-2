@@ -1,9 +1,47 @@
+:root {
+    --color-texto: white;
+    --color-primario: #531925;
+}
+
+body {
+    color: var(--color-texto);
+}
+
+[class^="ph-"], [class*=" ph-"] ::before {
+    font-size: 0.8rem;
+}
+
+* {
+    color: var(--color-texto);
+}
+
 body {
     font-family: Inter, sans-serif;
+    color: var(--color-texto);
 }
 
 button {
     background-color: transparent;
-    color: var(--color);
+    color: var(--color-texto);
     border: none;
+}
+
+h1 {
+    font-weight: 600;
+}
+
+h2 {
+    font-weight: 500;
+}
+
+@media screen and (max-width: 500px) {
+    .hide-on-small {
+        display: none !important;
+    }
+}
+
+@media screen and (min-width: 501px) {
+    .hide-on-big {
+
+    }
 }

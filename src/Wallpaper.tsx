@@ -1,13 +1,13 @@
-import { StyleSheet, css } from "aphrodite"
-import { numWallpaper } from "./Store"
-import { createEffect } from "solid-js"
-import {createStore} from "solid-js/store"
+import { StyleSheet, css } from "aphrodite";
+import { numWallpaper } from "./Store";
+import { createEffect } from "solid-js";
+import {createStore} from "solid-js/store";
 
-const duracionTransicion = 250
+const duracionTransicion = 250;
 
 export function Wallpaper() {
     /// @ts-ignore
-    const soportaBackdropFilter = document.body.style.backdropFilter !== undefined
+    const soportaBackdropFilter = document.body.style.backdropFilter !== undefined;
 
     const estilos = StyleSheet.create({
         contenedorCover: {
@@ -32,32 +32,32 @@ export function Wallpaper() {
         coverTransicion: {
             opacity: 0,
         },
-    })
+    });
 
     const [estilosRaw, setEstilosRaw] = createStore({
         "background-image": "none",
         opacity: 1,
-    })
+    });
 
     createEffect(() => {
-        const numImg = numWallpaper()
-        setEstilosRaw("opacity", 0)
+        const numImg = numWallpaper();
+        setEstilosRaw("opacity", 0);
 
         const promesa250ms = new Promise((resolve) => {
-            setTimeout(resolve, duracionTransicion)
-        })
+            setTimeout(resolve, duracionTransicion);
+        });
 
-        const url = `/img/wall${numImg}.webp`
-        const img = new Image()
+        const url = `/img/wall${numImg}.webp`;
+        const img = new Image();
         img.addEventListener("load", async() => {
-            await promesa250ms
+            await promesa250ms;
             setEstilosRaw({
                 "background-image": `url('${url}')`,
                 opacity: 1,
-            })
-        })
-        img.src = url
-    })
+            });
+        });
+        img.src = url;
+    });
 
     return (
         <div className={css(estilos.contenedorCover)}>
@@ -66,6 +66,6 @@ export function Wallpaper() {
                 style={{"background-image": estilosRaw["background-image"], opacity: estilosRaw.opacity}}
             />
         </div>
-    )
+    );
 
 }

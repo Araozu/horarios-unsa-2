@@ -20,7 +20,7 @@
         "vite-plugin-solid": "^2.2.6"
     },
     "scripts": {
-        "start": "vite",
+        "start": "vite --host",
         "dev": "vite",
         "build": "vite build",
         "serve": "vite preview"

@@ -1,10 +1,10 @@
-import { estilosGlobales } from "./Estilos"
-import { StyleSheet, css } from "aphrodite"
-import { numWallpaper, setNumWallpaper } from "./Store"
-import { TamanoLetra } from "./BarraSuperior/TamanoLetra"
-import { RouterLink } from "./Router"
+import { estilosGlobales } from "./Estilos";
+import { StyleSheet, css } from "aphrodite";
+import { numWallpaper, setNumWallpaper } from "./Store";
+import { TamanoLetra } from "./BarraSuperior/TamanoLetra";
+import { RouterLink } from "./Router";
 
-const ultimoIndiceWallpaper = 2
+const ultimoIndiceWallpaper = 1;
 
 const e = StyleSheet.create({
     contCambiador: {
@@ -30,29 +30,29 @@ const e = StyleSheet.create({
         paddingLeft: "0.5rem",
         marginRight: "0.25rem",
     },
-})
+});
 
 const retrocederWallpaper = () => {
-    const num = numWallpaper()
+    const num = numWallpaper();
     if (num > 0) {
-        setNumWallpaper(num - 1)
-        localStorage.setItem("num-img", (num - 1).toString())
+        setNumWallpaper(num - 1);
+        localStorage.setItem("num-img", (num - 1).toString());
     } else {
-        setNumWallpaper(ultimoIndiceWallpaper)
-        localStorage.setItem("num-img", (ultimoIndiceWallpaper).toString())
+        setNumWallpaper(ultimoIndiceWallpaper);
+        localStorage.setItem("num-img", (ultimoIndiceWallpaper).toString());
     }
-}
+};
 
 const avanzarWallpaper = () => {
-    const num = numWallpaper()
+    const num = numWallpaper();
     if (num < ultimoIndiceWallpaper) {
-        setNumWallpaper(num + 1)
-        localStorage.setItem("num-img", (num + 1).toString())
+        setNumWallpaper(num + 1);
+        localStorage.setItem("num-img", (num + 1).toString());
     } else {
-        setNumWallpaper(0)
-        localStorage.setItem("num-img", (0).toString())
+        setNumWallpaper(0);
+        localStorage.setItem("num-img", (0).toString());
     }
-}
+};
 
 function CambiadorImg() {
     return (
@@ -71,14 +71,14 @@ function CambiadorImg() {
                 />
             </span>
         </div>
-    )
+    );
 }
 
 const estilos = StyleSheet.create({
     tituloPrincipal: {
         fontWeight: "bold",
     },
-})
+});
 
 export function BarraSuperior() {
     return (
@@ -107,5 +107,5 @@ export function BarraSuperior() {
             <span className={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock)}>Ingeniería de Sistemas</span>
             <span className={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock)}>2022-B</span>
         </header>
-    )
+    );
 }

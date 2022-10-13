@@ -13,93 +13,128 @@ años:
       abreviado: TAIS
       Teoria:
         A:
-          Docente: "?"
+          Docente: Robert Arisaca
           Horas:
             - Ma0940
             - Ma1040
             - Ma1130
         B:
-          Docente: "?"
+          Docente: Robert Arisaca
           Horas:
             - Vi1450
             - Vi1550
             - Vi1640
       Laboratorio:
         A:
-          Docente: "?"
+          Docente: Robert Arisaca
           Horas:
             - Mi0700
             - Mi0750
         B:
-          Docente: "?"
+          Docente: Robert Arisaca
           Horas:
             - Mi1400
             - Mi1450
+        C:
+          Docente: Lazo Dely
+          Horas:
+            - Mi1830
+            - Mi1920
     Plataformas:
       nombre: Plataformas Emergentes
       abreviado: PE
       Teoria:
         A:
-          Docente: "?"
+          Docente: Diego Iquira
           Horas:
             - Lu0750
             - Lu0850
       Laboratorio:
         A:
-          Docente: "?"
+          Docente: Diego Iquira
           Horas:
             - Ju0850
             - Ju0940
+        B:
+          Docente: Diego Iquira
+          Horas:
+            - Ma1740
+            - Ma1830
     Proyecto de Sw:
       nombre: Proyecto de Ingeniería de Software 2
       abreviado: PIS2
       Teoria:
         A:
-          Docente: "?"
+          Docente: Freddy Saji
           Horas:
             - Lu0940
             - Lu1040
         C:
-          Docente: "?"
+          Docente: Freddy Saji
           Horas:
             - Lu1130
             - Lu1220
         B:
-          Docente: "?"
+          Docente: Freddy Saji
           Horas:
             - Lu1550
             - Lu1640
         D:
-          Docente: "?"
+          Docente: Freddy Saji
           Horas:
             - Lu1740
             - Lu1830
         E:
-          Docente: "?"
+          Docente: Freddy Saji
           Horas:
             - Ju0940
             - Ju1040
       Laboratorio:
+        A:
+          Docente: William Bornas
+          Horas:
+            - Ma0700
+            - Ma0750
         B:
-          Docente: "?"
+          Docente: Giovanni Martinez
           Horas:
             - Mi1830
             - Mi1920
+        C:
+          Docente: José Sulla
+          Horas:
+            - Ju1740
+            - Ju1830
+        D:
+          Docente: William Bornas
+          Horas:
+            - Vi1550
+            - Vi1730
+        E:
+          Docente: William Bornas
+          Horas:
+            - Ma0850
+            - Ma0940
     Sw de Juegos:
       nombre: Desarrollo de Software para Juegos
       abreviado: DSJ
       Teoria:
         A:
-          Docente: "?"
+          Docente: José Sulla
           Horas:
             - Lu1920
             - Lu2010
       Laboratorio:
         A:
-          Docente: "?"
+          Docente: José Sulla
           Horas:
             - Mi1220
             - Mi1310
+        B:
+          Docente: José Sulla
+          Horas:
+            - Mi1550
+            - Mi1640
     Tesis 2:
       nombre: Seminario de Tesis 2
       abreviado: ST2
@@ -163,23 +198,34 @@ años:
       abreviado: GSTI
       Teoria:
         A:
-          Docente: "?"
+          Docente: Fabricio Calienes
           Horas:
             - Ma1740
             - Ma1830
+      Laboratorio:
+        A:
+          Docente: Luis Rocha
+          Horas:
+            - Ju1830
+            - Ju1920
+        B:
+          Docente: Luis Rocha
+          Horas:
+            - Vi1830
+            - Vi1920
     Practicas:
       nombre: Prácticas Pre Profesionales
       abreviado: PPP
       Teoria:
         A:
-          Docente: "?"
+          Docente: Juan Zuñiga
           Horas:
             - Mi1740
             - Mi1830
             - Vi1740
             - Vi1830
         B:
-          Docente: "?"
+          Docente: Juan Zuñiga
           Horas:
             - Mi1920
             - Mi2010

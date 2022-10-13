@@ -1,15 +1,13 @@
-import { BarraSuperior } from "../BarraSuperior"
-import { estilosGlobales } from "../Estilos"
-import { StyleSheet, css } from "aphrodite"
-import { Separador } from "../Separador"
-import { Tabla } from "../ContenedorHorarios/Tabla"
-import YAML from "yaml"
-import { TablaObserver } from "../ContenedorHorarios/TablaObserver"
-import { Curso, Cursos } from "../types/DatosHorario"
-import { CursosElem } from "../ContenedorHorarios/CursosElem"
-import { For, createMemo } from "solid-js"
-import {createStore} from "solid-js/store"
-import { CursoEditor } from "./Editor/CursoEditor"
+import { BarraSuperior } from "../BarraSuperior";
+import { estilosGlobales } from "../Estilos";
+import { StyleSheet, css } from "aphrodite";
+import { Separador } from "../Separador";
+import { Tabla } from "../ContenedorHorarios/Tabla";
+import { TablaObserver } from "../ContenedorHorarios/TablaObserver";
+import { Curso, Cursos } from "../types/DatosHorario";
+import { For, createMemo } from "solid-js";
+import {createStore} from "solid-js/store";
+import { CursoEditor } from "./Editor/CursoEditor";
 
 const e = StyleSheet.create({
     contenedorGlobal: {
@@ -19,7 +17,7 @@ const e = StyleSheet.create({
         alignItems: "center",
         justifyContent: "center",
     },
-})
+});
 
 interface Data {
     indice: number,
@@ -40,39 +38,39 @@ const [nuevaData, setNuevaData] = createStore<Data>({
             },
         },
     }],
-})
+});
 
 type FormEvent = Event & { submitter: HTMLElement; } & { currentTarget: HTMLFormElement; target: HTMLFormElement; }
 export function Editor() {
-    const tablaObserver = new TablaObserver()
-    const dataWrapper = createMemo(() => nuevaData)
+    const tablaObserver = new TablaObserver();
+    const dataWrapper = createMemo(() => nuevaData);
 
     const agregarCurso = (ev: FormEvent) => {
-        ev.preventDefault()
+        ev.preventDefault();
 
         /// @ts-ignore
-        const nombreCurso: string = ev.target.elements.nombre_curso.value
+        const nombreCurso: string = ev.target.elements.nombre_curso.value;
         /// @ts-ignore
-        const nombreAbreviado: string = ev.target.elements.nombre_abreviado.value
+        const nombreAbreviado: string = ev.target.elements.nombre_abreviado.value;
 
         const curso: Curso = {
             nombre: nombreCurso,
             abreviado: nombreAbreviado,
             oculto: false,
             Teoria: {},
-        }
+        };
 
-        setNuevaData("cursos", nuevaData.indice, curso)
-        setNuevaData("indice", (i) => i + 1)
-    }
+        setNuevaData("cursos", nuevaData.indice, curso);
+        setNuevaData("indice", (i) => i + 1);
+    };
 
     const data = createMemo<Cursos>(() => {
-        const o: Cursos = {}
+        const o: Cursos = {};
         nuevaData.cursos.forEach((c) => {
-            o[c.nombre] = c
-        })
-        return o
-    })
+            o[c.nombre] = c;
+        });
+        return o;
+    });
 
     return (
         <div>
@@ -127,5 +125,5 @@ export function Editor() {
             </div>
 
         </div>
-    )
+    );
 }
