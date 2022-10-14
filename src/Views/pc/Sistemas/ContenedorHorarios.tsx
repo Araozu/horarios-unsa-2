@@ -72,35 +72,6 @@ const {
 export function ContenedorHorarios() {
     const [datosCargados, setDatosCargados] = createSignal(false);
     const [datos, setDatos] = createSignal<DatosHorario | null>(null);
-    const [estadoLayout, setEstadoLayout] = (
-        createSignal<EstadoLayout>(localStorage.getItem("estadoLayout") as EstadoLayout || "Normal")
-    );
-
-    const e = createMemo(() => {
-        let templateColumns = "";
-        switch (estadoLayout()) {
-            case "MaxHorarios": {
-                templateColumns = "0 auto";
-                break;
-            }
-            case "MaxPersonal": {
-                templateColumns = "auto 0m";
-                break;
-            }
-            case "Normal": {
-                templateColumns = "50% 50%";
-            }
-        }
-
-        localStorage.setItem("estadoLayout", estadoLayout());
-
-        return StyleSheet.create({
-            contenedor: {
-                display: "grid",
-                gridTemplateColumns: templateColumns,
-            },
-        });
-    });
 
     createEffect(async() => {
         const datos = await datosPromise;
@@ -111,28 +82,10 @@ export function ContenedorHorarios() {
     });
 
     return (
-        <div className={css(e().contenedor)}>
-            <div>
-                <MiHorario
-                    estadoLayout={estadoLayout()}
-                    setEstadoLayout={setEstadoLayout}
-                    cursosUsuario={cursosUsuario}
-                    fnAgregarCurso={agregarCursoUsuario}
-                    setCursosUsuarios={setCursosUsuarios}
-                />
-            </div>
-            <div>
-                <Show when={datosCargados()}>
-                    <Horarios
-                        data={datos()!}
-                        estadoLayout={estadoLayout()}
-                        setEstadoLayout={setEstadoLayout}
-                        fnAgregarCurso={(c) => agregarCursoUsuario(JSON.parse(JSON.stringify(c)))}
-                        listaCursosUsuario={cursosUsuario}
-                        setCursosUsuarios={setCursosUsuarios}
-                    />
-                </Show>
-            </div>
-        </div>
+        <MiHorario
+            cursosUsuario={cursosUsuario}
+            fnAgregarCurso={agregarCursoUsuario}
+            setCursosUsuarios={setCursosUsuarios}
+        />
     );
 }
