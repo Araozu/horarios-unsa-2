@@ -20,6 +20,7 @@ const s = StyleSheet.create({
 
 export function SeleccionCursos() {
     const [cursos, setCursos] = createSignal<RespuestaListaCursos>({});
+    const [msjErr, setMsjError] = createSignal(false);
 
     // Recuperar cursos de back
     (async() => setCursos(await getAllListaCursosMock()))();
@@ -29,14 +30,24 @@ export function SeleccionCursos() {
         const form = ev.target as HTMLFormElement;
         // Los checkboxes
         const elements = form.elements;
-        const idsAEnviar: Array<number> = [];
+        const idsAEnviar: Array<string> = [];
         for (let i = 0; i < elements.length; i += 1) {
             const inputBox = elements[i] as HTMLInputElement;
             if (inputBox.checked) {
-                idsAEnviar.push(parseInt(inputBox.value, 10));
+                idsAEnviar.push(inputBox.value);
             }
         }
-        console.log(idsAEnviar);
+
+        if (idsAEnviar.length === 0) {
+            setMsjError(true);
+            setTimeout(() => setMsjError(false), 2500);
+            return;
+        }
+
+        // Almacenar en localStorage
+        localStorage.setItem("cursos-seleccionados", JSON.stringify(idsAEnviar));
+        // Ir a sig pantalla
+        window.location.href = "#/sistemas-movil/";
     };
 
     return (
@@ -69,6 +80,8 @@ export function SeleccionCursos() {
                     )}
                 </For>
                 <div style="text-align: center">
+                    <span style={msjErr() ? "opacity: 1; color: red" : "opacity: 0"}>Selecciona al menos 1 curso</span>
+                    <br />
                     <Button texto={"Continuar"} />
                 </div>
             </form>
