@@ -52,8 +52,8 @@
 # Carga de horarios
 
 ```ts
-// HTTP GET
-// Url: /horarios?cursos=...
+// HTTP POST
+// Url: /horarios
 
 // El frontend envia una lista de cursos, de los cuales recuperar sus datos
 {
@@ -74,13 +74,13 @@
             {
                 id_laboratorio: number,
                 id_curso: number,
-                id_horario: number,
                 grupo: string,
                 docente: string,
                 // Array de objetos de la entidad Horario
                 horario: [
                     {
                         id_horario: number,
+                        id_laboratorio: number,
                         dia: string,
                         hora_inicio: string,
                         hora_fin: string,
