@@ -25,19 +25,21 @@ const s = StyleSheet.create({
     },
 });
 
-type DayIndex = 0 | 1 | 2 | 3;
+type DayIndex = 0 | 1 | 2 | 3 | 4;
 const days = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"];
 
-type Output = {
-    curso: string,
+export type GrupoDia = {
+    id_horario: number,
+    id_laboratorio: number,
+    abreviado: string,
     grupo: string,
-    idxHoraInicio: number,
+    offsetVertical: number, // 07:00 -> 0, 07:50 -> 1
     nroHoras: number,
-    offset: number, // 0, 1, 2
+    offsetHorizontal: number, // 0, 1, 2
     fraccion: number, // por cuanto dividir la celda. 1, 2, 3, ...
 }
 
-function Grupo(props: {data: Output}) {
+function Grupo(props: {data: GrupoDia}) {
     const ss = StyleSheet.create({
         button: {
             display: "inline-block",
@@ -48,16 +50,24 @@ function Grupo(props: {data: Output}) {
             position: "absolute",
         },
     });
+    const estilo = () => {
+        const fraccion = props.data.fraccion;
+        const offsetHorizontal = props.data.offsetHorizontal + 1;
+        const offsetVertical = props.data.offsetVertical;
+        const nroHoras = props.data.nroHoras;
+        return `left: calc((43vw / ${fraccion}) * ${offsetHorizontal} - 14vw); top: ${offsetVertical * 3}rem;` +
+            `height: ${nroHoras * 3}rem; width: calc(100% / ${fraccion})`;
+    };
     return (
-        <button className={css(ss.button)} style={`left: calc((43vw / ${props.data.fraccion}) * ${props.data.offset} - 14vw); top: ${props.data.idxHoraInicio * 3}rem; height: ${props.data.nroHoras * 3}rem; width: calc(100% / ${props.data.fraccion})`}>
-            {props.data.curso}
+        <button className={css(ss.button)} style={estilo()}>
+            {props.data.abreviado}
             <br />
             {props.data.grupo}
         </button>
     );
 }
 
-function Dia(props: {dia: string}) {
+function Dia(props: {dia: string, grupos: Array<GrupoDia>}) {
     const ss = StyleSheet.create({
         contenedorDia: {
             position: "relative",
@@ -67,40 +77,32 @@ function Dia(props: {dia: string}) {
         <div className={css(s.columna)}>
             <div className={css(s.tableIndex)}>{props.dia}</div>
             <div className={css(ss.contenedorDia)}>
-                <Grupo data={{
-                    curso: "TAIS",
-                    grupo: "LA",
-                    idxHoraInicio: 0,
-                    nroHoras: 3,
-                    offset: 1,
-                    fraccion: 3,
-                }}
-                />
-                <Grupo data={{
-                    curso: "PPP",
-                    grupo: "LB",
-                    idxHoraInicio: 2,
-                    nroHoras: 2,
-                    offset: 2,
-                    fraccion: 3,
-                }}
-                />
-                <Grupo data={{
-                    curso: "FC",
-                    grupo: "LC",
-                    idxHoraInicio: 1,
-                    nroHoras: 4,
-                    offset: 3,
-                    fraccion: 3,
-                }}
-                />
+                <For each={props.grupos}>
+                    {(grupo) => (
+                        <Grupo data={grupo} />
+                    )}
+                </For>
             </div>
         </div>
     );
 }
 
-export function Table() {
+export type TableInput = {
+    lunes: Array<GrupoDia>,
+    martes: Array<GrupoDia>,
+    miercoles: Array<GrupoDia>,
+    jueves: Array<GrupoDia>,
+    viernes: Array<GrupoDia>,
+}
+
+export function Table(props: {datos: TableInput}) {
     const [currentDay, setCurrentDay] = createSignal<DayIndex>(0);
+
+    const lunes = <Dia dia={"Lunes"} grupos={props.datos.lunes} />;
+    const martes = <Dia dia={"Martes"} grupos={props.datos.martes} />;
+    const miercoles = <Dia dia={"Miercoles"} grupos={props.datos.miercoles} />;
+    const jueves = <Dia dia={"Jueves"} grupos={props.datos.jueves} />;
+    const viernes = <Dia dia={"Viernes"} grupos={props.datos.viernes} />;
 
     return (
         <div className={css(s.container)}>
@@ -110,8 +112,8 @@ export function Table() {
                     {(hora) => <div className={css(s.celdaHora)}>{hora.substring(0, 5)}</div>}
                 </For>
             </div>
-            <Dia dia={days[currentDay()]} />
-            <Dia dia={days[currentDay() + 1]} />
+            {martes}
+            {miercoles}
         </div>
     );
 }
