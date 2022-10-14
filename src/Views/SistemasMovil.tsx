@@ -1,6 +1,6 @@
 import { TopBar } from "./SistemasMovil/TopBar";
 import { GrupoDia, Table, TableInput } from "./SistemasMovil/Table";
-import { getHorariosMock, ListaCursosCompleto } from "../API/CargaHorarios";
+import { getHorariosMock, Horario, ListaCursosCompleto } from "../API/CargaHorarios";
 import { createSignal } from "solid-js";
 import { generarMapaCeldas } from "./SistemasMovil/mapaCeldas";
 import { Button } from "../components/Button";
@@ -104,6 +104,9 @@ function transformar(input: ListaCursosCompleto): TableInput {
     };
 }
 
+const horasStr = ["0700","0750","0850","0940","1040","1130","1220","1310","1400",
+    "1450","1550","1640","1740","1830","1920","2010","2100","2150"];
+
 const horas = [
     700,
     750,
@@ -147,4 +150,18 @@ function infoDiaAOffsets(horaInicio: string, horaFinal: string): [number, number
     return [idxInicio, nroHoras];
 }
 
+// inicio: 1740 fin 2010 -> 1740,1830,1920
+export function infoDiaAListaHoras(horas: Array<Horario>): Array<string> {
+    const horasFin: Array<string> = [];
 
+    for (const grupoHoras of horas) {
+        const [idx, cantidad] = infoDiaAOffsets(grupoHoras.hora_inicio, grupoHoras.hora_fin);
+        const strDia = grupoHoras.dia.substring(0, 2);
+
+        for (let i = 0; i < cantidad; i += 1) {
+            horasFin.push(`${strDia}${horasStr[idx + i]}`);
+        }
+    }
+
+    return horasFin;
+}
