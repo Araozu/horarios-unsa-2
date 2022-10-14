@@ -25,7 +25,7 @@ const s = StyleSheet.create({
     },
 });
 
-export function TopBar() {
+export function TopBar(props: {tituloBarra: string}) {
     return (
         <nav className={css(s.bar)}>
             <button>
@@ -34,7 +34,7 @@ export function TopBar() {
                     title={"Cambiar imagen de fondo"}
                 />
             </button>
-            <p className={css(s.barLabel)}>Mi horario</p>
+            <p className={css(s.barLabel)}>{props.tituloBarra}</p>
         </nav>
     );
 }

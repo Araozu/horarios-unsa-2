@@ -1,11 +1,11 @@
 import {StyleSheet, css} from "aphrodite/no-important";
-import { createSignal, For, JSX } from "solid-js";
+import { createSignal, For } from "solid-js";
 import { horas } from "../../Store";
 
 const s = StyleSheet.create({
     container: {
         display: "grid",
-        gridTemplateColumns: "14vw 1fr 1fr",
+        gridTemplateColumns: "13vw 1fr 1fr",
         textAlign: "center",
         fontSize: "0.9rem",
     },

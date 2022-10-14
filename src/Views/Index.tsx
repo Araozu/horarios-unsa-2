@@ -3,6 +3,7 @@ import { StyleSheet, css } from "aphrodite/no-important";
 import { RouterLink } from "../Router";
 import { Show } from "solid-js";
 import { isMobile } from "../Store";
+import { MobileIndex } from "./MobileIndex";
 
 const e = StyleSheet.create({
     contenedorGlobal: {
@@ -31,46 +32,7 @@ const e = StyleSheet.create({
     },
 });
 
-function MobileIndex() {
-    const s = StyleSheet.create({
-        boton: {
-            backgroundColor: "var(--color-primario)",
-            color: "white",
-            padding: "1rem 5rem",
-            borderRadius: "25px",
-            margin: "1.5rem 0",
-            boxShadow: "2px 2px 2px 0 gray",
-            cursor: "pointer",
-        },
-        entrada: {
-            borderTop: "none",
-            borderRight: "none",
-            borderLeft: "none",
-            borderBottom: "solid 2px gray",
-            padding: "0.75rem 1rem",
-        },
-    });
 
-    const inputElement = <input type="email" placeholder="Correo electronico" className={css(s.entrada)} />;
-
-    const login = () => {
-        console.log((inputElement as HTMLInputElement).value);
-        window.location.href = "#/sistemas-movil/";
-    };
-
-    return (
-        <div className={css(e.contenedorGlobal)}>
-            <div style="text-align: center;">
-                <h1>Iniciar sesión</h1>
-                <br />
-                <br />
-                {inputElement}
-                <br />
-                <button className={css(s.boton)} onClick={login}>Iniciar Sesion</button>
-            </div>
-        </div>
-    );
-}
 
 export function Index() {
     return (

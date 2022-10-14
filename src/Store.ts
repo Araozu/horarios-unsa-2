@@ -28,6 +28,7 @@ export const horasDescanso = [
     "15:40 - 15:50",
     "17:30 - 17:40",
 ];
+export const SERVER_PATH = "";
 
 const numImgGuardado = Number(localStorage.getItem("num-img") ?? "0");
 const tamanoLetraGuardado = Number(/* localStorage.getItem("tamano-letra") ?? */ "16");

@@ -4,7 +4,7 @@ import { Table } from "./SistemasMovil/Table";
 export function SistemasMovil() {
     return (
         <div>
-            <TopBar />
+            <TopBar tituloBarra="Mi Horario" />
             <Table />
         </div>
     );
