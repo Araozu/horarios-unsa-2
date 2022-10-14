@@ -24,18 +24,6 @@ export function SistemasMovil() {
     );
 }
 
-/*
-{
-    id_horario: number,
-    id_laboratorio: number,
-    abreviado: string,
-    grupo: string,
-    offsetVertical: number, // 07:00 -> 0, 07:50 -> 1
-    nroHoras: number,
-    offsetHorizontal: number, // 0, 1, 2
-    fraccion: number, // por cuanto dividir la celda. 1, 2, 3, ...
-}
- */
 
 function transformar(input: ListaCursosCompleto): TableInput {
     const data: TableInput = {

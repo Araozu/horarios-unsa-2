@@ -128,6 +128,13 @@ export const getHorariosMock: GetHorariosFn = async(_) => {
                         hora_fin: "1640",
                         dia: "Miercoles",
                     },
+                    {
+                        id_horario: 6,
+                        id_laboratorio: 1,
+                        hora_inicio: "1400",
+                        hora_fin: "1640",
+                        dia: "Viernes",
+                    },
                 ],
             },
         ],

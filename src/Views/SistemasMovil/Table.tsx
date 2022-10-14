@@ -52,10 +52,10 @@ function Grupo(props: {data: GrupoDia}) {
     });
     const estilo = () => {
         const fraccion = props.data.fraccion;
-        const offsetHorizontal = props.data.offsetHorizontal + 1;
+        const offsetHorizontal = props.data.offsetHorizontal;
         const offsetVertical = props.data.offsetVertical;
         const nroHoras = props.data.nroHoras;
-        return `left: calc((43vw / ${fraccion}) * ${offsetHorizontal} - 14vw); top: ${offsetVertical * 3}rem;` +
+        return `left: calc((43vw / ${fraccion}) * ${offsetHorizontal}); top: ${offsetVertical * 3}rem;` +
             `height: ${nroHoras * 3}rem; width: calc(100% / ${fraccion})`;
     };
     return (
@@ -112,8 +112,8 @@ export function Table(props: {datos: TableInput}) {
                     {(hora) => <div className={css(s.celdaHora)}>{hora.substring(0, 5)}</div>}
                 </For>
             </div>
-            {martes}
-            {miercoles}
+            {jueves}
+            {viernes}
         </div>
     );
 }
