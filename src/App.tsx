@@ -6,6 +6,7 @@ import { Switch, Match, Show } from "solid-js";
 import { Wallpaper } from "./Wallpaper";
 import { SistemasMovil } from "./Views/SistemasMovil";
 import { SeleccionCursos } from "./Views/SeleccionCursos";
+import { VerMatricula } from "./Views/VerMatricula";
 
 function App() {
     const route = useRouter();
@@ -28,6 +29,9 @@ function App() {
                 </Match>
                 <Match when={route() === "/sistemas-movil/"}>
                     <SistemasMovil />
+                </Match>
+                <Match when={route() === "/ver-matricula/"}>
+                    <VerMatricula />
                 </Match>
                 <Match when={route() === "/sistemas/"}>
                     <Main />

@@ -1,6 +1,6 @@
 import { css, StyleSheet } from "aphrodite/no-important";
-import { createSignal } from "solid-js";
-import { SERVER_PATH } from "../Store";
+import { batch, createSignal } from "solid-js";
+import { SERVER_PATH, setGruposSeleccionados } from "../Store";
 
 const e = StyleSheet.create({
     contenedorGlobal: {
@@ -91,7 +91,11 @@ export function MobileIndex() {
         } else if (response.matriculas.length === 0) {
             window.location.href = "#/seleccion-cursos/";
         } else if (response.matriculas.length > 0) {
-            alert("TODO");
+            batch(() => {
+                for (const id_lab of response.matriculas) {
+                    setGruposSeleccionados(id_lab, true);
+                }
+            });
         }
     };
 

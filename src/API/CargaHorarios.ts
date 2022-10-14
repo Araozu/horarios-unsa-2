@@ -74,6 +74,10 @@ type GetHorariosFn = (_: InputData) => Promise<ListaCursosCompleto>
 
 export const getHorarios: GetHorariosFn = async(data) => {
     const response = await fetch(`${SERVER_PATH}/horarios`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
         body: JSON.stringify(data),
     });
     return await response.json();

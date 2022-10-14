@@ -1,6 +1,6 @@
 import { StyleSheet, css } from "aphrodite/no-important";
 
-export function Button(props: {texto: string}) {
+export function Button(props: {texto: string, onClick?: () => void}) {
     const s = StyleSheet.create({
         boton: {
             backgroundColor: "var(--color-primario)",
@@ -13,7 +13,7 @@ export function Button(props: {texto: string}) {
         },
     });
     return (
-        <button type="submit" className={css(s.boton)}>
+        <button type="submit" className={css(s.boton)} onClick={() => props.onClick?.()}>
             {props.texto}
         </button>
     );

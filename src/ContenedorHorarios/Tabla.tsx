@@ -161,6 +161,7 @@ const procesarAnio = (data: Cursos, anio: string, version: number, setCursosUsua
                             "cursos",
                             Number(indiceCurso),
                             "Laboratorio",
+                            /// @ts-ignore
                             produce<{ [p: string]: DatosGrupo }>((x) => {
                                 const grupoActualSeleccionado = x[grupoStr].seleccionado;
 

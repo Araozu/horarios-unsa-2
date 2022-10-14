@@ -3,6 +3,8 @@ import { GrupoDia, Table, TableInput } from "./SistemasMovil/Table";
 import { getHorariosMock, ListaCursosCompleto } from "../API/CargaHorarios";
 import { createSignal } from "solid-js";
 import { generarMapaCeldas } from "./SistemasMovil/mapaCeldas";
+import { Button } from "../components/Button";
+import { gruposSeleccionados, SERVER_PATH } from "../Store";
 
 export function SistemasMovil() {
     const [rawData, setRawData] = createSignal<ListaCursosCompleto>([]);
@@ -16,10 +18,36 @@ export function SistemasMovil() {
         setRawData(data);
     })();
 
+    const matricular = async() => {
+        const laboratoriosAMatricular = Object.entries(gruposSeleccionados)
+            .filter((x) => x[1] === true)
+            .map((x) => x[0]);
+
+        const response = await fetch(`${SERVER_PATH}/matricula`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                correo_usuario: localStorage.getItem("correo"),
+                horarios: laboratoriosAMatricular,
+            }),
+        });
+        if (response.ok) {
+            window.location.href = "#/ver-matricula/";
+        } else {
+            alert("No se pudo procesar la matricula");
+        }
+    };
+
     return (
         <div>
             <TopBar tituloBarra="Mi Horario" />
             <Table datos={transformar(rawData())} />
+            <hr />
+            <div style="text-align: center;">
+                <Button texto={"Matricular"} onClick={matricular} />
+            </div>
         </div>
     );
 }
