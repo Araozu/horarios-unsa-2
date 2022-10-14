@@ -1,10 +1,11 @@
 import {StyleSheet, css} from "aphrodite/no-important";
-import { createSignal, JSX } from "solid-js";
+import { createSignal, For, JSX } from "solid-js";
+import { horas } from "../../Store";
 
 const s = StyleSheet.create({
     container: {
         display: "grid",
-        gridTemplateColumns: "3.5rem 1fr 1fr",
+        gridTemplateColumns: "14vw 1fr 1fr",
         textAlign: "center",
         fontSize: "0.9rem",
     },
@@ -15,45 +16,85 @@ const s = StyleSheet.create({
         textAlign: "center",
     },
     columna: {
-        textAlign: "left",
         borderRight: "solid 2px var(--color-borde)",
+    },
+    celdaHora: {
+        position: "relative",
+        top: "-0.75rem",
+        height: "3rem",
     },
 });
 
 type DayIndex = 0 | 1 | 2 | 3;
 const days = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"];
 
-function Grupo(props: {curso: string, grupo: string}) {
+type Output = {
+    curso: string,
+    grupo: string,
+    idxHoraInicio: number,
+    nroHoras: number,
+    offset: number, // 0, 1, 2
+    fraccion: number, // por cuanto dividir la celda. 1, 2, 3, ...
+}
+
+function Grupo(props: {data: Output}) {
     const ss = StyleSheet.create({
         button: {
             display: "inline-block",
-            padding: "0.25rem 0.35rem",
+            padding: "0.2rem 0.2rem",
             textAlign: "left",
             borderRadius: "10px",
             border: "solid 2px red",
-            flexGrow: 1,
-            margin: "1px",
+            position: "absolute",
         },
     });
     return (
-        <button className={css(ss.button)}>
-            {props.curso}
+        <button className={css(ss.button)} style={`left: calc((43vw / ${props.data.fraccion}) * ${props.data.offset} - 14vw); top: ${props.data.idxHoraInicio * 3}rem; height: ${props.data.nroHoras * 3}rem; width: calc(100% / ${props.data.fraccion})`}>
+            {props.data.curso}
             <br />
-            {props.grupo}
+            {props.data.grupo}
         </button>
     );
 }
 
-export function Celda(props: {children: JSX.Element}) {
+function Dia(props: {dia: string}) {
     const ss = StyleSheet.create({
-        celda: {
-            padding: "0 0.25rem",
-            display: "flex",
+        contenedorDia: {
+            position: "relative",
         },
     });
     return (
-        <div className={css(ss.celda)}>
-            {props.children}
+        <div className={css(s.columna)}>
+            <div className={css(s.tableIndex)}>{props.dia}</div>
+            <div className={css(ss.contenedorDia)}>
+                <Grupo data={{
+                    curso: "TAIS",
+                    grupo: "LA",
+                    idxHoraInicio: 0,
+                    nroHoras: 3,
+                    offset: 1,
+                    fraccion: 3,
+                }}
+                />
+                <Grupo data={{
+                    curso: "PPP",
+                    grupo: "LB",
+                    idxHoraInicio: 2,
+                    nroHoras: 2,
+                    offset: 2,
+                    fraccion: 3,
+                }}
+                />
+                <Grupo data={{
+                    curso: "FC",
+                    grupo: "LC",
+                    idxHoraInicio: 1,
+                    nroHoras: 4,
+                    offset: 3,
+                    fraccion: 3,
+                }}
+                />
+            </div>
         </div>
     );
 }
@@ -64,27 +105,13 @@ export function Table() {
     return (
         <div className={css(s.container)}>
             <div className={css(s.columna)}>
-                <div className={css(s.tableIndex)} style="border: none">&nbsp;</div>
+                <div className={css(s.tableIndex)} style="border: none; background: transparent;">&nbsp;</div>
+                <For each={horas}>
+                    {(hora) => <div className={css(s.celdaHora)}>{hora.substring(0, 5)}</div>}
+                </For>
             </div>
-            <div className={css(s.columna)}>
-                <div className={css(s.tableIndex)}>{days[currentDay()]}</div>
-                <Celda>
-                    <Grupo curso="TAIS 2" grupo="LA" />
-                    <Grupo curso="ST2" grupo="LB" />
-                </Celda>
-                <Celda>
-                    <Grupo curso="TAIS 2" grupo="LB" />
-                </Celda>
-                <Celda>
-                    <Grupo curso="TAIS" grupo="LC" />
-                    <Grupo curso="PIS 2" grupo="LB" />
-                    <Grupo curso="PPP" grupo="B" />
-                </Celda>
-            </div>
-            <div className={css(s.columna)}>
-                <div className={css(s.tableIndex)}>{days[currentDay() + 1]}</div>
-                <div style="padding: 0 0.25rem" />
-            </div>
+            <Dia dia={days[currentDay()]} />
+            <Dia dia={days[currentDay() + 1]} />
         </div>
     );
 }

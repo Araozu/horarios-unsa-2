@@ -1,32 +1,4 @@
 
-interface Curso {
-    // Nombre completo del curso
-    nombre: string,
-    // Nombre del curso abreviado
-    abreviado: string,
-    // Información de las horas de teoria
-    Teoria: {
-        // grupo es una letra: A, B, C, D
-        [grupo: string]: DatosGrupo,
-    },
-    // Información de las horas de laboratorio
-    Laboratorio?: {
-        // grupo es una letra: A, B, C, D
-        [grupo: string]: DatosGrupo,
-    },
-}
-
-interface DatosGrupo {
-    // Nombre del docente de este grupo
-    Docente: string,
-    /*
-        Las horas del curso en el siguiente formato: DD_HHMM
-        DD puede ser Lu, Ma, Mi, Ju, Vi
-        Ejm: Ma0850, Vi1640, Ju1550
-    */
-    Horas: string[]
-}
-
 // Exclusivo de un unico dia
 type Input = {
     horaInicio: number,
