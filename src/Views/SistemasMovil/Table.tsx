@@ -1,19 +1,24 @@
-import {StyleSheet, css} from "aphrodite/no-important";
+import { StyleSheet, css } from "aphrodite/no-important";
 import { createSignal, For } from "solid-js";
+import { Swiper, SwiperSlide } from "swiper/solid";
 import { horas } from "../../Store";
+
+import "swiper/css";
+import { Grupo } from "./Grupo";
 
 const s = StyleSheet.create({
     container: {
         display: "grid",
-        gridTemplateColumns: "13vw 1fr 1fr",
+        gridTemplateColumns: "13vw 1fr",
         textAlign: "center",
         fontSize: "0.9rem",
     },
     tableIndex: {
-        backgroundColor: "rgba(83,25,37,0.8)",
+        backgroundColor: "rgb(108,67,75)",
         color: "white",
         padding: "0.5rem 0.25rem",
         textAlign: "center",
+        width: "42vw",
     },
     columna: {
         borderRight: "solid 2px var(--color-borde)",
@@ -24,9 +29,6 @@ const s = StyleSheet.create({
         height: "3rem",
     },
 });
-
-type DayIndex = 0 | 1 | 2 | 3 | 4;
-const days = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes"];
 
 export type GrupoDia = {
     id_horario: number,
@@ -39,38 +41,11 @@ export type GrupoDia = {
     fraccion: number, // por cuanto dividir la celda. 1, 2, 3, ...
 }
 
-function Grupo(props: {data: GrupoDia}) {
-    const ss = StyleSheet.create({
-        button: {
-            display: "inline-block",
-            padding: "0.2rem 0.2rem",
-            textAlign: "left",
-            borderRadius: "10px",
-            border: "solid 2px red",
-            position: "absolute",
-        },
-    });
-    const estilo = () => {
-        const fraccion = props.data.fraccion;
-        const offsetHorizontal = props.data.offsetHorizontal;
-        const offsetVertical = props.data.offsetVertical;
-        const nroHoras = props.data.nroHoras;
-        return `left: calc((43vw / ${fraccion}) * ${offsetHorizontal}); top: ${offsetVertical * 3}rem;` +
-            `height: ${nroHoras * 3}rem; width: calc(100% / ${fraccion})`;
-    };
-    return (
-        <button className={css(ss.button)} style={estilo()}>
-            {props.data.abreviado}
-            <br />
-            {props.data.grupo}
-        </button>
-    );
-}
-
-function Dia(props: {dia: string, grupos: Array<GrupoDia>}) {
+function Dia(props: { dia: string, grupos: Array<GrupoDia> }) {
     const ss = StyleSheet.create({
         contenedorDia: {
             position: "relative",
+            width: "42vw",
         },
     });
     return (
@@ -95,9 +70,7 @@ export type TableInput = {
     viernes: Array<GrupoDia>,
 }
 
-export function Table(props: {datos: TableInput}) {
-    const [currentDay, setCurrentDay] = createSignal<DayIndex>(0);
-
+export function Table(props: { datos: TableInput }) {
     const lunes = <Dia dia={"Lunes"} grupos={props.datos.lunes} />;
     const martes = <Dia dia={"Martes"} grupos={props.datos.martes} />;
     const miercoles = <Dia dia={"Miercoles"} grupos={props.datos.miercoles} />;
@@ -112,8 +85,16 @@ export function Table(props: {datos: TableInput}) {
                     {(hora) => <div className={css(s.celdaHora)}>{hora.substring(0, 5)}</div>}
                 </For>
             </div>
-            {jueves}
-            {viernes}
+            <Swiper
+                slidesPerView={2}
+                style="width: 86vw"
+            >
+                <SwiperSlide>{lunes}</SwiperSlide>
+                <SwiperSlide>{martes}</SwiperSlide>
+                <SwiperSlide>{miercoles}</SwiperSlide>
+                <SwiperSlide>{jueves}</SwiperSlide>
+                <SwiperSlide>{viernes}</SwiperSlide>
+            </Swiper>
         </div>
     );
 }

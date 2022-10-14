@@ -35,6 +35,7 @@
         "Node 10"
     ],
     "dependencies": {
+        "swiper": "^8.4.4",
         "yaml": "^1.10.0"
     }
 }

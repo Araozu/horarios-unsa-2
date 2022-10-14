@@ -7,6 +7,9 @@ const s = StyleSheet.create({
         height: "3.5rem",
         display: "flex",
         alignItems: "center",
+        position: "sticky",
+        top: 0,
+        zIndex: 100,
     },
     icon: {
         display: "inline-block",
