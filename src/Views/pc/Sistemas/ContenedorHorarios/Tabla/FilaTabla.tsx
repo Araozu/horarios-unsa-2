@@ -1,10 +1,10 @@
 import { StyleSheet, css } from "aphrodite";
-import { estilosGlobales } from "../../Estilos";
+import { estilosGlobales } from "../../../../../Estilos";
 import { For, createMemo } from "solid-js";
 import {createStore, Store} from "solid-js/store";
-import { Dia, dias } from "../../Store";
+import { Dia, dias } from "../../../../../Store";
 import { CeldaFila } from "./CeldaFila";
-import { DataProcesada } from "../../types/DatosHorario";
+import { DataProcesada } from "../../../../../types/DatosHorario";
 import { coloresBorde, diaANum } from "../Tabla";
 import { TablaObserver } from "../TablaObserver";
 

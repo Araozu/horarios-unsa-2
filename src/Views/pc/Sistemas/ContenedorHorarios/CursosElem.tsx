@@ -1,9 +1,9 @@
-import { Cursos, DatosGrupo, ListaCursosUsuario, Curso } from "../types/DatosHorario"
-import { createMemo, For } from "solid-js"
-import { produce, SetStoreFunction } from "solid-js/store"
-import { StyleSheet, css } from "aphrodite"
-import { estilosGlobales } from "../Estilos"
-import { TablaObserver } from "./TablaObserver"
+import { Cursos, DatosGrupo, ListaCursosUsuario, Curso } from "../../../../types/DatosHorario";
+import { createMemo, For } from "solid-js";
+import { produce, SetStoreFunction } from "solid-js/store";
+import { StyleSheet, css } from "aphrodite";
+import { estilosGlobales } from "../../../../Estilos";
+import { TablaObserver } from "./TablaObserver";
 
 const e = StyleSheet.create({
     inline: {
@@ -33,14 +33,14 @@ const e = StyleSheet.create({
         border: "none",
         color: "var(--color)",
     },
-})
+});
 
 const claseCursoNoAgregado = css(
     e.contenedorCurso,
     estilosGlobales.contenedor,
-)
+);
 
-const claseCursoOculto = css(e.cursoOculto)
+const claseCursoOculto = css(e.cursoOculto);
 
 interface Props {
     version: number,
@@ -64,7 +64,7 @@ interface PropsIndicadorGrupo {
 }
 
 function IndicadorGrupo(props: PropsIndicadorGrupo) {
-    const id = `${props.idParcial}_${props.esLab ? "L" : "T"}_${props.nombre}`
+    const id = `${props.idParcial}_${props.esLab ? "L" : "T"}_${props.nombre}`;
     return (
         <span
             className={css(e.botonTexto, estilosGlobales.contenedorCursor, estilosGlobales.contenedorCursorSoft)}
@@ -75,7 +75,7 @@ function IndicadorGrupo(props: PropsIndicadorGrupo) {
         >
             {props.esLab ? "L" : ""}{props.nombre}
         </span>
-    )
+    );
 }
 
 const agruparProfesores = (
@@ -84,31 +84,31 @@ const agruparProfesores = (
     esLab: boolean,
     setCursosUsuarios: FnSetCursosUsuarios,
 ) => {
-    const profesores: { [k: string]: [string, () => void][] } = {}
+    const profesores: { [k: string]: [string, () => void][] } = {};
     for (const [grupo, datosGrupo] of Object.entries(datos)) {
-        const nombreProfesor = datosGrupo.Docente
+        const nombreProfesor = datosGrupo.Docente;
         if (!profesores[nombreProfesor]) {
-            profesores[nombreProfesor] = []
+            profesores[nombreProfesor] = [];
         }
         profesores[nombreProfesor].push([
             grupo,
             () => {
                 setCursosUsuarios("cursos", Number(indiceCurso), "Teoria", produce<{ [p: string]: DatosGrupo }>((x) => {
-                    const grupoActualSeleccionado = x[grupo].seleccionado
+                    const grupoActualSeleccionado = x[grupo].seleccionado;
 
                     if (grupoActualSeleccionado) {
-                        x[grupo].seleccionado = false
+                        x[grupo].seleccionado = false;
                     } else {
                         for (const xKey in x) {
-                            x[xKey].seleccionado = xKey === grupo
+                            x[xKey].seleccionado = xKey === grupo;
                         }
                     }
-                }))
+                }));
             },
-        ])
+        ]);
     }
-    return profesores
-}
+    return profesores;
+};
 
 function CursoE(
     indiceCurso: string,
@@ -117,7 +117,7 @@ function CursoE(
     claseCursoAgregado: string,
     props: Props,
 ) {
-    const idCurso = `${props.version}_${anio()}_${datosCurso.abreviado}`
+    const idCurso = `${props.version}_${anio()}_${datosCurso.abreviado}`;
 
     const cursoAgregadoMemo = createMemo(
         () => props.listaCursosUsuario.cursos.find((x) => x.nombre === datosCurso.nombre && !x.oculto) !== undefined,
@@ -126,33 +126,33 @@ function CursoE(
             equals:
                 (x, y) => x === y,
         },
-    )
+    );
 
     const tituloMemo = createMemo(() => (cursoAgregadoMemo()
         ? "Remover de mi horario"
-        : "Agregar a mi horario"))
+        : "Agregar a mi horario"));
 
     const claseMemo = createMemo(() => {
         if (props.esCursoMiHorario && datosCurso.oculto) {
-            return claseCursoOculto
+            return claseCursoOculto;
         }
         return cursoAgregadoMemo()
             ? claseCursoAgregado
-            : claseCursoNoAgregado
-    })
+            : claseCursoNoAgregado;
+    });
 
     const profesoresTeoria = createMemo(() => agruparProfesores(
         datosCurso.Teoria,
         Number(indiceCurso),
         false,
         props.setCursosUsuarios,
-    ))
+    ));
     const profesoresLab = createMemo(() => agruparProfesores(
         datosCurso.Laboratorio ?? {},
         Number(indiceCurso),
         true,
         props.setCursosUsuarios,
-    ))
+    ));
 
     const IndicadorGrupos = (profesor: string, grupos: [string, () => void][], esLab: boolean) => (
         <td style={{"padding-bottom": "0.5rem", "padding-right": "0.75rem"}}>
@@ -172,7 +172,7 @@ function CursoE(
                 }
             </For>
         </td>
-    )
+    );
 
     return (
         <div className={claseMemo()}>
@@ -204,17 +204,17 @@ function CursoE(
                 {tituloMemo}
             </button>
         </div>
-    )
+    );
 }
 
 export function CursosElem(props: Props) {
-    const anio = () => props.anioActual().substring(0, props.anioActual().indexOf(" "))
+    const anio = () => props.anioActual().substring(0, props.anioActual().indexOf(" "));
 
     const claseCursoAgregado = css(
         e.contenedorCurso,
         estilosGlobales.contenedor,
         !props.esCursoMiHorario && estilosGlobales.contenedorCursorActivo,
-    )
+    );
 
     return (
         <>
@@ -222,5 +222,5 @@ export function CursosElem(props: Props) {
                 {([indiceCurso, datosCurso]) => CursoE(indiceCurso, datosCurso, anio, claseCursoAgregado, props)}
             </For>
         </>
-    )
+    );
 }

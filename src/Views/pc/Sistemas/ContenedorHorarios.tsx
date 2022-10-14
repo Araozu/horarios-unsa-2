@@ -1,42 +1,43 @@
-import YAML from "yaml"
-import { css, StyleSheet } from "aphrodite"
-import { MiHorario } from "./MiHorario"
-import { Horarios } from "./Horarios"
+import YAML from "yaml";
+import { css, StyleSheet } from "aphrodite";
+import { MiHorario } from "./ContenedorHorarios/MiHorario";
+import { Horarios } from "./ContenedorHorarios/Horarios";
 import {
     Anios,
     Cursos,
     DatosHorario,
     DatosHorarioRaw,
     DatosGrupo,
-} from "../types/DatosHorario"
-import { estilosGlobales } from "../Estilos"
-import { batch, createEffect, createMemo, createSignal, Show } from "solid-js"
-import { useListaCursos } from "./useListaCursos"
+} from "../../../types/DatosHorario";
+import { estilosGlobales } from "../../../Estilos";
+import { batch, createEffect, createMemo, createSignal, Show } from "solid-js";
+import { useListaCursos } from "./ContenedorHorarios/useListaCursos";
 
 const datosPromise = (async() => {
-    const file = await fetch("/horarios/2022_2_fps_ingenieriadesistemas.yaml")
-    const text = await file.text()
-    const datosRaw = YAML.parse(text) as DatosHorarioRaw
+    const file = await fetch("/horarios/2022_2_fps_ingenieriadesistemas.yaml");
+    const text = await file.text();
+    const datosRaw = YAML.parse(text) as DatosHorarioRaw;
+    console.log(datosRaw);
 
     // Agregar los campos faltantes a DatosHorarioRaw para que sea DatosHorario
     const datos: DatosHorario = {
         ...datosRaw,
         años: {},
-    }
+    };
 
-    const anios: Anios = {}
+    const anios: Anios = {};
     for (const [nombreAnio, anio] of Object.entries(datosRaw.años)) {
-        const anioData: Cursos = {}
+        const anioData: Cursos = {};
         for (const [nombreCurso, curso] of Object.entries(anio)) {
 
-            const gruposTeoria: { [k: string]: DatosGrupo } = {}
+            const gruposTeoria: { [k: string]: DatosGrupo } = {};
             for (const [key, data] of Object.entries(curso.Teoria)) {
-                gruposTeoria[key] = Object.assign({seleccionado: false}, data)
+                gruposTeoria[key] = Object.assign({seleccionado: false}, data);
             }
 
-            const gruposLab: { [k: string]: DatosGrupo } = {}
+            const gruposLab: { [k: string]: DatosGrupo } = {};
             for (const [key, data] of Object.entries(curso.Laboratorio ?? {})) {
-                gruposLab[key] = Object.assign({seleccionado: false}, data)
+                gruposLab[key] = Object.assign({seleccionado: false}, data);
             }
 
             anioData[nombreCurso] = {
@@ -44,21 +45,21 @@ const datosPromise = (async() => {
                 oculto: false,
                 Teoria: gruposTeoria,
                 Laboratorio: gruposLab,
-            }
+            };
         }
 
-        anios[nombreAnio] = anioData
+        anios[nombreAnio] = anioData;
     }
 
-    datos.años = anios
-    return datos
-})()
+    datos.años = anios;
+    return datos;
+})();
 
 const ElemCargando = () => (
     <div className={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock)}>
         Recuperando horarios...
     </div>
-)
+);
 
 export type EstadoLayout = "MaxPersonal" | "Normal" | "MaxHorarios";
 
@@ -66,48 +67,48 @@ const {
     listaCursos: cursosUsuario,
     setListaCursos: setCursosUsuarios,
     agregarCursoALista: agregarCursoUsuario,
-} = useListaCursos()
+} = useListaCursos();
 
 export function ContenedorHorarios() {
-    const [datosCargados, setDatosCargados] = createSignal(false)
-    const [datos, setDatos] = createSignal<DatosHorario | null>(null)
+    const [datosCargados, setDatosCargados] = createSignal(false);
+    const [datos, setDatos] = createSignal<DatosHorario | null>(null);
     const [estadoLayout, setEstadoLayout] = (
         createSignal<EstadoLayout>(localStorage.getItem("estadoLayout") as EstadoLayout || "Normal")
-    )
+    );
 
     const e = createMemo(() => {
-        let templateColumns = ""
+        let templateColumns = "";
         switch (estadoLayout()) {
             case "MaxHorarios": {
-                templateColumns = "0 auto"
-                break
+                templateColumns = "0 auto";
+                break;
             }
             case "MaxPersonal": {
-                templateColumns = "auto 0m"
-                break
+                templateColumns = "auto 0m";
+                break;
             }
             case "Normal": {
-                templateColumns = "50% 50%"
+                templateColumns = "50% 50%";
             }
         }
 
-        localStorage.setItem("estadoLayout", estadoLayout())
+        localStorage.setItem("estadoLayout", estadoLayout());
 
         return StyleSheet.create({
             contenedor: {
                 display: "grid",
                 gridTemplateColumns: templateColumns,
             },
-        })
-    })
+        });
+    });
 
     createEffect(async() => {
-        const datos = await datosPromise
+        const datos = await datosPromise;
         batch(() => {
-            setDatos(datos)
-            setDatosCargados(true)
-        })
-    })
+            setDatos(datos);
+            setDatosCargados(true);
+        });
+    });
 
     return (
         <div className={css(e().contenedor)}>
@@ -133,5 +134,5 @@ export function ContenedorHorarios() {
                 </Show>
             </div>
         </div>
-    )
+    );
 }

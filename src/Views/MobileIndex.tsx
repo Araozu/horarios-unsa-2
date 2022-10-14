@@ -1,6 +1,7 @@
 import { css, StyleSheet } from "aphrodite/no-important";
 import { batch, createSignal } from "solid-js";
 import { SERVER_PATH, setGruposSeleccionados } from "../Store";
+import { mockLoginEmpty } from "../API/Login";
 
 const e = StyleSheet.create({
     contenedorGlobal: {
@@ -29,34 +30,6 @@ const e = StyleSheet.create({
     },
 });
 
-type IdLaboratorio = number;
-type LoginData = {correo_usuario: string};
-type LoginResponse = Promise<{matriculas: Array<IdLaboratorio>} | null>;
-type LoginFunction = (data: LoginData) => LoginResponse;
-
-// Mock for a login without courses
-const mockLoginEmpty: LoginFunction = async(data) => ({matriculas: []});
-
-// Mock for a login with courses
-const mockLoginNotEmpty: LoginFunction = async(_) => ({
-    matriculas: [0, 1, 2, 3],
-});
-
-// Error login mock
-const mockLoginWithError: LoginFunction = async(_) => null;
-
-// Standard login
-const loginFn: LoginFunction = async(data) => {
-    const petition = await fetch(`${SERVER_PATH}/login`, {
-        method: "POST",
-        body: JSON.stringify({
-            correo_usuario: data.correo_usuario,
-        }),
-    });
-    if (!petition.ok) return null;
-    return await petition.json() as {matriculas: Array<IdLaboratorio>};
-};
-
 export function MobileIndex() {
     const s = StyleSheet.create({
         boton: {
@@ -78,7 +51,7 @@ export function MobileIndex() {
     });
     const [msgErrorVisible, setMsgErrorVisible] = createSignal(false);
 
-    const inputElement = <input required type="email" placeholder="Correo electronico" className={css(s.entrada)} />;
+    const inputElement = <input required type="email" placeholder="correo@unsa.edu.pe" className={css(s.entrada)} />;
 
     const login = async(ev: Event) => {
         ev.preventDefault();
@@ -89,13 +62,16 @@ export function MobileIndex() {
             setMsgErrorVisible(true);
             setTimeout(() => setMsgErrorVisible(false), 2500);
         } else if (response.matriculas.length === 0) {
+            localStorage.setItem("correo", email);
             window.location.href = "#/seleccion-cursos/";
         } else if (response.matriculas.length > 0) {
+            localStorage.setItem("correo", email);
             batch(() => {
                 for (const id_lab of response.matriculas) {
                     setGruposSeleccionados(id_lab, true);
                 }
             });
+            window.location.href = "#/ver-matricula/";
         }
     };
 

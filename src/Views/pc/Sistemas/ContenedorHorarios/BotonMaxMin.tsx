@@ -1,6 +1,6 @@
-import { css } from "aphrodite"
-import { estilosGlobales } from "../Estilos"
-import { EstadoLayout } from "./ContenedorHorarios"
+import { css } from "aphrodite";
+import { estilosGlobales } from "../../../../Estilos";
+import {EstadoLayout} from "../ContenedorHorarios";
 
 interface BotonMaxMinProps {
     fnMaximizar: () => void,
@@ -10,19 +10,19 @@ interface BotonMaxMinProps {
 }
 
 export function BotonMaxMin(props: BotonMaxMinProps) {
-    const horariosMax = () => props.estadoActualLayout() === props.estadoLayoutMax
+    const horariosMax = () => props.estadoActualLayout() === props.estadoLayoutMax;
 
-    const tituloBoton = () => (horariosMax() ? "Minimizar" : "Maximizar")
-    const iconoBoton = () => (horariosMax() ? "ph-arrows-in" : "ph-arrows-out")
+    const tituloBoton = () => (horariosMax() ? "Minimizar" : "Maximizar");
+    const iconoBoton = () => (horariosMax() ? "ph-arrows-in" : "ph-arrows-out");
 
     const funcionBoton = () => {
-        const estaMaximizado = horariosMax()
+        const estaMaximizado = horariosMax();
         if (estaMaximizado) {
-            props.fnMinimizar()
+            props.fnMinimizar();
         } else {
-            props.fnMaximizar()
+            props.fnMaximizar();
         }
-    }
+    };
 
     return (
         <button
@@ -38,5 +38,5 @@ export function BotonMaxMin(props: BotonMaxMinProps) {
         >
             <i className={`${css(estilosGlobales.botonPhospor)} ${iconoBoton()}`} />
         </button>
-    )
+    );
 }

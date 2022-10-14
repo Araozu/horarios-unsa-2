@@ -1,9 +1,9 @@
 import { StyleSheet, css } from "aphrodite";
 import { batch, createMemo, For } from "solid-js";
 import { produce, SetStoreFunction } from "solid-js/store";
-import { estilosGlobales } from "../Estilos";
-import { Cursos, ListaCursosUsuario, DataProcesada, DatosGrupo } from "../types/DatosHorario";
-import { Dia, dias, horas } from "../Store";
+import {estilosGlobales} from "../../../../Estilos";
+import { Cursos, ListaCursosUsuario, DataProcesada, DatosGrupo } from "../../../../types/DatosHorario";
+import { Dia, dias, horas } from "../../../../Store";
 import { FilaTabla } from "./Tabla/FilaTabla";
 import { TablaObserver } from "./TablaObserver";
 

@@ -1,9 +1,9 @@
 import { StyleSheet, css } from "aphrodite";
-import { estilosGlobales } from "../../Estilos";
+import { estilosGlobales } from "../../../../../Estilos";
 import { For, createSignal, createMemo, createEffect, onCleanup } from "solid-js";
-import { Dia } from "../../Store";
-import { DatosGrupo } from "../../types/DatosHorario";
-import { TablaObserver } from "../TablaObserver";
+import { Dia } from "../../../../../Store";
+import { DatosGrupo } from "../../../../../types/DatosHorario";
+import {TablaObserver} from "../TablaObserver";
 
 const e = StyleSheet.create({
     celdaComun: {
@@ -179,7 +179,9 @@ function RenderFila(datos: DatosProps, props: Props) {
             return `${css(...clases)} ${adicional}`;
         },
         undefined,
-        (x, y) => x === y,
+        {
+            equals: (x, y) => x === y,
+        },
     );
 
     return (

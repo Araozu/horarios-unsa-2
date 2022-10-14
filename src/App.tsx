@@ -1,4 +1,4 @@
-import { Main } from "./Views/Main";
+import { Sistemas } from "./Views/pc/Sistemas";
 import { Index } from "./Views/Index";
 import { Editor } from "./Views/Editor";
 import { useRouter } from "./Router";
@@ -7,6 +7,7 @@ import { Wallpaper } from "./Wallpaper";
 import { SistemasMovil } from "./Views/SistemasMovil";
 import { SeleccionCursos } from "./Views/SeleccionCursos";
 import { VerMatricula } from "./Views/VerMatricula";
+import {SeleccionCursos as SeleccionCursosPC} from "./Views/pc/SeleccionCursos";
 
 function App() {
     const route = useRouter();
@@ -33,8 +34,12 @@ function App() {
                 <Match when={route() === "/ver-matricula/"}>
                     <VerMatricula />
                 </Match>
-                <Match when={route() === "/sistemas/"}>
-                    <Main />
+
+                <Match when={route() === "/pc/seleccion-cursos/"}>
+                    <SeleccionCursosPC />
+                </Match>
+                <Match when={route() === "/pc/sistemas/"}>
+                    <Sistemas />
                 </Match>
             </Switch>
         </div>

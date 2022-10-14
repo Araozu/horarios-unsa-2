@@ -1,14 +1,14 @@
-import { estilosGlobales } from "../Estilos"
-import { StyleSheet, css } from "aphrodite"
-import { Tabla } from "./Tabla"
-import { EstadoLayout } from "./ContenedorHorarios"
-import { Switch, Match, createMemo } from "solid-js"
-import {SetStoreFunction} from "solid-js/store"
-import { BotonMaxMin } from "./BotonMaxMin"
-import { BotonIcono } from "./BotonIcono"
-import { Curso, Cursos, ListaCursosUsuario } from "../types/DatosHorario"
-import { CursosElem } from "./CursosElem"
-import { TablaObserver } from "./TablaObserver"
+import { estilosGlobales } from "../../../../Estilos";
+import { StyleSheet, css } from "aphrodite";
+import {Tabla} from "./Tabla";
+import { EstadoLayout } from "../ContenedorHorarios";
+import { Switch, Match, createMemo } from "solid-js";
+import {SetStoreFunction} from "solid-js/store";
+import { BotonMaxMin } from "./BotonMaxMin";
+import { BotonIcono } from "./BotonIcono";
+import { Curso, Cursos, ListaCursosUsuario } from "../../../../types/DatosHorario";
+import { CursosElem } from "./CursosElem";
+import { TablaObserver } from "./TablaObserver";
 
 interface MiHorarioProps {
     estadoLayout: EstadoLayout,
@@ -29,22 +29,22 @@ const e = StyleSheet.create({
             textDecoration: "none",
         },
     },
-})
+});
 
 export function MiHorario(props: MiHorarioProps) {
-    const tablaObserver = new TablaObserver()
+    const tablaObserver = new TablaObserver();
 
     const datosMiHorario = createMemo(() => {
-        const obj: Cursos = {}
+        const obj: Cursos = {};
         props.cursosUsuario.cursos.forEach((x, i) => {
-            obj[i] = x
-        })
-        return obj
-    })
+            obj[i] = x;
+        });
+        return obj;
+    });
 
-    const fnMaximizar = () => props.setEstadoLayout("MaxPersonal")
-    const fnMinimizar = () => props.setEstadoLayout("Normal")
-    const estadoActualLayout = () => props.estadoLayout
+    const fnMaximizar = () => props.setEstadoLayout("MaxPersonal");
+    const fnMinimizar = () => props.setEstadoLayout("Normal");
+    const estadoActualLayout = () => props.estadoLayout;
 
     /* TODO: En barra superior colocar todos los horarios. En barra inferior el horario
         actual.
@@ -142,5 +142,5 @@ export function MiHorario(props: MiHorarioProps) {
                 </Match>
             </Switch>
         </div>
-    )
+    );
 }
