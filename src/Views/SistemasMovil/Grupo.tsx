@@ -1,5 +1,6 @@
 import { css, StyleSheet } from "aphrodite/no-important";
 import { GrupoDia } from "./Table";
+import { gruposSeleccionados, setGruposSeleccionados } from "../../Store";
 
 const colores: Array<[string, string]> = [
     ["#FFEBEE", "#F44336"],
@@ -14,16 +15,25 @@ const colores: Array<[string, string]> = [
 ];
 
 export function Grupo(props: { data: GrupoDia }) {
+    const [colorDesactivado, colorActivado] = colores[props.data.id_laboratorio % 9];
     const ss = StyleSheet.create({
         button: {
             display: "inline-block",
-            padding: "0.2rem 0.2rem",
+            padding: "0.2rem 1rem",
             textAlign: "left",
             borderRadius: "10px",
-            border: "solid 2px red",
+            border: `solid 2px ${colorActivado}`,
             position: "absolute",
         },
     });
+
+    const estiloFondo = () => {
+        if (gruposSeleccionados[props.data.id_laboratorio]) {
+            return `background-color: ${colorActivado}; color: white; font-weight: 600;`;
+        } else {
+            return `background-color: ${colorDesactivado};`;
+        }
+    };
 
     const estilo = () => {
         const fraccion = props.data.fraccion;
@@ -31,24 +41,24 @@ export function Grupo(props: { data: GrupoDia }) {
         const offsetVertical = props.data.offsetVertical;
         const nroHoras = props.data.nroHoras;
 
-        const [colorDesactivado, colorActivado] = colores[props.data.id_laboratorio % 9];
-        const estiloColor = `background-color: ${colorDesactivado};border-color: ${colorActivado}`;
-
         return `left: calc((43vw / ${fraccion}) * ${offsetHorizontal}); top: ${offsetVertical * 3}rem;` +
-            `height: ${nroHoras * 3}rem; width: calc(100% / ${fraccion});${estiloColor}`;
+            `height: ${nroHoras * 3}rem; width: calc(100% / ${fraccion});`;
+    };
+
+    const handleClick = () => {
+        setGruposSeleccionados(props.data.id_laboratorio, (x) => !x);
     };
 
     return (
-        <input
+        <button
             type="button"
             className={css(ss.button)}
-            style={estilo()}
-            onClick={() => console.log(`:D ${props.data.id_laboratorio}`)}
-            value={`${props.data.abreviado} ${props.data.grupo}`}
+            style={`${estilo()}${estiloFondo()}`}
+            onClick={handleClick}
         >
             {props.data.abreviado}
             <br />
             {props.data.grupo}
-        </input>
+        </button>
     );
 }

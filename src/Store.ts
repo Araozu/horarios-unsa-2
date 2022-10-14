@@ -1,4 +1,5 @@
 import { createSignal } from "solid-js";
+import { createStore } from "solid-js/store";
 
 export type Dia = "Lunes" | "Martes" | "Miercoles" | "Jueves" | "Viernes";
 
@@ -36,3 +37,5 @@ const tamanoLetraGuardado = Number(/* localStorage.getItem("tamano-letra") ?? */
 export const [numWallpaper, setNumWallpaper] = createSignal(numImgGuardado);
 export const [tamanoLetra, setTamanoLetra] = createSignal(tamanoLetraGuardado);
 export const [isMobile, setIsMobile] = createSignal(screen.width < 500);
+
+export const [gruposSeleccionados, setGruposSeleccionados] = createStore<{[k: number]: boolean}>({});
