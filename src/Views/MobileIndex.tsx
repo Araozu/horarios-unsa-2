@@ -61,17 +61,9 @@ export function MobileIndex() {
         if (response === null) {
             setMsgErrorVisible(true);
             setTimeout(() => setMsgErrorVisible(false), 2500);
-        } else if (response.matriculas.length === 0) {
+        } else {
             localStorage.setItem("correo", email);
             window.location.href = "#/seleccion-cursos/";
-        } else if (response.matriculas.length > 0) {
-            localStorage.setItem("correo", email);
-            batch(() => {
-                for (const id_lab of response.matriculas) {
-                    setGruposSeleccionados(id_lab, true);
-                }
-            });
-            window.location.href = "#/ver-matricula/";
         }
     };
 
