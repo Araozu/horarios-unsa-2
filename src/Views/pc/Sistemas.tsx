@@ -82,7 +82,7 @@ function listaCursosADatos(cursosEntrada: ListaCursosCompleto): Cursos {
             gruposLab[lab.grupo] = {
                 id_laboratorio: lab.id_laboratorio,
                 Docente: lab.docente,
-                Horas: infoDiaAListaHoras(lab.horario),
+                Horas: infoDiaAListaHoras(lab.horarios),
                 seleccionado: false,
             };
         }

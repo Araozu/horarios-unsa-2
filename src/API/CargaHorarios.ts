@@ -54,7 +54,7 @@ export type Laboratorio = {
     grupo: string,
     docente: string,
     // Array de objetos de la entidad Horario
-    horario: Array<Horario>
+    horarios: Array<Horario>
 }
 export type CursoCompleto = {
     id_curso: number,
@@ -95,7 +95,7 @@ export const getHorariosMock: GetHorariosFn = async(_) => {
                 id_curso: 0,
                 grupo: "A",
                 docente: "Luis Rocha",
-                horario: [
+                horarios: [
                     {
                         id_horario: 0,
                         id_laboratorio: 0,
@@ -117,7 +117,7 @@ export const getHorariosMock: GetHorariosFn = async(_) => {
                 id_curso: 0,
                 grupo: "B",
                 docente: "Luis Rocha",
-                horario: [
+                horarios: [
                     {
                         id_horario: 2,
                         id_laboratorio: 1,
@@ -154,7 +154,7 @@ export const getHorariosMock: GetHorariosFn = async(_) => {
                 id_curso: 1,
                 grupo: "A",
                 docente: "Diego Iquira",
-                horario: [
+                horarios: [
                     {
                         id_horario: 4,
                         id_laboratorio: 2,
@@ -169,7 +169,7 @@ export const getHorariosMock: GetHorariosFn = async(_) => {
                 id_curso: 1,
                 grupo: "B",
                 docente: "Diego Iquira",
-                horario: [
+                horarios: [
                     {
                         id_horario: 5,
                         id_laboratorio: 3,

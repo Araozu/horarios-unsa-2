@@ -65,7 +65,7 @@ function transformar(input: ListaCursosCompleto): TableInput {
     // Organizar por dias
     for (const curso of input) {
         for (const lab of curso.laboratorios) {
-            for (const horas of lab.horario) {
+            for (const horas of lab.horarios) {
                 const dia = horas.dia;
                 const [idx, nroHoras] = infoDiaAOffsets(horas.hora_inicio, horas.hora_fin);
                 const datos = {
