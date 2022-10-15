@@ -6,6 +6,18 @@ import { createSignal } from "solid-js";
 import { getHorariosMock, ListaCursosCompleto } from "../../API/CargaHorarios";
 import { Cursos, DatosGrupo } from "../../types/DatosHorario";
 import { infoDiaAListaHoras } from "../SistemasMovil";
+import { StyleSheet, css } from "aphrodite/no-important";
+import { estilosGlobales } from "../../Estilos";
+import { gruposSeleccionados, SERVER_PATH } from "../../Store";
+
+const s = StyleSheet.create({
+    botonAccion: {
+        width: "50%",
+        display: "inline-block",
+        textAlign: "center",
+        backgroundColor: "var(--color-primario)",
+    },
+});
 
 export function Sistemas() {
     const [data, setData] = createSignal<Cursos>({});
@@ -19,12 +31,43 @@ export function Sistemas() {
         setData(listaCursosADatos(data));
     })();
 
+    const matricular = async() => {
+        const laboratoriosAMatricular = Object.entries(gruposSeleccionados)
+            .filter((x) => x[1] === true)
+            .map((x) => x[0]);
+
+        const response = await fetch(`${SERVER_PATH}/matricula`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                correo_usuario: localStorage.getItem("correo"),
+                horarios: laboratoriosAMatricular,
+            }),
+        });
+        if (response.ok) {
+            window.location.href = "#/pc/ver-matricula/";
+        } else {
+            alert("No se pudo procesar la matricula");
+        }
+    };
+
     return (
         <div>
             <BarraSuperior />
             <Separador />
             <Separador />
             <ContenedorHorarios datos={data()} />
+            <Separador />
+            <div style="text-align: center;">
+                <button
+                    className={css(estilosGlobales.contenedor, estilosGlobales.contenedorCursor, s.botonAccion)}
+                    onclick={matricular}
+                >
+                    Matricular
+                </button>
+            </div>
             <Creditos />
         </div>
     );

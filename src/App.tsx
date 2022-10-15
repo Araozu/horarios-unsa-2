@@ -8,6 +8,7 @@ import { SistemasMovil } from "./Views/SistemasMovil";
 import { SeleccionCursos } from "./Views/SeleccionCursos";
 import { VerMatricula } from "./Views/VerMatricula";
 import {SeleccionCursos as SeleccionCursosPC} from "./Views/pc/SeleccionCursos";
+import { VerMatricula as VerMatriculaPC } from "./Views/pc/VerMatricula";
 
 function App() {
     const route = useRouter();
@@ -40,6 +41,9 @@ function App() {
                 </Match>
                 <Match when={route() === "/pc/sistemas/"}>
                     <Sistemas />
+                </Match>
+                <Match when={route() === "/pc/ver-matricula/"}>
+                    <VerMatriculaPC />
                 </Match>
             </Switch>
         </div>

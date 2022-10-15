@@ -127,7 +127,7 @@ export function SeleccionCursos() {
                         className={css(estilosGlobales.contenedor, estilosGlobales.contenedorCursor, e.botonAccion)}
                     >
                         Iniciar sesion
-                    </button >
+                    </button>
                 </form>
             </div>
         </div>
