@@ -4,7 +4,7 @@ import { RouterLink } from "../Router";
 import { batch, createSignal, Show } from "solid-js";
 import { isMobile, setGruposSeleccionados } from "../Store";
 import { MobileIndex } from "./MobileIndex";
-import { mockLoginEmpty, mockLoginNotEmpty, mockLoginWithError } from "../API/Login";
+import { loginFn } from "../API/Login";
 
 const e = StyleSheet.create({
     contenedorGlobal: {
@@ -46,17 +46,17 @@ const e = StyleSheet.create({
 
 export function Index() {
     const [msgErrorVisible, setMsgErrorVisible] = createSignal(false);
-    const inputElement = <input className={css(e.inputCorreo)} type="email" required placeholder="correo@unsa.edu.pe" />;
+    const inputElement = <input class={css(e.inputCorreo)} type="email" required placeholder="correo@unsa.edu.pe" />;
 
     const login = async(ev: Event) => {
         ev.preventDefault();
         const email = (inputElement as HTMLInputElement).value;
-        const response = await mockLoginEmpty({correo_usuario: email});
+        const response = await loginFn({correo_usuario: email});
 
         if (response === null) {
             setMsgErrorVisible(true);
             setTimeout(() => setMsgErrorVisible(false), 2500);
-        } else if (response.matriculas.length === 0) {
+        } else if (!response.matriculas || response.matriculas.length === 0) {
             localStorage.setItem("correo", email);
             window.location.href = "#/pc/seleccion-cursos/";
         } else if (response.matriculas.length > 0) {
@@ -73,9 +73,9 @@ export function Index() {
     return (
         <>
             <Show when={!isMobile()}>
-                <div className={css(e.contenedorGlobal)}>
-                    <div className={css(e.cont)}>
-                        <div className={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock, e.cont)}>
+                <div class={css(e.contenedorGlobal)}>
+                    <div class={css(e.cont)}>
+                        <div class={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock, e.cont)}>
                             <h1 style={{
                                 "text-align": "center",
                                 "font-size": "1.75rem",
@@ -83,7 +83,7 @@ export function Index() {
                             >
                                 Horarios UNSA
                             </h1>
-                            <p className={css(e.parrafo)}>
+                            <p class={css(e.parrafo)}>
                                 Inicia sesión con tu correo institucional.
                                 <br />
                                 {inputElement}
@@ -92,17 +92,17 @@ export function Index() {
                                 El correo es invalido
                             </span>
                         </div>
-                        <button onClick={login} className={css(estilosGlobales.contenedor, estilosGlobales.contenedorCursor, e.botonAccion)}>
+                        <button onClick={login} class={css(estilosGlobales.contenedor, estilosGlobales.contenedorCursor, e.botonAccion)}>
                             Iniciar sesion
                         </button>
                         <br />
                         <br />
                         <a
-                            className={css(estilosGlobales.contenedor, estilosGlobales.contenedorCursor, e.botonAccion)}
+                            class={css(estilosGlobales.contenedor, estilosGlobales.contenedorCursor, e.botonAccion)}
                             href="https://github.com/Araozu/horarios-unsa-2/"
                             target="_blank"
                         >
-                            <i className={`${css(e.iconoGitHub)} ph-code`} />
+                            <i class={`${css(e.iconoGitHub)} ph-code`} />
                             Código fuente en GitHub
                         </a>
                     </div>

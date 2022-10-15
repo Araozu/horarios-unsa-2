@@ -1,8 +1,7 @@
 import { css, StyleSheet } from "aphrodite/no-important";
 import { estilosGlobales } from "../../Estilos";
 import { createSignal, For } from "solid-js";
-import { getAllListaCursosMock, RespuestaListaCursos } from "../../API/ListaCursos";
-import { getMatriculaMock, InfoMatricula } from "../../API/VerMatricula";
+import { getMatricula, InfoMatricula } from "../../API/VerMatricula";
 import { gruposSeleccionados } from "../../Store";
 
 const e = StyleSheet.create({
@@ -59,14 +58,14 @@ export function VerMatricula() {
         const laboratorios = Object.entries(gruposSeleccionados)
             .filter((x) => x[1] === true)
             .map((x) => parseInt(x[0], 10));
-        setInfoMatriculas(await getMatriculaMock({matriculas: laboratorios}));
+        setInfoMatriculas(await getMatricula({matriculas: laboratorios}));
     })();
 
     return (
-        <div className={css(e.contenedorGlobal)}>
-            <div className={css(e.cont)}>
+        <div class={css(e.contenedorGlobal)}>
+            <div class={css(e.cont)}>
 
-                <div className={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock, e.cont)}>
+                <div class={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock, e.cont)}>
                     <h1 style={{
                         "text-align": "center",
                         "font-size": "1.75rem",

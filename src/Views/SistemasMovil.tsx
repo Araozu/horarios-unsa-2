@@ -1,6 +1,6 @@
 import { TopBar } from "./SistemasMovil/TopBar";
 import { GrupoDia, Table, TableInput } from "./SistemasMovil/Table";
-import { getHorariosMock, Horario, ListaCursosCompleto } from "../API/CargaHorarios";
+import { getHorarios, Horario, ListaCursosCompleto } from "../API/CargaHorarios";
 import { createSignal } from "solid-js";
 import { generarMapaCeldas } from "./SistemasMovil/mapaCeldas";
 import { Button } from "../components/Button";
@@ -12,7 +12,7 @@ export function SistemasMovil() {
     // Obtener cursos seleccionados del servidor
     (async() => {
         const cursos: Array<string> = JSON.parse(localStorage.getItem("cursos-seleccionados") ?? "[]");
-        const data = await getHorariosMock({
+        const data = await getHorarios({
             cursos: cursos.map((x) => parseInt(x, 10)),
         });
         setRawData(data);

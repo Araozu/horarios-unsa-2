@@ -3,7 +3,7 @@ import { ContenedorHorarios } from "./Sistemas/ContenedorHorarios";
 import { Creditos } from "../../Creditos";
 import { Separador } from "../../Separador";
 import { createSignal } from "solid-js";
-import { getHorariosMock, ListaCursosCompleto } from "../../API/CargaHorarios";
+import { getHorarios, ListaCursosCompleto } from "../../API/CargaHorarios";
 import { Cursos, DatosGrupo } from "../../types/DatosHorario";
 import { infoDiaAListaHoras } from "../SistemasMovil";
 import { StyleSheet, css } from "aphrodite/no-important";
@@ -25,7 +25,7 @@ export function Sistemas() {
     // Obtener cursos seleccionados del servidor
     (async() => {
         const cursos: Array<string> = JSON.parse(localStorage.getItem("cursos-seleccionados") ?? "[]");
-        const data = await getHorariosMock({
+        const data = await getHorarios({
             cursos: cursos.map((x) => parseInt(x, 10)),
         });
         setData(listaCursosADatos(data));
@@ -62,7 +62,7 @@ export function Sistemas() {
             <Separador />
             <div style="text-align: center;">
                 <button
-                    className={css(estilosGlobales.contenedor, estilosGlobales.contenedorCursor, s.botonAccion)}
+                    class={css(estilosGlobales.contenedor, estilosGlobales.contenedorCursor, s.botonAccion)}
                     onclick={matricular}
                 >
                     Matricular

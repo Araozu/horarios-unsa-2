@@ -21,6 +21,7 @@ export const loginFn: LoginFunction = async(data) => {
     const petition = await fetch(`${SERVER_PATH}/login`, {
         method: "POST",
         headers: {
+            "Accept": "application/json",
             "Content-Type": "application/json",
         },
         body: JSON.stringify({

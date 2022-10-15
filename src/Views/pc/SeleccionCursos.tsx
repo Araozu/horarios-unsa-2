@@ -1,7 +1,7 @@
 import { css, StyleSheet } from "aphrodite/no-important";
 import { estilosGlobales } from "../../Estilos";
 import { createSignal, For } from "solid-js";
-import { getAllListaCursosMock, RespuestaListaCursos } from "../../API/ListaCursos";
+import { getAllListaCursos, RespuestaListaCursos } from "../../API/ListaCursos";
 
 const e = StyleSheet.create({
     contenedorGlobal: {
@@ -55,7 +55,7 @@ export function SeleccionCursos() {
     const [msgErr, setMsgError] = createSignal(false);
 
     // Recuperar cursos de back
-    (async() => setCursos(await getAllListaCursosMock()))();
+    (async() => setCursos(await getAllListaCursos()))();
 
     const submit = (ev: Event) => {
         ev.preventDefault();
@@ -83,10 +83,10 @@ export function SeleccionCursos() {
     };
 
     return (
-        <div className={css(e.contenedorGlobal)}>
-            <div className={css(e.cont)}>
+        <div class={css(e.contenedorGlobal)}>
+            <div class={css(e.cont)}>
                 <form onSubmit={submit}>
-                    <div className={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock, e.cont)}>
+                    <div class={css(estilosGlobales.contenedor, estilosGlobales.inlineBlock, e.cont)}>
                         <h1 style={{
                             "text-align": "center",
                             "font-size": "1.75rem",
@@ -100,14 +100,14 @@ export function SeleccionCursos() {
                             {([nombreAnio, infoCurso]) => (
                                 <>
                                     <h2>{nombreAnio} año</h2>
-                                    <div className={css(e.grid)}>
+                                    <div class={css(e.grid)}>
                                         <For each={infoCurso}>
                                             {(curso) => (
                                                 <>
                                                     <input
                                                         type="checkbox"
                                                         value={curso.id_curso}
-                                                        className={css(e.checkbox)}
+                                                        class={css(e.checkbox)}
                                                     />
                                                     <span>{curso.nombre_curso}</span>
                                                 </>
@@ -124,9 +124,9 @@ export function SeleccionCursos() {
                     </div>
                     <button
                         type="submit"
-                        className={css(estilosGlobales.contenedor, estilosGlobales.contenedorCursor, e.botonAccion)}
+                        class={css(estilosGlobales.contenedor, estilosGlobales.contenedorCursor, e.botonAccion)}
                     >
-                        Iniciar sesion
+                        Continuar
                     </button>
                 </form>
             </div>

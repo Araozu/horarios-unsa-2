@@ -15,7 +15,7 @@ function App() {
     const isMobile = screen.width <= 500;
 
     return (
-        <div className="App" style={isMobile ? "--color-texto: #202020;" : ""}>
+        <div class="App" style={isMobile ? "--color-texto: #202020;" : ""}>
             <Show when={!isMobile}>
                 <Wallpaper />
             </Show>

@@ -2,7 +2,7 @@ import { TopBar } from "./SistemasMovil/TopBar";
 import { StyleSheet, css } from "aphrodite/no-important";
 import { Card } from "../components/Card";
 import { createSignal, For } from "solid-js";
-import { getAllListaCursosMock, RespuestaListaCursos } from "../API/ListaCursos";
+import { getAllListaCursos, RespuestaListaCursos } from "../API/ListaCursos";
 import { Button } from "../components/Button";
 
 const s = StyleSheet.create({
@@ -23,7 +23,7 @@ export function SeleccionCursos() {
     const [msjErr, setMsjError] = createSignal(false);
 
     // Recuperar cursos de back
-    (async() => setCursos(await getAllListaCursosMock()))();
+    (async() => setCursos(await getAllListaCursos()))();
 
     const submit = (ev: Event) => {
         ev.preventDefault();
@@ -62,14 +62,14 @@ export function SeleccionCursos() {
                     {([nombreAnio, infoCurso]) => (
                         <Card>
                             <h2>{nombreAnio} año</h2>
-                            <div className={css(s.grid)}>
+                            <div class={css(s.grid)}>
                                 <For each={infoCurso}>
                                     {(curso) => (
                                         <>
                                             <input
                                                 type="checkbox"
                                                 value={curso.id_curso}
-                                                className={css(s.checkbox)}
+                                                class={css(s.checkbox)}
                                             />
                                             <span>{curso.nombre_curso}</span>
                                         </>

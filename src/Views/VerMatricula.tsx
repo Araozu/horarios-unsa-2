@@ -1,7 +1,7 @@
 import { TopBar } from "./SistemasMovil/TopBar";
 import { Card } from "../components/Card";
 import { createSignal, For } from "solid-js";
-import { getMatriculaMock, InfoMatricula } from "../API/VerMatricula";
+import { getMatricula, InfoMatricula } from "../API/VerMatricula";
 import { gruposSeleccionados } from "../Store";
 
 export function VerMatricula() {
@@ -11,7 +11,7 @@ export function VerMatricula() {
         const laboratorios = Object.entries(gruposSeleccionados)
             .filter((x) => x[1] === true)
             .map((x) => parseInt(x[0], 10));
-        setInfoMatriculas(await getMatriculaMock({matriculas: laboratorios}));
+        setInfoMatriculas(await getMatricula({matriculas: laboratorios}));
     })();
 
     return (

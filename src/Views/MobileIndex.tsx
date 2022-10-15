@@ -1,7 +1,7 @@
 import { css, StyleSheet } from "aphrodite/no-important";
 import { batch, createSignal } from "solid-js";
 import { SERVER_PATH, setGruposSeleccionados } from "../Store";
-import { mockLoginEmpty } from "../API/Login";
+import { loginFn } from "../API/Login";
 
 const e = StyleSheet.create({
     contenedorGlobal: {
@@ -51,12 +51,12 @@ export function MobileIndex() {
     });
     const [msgErrorVisible, setMsgErrorVisible] = createSignal(false);
 
-    const inputElement = <input required type="email" placeholder="correo@unsa.edu.pe" className={css(s.entrada)} />;
+    const inputElement = <input required type="email" placeholder="correo@unsa.edu.pe" class={css(s.entrada)} />;
 
     const login = async(ev: Event) => {
         ev.preventDefault();
         const email = (inputElement as HTMLInputElement).value;
-        const response = await mockLoginEmpty({correo_usuario: email});
+        const response = await loginFn({correo_usuario: email});
 
         if (response === null) {
             setMsgErrorVisible(true);
@@ -76,7 +76,7 @@ export function MobileIndex() {
     };
 
     return (
-        <div className={css(e.contenedorGlobal)}>
+        <div class={css(e.contenedorGlobal)}>
             <div style="text-align: center;">
                 <h1>Iniciar sesión</h1>
                 <br />
@@ -84,7 +84,7 @@ export function MobileIndex() {
                 <form onSubmit={(ev) => login(ev)}>
                     {inputElement}
                     <br />
-                    <button type="submit" className={css(s.boton)}>Iniciar Sesion</button>
+                    <button type="submit" class={css(s.boton)}>Iniciar Sesion</button>
                 </form>
                 <span style={{opacity: msgErrorVisible() ? 1 : 0}}>El correo es invalido</span>
             </div>
