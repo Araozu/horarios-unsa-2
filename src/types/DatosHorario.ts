@@ -27,6 +27,7 @@ export interface DatosHorarioRaw {
 }
 
 export interface DatosGrupo {
+    id_laboratorio: number,
     Docente: string,
     Horas: string[]
     seleccionado: boolean
@@ -44,9 +45,8 @@ export interface Curso {
     }
 }
 
-export interface ListaCursosUsuario {
-    sigIndice: number,
-    cursos: Curso[]
+export type ListaCursosUsuario = {
+    [key: string]: Curso
 }
 
 export interface Cursos {

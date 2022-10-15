@@ -1,6 +1,7 @@
 import { createMemo, createEffect, untrack } from "solid-js";
 import {createStore, SetStoreFunction, Store, produce} from "solid-js/store";
 import { DatosGrupo } from "../../../../types/DatosHorario";
+import { gruposSeleccionados } from "../../../../Store";
 
 const createMemoDefault = <T>(f: () => T) => createMemo<T>(
     f,
@@ -73,6 +74,7 @@ export class TablaObserver {
 
     /**
      * Crea un memo que indica el estado de la celda
+     * @param id_laboratorio Id del laboratorio
      * @param anio El año
      * @param curso Curso abreviado
      * @param esLab Si es laboratorio
@@ -80,6 +82,7 @@ export class TablaObserver {
      * @param datosGrupo Contiene `seleccionado`, se usa ese valor reactivo
      */
     private registrar(
+        id_laboratorio: number,
         anio: string,
         curso: string,
         esLab: boolean,
@@ -131,15 +134,7 @@ export class TablaObserver {
             }
         });
 
-        const seleccionadoMemo = createMemoDefault<EstadoSeleccionado>(() => {
-            const gruposSeleccionados = this.seleccionado[anio][curso][esLab ? "Laboratorio" : "Teoria"];
-
-            if (gruposSeleccionados.length > 0) {
-                return gruposSeleccionados.find((x) => x === grupo) ? "Seleccionado" : "Oculto";
-            } else {
-                return "Normal";
-            }
-        });
+        const seleccionadoMemo = createMemoDefault<EstadoSeleccionado>(() => ((gruposSeleccionados[id_laboratorio]) ? "Seleccionado" : "Normal"));
 
         return createMemoDefault((): EstadoCelda => {
             const resaltado = resaltadoMemo();
@@ -176,7 +171,7 @@ export class TablaObserver {
         }
 
         const [, anio, curso, lab, grupo] = id.split("_");
-        const memo = this.registrar(anio, curso, lab === "L", grupo, datosGrupo);
+        const memo = this.registrar(datosGrupo.id_laboratorio, anio, curso, lab === "L", grupo, datosGrupo);
         this.memos[id] = memo;
         return memo;
     }

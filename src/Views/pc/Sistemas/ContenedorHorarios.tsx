@@ -1,7 +1,6 @@
 import YAML from "yaml";
 import { css, StyleSheet } from "aphrodite";
 import { MiHorario } from "./ContenedorHorarios/MiHorario";
-import { Horarios } from "./ContenedorHorarios/Horarios";
 import {
     Anios,
     Cursos,
@@ -20,18 +19,17 @@ const {
 } = useListaCursos();
 
 export function ContenedorHorarios(props: {datos: Cursos}) {
-    const [datos, setDatos] = createSignal<Cursos>({});
 
     createEffect(async() => {
-        const datos = props.datos;
+        const d2 = props.datos;
         batch(() => {
-            setDatos(datos);
+            Object.entries(d2).forEach(([_, curso]) => agregarCursoUsuario(curso));
         });
     });
 
     return (
         <MiHorario
-            cursos={datos()}
+            cursos={props.datos}
             fnAgregarCurso={agregarCursoUsuario}
             setCursosUsuarios={setCursosUsuarios}
         />

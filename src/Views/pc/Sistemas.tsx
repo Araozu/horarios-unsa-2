@@ -37,6 +37,7 @@ function listaCursosADatos(cursosEntrada: ListaCursosCompleto): Cursos {
         const gruposLab: {[grupo: string]: DatosGrupo} = {};
         for (const lab of curso.laboratorios) {
             gruposLab[lab.grupo] = {
+                id_laboratorio: lab.id_laboratorio,
                 Docente: lab.docente,
                 Horas: infoDiaAListaHoras(lab.horario),
                 seleccionado: false,

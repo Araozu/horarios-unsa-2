@@ -4,6 +4,7 @@ import { produce, SetStoreFunction } from "solid-js/store";
 import { StyleSheet, css } from "aphrodite";
 import { estilosGlobales } from "../../../../Estilos";
 import { TablaObserver } from "./TablaObserver";
+import { setGruposSeleccionados } from "../../../../Store";
 
 const e = StyleSheet.create({
     inline: {
@@ -47,7 +48,6 @@ interface Props {
     dataAnio: Cursos,
     anioActual: () => string,
     fnAgregarCurso: (c: Curso) => void,
-    listaCursosUsuario: ListaCursosUsuario,
     esCursoMiHorario: boolean,
     setCursosUsuarios: SetStoreFunction<ListaCursosUsuario>,
     tablaObserver: TablaObserver,
@@ -93,17 +93,7 @@ const agruparProfesores = (
         profesores[nombreProfesor].push([
             grupo,
             () => {
-                setCursosUsuarios("cursos", Number(indiceCurso), "Teoria", produce<{ [p: string]: DatosGrupo }>((x) => {
-                    const grupoActualSeleccionado = x[grupo].seleccionado;
-
-                    if (grupoActualSeleccionado) {
-                        x[grupo].seleccionado = false;
-                    } else {
-                        for (const xKey in x) {
-                            x[xKey].seleccionado = xKey === grupo;
-                        }
-                    }
-                }));
+                setGruposSeleccionados(datosGrupo.id_laboratorio, (x) => !x);
             },
         ]);
     }
@@ -119,26 +109,11 @@ function CursoE(
 ) {
     const idCurso = `${props.version}_${anio()}_${datosCurso.abreviado}`;
 
-    const cursoAgregadoMemo = createMemo(
-        () => props.listaCursosUsuario.cursos.find((x) => x.nombre === datosCurso.nombre && !x.oculto) !== undefined,
-        undefined,
-        {
-            equals:
-                (x, y) => x === y,
-        },
-    );
-
-    const tituloMemo = createMemo(() => (cursoAgregadoMemo()
-        ? "Remover de mi horario"
-        : "Agregar a mi horario"));
-
     const claseMemo = createMemo(() => {
         if (props.esCursoMiHorario && datosCurso.oculto) {
             return claseCursoOculto;
         }
-        return cursoAgregadoMemo()
-            ? claseCursoAgregado
-            : claseCursoNoAgregado;
+        return claseCursoNoAgregado;
     });
 
     const profesoresTeoria = createMemo(() => agruparProfesores(
@@ -197,12 +172,6 @@ function CursoE(
                     </tr>
                 </tbody>
             </table>
-            <button
-                className={css(e.botonTexto, estilosGlobales.contenedorCursor, estilosGlobales.contenedorCursorSoft)}
-                onClick={() => props.fnAgregarCurso(datosCurso)}
-            >
-                {tituloMemo}
-            </button>
         </div>
     );
 }

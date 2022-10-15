@@ -9,27 +9,21 @@ interface ReturnType {
 }
 
 export const useListaCursos = (): ReturnType => {
-    const [listaCursos, setListaCursos] = createStore<ListaCursosUsuario>({
-        sigIndice: 0,
-        cursos: [],
-    });
+    const [listaCursos, setListaCursos] = createStore<ListaCursosUsuario>({});
 
     const agregarCursoALista = (curso: Curso): Curso => {
         // Si el horario ya se habia agregado, ocultarlo
-        const cursoActualIndex = listaCursos.cursos.findIndex((x) => x.nombre === curso.nombre);
-        if (cursoActualIndex !== -1) {
-            setListaCursos("cursos", cursoActualIndex, "oculto", (x) => !x);
-            return listaCursos.cursos[cursoActualIndex];
+        if (listaCursos[curso.nombre]) {
+            setListaCursos(curso.nombre, "oculto", (x) => !x);
+            return listaCursos[curso.nombre];
         } else {
-            setListaCursos("cursos", listaCursos.sigIndice, curso);
-            setListaCursos("sigIndice", (x) => x + 1);
-            return listaCursos.cursos[listaCursos.sigIndice - 1];
+            setListaCursos(curso.nombre, curso);
+            return listaCursos[curso.nombre];
         }
     };
 
     const eliminarCursosDeLista = () => {
-        setListaCursos("cursos", []);
-        setListaCursos("sigIndice", 0);
+        setListaCursos({});
     };
 
     return {

@@ -11,7 +11,7 @@ import { CursosElem } from "./CursosElem";
 import { TablaObserver } from "./TablaObserver";
 
 interface MiHorarioProps {
-    cursosUsuario: ListaCursosUsuario,
+    cursos: Cursos,
     fnAgregarCurso: (c: Curso) => void,
     setCursosUsuarios: SetStoreFunction<ListaCursosUsuario>
 }
@@ -34,7 +34,7 @@ export function MiHorario(props: MiHorarioProps) {
 
     const datosMiHorario = createMemo(() => {
         const obj: Cursos = {};
-        props.cursosUsuario.cursos.forEach((x, i) => {
+        Object.entries(props.cursos).forEach(([_, x], i) => {
             obj[i] = x;
         });
         return obj;
@@ -69,7 +69,6 @@ export function MiHorario(props: MiHorarioProps) {
                 anioActual={() => "Mi horario"}
                 dataAnio={datosMiHorario()}
                 fnAgregarCurso={props.fnAgregarCurso}
-                listaCursosUsuario={props.cursosUsuario}
                 esCursoMiHorario
                 setCursosUsuarios={props.setCursosUsuarios}
                 tablaObserver={tablaObserver}

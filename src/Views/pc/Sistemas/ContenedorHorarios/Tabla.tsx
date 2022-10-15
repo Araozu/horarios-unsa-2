@@ -3,7 +3,7 @@ import { batch, createMemo, For } from "solid-js";
 import { produce, SetStoreFunction } from "solid-js/store";
 import {estilosGlobales} from "../../../../Estilos";
 import { Cursos, ListaCursosUsuario, DataProcesada, DatosGrupo } from "../../../../types/DatosHorario";
-import { Dia, dias, horas } from "../../../../Store";
+import { Dia, dias, gruposSeleccionados, horas, setGruposSeleccionados } from "../../../../Store";
 import { FilaTabla } from "./Tabla/FilaTabla";
 import { TablaObserver } from "./TablaObserver";
 
@@ -117,17 +117,7 @@ const procesarAnio = (data: Cursos, anio: string, version: number, setCursosUsua
                     esLab: false,
                     datosGrupo: grupo,
                     fnSeleccionar: () => {
-                        setCursosUsuarios("cursos", Number(indiceCurso), "Teoria", produce<{ [p: string]: DatosGrupo }>((x) => {
-                            const grupoActualSeleccionado = x[grupoStr].seleccionado;
 
-                            if (grupoActualSeleccionado) {
-                                x[grupoStr].seleccionado = false;
-                            } else {
-                                for (const xKey in x) {
-                                    x[xKey].seleccionado = xKey === grupoStr;
-                                }
-                            }
-                        }));
                     },
                 });
             }
@@ -157,23 +147,7 @@ const procesarAnio = (data: Cursos, anio: string, version: number, setCursosUsua
                     esLab: true,
                     datosGrupo: grupo,
                     fnSeleccionar: () => {
-                        setCursosUsuarios(
-                            "cursos",
-                            Number(indiceCurso),
-                            "Laboratorio",
-                            /// @ts-ignore
-                            produce<{ [p: string]: DatosGrupo }>((x) => {
-                                const grupoActualSeleccionado = x[grupoStr].seleccionado;
-
-                                if (grupoActualSeleccionado) {
-                                    x[grupoStr].seleccionado = false;
-                                } else {
-                                    for (const xKey in x) {
-                                        x[xKey].seleccionado = xKey === grupoStr;
-                                    }
-                                }
-                            }),
-                        );
+                        setGruposSeleccionados(grupo.id_laboratorio, (x) => !x);
                     },
                 });
             }
