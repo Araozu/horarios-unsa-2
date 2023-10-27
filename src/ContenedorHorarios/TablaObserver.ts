@@ -1,7 +1,6 @@
-import { createMemo, createEffect, untrack } from "solid-js";
-import {createStore, SetStoreFunction, Store, produce} from "solid-js/store";
-import { DatosGrupo } from "../../../../types/DatosHorario";
-import { gruposSeleccionados } from "../../../../Store";
+import { createMemo, createEffect, untrack } from "solid-js"
+import {createStore, SetStoreFunction, Store, produce} from "solid-js/store"
+import { DatosGrupo } from "../types/DatosHorario"
 
 const createMemoDefault = <T>(f: () => T) => createMemo<T>(
     f,
@@ -9,7 +8,7 @@ const createMemoDefault = <T>(f: () => T) => createMemo<T>(
     {
         equals: (x, y) => x === y,
     },
-);
+)
 
 /**
  * - Normal
@@ -63,18 +62,17 @@ export class TablaObserver {
             curso: undefined,
             esLab: undefined,
             grupo: undefined,
-        });
-        this.resaltado = resaltado;
-        this.setResaltado = setResaltado;
+        })
+        this.resaltado = resaltado
+        this.setResaltado = setResaltado
 
-        const [seleccionado, setSeleccionado] = createStore<ISeleccionado>({});
-        this.seleccionado = seleccionado;
-        this.setSeleccionado = setSeleccionado;
+        const [seleccionado, setSeleccionado] = createStore<ISeleccionado>({})
+        this.seleccionado = seleccionado
+        this.setSeleccionado = setSeleccionado
     }
 
     /**
      * Crea un memo que indica el estado de la celda
-     * @param id_laboratorio Id del laboratorio
      * @param anio El año
      * @param curso Curso abreviado
      * @param esLab Si es laboratorio
@@ -82,82 +80,89 @@ export class TablaObserver {
      * @param datosGrupo Contiene `seleccionado`, se usa ese valor reactivo
      */
     private registrar(
-        id_laboratorio: number,
         anio: string,
         curso: string,
         esLab: boolean,
         grupo: string,
         datosGrupo: DatosGrupo,
     ): () => EstadoCelda {
-        const resaltado = this.resaltado;
+        const resaltado = this.resaltado
         const resaltadoMemo = createMemoDefault(() => {
             if (resaltado.anio === anio && resaltado.curso === curso) {
                 if (resaltado.esLab === undefined) {
-                    return true;
+                    return true
                 } else if (resaltado.esLab !== esLab) {
-                    return false;
+                    return false
                 } else {
                     if (resaltado.grupo === undefined) {
-                        return true;
-                    } else return resaltado.grupo === grupo;
+                        return true
+                    } else return resaltado.grupo === grupo
                 }
             } else {
-                return false;
+                return false
             }
-        });
+        })
 
         // Registrar curso en `seleccionado`
         this.setSeleccionado((obj: Store<ISeleccionado>) => {
-            const nuevoObj = {...obj};
+            const nuevoObj = {...obj}
 
             if (!nuevoObj[anio]) {
-                nuevoObj[anio] = {};
+                nuevoObj[anio] = {}
             }
 
             if (!nuevoObj[anio][curso]) {
                 nuevoObj[anio][curso] = {
                     Laboratorio: [],
                     Teoria: [],
-                };
+                }
             }
 
-            return nuevoObj;
-        });
+            return nuevoObj
+        })
 
         // Crear un effect para que cada vez que la celda se seleccione se actualize `seleccionado`
         createEffect(() => {
-            const seleccionado = datosGrupo.seleccionado;
+            const seleccionado = datosGrupo.seleccionado
             if (seleccionado) {
-                this.setSeleccionado(anio, curso, esLab ? "Laboratorio" : "Teoria", (x) => [...x, grupo]);
+                this.setSeleccionado(anio, curso, esLab ? "Laboratorio" : "Teoria", (x) => [...x, grupo])
             } else {
-                this.setSeleccionado(anio, curso, esLab ? "Laboratorio" : "Teoria", (x) => x.filter((x) => x !== grupo));
+                this.setSeleccionado(anio, curso, esLab ? "Laboratorio" : "Teoria", (x) => x.filter((x) => x !== grupo))
             }
-        });
+        })
 
-        const seleccionadoMemo = createMemoDefault<EstadoSeleccionado>(() => ((gruposSeleccionados[id_laboratorio]) ? "Seleccionado" : "Normal"));
+        const seleccionadoMemo = createMemoDefault<EstadoSeleccionado>(() => {
+            const gruposSeleccionados = this.seleccionado[anio][curso][esLab ? "Laboratorio" : "Teoria"]
+
+            if (gruposSeleccionados.length > 0) {
+                return gruposSeleccionados.find((x) => x === grupo) ? "Seleccionado" : "Oculto"
+            } else {
+                return "Normal"
+            }
+        })
 
         return createMemoDefault((): EstadoCelda => {
-            const resaltado = resaltadoMemo();
-            const seleccionado = seleccionadoMemo();
+            const resaltado = resaltadoMemo()
+            const seleccionado = seleccionadoMemo()
 
             switch (seleccionado) {
                 case "Normal": {
-                    return resaltado ? "Resaltado" : "Normal";
+                    return resaltado ? "Resaltado" : "Normal"
                 }
                 case "Oculto": {
-                    return resaltado ? "ResaltadoOculto" : "Oculto";
+                    return resaltado ? "ResaltadoOculto" : "Oculto"
                 }
                 case "Seleccionado": {
-                    return resaltado ? "ResaltadoSeleccionado" : "Seleccionado";
+                    return resaltado ? "ResaltadoSeleccionado" : "Seleccionado"
                 }
                 default: {
-                    let _: never;
+                    let _: never
                     // eslint-disable-next-line prefer-const
-                    _ = seleccionado;
-                    return _;
+                    _ = seleccionado
+                    return _
                 }
             }
-        });
+        })
     }
 
     /**
@@ -167,13 +172,13 @@ export class TablaObserver {
      */
     registrarConId(id: string, datosGrupo: DatosGrupo): () => EstadoCelda {
         if (this.memos[id]) {
-            return this.memos[id];
+            return this.memos[id]
         }
 
-        const [, anio, curso, lab, grupo] = id.split("_");
-        const memo = this.registrar(datosGrupo.id_laboratorio, anio, curso, lab === "L", grupo, datosGrupo);
-        this.memos[id] = memo;
-        return memo;
+        const [, anio, curso, lab, grupo] = id.split("_")
+        const memo = this.registrar(anio, curso, lab === "L", grupo, datosGrupo)
+        this.memos[id] = memo
+        return memo
     }
 
     /**
@@ -181,24 +186,24 @@ export class TablaObserver {
      * @param id Id a resaltar - YYYYMMDD_Año_Curso[\_Lab[_Grupo]]
      */
     resaltar(id: string) {
-        const [, anio, curso, lab, grupo] = id.split("_");
+        const [, anio, curso, lab, grupo] = id.split("_")
         if (anio === undefined || curso === undefined) {
-            console.error("Error al intentar resaltar celda: anio o curso son undefined:", anio, curso);
-            return;
+            console.error("Error al intentar resaltar celda: anio o curso son undefined:", anio, curso)
+            return
         }
 
-        let esLab: boolean | undefined;
+        let esLab: boolean | undefined
         if (lab === undefined) {
-            esLab = undefined;
+            esLab = undefined
         } else {
-            esLab = lab === "L";
+            esLab = lab === "L"
         }
         this.setResaltado({
             anio,
             curso,
             esLab,
             grupo,
-        });
+        })
     }
 
     quitarResaltado() {
@@ -207,10 +212,10 @@ export class TablaObserver {
             curso: undefined,
             esLab: undefined,
             grupo: undefined,
-        });
+        })
     }
 
     limpiar(id: string) {
-        delete this.memos[id];
+        delete this.memos[id]
     }
 }

@@ -1,12 +1,12 @@
-import { StyleSheet, css } from "aphrodite";
-import { estilosGlobales } from "../../../../../Estilos";
-import { For, createMemo } from "solid-js";
-import {createStore, Store} from "solid-js/store";
-import { Dia, dias } from "../../../../../Store";
-import { CeldaFila } from "./CeldaFila";
-import { DataProcesada } from "../../../../../types/DatosHorario";
-import { coloresBorde, diaANum } from "../Tabla";
-import { TablaObserver } from "../TablaObserver";
+import { StyleSheet, css } from "aphrodite"
+import { estilosGlobales } from "../../Estilos"
+import { For, createMemo } from "solid-js"
+import {createStore, Store} from "solid-js/store"
+import { Dia, dias } from "../../Store"
+import { CeldaFila } from "./CeldaFila"
+import { DataProcesada } from "../../types/DatosHorario"
+import { coloresBorde, diaANum } from "../Tabla"
+import { TablaObserver } from "../TablaObserver"
 
 const e = StyleSheet.create({
     celdaHora: {
@@ -50,7 +50,7 @@ const e = StyleSheet.create({
     celdaResaltadoTransparente: {
         backgroundColor: "transparent",
     },
-});
+})
 
 const [diasResaltados, setDiasResaltados] = createStore({
     Lunes: 0,
@@ -58,7 +58,7 @@ const [diasResaltados, setDiasResaltados] = createStore({
     Miercoles: 0,
     Jueves: 0,
     Viernes: 0,
-} as { [k: string]: number });
+} as { [k: string]: number })
 
 interface Props {
     hora: string,
@@ -69,7 +69,7 @@ interface Props {
 const diasFilter = createMemo(() => Object.entries(diasResaltados)
     .filter((x) => x[1] > 0)
     .map((x) => x[0] as Dia)
-    .sort((x, y) => (diaANum(x) > diaANum(y) ? 1 : -1)));
+    .sort((x, y) => (diaANum(x) > diaANum(y) ? 1 : -1)))
 
 const useDiasResaltados: () => [
     Store<{ [k: string]: boolean }>,
@@ -82,26 +82,26 @@ const useDiasResaltados: () => [
         Miercoles: false,
         Jueves: false,
         Viernes: false,
-    } as { [k: string]: boolean });
+    } as { [k: string]: boolean })
 
     const fnResaltar = (d: Dia) => {
-        setDiasResaltadosLocal(d, true);
-        setDiasResaltados(d, (v) => v + 1);
-    };
+        setDiasResaltadosLocal(d, true)
+        setDiasResaltados(d, (v) => v + 1)
+    }
 
     const fnDesresaltar = (d: Dia) => {
-        setDiasResaltadosLocal(d, false);
-        setDiasResaltados(d, (v) => v - 1);
-    };
+        setDiasResaltadosLocal(d, false)
+        setDiasResaltados(d, (v) => v - 1)
+    }
 
-    return [diasResaltadosLocal, fnResaltar, fnDesresaltar];
-};
+    return [diasResaltadosLocal, fnResaltar, fnDesresaltar]
+}
 
 export function FilaTabla(props: Props) {
-    const [diasResaltadosLocal, fnResaltar, fnDesresaltar] = useDiasResaltados();
+    const [diasResaltadosLocal, fnResaltar, fnDesresaltar] = useDiasResaltados()
 
-    const hora = props.hora;
-    const data = props.data;
+    const hora = props.hora
+    const data = props.data
 
     return (
         <div style={{position: "relative"}}>
@@ -133,10 +133,10 @@ export function FilaTabla(props: Props) {
                 </div>
                 <For each={dias}>
                     {(dia) => {
-                        const diaStr = dia.substring(0, 2);
-                        const horaStr = hora.substring(0, 5);
+                        const diaStr = dia.substring(0, 2)
+                        const horaStr = hora.substring(0, 5)
 
-                        const datos = data?.[horaStr]?.[diaStr] ?? [];
+                        const datos = data?.[horaStr]?.[diaStr] ?? []
 
                         return (
                             <CeldaFila
@@ -146,11 +146,11 @@ export function FilaTabla(props: Props) {
                                 dia={dia}
                                 tablaObserver={props.tablaObserver}
                             />
-                        );
+                        )
                     }}
                 </For>
                 <div className={css(e.filaBorde)} />
             </div>
         </div>
-    );
+    )
 }

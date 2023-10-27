@@ -1,4 +1,4 @@
-import { StyleSheet } from "aphrodite";
+import { StyleSheet } from "aphrodite"
 
 export const estilosGlobales = StyleSheet.create({
     contenedor: {
@@ -58,4 +58,4 @@ export const estilosGlobales = StyleSheet.create({
         padding: "0.25rem 0.35rem",
         borderRadius: "5px",
     },
-});
+})

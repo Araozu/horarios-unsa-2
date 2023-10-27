@@ -1,5 +1,5 @@
-import { css } from "aphrodite";
-import {estilosGlobales} from "../../../../Estilos";
+import { css } from "aphrodite"
+import { estilosGlobales } from "../Estilos"
 
 interface BotonMaxMinProps {
     icono: string,
@@ -21,5 +21,5 @@ export function BotonIcono(props: BotonMaxMinProps) {
         >
             <i className={`${css(estilosGlobales.botonPhospor)} ${props.icono}`} />
         </div>
-    );
+    )
 }

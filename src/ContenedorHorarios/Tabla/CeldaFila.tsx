@@ -1,9 +1,9 @@
-import { StyleSheet, css } from "aphrodite";
-import { estilosGlobales } from "../../../../../Estilos";
-import { For, createSignal, createMemo, createEffect, onCleanup } from "solid-js";
-import { Dia } from "../../../../../Store";
-import { DatosGrupo } from "../../../../../types/DatosHorario";
-import {TablaObserver} from "../TablaObserver";
+import { StyleSheet, css } from "aphrodite"
+import { estilosGlobales } from "../../Estilos"
+import { For, createSignal, createMemo, createEffect, onCleanup } from "solid-js"
+import { Dia } from "../../Store"
+import { DatosGrupo } from "../../types/DatosHorario"
+import { TablaObserver } from "../TablaObserver"
 
 const e = StyleSheet.create({
     celdaComun: {
@@ -42,7 +42,7 @@ const e = StyleSheet.create({
     celdaResaltadoSeleccionado: {
         textDecoration: "underline",
     },
-});
+})
 
 const eColores = StyleSheet.create({
     lunes: {
@@ -62,7 +62,7 @@ const eColores = StyleSheet.create({
     viernes: {
         backgroundColor: "rgba(244,67,54,1)",
     },
-});
+})
 
 const clasesColores = {
     Lunes: css(eColores.lunes),
@@ -70,7 +70,7 @@ const clasesColores = {
     Miercoles: css(eColores.miercoles),
     Jueves: css(eColores.jueves),
     Viernes: css(eColores.viernes),
-};
+}
 
 interface DatosProps {
     id: string,
@@ -97,110 +97,108 @@ interface Props {
     tablaObserver: TablaObserver,
 }
 
-const claseSeldaSeleccionada = css(e.celdaSeleccionado);
+const claseSeldaSeleccionada = css(e.celdaSeleccionado)
 
 function RenderFila(datos: DatosProps, props: Props) {
-    const id = datos.id;
-    const txt = datos.txt;
-    const esLab = datos.esLab;
-    const fnSeleccionar = datos.fnSeleccionar;
+    const id = datos.id
+    const txt = datos.txt
+    const esLab = datos.esLab
+    const fnSeleccionar = datos.fnSeleccionar
 
-    const estadoCeldaMemo = props.tablaObserver.registrarConId(id, datos.datosGrupo);
+    const estadoCeldaMemo = props.tablaObserver.registrarConId(id, datos.datosGrupo)
 
-    const [estabaResaltado, setEstabaResaltado] = createSignal(false);
+    const [estabaResaltado, setEstabaResaltado] = createSignal(false)
 
     // Limpiar los memos, porque cuando se desmonta la celda esos memos quedan sin efecto
     onCleanup(() => {
-        props.tablaObserver.limpiar(id);
-    });
+        props.tablaObserver.limpiar(id)
+    })
 
     const clases = createMemo(
         () => {
             const clases = [
                 e.celdaCurso,
                 esLab ? e.celdaCursoLab : e.celdaCursoTeoria,
-            ];
-            let adicional = "";
+            ]
+            let adicional = ""
 
-            const estadoCelda = estadoCeldaMemo();
+            const estadoCelda = estadoCeldaMemo()
 
             switch (estadoCelda) {
                 case "Normal": {
                     if (estabaResaltado()) {
-                        props.fnDesresaltarFila();
-                        setEstabaResaltado(false);
+                        props.fnDesresaltarFila()
+                        setEstabaResaltado(false)
                     }
 
-                    break;
+                    break
                 }
                 case "Oculto": {
                     if (estabaResaltado()) {
-                        props.fnDesresaltarFila();
-                        setEstabaResaltado(false);
+                        props.fnDesresaltarFila()
+                        setEstabaResaltado(false)
                     }
 
-                    clases.push(e.celdaOculto);
-                    break;
+                    clases.push(e.celdaOculto)
+                    break
                 }
                 case "Resaltado": {
-                    props.fnResaltarFila();
-                    setEstabaResaltado(true);
-                    clases.push(e.celdaResaltado);
-                    adicional = clasesColores[props.dia];
-                    break;
+                    props.fnResaltarFila()
+                    setEstabaResaltado(true)
+                    clases.push(e.celdaResaltado)
+                    adicional = clasesColores[props.dia]
+                    break
                 }
                 case "Seleccionado": {
                     if (estabaResaltado()) {
-                        props.fnDesresaltarFila();
-                        setEstabaResaltado(false);
+                        props.fnDesresaltarFila()
+                        setEstabaResaltado(false)
                     }
 
-                    clases.push(e.celdaSeleccionado);
-                    break;
+                    clases.push(e.celdaSeleccionado)
+                    break
                 }
                 case "ResaltadoOculto": {
-                    props.fnResaltarFila();
-                    setEstabaResaltado(true);
+                    props.fnResaltarFila()
+                    setEstabaResaltado(true)
 
-                    clases.push(e.celdaResaltadoOculto);
-                    adicional = clasesColores[props.dia];
-                    break;
+                    clases.push(e.celdaResaltadoOculto)
+                    adicional = clasesColores[props.dia]
+                    break
                 }
                 case "ResaltadoSeleccionado": {
-                    props.fnResaltarFila();
-                    setEstabaResaltado(true);
+                    props.fnResaltarFila()
+                    setEstabaResaltado(true)
 
-                    clases.push(e.celdaResaltadoSeleccionado);
-                    adicional = clasesColores[props.dia];
-                    break;
+                    clases.push(e.celdaResaltadoSeleccionado)
+                    adicional = clasesColores[props.dia]
+                    break
                 }
             }
 
-            return `${css(...clases)} ${adicional}`;
+            return `${css(...clases)} ${adicional}`
         },
         undefined,
-        {
-            equals: (x, y) => x === y,
-        },
-    );
+        (x, y) => x === y,
+    )
 
     return (
         <button className={clases()}
             onMouseEnter={() => {
-                props.tablaObserver.resaltar(id);
+                props.tablaObserver.resaltar(id)
             }}
             onMouseLeave={() => {
-                props.tablaObserver.quitarResaltado();
+                props.tablaObserver.quitarResaltado()
             }}
             onClick={fnSeleccionar}
         >
             {txt}
         </button>
-    );
+    )
 }
 
 export function CeldaFila(props: Props) {
-    const datos = props.datos;
+    const datos = props.datos
 
     return (
         <div className={css(e.celdaComun, estilosGlobales.inlineBlock)}>
@@ -208,5 +206,5 @@ export function CeldaFila(props: Props) {
                 {(datos) => RenderFila(datos, props)}
             </For>
         </div>
-    );
+    )
 }

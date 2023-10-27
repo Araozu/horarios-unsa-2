@@ -1,11 +1,11 @@
-import { StyleSheet, css } from "aphrodite";
-import { batch, createMemo, For } from "solid-js";
-import { produce, SetStoreFunction } from "solid-js/store";
-import {estilosGlobales} from "../../../../Estilos";
-import { Cursos, ListaCursosUsuario, DataProcesada, DatosGrupo } from "../../../../types/DatosHorario";
-import { Dia, dias, gruposSeleccionados, horas, setGruposSeleccionados } from "../../../../Store";
-import { FilaTabla } from "./Tabla/FilaTabla";
-import { TablaObserver } from "./TablaObserver";
+import { StyleSheet, css } from "aphrodite"
+import { batch, createMemo, For } from "solid-js"
+import { produce, SetStoreFunction } from "solid-js/store"
+import { estilosGlobales } from "../Estilos"
+import { Cursos, ListaCursosUsuario, DataProcesada, DatosGrupo } from "../types/DatosHorario"
+import { Dia, dias, horas } from "../Store"
+import { FilaTabla } from "./Tabla/FilaTabla"
+import { TablaObserver } from "./TablaObserver"
 
 export const coloresBorde = Object.freeze([
     "rgba(33,150,243,1)",
@@ -13,22 +13,22 @@ export const coloresBorde = Object.freeze([
     "rgba(236,64,122 ,1)",
     "rgba(29,233,182 ,1)",
     "rgba(244,67,54,1)",
-]);
+])
 
 export const diaANum = (d: Dia) => {
     switch (d) {
         case "Lunes":
-            return 0;
+            return 0
         case "Martes":
-            return 1;
+            return 1
         case "Miercoles":
-            return 2;
+            return 2
         case "Jueves":
-            return 3;
+            return 3
         case "Viernes":
-            return 4;
+            return 4
     }
-};
+}
 
 const e = StyleSheet.create({
     fila: {
@@ -81,34 +81,34 @@ const e = StyleSheet.create({
     celdaCursoTeoria: {
         fontWeight: "bold",
     },
-});
+})
 
 type FnSetCursosUsuarios = SetStoreFunction<ListaCursosUsuario>;
 
 const procesarAnio = (data: Cursos, anio: string, version: number, setCursosUsuarios: FnSetCursosUsuarios) => {
-    const obj: DataProcesada = {};
+    const obj: DataProcesada = {}
 
     for (const [indiceCurso, curso] of Object.entries(data)) {
-        if (curso.oculto) continue;
+        if (curso.oculto) continue
 
-        const nombreAbreviado = curso.abreviado;
+        const nombreAbreviado = curso.abreviado
 
         for (const [grupoStr, grupo] of Object.entries(curso.Teoria)) {
             for (const hora of grupo.Horas) {
-                const dia = hora.substring(0, 2);
-                const horas = hora.substring(2, 4);
-                const minutos = hora.substr(4);
+                const dia = hora.substring(0, 2)
+                const horas = hora.substring(2, 4)
+                const minutos = hora.substr(4)
 
-                const horaCompleta = `${horas}:${minutos}`;
+                const horaCompleta = `${horas}:${minutos}`
 
-                const id = `${version}_${anio}_${nombreAbreviado}_T_${grupoStr}`;
+                const id = `${version}_${anio}_${nombreAbreviado}_T_${grupoStr}`
 
                 if (!(horaCompleta in obj)) {
-                    obj[horaCompleta] = {};
+                    obj[horaCompleta] = {}
                 }
 
                 if (!(dia in obj[horaCompleta])) {
-                    obj[horaCompleta][dia] = [];
+                    obj[horaCompleta][dia] = []
                 }
 
                 obj[horaCompleta][dia].push({
@@ -117,28 +117,38 @@ const procesarAnio = (data: Cursos, anio: string, version: number, setCursosUsua
                     esLab: false,
                     datosGrupo: grupo,
                     fnSeleccionar: () => {
+                        setCursosUsuarios("cursos", Number(indiceCurso), "Teoria", produce<{ [p: string]: DatosGrupo }>((x) => {
+                            const grupoActualSeleccionado = x[grupoStr].seleccionado
 
+                            if (grupoActualSeleccionado) {
+                                x[grupoStr].seleccionado = false
+                            } else {
+                                for (const xKey in x) {
+                                    x[xKey].seleccionado = xKey === grupoStr
+                                }
+                            }
+                        }))
                     },
-                });
+                })
             }
         }
 
         for (const [grupoStr, grupo] of Object.entries(curso.Laboratorio ?? {})) {
             for (const hora of grupo.Horas) {
-                const dia = hora.substring(0, 2);
-                const horas = hora.substring(2, 4);
-                const minutos = hora.substr(4);
+                const dia = hora.substring(0, 2)
+                const horas = hora.substring(2, 4)
+                const minutos = hora.substr(4)
 
-                const horaCompleta = `${horas}:${minutos}`;
+                const horaCompleta = `${horas}:${minutos}`
 
-                const id = `${version}_${anio}_${nombreAbreviado}_L_${grupoStr}`;
+                const id = `${version}_${anio}_${nombreAbreviado}_L_${grupoStr}`
 
                 if (!(horaCompleta in obj)) {
-                    obj[horaCompleta] = {};
+                    obj[horaCompleta] = {}
                 }
 
                 if (!(dia in obj[horaCompleta])) {
-                    obj[horaCompleta][dia] = [];
+                    obj[horaCompleta][dia] = []
                 }
 
                 obj[horaCompleta][dia].push({
@@ -147,15 +157,30 @@ const procesarAnio = (data: Cursos, anio: string, version: number, setCursosUsua
                     esLab: true,
                     datosGrupo: grupo,
                     fnSeleccionar: () => {
-                        setGruposSeleccionados(grupo.id_laboratorio, (x) => !x);
+                        setCursosUsuarios(
+                            "cursos",
+                            Number(indiceCurso),
+                            "Laboratorio",
+                            produce<{ [p: string]: DatosGrupo }>((x) => {
+                                const grupoActualSeleccionado = x[grupoStr].seleccionado
+
+                                if (grupoActualSeleccionado) {
+                                    x[grupoStr].seleccionado = false
+                                } else {
+                                    for (const xKey in x) {
+                                        x[xKey].seleccionado = xKey === grupoStr
+                                    }
+                                }
+                            }),
+                        )
                     },
-                });
+                })
             }
         }
     }
 
-    return obj;
-};
+    return obj
+}
 
 interface Props {
     data: Cursos,
@@ -166,12 +191,12 @@ interface Props {
 }
 
 export function Tabla(props: Props) {
-    const anio = () => props.anio.substring(0, props.anio.indexOf(" "));
-    const data = createMemo(() => procesarAnio(props.data, anio(), props.version, props.setCursosUsuarios));
+    const anio = () => props.anio.substring(0, props.anio.indexOf(" "))
+    const data = createMemo(() => procesarAnio(props.data, anio(), props.version, props.setCursosUsuarios))
 
     const celdas = createMemo(() => {
         // Hace reaccionar a la reactividad de Solid
-        const d = data();
+        const d = data()
         return (
             <For each={horas}>
                 {(hora) => (
@@ -182,8 +207,8 @@ export function Tabla(props: Props) {
                     />
                 )}
             </For>
-        );
-    });
+        )
+    })
 
     return (
         <div>
@@ -198,5 +223,5 @@ export function Tabla(props: Props) {
             </div>
             {celdas()}
         </div>
-    );
+    )
 }
